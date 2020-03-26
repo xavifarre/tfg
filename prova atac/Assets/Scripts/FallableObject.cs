@@ -17,7 +17,7 @@ public class FallableObject
             obj.transform.localScale = Vector2.Lerp(Vector2.one, Vector2.zero, i / fallFrames);
             yield return new WaitForEndOfFrame();
         }
-
+        yield return new WaitForSeconds(0.5f);
         obj.SendMessage("EndFall");
     }
 }

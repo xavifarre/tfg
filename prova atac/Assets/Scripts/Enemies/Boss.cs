@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void Die()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Hit(Attack attack)
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    protected override void Init()
+    {
+        throw new System.NotImplementedException();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

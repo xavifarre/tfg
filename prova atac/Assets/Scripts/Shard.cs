@@ -209,7 +209,7 @@ public class Shard : MonoBehaviour {
         else if (collision.gameObject.tag == "Enemy")
         {
             //collision.gameObject.SendMessage("Damage");
-            DestroyShard();
+            //DestroyShard();
         }
         else
         {

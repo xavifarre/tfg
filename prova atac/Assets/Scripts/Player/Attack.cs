@@ -6,6 +6,8 @@ public class Attack : MonoBehaviour
 {
     public int framesActive = 10;
     public GameObject hitParticles;
+    public int damage;
+    public float knockback;
 
     private GameObject player;
     private Collider2D col;
@@ -70,6 +72,9 @@ public class Attack : MonoBehaviour
 
             //Crida a la funció de generació de cristalls
             player.SendMessage("GenerateShards", impactPoint);
+
+            //Envia el hit al enemic
+            collider.GetComponent<Enemy>().Hit(this);
         }
     }
 }

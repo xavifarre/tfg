@@ -37,6 +37,7 @@ public class Cliff : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(collision.gameObject.tag);
         if(collision.gameObject.tag == "Player")
         {
             if (offsetStates.ContainsKey((int)collision.gameObject.GetComponent<Player>().state))
@@ -48,7 +49,10 @@ public class Cliff : MonoBehaviour
                 TriggerFall(collision);
             }
         }
-        
+        else
+        {
+            TriggerFall(collision);
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -89,7 +93,6 @@ public class Cliff : MonoBehaviour
             contactsSum += hit.point;
             n++;
         }
-
         contactsSum /= n;
         hitTilePos = contactsSum;
         Grid tileGrid = tilemap.layoutGrid;

@@ -18,7 +18,6 @@ public class Player : MonoBehaviour {
 
     //Actions
     bool inAction = false;
-    public enum State {Idle, Attack, Dash, KnockBack, Fall, Dead };
     public State state;
     float tAction;
 
@@ -233,15 +232,8 @@ public class Player : MonoBehaviour {
     //Move to position
     public void Move(Vector3 position)
     {
-        
-        if (PixelPerfectMovement.active)
-        {
-            rb2d.MovePosition(PixelPerfectMovement.PixelPerfectClamp(position, 16));
-        }
-        else
-        {
-            rb2d.MovePosition(position);
-        }
+
+        PixelPerfectMovement.Move(position, rb2d);
     }
 
     void CheckAttackInput()

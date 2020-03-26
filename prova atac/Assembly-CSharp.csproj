@@ -62,9 +62,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\Camera\PixelCam.cs" />
+    <Compile Include="Assets\Scripts\Classes.cs" />
     <Compile Include="Assets\Scripts\Cliff.cs" />
     <Compile Include="Assets\Scripts\DestroyAfterSeconds.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss.cs" />

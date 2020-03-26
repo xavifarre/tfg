@@ -20,9 +20,6 @@ public class CameraFollowPlayer : MonoBehaviour
 
         transform.position = smoothedPosition;
 
-        if (PixelPerfectMovement.active)
-        {
-            transform.position = PixelPerfectMovement.PixelPerfectClamp(smoothedPosition, 16);
-        }
+        PixelPerfectMovement.Move(smoothedPosition, transform);
     }
 }
