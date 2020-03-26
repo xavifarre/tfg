@@ -62,13 +62,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Attack.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\Camera\PixelCam.cs" />
     <Compile Include="Assets\Scripts\Cliff.cs" />
     <Compile Include="Assets\Scripts\DestroyAfterSeconds.cs" />
-    <Compile Include="Assets\Scripts\DisableOnDash.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Minion.cs" />
@@ -77,7 +75,9 @@
     <Compile Include="Assets\Scripts\MathFunctions.cs" />
     <Compile Include="Assets\Scripts\ParticleDestroyer.cs" />
     <Compile Include="Assets\Scripts\PixelPerfectMovement.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\Attack.cs" />
+    <Compile Include="Assets\Scripts\Player\DisableOnDash.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\RainbowTintEffect.cs" />
     <Compile Include="Assets\Scripts\Shard.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />

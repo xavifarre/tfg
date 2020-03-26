@@ -21,7 +21,7 @@ public class Cliff : MonoBehaviour
     void Start()
     {
         // {estat,frames}
-        offsetStates = new Dictionary<int, int> { { 0, 30 }, { 1, 100 } };
+        offsetStates = new Dictionary<int, int> { { 0, 60 }, { 1, 100 } };
 
 
         tilemap = transform.parent.GetComponent<Tilemap>();
