@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - VFX
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Player
+  - CrystalInactive
+  - CrystalActive
+  - Enemy
+  - Boss
+  - PlayerDash
+  - Cliff
+  - FeetCollider
+  - IgnoreAll
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3372055105
+    locked: 0
+  - name: Game
+    uniqueID: 528159245
+    locked: 0
+  - name: Effects
+    uniqueID: 1909916999
+    locked: 0
