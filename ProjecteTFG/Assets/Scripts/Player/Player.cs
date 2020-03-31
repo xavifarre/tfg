@@ -63,6 +63,7 @@ public class Player : MonoBehaviour {
     public float shardOffset = 1;
     public Vector2Int minMaxShards = new Vector2Int(3,5);
     public List<Shard> activeShards;
+    public Vector2 shardRange = new Vector2(300,500);
 
     //Animations
     private Animator animator;
@@ -311,7 +312,7 @@ public class Player : MonoBehaviour {
         Move(transform.position + tDir * tDistance);
 
         //float vDash = 2f;
-        //float vt = MathFunctions.EaseOutVelExp(tAction, vDash, 0, dashFrames, 3);
+        //float vt = MathFunctions.EaseOutExp(tAction, vDash, 0, dashFrames, 3);
 
         //Debug.Log(vt);
         //Move(transform.position + (Vector3)lastDir.normalized * vt );
@@ -421,18 +422,18 @@ public class Player : MonoBehaviour {
 
         for (int i = 0; i < nShards; i++){
 
-            float randomX = Random.Range(-500, 500) / 1000f * (lastDir.y + 0.2f);
-            float randomY = Random.Range(-500, 500) / 1000f * (lastDir.x + 0.2f);
+            float randomX = Random.Range(-800, 800) / 1000f * (lastDir.y + 0.2f);
+            float randomY = Random.Range(-800, 800) / 1000f * (lastDir.x + 0.2f);
 
             Vector3 spawnPos = new Vector3(pos.x + randomX, pos.y + randomY, 0);
 
             Vector3 impactDir = (spawnPos - transform.position).normalized;
 
-            impactDir = Quaternion.AngleAxis(30 * (consecutiveAttacks % 2 == 0 ? 1 : -1), Vector3.forward) * impactDir;
+            //impactDir = Quaternion.AngleAxis(30 * (consecutiveAttacks % 2 == 0 ? 1 : -1), Vector3.forward) * impactDir;
 
             Vector3 destDir = (new Vector3(spawnPos.x + lastDir.x/2 + impactDir.x * 3 + randomX * 4, spawnPos.y + lastDir.y/2 + impactDir.y*3 + randomY * 4, 0) - spawnPos).normalized;
 
-            Vector3 destPos = pos + destDir * Random.Range(200,400)/100f;
+            Vector3 destPos = pos + destDir * Random.Range(shardRange.x, shardRange.y) /100f;
 
             spawnList.Add(spawnPos);
             destList.Add(destPos);

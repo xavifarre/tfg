@@ -7,8 +7,13 @@ public class Shard : MonoBehaviour {
 
     public float speed = 5f;
     public float rotSpeed = 10f;
-    public float acceleration = 5f;
     public float maxActiveTime = 10f;
+
+    //Velocity
+    public float acceleration = 5f;
+    public float growRate = 0.5f;
+    private float startVel = 0;
+    private float tVel = 0;
 
     bool moving = false;
     bool recalling = false;
@@ -103,29 +108,41 @@ public class Shard : MonoBehaviour {
         
         if (recalling)
         {
-            dur = 0.8f;
-            targetPos = player.transform.position;
-            transform.right = targetPos - transform.position;
-            nextPos = MathFunctions.EaseInExp(tMov, originPos, targetPos, dur, 3);
-            rb.MovePosition(nextPos);
+            dur = 2f;
+            targetPos = player.transform.position - Vector3.up * 0.5f;
+
+            //transform.right = targetPos - transform.position;
+            //nextPos = MathFunctions.EaseInExp(tMov, originPos, targetPos, dur, 3);
+
+            tVel = tVel + acceleration * Time.deltaTime;
+            float vel = startVel + Mathf.Pow(1 + growRate, tVel);
+
+            Vector3 movement = (targetPos - transform.position).normalized * vel * Time.deltaTime;
+            if(movement.magnitude > (targetPos - transform.position).magnitude)
+            {
+                transform.position = targetPos;
+                DestroyShard();
+            }
+            else
+            {
+                nextPos = transform.position + movement;
+                rb.MovePosition(nextPos);
+            }
+                        
         }
         else
         {
             dur = 0.5f;
             nextPos = MathFunctions.EaseOutExp(tMov, originPos, targetPos, dur, 3);
             rb.MovePosition(nextPos);
-        }
-        
-        if (tMov >= dur)
-        {
-            Stop();
-            if (recalling)
-            {
-                transform.position = player.transform.position;
 
-                DestroyShard();
+            if (tMov >= dur)
+            {
+                Stop();
             }
         }
+        
+       
         tMov += Time.deltaTime;
     }
 
@@ -204,7 +221,7 @@ public class Shard : MonoBehaviour {
         if (collision.gameObject.tag == "Player")
         {
             //Debug.Log(collision.gameObject.layer);
-            DestroyShard();
+            //DestroyShard();
         }
         else if (collision.gameObject.tag == "Enemy")
         {

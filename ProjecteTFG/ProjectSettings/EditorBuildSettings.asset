@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/AttackTest.unity
+    guid: 0cf64ceeb8a620b47a86d29d9039eedc
   m_configObjects: {}

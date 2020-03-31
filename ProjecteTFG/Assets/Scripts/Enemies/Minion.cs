@@ -30,8 +30,6 @@ public class Minion : Enemy
             Vector3 nextPos = MathFunctions.EaseOutExp(tAction,startActionPoint,endActionPoint,knockBackDuration, 5);
             PixelPerfectMovement.Move(nextPos, rb);
 
-            Debug.Log(nextPos);
-
             tAction++;
 
             if (tAction >= knockBackDuration)

@@ -35,7 +35,6 @@ public class PixelPerfectMovement : MonoBehaviour
     //Move to position (rb)
     public static void Move(Vector3 position, Rigidbody2D rb)
     {
-        Debug.Log((position - (Vector3)rb.position).magnitude);
         if (active)
         {
             

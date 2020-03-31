@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-    public Vector2 spawnArea1 = new Vector2(-9f, -5f);
-    public Vector2 spawnArea2 = new Vector2(9f, 5f);
+    public Vector2 spawnAreaSize = new Vector2(10f, 5f);
 
     public float spawnTime = 1;
 
@@ -24,7 +23,7 @@ public class Spawner : MonoBehaviour {
         t += Time.deltaTime;
         if(t>= spawnTime)
         {
-            Vector2 pos = new Vector2(Random.Range(spawnArea1.x, spawnArea2.x),Random.Range(spawnArea1.y, spawnArea2.y));
+            Vector2 pos = new Vector2(Random.Range(transform.position.x - spawnAreaSize.x/2, transform.position.x + spawnAreaSize.x / 2),Random.Range(transform.position.y - spawnAreaSize.y / 2, transform.position.y + spawnAreaSize.y / 2));
 
             GameObject spawnedObject = Instantiate(obj,pos, Quaternion.AngleAxis(Random.Range(0.0f, 360.0f),Vector3.forward));
 
@@ -38,4 +37,10 @@ public class Spawner : MonoBehaviour {
             t = 0;
         }
 	}
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position, (Vector3)spawnAreaSize + Vector3.forward);
+    }
 }

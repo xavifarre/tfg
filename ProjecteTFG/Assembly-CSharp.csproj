@@ -62,7 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\Camera\PixelCam.cs" />
@@ -74,6 +73,7 @@
     <Compile Include="Assets\Scripts\Enemies\Minion.cs" />
     <Compile Include="Assets\Scripts\FallableObject.cs" />
     <Compile Include="Assets\Scripts\FollowEffect.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\MathFunctions.cs" />
     <Compile Include="Assets\Scripts\ParticleDestroyer.cs" />
     <Compile Include="Assets\Scripts\PixelPerfectMovement.cs" />
@@ -84,11 +84,17 @@
     <Compile Include="Assets\Scripts\Shard.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
     <None Include="Assets\Shaders\LightCircle.shader" />
+    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.PixelPerfect.Editor">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
@@ -96,8 +102,20 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Universal.Editor">
+      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
@@ -108,6 +126,9 @@
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
@@ -117,8 +138,14 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
@@ -131,6 +158,12 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
@@ -146,39 +179,6 @@
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
-      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Editor">
-      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
-      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Editor">
-      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ShaderGraph.Editor">
-      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-      <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.7f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

@@ -11,6 +11,13 @@ public class MathFunctions : MonoBehaviour
         return (dest - origin) * Mathf.Pow(t, e) + origin;
     }
 
+    //Accelerar float exponencialment
+    public static float EaseInExp(float t, float vStart, float vEnd, float duration, int e)
+    {
+        t /= duration;
+        return (vEnd - vStart) * Mathf.Pow(t, e) + vStart;
+    }
+
     //Moviment desaccelerat exponencialment
     public static Vector3 EaseOutExp(float t, Vector3 origin, Vector3 dest, float duration, int e)
     {
@@ -19,8 +26,8 @@ public class MathFunctions : MonoBehaviour
         return (dest - origin) * (Mathf.Pow(t, e) + 1) + origin;
     }
 
-    //Desaccelerar velocitat exponencialment
-    public static float EaseOutVelExp(float t, float vStart, float vEnd, float duration, int e)
+    //Desaccelerar float exponencialment
+    public static float EaseOutExp(float t, float vStart, float vEnd, float duration, int e)
     {
         t /= duration;
         t--;
