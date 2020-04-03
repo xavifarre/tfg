@@ -49,15 +49,6 @@ TagManager:
   - name: Game
     uniqueID: 528159245
     locked: 0
-  - name: Enemies
-    uniqueID: 3244010105
-    locked: 0
-  - name: Crystals
-    uniqueID: 1999178309
-    locked: 0
-  - name: Player
-    uniqueID: 4054769965
-    locked: 0
   - name: Effects
     uniqueID: 1909916999
     locked: 0

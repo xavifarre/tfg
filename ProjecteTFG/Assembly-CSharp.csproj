@@ -74,12 +74,14 @@
     <Compile Include="Assets\Scripts\FallableObject.cs" />
     <Compile Include="Assets\Scripts\FollowEffect.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\iState.cs" />
     <Compile Include="Assets\Scripts\MathFunctions.cs" />
     <Compile Include="Assets\Scripts\ParticleDestroyer.cs" />
     <Compile Include="Assets\Scripts\PixelPerfectMovement.cs" />
     <Compile Include="Assets\Scripts\Player\Attack.cs" />
     <Compile Include="Assets\Scripts\Player\DisableOnDash.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\StateFollowEffect.cs" />
     <Compile Include="Assets\Scripts\RainbowTintEffect.cs" />
     <Compile Include="Assets\Scripts\Shard.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />

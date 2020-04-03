@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Shard : MonoBehaviour {
 
-
+    //Basic
     public float speed = 5f;
     public float rotSpeed = 10f;
     public float maxActiveTime = 10f;
+    public int damage = 1;
 
     //Velocity
     public float acceleration = 5f;
@@ -36,10 +37,11 @@ public class Shard : MonoBehaviour {
     public float minSpeedRotation = 0.3f;
 
     //Float values
-    private float maxFloatDistance = 2f;
     private float tFloat = 0;
 
     private float tMov = 0;
+
+    private SpriteRenderer spriteRenderer;
 
     //Sprite
     public SpriteRenderer sprite;
@@ -58,6 +60,8 @@ public class Shard : MonoBehaviour {
 
         //Randomitzar rotació
         rotationValue = new Vector3(Random.Range(1, 11), Random.Range(1, 11), Random.Range(1, 11)).normalized;
+
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 	
 	void FixedUpdate () {
@@ -73,6 +77,12 @@ public class Shard : MonoBehaviour {
 
         UpdateRotation();
 	}
+
+    private void LateUpdate()
+    {
+        spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(this.spriteRenderer.bounds.min).y * -1;
+    }
+
     public void Recall(Vector3 target)
     {
         MoveShards(target);
@@ -227,6 +237,7 @@ public class Shard : MonoBehaviour {
         {
             //collision.gameObject.SendMessage("Damage");
             //DestroyShard();
+            collision.GetComponent<Enemy>().GetDamage(damage);
         }
         else
         {

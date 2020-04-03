@@ -4768,7 +4768,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 443d62b51c89d4540982318730b41201, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4788,7 +4788,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1909916999
-  m_SortingLayer: 6
+  m_SortingLayer: 3
   m_SortingOrder: 3
   m_RenderMode: 0
   m_SortMode: 0

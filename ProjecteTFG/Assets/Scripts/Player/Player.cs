@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, IState {
 
     //Movement speed
     public float speed;
@@ -16,7 +16,6 @@ public class Player : MonoBehaviour {
     private Rigidbody2D rb2d;
 
     //Actions
-    bool inAction = false;
     public State state;
     float tAction;
 
@@ -38,6 +37,7 @@ public class Player : MonoBehaviour {
 
     //Invulnerable
     bool invulnerable = false;
+    public int invulnerableFrames = 10;
 
     //Attack
     GameObject attackCollider;
@@ -60,7 +60,7 @@ public class Player : MonoBehaviour {
 
     //Shards
     public GameObject shardObject;
-    public float shardOffset = 1;
+    public int ShardDamage;
     public Vector2Int minMaxShards = new Vector2Int(3,5);
     public List<Shard> activeShards;
     public Vector2 shardRange = new Vector2(300,500);
@@ -71,13 +71,18 @@ public class Player : MonoBehaviour {
     //UI
     public Text textActionCD;
 
-    // Use this for initialization
+    //Sprite renderer
+    private SpriteRenderer spriteRenderer;
+
+    
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         attackCollider = transform.Find("Attack").gameObject;
         lastDir = new Vector2(0, -1);
         animator = GetComponent<Animator>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -148,6 +153,13 @@ public class Player : MonoBehaviour {
 
         UpdateAnimations();
     }
+
+    //Modificar ordre de layer segons la posició y
+    private void LateUpdate()
+    {
+        spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(this.spriteRenderer.bounds.min).y * -1;
+    }
+
 
     void CheckMoveInputs()
     {
@@ -282,7 +294,6 @@ public class Player : MonoBehaviour {
 
     void Dash()
     {
-        inAction = true;
         state = State.Dash;
         invulnerable = true;
         startPoint = transform.position;
@@ -291,7 +302,6 @@ public class Player : MonoBehaviour {
         gameObject.layer = LayerMask.NameToLayer("PlayerDash"); //Canvi de layer per a travessar enemics simples
         StartCoroutine(IDashCooldown());
         attackCollider.GetComponent<Attack>().StopAttack();
-        //GetComponent<SpriteRenderer>().color = Color.cyan;
 
         animator.SetTrigger("Dash");
 
@@ -321,7 +331,6 @@ public class Player : MonoBehaviour {
         //Invulnerabilitat 2/3 parts del dash
         if (tAction >= dashFrames * 2 / 3)
         {
-            //GetComponent<SpriteRenderer>().color = Color.blue;
             invulnerable = false;
             gameObject.layer = LayerMask.NameToLayer("Player");
         }
@@ -335,15 +344,12 @@ public class Player : MonoBehaviour {
 
     void EndDash()
     {
-        inAction = false;
         state = State.Idle;
-        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     //Atac bàsic a melee. S'alterna dreta i esquerra
     void MeleeAttack()
     {
-        inAction = true;
         invulnerable = true;
         attackCollider.SendMessage("PerformAttack", lastDir);
         consecutiveAttacks++;
@@ -397,8 +403,6 @@ public class Player : MonoBehaviour {
     void EndAttackSequence()
     {
         state = State.Idle;
-        inAction = false;
-        GetComponent<SpriteRenderer>().color = Color.white;
         consecutiveAttacks = 0;
     }
 
@@ -450,9 +454,12 @@ public class Player : MonoBehaviour {
         {
             GameObject spawnedObject = Instantiate(shardObject, spawnList[i], Quaternion.AngleAxis(Random.Range(0.0f, 360.0f), Vector3.forward));
 
-            activeShards.Add(spawnedObject.GetComponent<Shard>());
+            Shard shard = spawnedObject.GetComponent<Shard>();
 
-            spawnedObject.SendMessage("MoveShards", destList[i]);
+            activeShards.Add(shard);
+  
+            shard.MoveShards(destList[i]);
+            shard.damage = ShardDamage;
 
             yield return new WaitForSeconds(0.01f);
         }
@@ -460,30 +467,6 @@ public class Player : MonoBehaviour {
     }
 
 
-    /*   -----------OBSOLETA------------
-    void GenerateShards(Object hitInfo)
-    {
-        int nShards = Random.Range(minMaxShards.x, minMaxShards.y+1);
-
-        for(int i = 0; i < nShards; i++){
-
-            float randomX = Random.Range(-10, 10) / 10f * (lastDir.y + 0.2f);
-            float randomY = Random.Range(-10, 10) / 10f * (lastDir.x + 0.2f);
-
-            Vector3 spawnPos = new Vector3(transform.position.x + shardOffset * lastDir.x + randomX, transform.position.y + shardOffset * lastDir.y + randomY, 0);
-            Vector3 destPos = new Vector3(transform.position.x + shardOffset * lastDir.x * 2 + randomX * 3, transform.position.y + shardOffset * lastDir.y * 2 + randomY * 3, 0);
-            
-
-            //Debug.Log(spawnPos + destPos.ToString());
-
-            GameObject spawnedObject = Instantiate(shardObject, spawnPos, Quaternion.AngleAxis(Random.Range(0.0f, 360.0f), Vector3.forward));
-            
-            activeShards.Add(spawnedObject.GetComponent<Shard>());
-
-            spawnedObject.SendMessage("MoveShards", destPos);
-            
-        }
-    }*/
     public void EnemyHit(Enemy enemy)
     {
         if (!invulnerable)
@@ -491,7 +474,8 @@ public class Player : MonoBehaviour {
             GetDamage(enemy.damage);
             if (state != State.Dead)
             {
-                //KnockBack(enemy.transform.position);
+                KnockBack(enemy.transform.position, enemy.knockBackValue);
+                DamageInvulnerability();
             }
         }
     }
@@ -499,7 +483,7 @@ public class Player : MonoBehaviour {
     public void DashCrash(Enemy enemy)
     {
         GetDamage(enemy.damage);
-        KnockBack(enemy.transform.position);
+        KnockBack(enemy.transform.position, enemy.knockBackValue);
     }
 
     public void GetDamage(int damage)
@@ -534,14 +518,19 @@ public class Player : MonoBehaviour {
         return health <= 0;
     }
 
-    public void KnockBack(Vector3 pusherPos)
+    public void DamageInvulnerability()
+    {
+        invulnerable = true;
+        GetComponent<SpriteRenderer>().color = Color.red;
+        StartCoroutine(IInvulnerabilityDamage());
+    }
+
+    public void KnockBack(Vector3 pusherPos, float value)
     {
         Vector3 direction = (transform.position - pusherPos).normalized;
 
         startPoint = transform.position;
-        destPoint = Vector2.ClampMagnitude(direction * 10000, knockBackDistance) + startPoint;
-
-        GetComponent<SpriteRenderer>().color = Color.red;
+        destPoint = Vector2.ClampMagnitude(direction * 10000, knockBackDistance*value) + startPoint;
 
         animator.SetTrigger("Hit");
 
@@ -551,7 +540,6 @@ public class Player : MonoBehaviour {
 
     private void EndKnockBack()
     {
-        GetComponent<SpriteRenderer>().color = Color.white;
         state = State.Idle;
     }
 
@@ -584,6 +572,7 @@ public class Player : MonoBehaviour {
         transform.localScale = Vector2.one;
         transform.position = lastSafePosition + -(Vector3)lastDir * 0.5f;
         state = State.Idle;
+        DamageInvulnerability();
     }
 
     //Actualitzar els paràmetres d'animació
@@ -598,6 +587,21 @@ public class Player : MonoBehaviour {
         //Si està realitzant una acció activar la layer d'accions
         animator.SetLayerWeight(2, state == 0 ? 0 : 1);      
     }
+
+
+
+    /***********************************
+                GETTERS
+     ***********************************/
+
+    public State GetState()
+    {
+        return state;
+    }
+
+    /***********************************
+                CORUTINES
+     ***********************************/
 
     IEnumerator IDashCooldown()
     {
@@ -614,4 +618,15 @@ public class Player : MonoBehaviour {
         dashReady = true;
     }
 
+    IEnumerator IInvulnerabilityDamage()
+    {
+        int t = 0;
+        while(t < invulnerableFrames)
+        {
+            t++;
+            yield return null;
+        }
+        invulnerable = false;
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
 }

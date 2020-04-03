@@ -8,8 +8,6 @@ public class Cliff : MonoBehaviour
 
     private Tilemap tilemap;
     private Vector3 hitTilePos, pos2, pos3;
-    
-    private float offsetFrames = 30;
 
     private float tFrames;
 
@@ -22,7 +20,6 @@ public class Cliff : MonoBehaviour
     {
         // {estat,frames}
         offsetStates = new Dictionary<int, int> { { 0, 60 }, { 1, 100 } };
-
 
         tilemap = transform.parent.GetComponent<Tilemap>();
         tFrames = 0;
@@ -61,7 +58,6 @@ public class Cliff : MonoBehaviour
         {
             if (offsetStates.ContainsKey((int)collision.gameObject.GetComponent<Player>().state))
             {
-                Debug.Log(tFrames + " " + collision.gameObject.layer);
                 if(lastState == (int)collision.gameObject.GetComponent<Player>().state)
                 {
                     tFrames++;

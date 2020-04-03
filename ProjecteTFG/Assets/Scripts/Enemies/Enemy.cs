@@ -8,7 +8,7 @@ public abstract class Enemy : MonoBehaviour
     public int damage;
     public int size;
     public int health;
-
+    public float knockBackValue = 1;
 
     //Is vulnerable
     protected bool vulnerable = true;
@@ -21,17 +21,28 @@ public abstract class Enemy : MonoBehaviour
 
     protected Player player;
 
+    //Sprite Renderer
+    private SpriteRenderer spriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    //Modificar ordre de layer segons la posició y
+    private void LateUpdate()
+    {
+        spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(this.spriteRenderer.bounds.min).y * -1;
     }
 
     public void GetDamage(int damage)
@@ -42,13 +53,11 @@ public abstract class Enemy : MonoBehaviour
 
     protected void CheckDeath()
     {
-        if(health < 0)
+        if(health <= 0)
         {
             Die();
         }
     }
-
-
 
     protected abstract void Init();
     public abstract void Hit(Attack attack);

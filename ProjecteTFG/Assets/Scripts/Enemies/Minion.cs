@@ -83,7 +83,10 @@ public class Minion : Enemy
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.SendMessage("EnemyHit", this);
+            if(damage > 0)
+            {
+                collision.gameObject.GetComponent<Player>().EnemyHit(this);
+            }
         }
     }
 }
