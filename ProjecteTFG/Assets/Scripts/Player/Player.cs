@@ -74,7 +74,9 @@ public class Player : MonoBehaviour, IState {
     //Sprite renderer
     private SpriteRenderer spriteRenderer;
 
-    
+    //Game manager
+    private GameManager gm;
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -83,6 +85,8 @@ public class Player : MonoBehaviour, IState {
         animator = GetComponent<Animator>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        gm = FindObjectOfType<GameManager>();
     }
 
     private void FixedUpdate()

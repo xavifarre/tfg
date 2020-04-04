@@ -211,7 +211,7 @@ MonoBehaviour:
   fallFrames: 60
   shardObject: {fileID: 1028228151706104, guid: adefcabf1c17acc48a788833313ba98d,
     type: 3}
-  shardOffset: 2
+  ShardDamage: 1
   minMaxShards: {x: 0, y: 2}
   activeShards: []
   shardRange: {x: 300, y: 500}
