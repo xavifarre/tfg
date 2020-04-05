@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
+    public int fase = 0;
+
     public override void Die()
     {
         throw new System.NotImplementedException();

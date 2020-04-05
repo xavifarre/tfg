@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraLimits : MonoBehaviour
 {
+    public int area = 0;
     public GameObject limitContainer;
     [HideInInspector]
     public List<Vector2> limits = new List<Vector2>();
@@ -27,7 +28,7 @@ public class CameraLimits : MonoBehaviour
         return !Poly.ContainsPoint(limits.ToArray(), point);
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         List<Vector2> lim = new List<Vector2>();
         foreach (Transform child in limitContainer.transform)

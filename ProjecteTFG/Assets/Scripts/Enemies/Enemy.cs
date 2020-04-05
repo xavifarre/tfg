@@ -31,6 +31,8 @@ public abstract class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        Init();
     }
 
     // Update is called once per frame

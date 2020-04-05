@@ -9,7 +9,11 @@ public class CameraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        cameraLimits = new CameraLimits[10];
+        foreach(CameraLimits cl in FindObjectsOfType<CameraLimits>())
+        {
+            cameraLimits[cl.area] = cl;
+        }
     }
 
     // Update is called once per frame
@@ -38,8 +42,4 @@ public class CameraManager : MonoBehaviour
         return desiredPosition;
     }
 
-    IEnumerator BlendingCamera()
-    {
-        yield return null;
-    }
 }

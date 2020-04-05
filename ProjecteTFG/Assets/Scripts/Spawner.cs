@@ -4,43 +4,237 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-    public Vector2 spawnAreaSize = new Vector2(10f, 5f);
-
-    public float spawnTime = 1;
-
-    float t = 0;
-
     public GameObject obj;
-    public Player player;
+    public GameObject spawnContainer;
+    public float spawnInterval = 1;
+    public int spawnBurst = 1;
+    public int maxLoops = 1;
+
+    public enum Type {Areas, Points}
+    public Type type;
+
+    private List<RectArea> areas;
+
+    public bool sequential = true;
+    public bool mirror = false;
+
+    private List<Vector2> points;
+    private int iSeq = 0;
+    private List<int> iUsed;
+
+
+    [Header("Minimum Distances")]
+    public float minimumDistanceToPlayer = 0;
+    public float minimumDistanceToOther = 0;
+
+    private float t = 0;
+    private bool spawning = false;
+    private int spawnLoops = 0;
+    private Player player;
+
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        player = FindObjectOfType<Player>();
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        t += Time.deltaTime;
-        if(t>= spawnTime)
+        if (type == Type.Points)
         {
-            Vector2 pos = new Vector2(Random.Range(transform.position.x - spawnAreaSize.x/2, transform.position.x + spawnAreaSize.x / 2),Random.Range(transform.position.y - spawnAreaSize.y / 2, transform.position.y + spawnAreaSize.y / 2));
-
-            GameObject spawnedObject = Instantiate(obj,pos, Quaternion.AngleAxis(Random.Range(0.0f, 360.0f),Vector3.forward));
-
-            Shard shard = obj.GetComponent<Shard>();
-
-            if (shard)
+            points = new List<Vector2>();
+            foreach (Transform tr in transform)
             {
-                player.activeShards.Add(shard);
+                points.Add(tr.position);
             }
+        }
 
-            t = 0;
+        if (type == Type.Areas)
+        {
+            areas = new List<RectArea>();
+            foreach (Transform tr in transform)
+            {
+                areas.Add(tr.GetComponent<RectArea>());
+            }
+        }
+
+        if (obj && spawnContainer)
+        {
+            StartSpawning();
+        }
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
+        if (spawning)
+        {
+            t += Time.deltaTime;
+            if (t >= spawnInterval)
+            {
+                TriggerSpawn();
+
+                t = t % spawnInterval;
+                spawnLoops++;
+                if (spawnLoops >= maxLoops)
+                {
+                    StopSpawning();
+                }
+            }
         }
 	}
 
-    private void OnDrawGizmos()
+    private void TriggerSpawn()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(transform.position, (Vector3)spawnAreaSize + Vector3.forward);
+        for(int i=0; i < spawnBurst; i++)
+        {
+            Vector2 pos = Vector2.zero;
+            if (type == Type.Areas)
+            {
+                pos = SpawnOnAreas();
+            }
+            else if(type == Type.Points)
+            {
+                pos = SpawnOnPoints();
+            }
+            Spawn(pos);
+
+            if (mirror)
+            {
+                Vector3 v = ((Vector3)pos - transform.position)*-1;
+                Spawn(transform.position + v);
+                i++;
+            }
+        }
+    }
+
+    public void StartSpawning()
+    {
+        t = spawnInterval;
+        spawnLoops = 0;
+        iSeq = 0;
+        iUsed = new List<int>();
+        spawning = true;
+    }
+
+    public void StopSpawning()
+    {
+        spawning = false;
+    }
+    private void Spawn(Vector3 pos)
+    {
+        GameObject spawnedObject = Instantiate(obj, pos, Quaternion.identity, spawnContainer.transform);
+
+    }
+
+    private Vector3 SpawnOnAreas()
+    {
+        Vector2 pos;
+        if (sequential)
+        {
+            pos = RandomPos(areas[iSeq % areas.Count]);
+            while (!MinDistanceValid(pos))
+            {
+                pos = RandomPos(areas[iSeq % areas.Count]);
+            }
+            iSeq++;
+        }
+        else
+        {
+            int rand = Random.Range(0, areas.Count);
+            while(iUsed.Contains(rand))
+            {
+                rand = Random.Range(0, areas.Count);
+            }
+
+            iUsed.Add(rand);
+
+            if (iUsed.Count >= areas.Count)
+            {
+                iUsed.Clear();
+            }
+
+            pos = RandomPos(areas[rand]);
+        }
+
+        return pos;
+    }
+
+    private Vector3 SpawnOnPoints()
+    {
+        Vector2 pos;
+        if (sequential)
+        {
+            pos = points[iSeq % points.Count];
+            iSeq++;
+        }
+        else
+        {
+            int rand = Random.Range(0, points.Count);
+            while (iUsed.Contains(rand))
+            {
+                rand = Random.Range(0, points.Count);
+            }
+
+            iUsed.Add(rand);
+
+            if (iUsed.Count >= points.Count)
+            {
+                iUsed.Clear();
+            }
+
+            pos = points[rand];
+        }
+        return pos;
+    }
+
+    private Vector3 RandomPos(RectArea area)
+    {
+        return new Vector2(Random.Range(area.transform.position.x - area.spawnAreaSize.x / 2, area.transform.position.x + area.spawnAreaSize.x / 2), Random.Range(area.transform.position.y - area.spawnAreaSize.y / 2, area.transform.position.y + area.spawnAreaSize.y / 2));
+    }
+
+    private bool MinDistanceValid(Vector3 pos)
+    {
+        return MinDistancePlayer(pos) && MinDistanceOther(pos);
+    }
+
+    private bool MinDistancePlayer(Vector3 pos)
+    {
+        return Vector3.Distance(pos, player.transform.position) >= minimumDistanceToPlayer; ;
+    }
+
+    private bool MinDistanceOther(Vector3 pos)
+    {
+        foreach(Transform other in spawnContainer.transform)
+        {
+            if (Vector3.Distance(pos, other.position) < minimumDistanceToOther)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        if(type == Type.Areas)
+        {
+            //foreach (Transform tr in transform)
+            //{
+            //    RectArea area = tr.GetComponent<RectArea>();
+            //    Gizmos.color = Color.blue;
+            //    Gizmos.DrawWireCube(transform.position, (Vector3)area.spawnAreaSize + Vector3.forward);
+            //}
+        }
+        else if(type == Type.Points)
+        {
+            foreach(Transform tr in transform)
+            {
+                Vector2 p = tr.position;
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(p - Vector2.one, p + Vector2.one);
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(p - Vector2.right + Vector2.up, p + Vector2.right - Vector2.up);
+            }
+        }
     }
 }
