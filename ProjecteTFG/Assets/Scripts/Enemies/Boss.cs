@@ -21,6 +21,11 @@ public class Boss : Enemy
         throw new System.NotImplementedException();
     }
 
+    protected override void UpdateEnemy()
+    {
+        throw new System.NotImplementedException();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerDash"))

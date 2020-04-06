@@ -6,6 +6,7 @@ public abstract class Enemy : MonoBehaviour
 {
     //Basic variables
     public int damage;
+    public float speed;
     public int size;
     public int health;
     public float knockBackValue = 1;
@@ -18,6 +19,7 @@ public abstract class Enemy : MonoBehaviour
 
     //RigidBody
     protected Rigidbody2D rb;
+    protected Vector3 realPos;
 
     protected Player player;
 
@@ -32,13 +34,14 @@ public abstract class Enemy : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        realPos = transform.position;
         Init();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateEnemy();
     }
 
     //Modificar ordre de layer segons la posició y
@@ -62,6 +65,7 @@ public abstract class Enemy : MonoBehaviour
     }
 
     protected abstract void Init();
+    protected abstract void UpdateEnemy();
     public abstract void Hit(Attack attack);
     public abstract void Die();
 }

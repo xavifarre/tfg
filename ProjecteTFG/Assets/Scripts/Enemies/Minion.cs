@@ -23,6 +23,11 @@ public class Minion : Enemy
 
     }
 
+    protected override void UpdateEnemy()
+    {
+        //throw new System.NotImplementedException();
+    }
+
     private void FixedUpdate()
     {
         if(state == State.KnockBack)
@@ -78,6 +83,8 @@ public class Minion : Enemy
     {
         state = State.Dead;
     }
+
+
 
     private void OnCollisionStay2D(Collision2D collision)
     {

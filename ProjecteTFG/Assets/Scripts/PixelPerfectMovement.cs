@@ -37,7 +37,6 @@ public class PixelPerfectMovement : MonoBehaviour
     {
         if (active)
         {
-            
             rb.MovePosition(PixelPerfectClamp(position));
         }
         else

@@ -252,7 +252,6 @@ public class Player : MonoBehaviour, IState {
     //Move to position
     public void Move(Vector3 position)
     {
-
         PixelPerfectMovement.Move(position, rb2d);
     }
 

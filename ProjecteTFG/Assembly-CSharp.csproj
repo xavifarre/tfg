@@ -79,7 +79,8 @@
     <Compile Include="Assets\Scripts\FallableObject.cs" />
     <Compile Include="Assets\Scripts\FollowEffect.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\iState.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\ISpawner.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IState.cs" />
     <Compile Include="Assets\Scripts\MathFunctions.cs" />
     <Compile Include="Assets\Scripts\ParticleDestroyer.cs" />
     <Compile Include="Assets\Scripts\PixelPerfectMovement.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Assets\Scripts\RainbowTintEffect.cs" />
     <Compile Include="Assets\Scripts\Shard.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
+    <Compile Include="Assets\SpawnerGroup.cs" />
     <None Include="Assets\Shaders\LightCircle.shader" />
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>

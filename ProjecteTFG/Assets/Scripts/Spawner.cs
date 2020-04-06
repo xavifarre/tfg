@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour {
+public class Spawner : MonoBehaviour, ISpawner
+{
 
     public GameObject obj;
     public GameObject spawnContainer;
@@ -15,7 +16,8 @@ public class Spawner : MonoBehaviour {
 
     private List<RectArea> areas;
 
-    public bool sequential = true;
+    public enum Order { Sequential, RandomNoRepeat, FullRandom}
+    public Order order;
     public bool mirror = false;
 
     private List<Vector2> points;
@@ -127,8 +129,8 @@ public class Spawner : MonoBehaviour {
 
     private Vector3 SpawnOnAreas()
     {
-        Vector2 pos;
-        if (sequential)
+        Vector2 pos = Vector2.zero;
+        if (order == Order.Sequential)
         {
             pos = RandomPos(areas[iSeq % areas.Count]);
             while (!MinDistanceValid(pos))
@@ -137,7 +139,7 @@ public class Spawner : MonoBehaviour {
             }
             iSeq++;
         }
-        else
+        else if(order == Order.RandomNoRepeat)
         {
             int rand = Random.Range(0, areas.Count);
             while(iUsed.Contains(rand))
@@ -154,19 +156,24 @@ public class Spawner : MonoBehaviour {
 
             pos = RandomPos(areas[rand]);
         }
+        else if(order == Order.FullRandom)
+        {
+            int rand = Random.Range(0, areas.Count);
+            pos = RandomPos(areas[rand]);
+        }
 
         return pos;
     }
 
     private Vector3 SpawnOnPoints()
     {
-        Vector2 pos;
-        if (sequential)
+        Vector2 pos = Vector2.zero;
+        if (order == Order.Sequential)
         {
             pos = points[iSeq % points.Count];
             iSeq++;
         }
-        else
+        else if (order == Order.RandomNoRepeat)
         {
             int rand = Random.Range(0, points.Count);
             while (iUsed.Contains(rand))
@@ -183,6 +190,12 @@ public class Spawner : MonoBehaviour {
 
             pos = points[rand];
         }
+        else if (order == Order.FullRandom)
+        {
+            int rand = Random.Range(0, points.Count);
+            pos = points[rand];
+        }
+
         return pos;
     }
 
