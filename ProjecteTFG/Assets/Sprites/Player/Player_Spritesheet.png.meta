@@ -1299,7 +1299,7 @@ TextureImporter:
       name: Player_Spritesheet_3
       rect:
         serializedVersion: 2
-        x: 102
+        x: 101
         y: 519
         width: 14
         height: 30
@@ -1635,12 +1635,12 @@ TextureImporter:
       name: Player_Spritesheet_19
       rect:
         serializedVersion: 2
-        x: 100
+        x: 98
         y: 487
-        width: 17
+        width: 23
         height: 30
       alignment: 9
-      pivot: {x: 0.7058824, y: 0.5}
+      pivot: {x: 0.6086956, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1887,12 +1887,12 @@ TextureImporter:
       name: Player_Spritesheet_31
       rect:
         serializedVersion: 2
-        x: 100
+        x: 98
         y: 457
-        width: 18
-        height: 29
+        width: 23
+        height: 30
       alignment: 9
-      pivot: {x: 0.6666667, y: 0.4827586}
+      pivot: {x: 0.6086956, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2160,12 +2160,12 @@ TextureImporter:
       name: Player_Spritesheet_47
       rect:
         serializedVersion: 2
-        x: 100
-        y: 429
-        width: 20
-        height: 28
+        x: 98
+        y: 427
+        width: 23
+        height: 30
       alignment: 9
-      pivot: {x: 0.6, y: 0.5}
+      pivot: {x: 0.6086956, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2328,12 +2328,12 @@ TextureImporter:
       name: Player_Spritesheet_57
       rect:
         serializedVersion: 2
-        x: 99
-        y: 400
-        width: 21
-        height: 27
+        x: 98
+        y: 397
+        width: 23
+        height: 30
       alignment: 9
-      pivot: {x: 0.61904764, y: 0.4814815}
+      pivot: {x: 0.6086956, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2455,9 +2455,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 98
-        y: 371
+        y: 367
         width: 23
-        height: 26
+        height: 30
       alignment: 9
       pivot: {x: 0.6086956, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2790,12 +2790,12 @@ TextureImporter:
       name: Player_Spritesheet_87
       rect:
         serializedVersion: 2
-        x: 99
-        y: 342
-        width: 21
-        height: 25
+        x: 98
+        y: 337
+        width: 23
+        height: 30
       alignment: 9
-      pivot: {x: 0.61904764, y: 0.44}
+      pivot: {x: 0.6086956, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2958,12 +2958,12 @@ TextureImporter:
       name: Player_Spritesheet_97
       rect:
         serializedVersion: 2
-        x: 100
-        y: 309
-        width: 19
-        height: 28
+        x: 98
+        y: 307
+        width: 23
+        height: 30
       alignment: 9
-      pivot: {x: 0.6315789, y: 0.4642857}
+      pivot: {x: 0.6086956, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3294,12 +3294,12 @@ TextureImporter:
       name: Player_Spritesheet_119
       rect:
         serializedVersion: 2
-        x: 100
-        y: 279
-        width: 17
-        height: 27
+        x: 98
+        y: 277
+        width: 23
+        height: 30
       alignment: 9
-      pivot: {x: 0.7058824, y: 0.4814815}
+      pivot: {x: 0.6086956, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3462,12 +3462,12 @@ TextureImporter:
       name: Player_Spritesheet_127
       rect:
         serializedVersion: 2
-        x: 100
-        y: 251
-        width: 18
-        height: 26
+        x: 98
+        y: 247
+        width: 23
+        height: 30
       alignment: 9
-      pivot: {x: 0.6666667, y: 0.46153846}
+      pivot: {x: 0.6086956, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3714,12 +3714,12 @@ TextureImporter:
       name: Player_Spritesheet_139
       rect:
         serializedVersion: 2
-        x: 100
-        y: 221
-        width: 19
-        height: 26
+        x: 98
+        y: 217
+        width: 23
+        height: 30
       alignment: 9
-      pivot: {x: 0.6315789, y: 0.46153846}
+      pivot: {x: 0.6086956, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3882,12 +3882,12 @@ TextureImporter:
       name: Player_Spritesheet_147
       rect:
         serializedVersion: 2
-        x: 99
-        y: 191
-        width: 21
-        height: 26
+        x: 98
+        y: 187
+        width: 23
+        height: 30
       alignment: 9
-      pivot: {x: 0.61904764, y: 0.46153846}
+      pivot: {x: 0.6086956, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4092,12 +4092,12 @@ TextureImporter:
       name: Player_Spritesheet_157
       rect:
         serializedVersion: 2
-        x: 99
-        y: 160
-        width: 20
-        height: 27
+        x: 98
+        y: 157
+        width: 23
+        height: 30
       alignment: 9
-      pivot: {x: 0.65, y: 0.4814815}
+      pivot: {x: 0.6086956, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

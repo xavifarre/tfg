@@ -15,6 +15,7 @@ public class CameraFollowPlayer : MonoBehaviour
 
     public CameraLimits cameraLimits;
 
+
     private void Start()
     {
         cm = FindObjectOfType<CameraManager>();
@@ -27,8 +28,6 @@ public class CameraFollowPlayer : MonoBehaviour
         desiredPosition = cm.ClampPositionOnArea(desiredPosition);
 
         Vector3 smoothedPosition = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothTime);
-
-        transform.position = smoothedPosition;
 
         PixelPerfectMovement.Move(smoothedPosition, transform);
     }

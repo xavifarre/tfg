@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour, IState {
+public class Player : MonoBehaviour, IState, IFallableObject {
 
     //Movement speed
     public float speed;
@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, IState {
     public bool dead = false;
 
     private Rigidbody2D rb2d;
+    private Vector3 realPos;
 
     //Actions
     public State state;
@@ -31,30 +32,30 @@ public class Player : MonoBehaviour, IState {
 
     //Dash
     public float dashDistance = 5;
-    public float dashFrames = 10;
+    public float dashTime = 0.2f;
     public float dashCd = 3;
     bool dashReady = true;
 
     //Invulnerable
     bool invulnerable = false;
-    public int invulnerableFrames = 10;
+    public float invulnerableTime = 0.2f;
 
     //Attack
     GameObject attackCollider;
     int consecutiveAttacks = 0;
-    public float attackFrames = 20;
-    public float attackMovementFrames = 10;
+    public float attackTime = 0.4f;
+    public float attackMovementTime= 0.2f;
     public float attackMovementDistance = 0.5f;
 
     //InputQueue
     string queuedInput = "";
 
     //KnockBack
-    public float knockBackFrames = 20;
+    public float knockBackTime = 20;
     public float knockBackDistance = 2;
 
     //Fall
-    public float fallFrames = 60;
+    public float fallTime = 1f;
     private Vector3 fallSpawnPosition;
 
 
@@ -87,15 +88,18 @@ public class Player : MonoBehaviour, IState {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         gm = FindObjectOfType<GameManager>();
+
+        realPos = transform.position;
     }
 
     private void FixedUpdate()
     {
         //Update actions
-        if(state == State.Idle)
+        if (state == State.Idle)
         {
             //Move
-            Move(transform.position + movementValue * Time.fixedDeltaTime * speed);
+            realPos = realPos + movementValue * Time.deltaTime * speed;
+            Move(realPos);
             //transform.position = transform.position + movement * Time.deltaTime * speed;
         }
 
@@ -142,9 +146,7 @@ public class Player : MonoBehaviour, IState {
         if (CanDash())
         {
             CheckDashInput();
-        }
-
-        
+        }        
 
         if (Input.GetKeyDown("u"))
         {
@@ -252,6 +254,7 @@ public class Player : MonoBehaviour, IState {
     //Move to position
     public void Move(Vector3 position)
     {
+        realPos = position;
         PixelPerfectMovement.Move(position, rb2d);
     }
 
@@ -299,13 +302,13 @@ public class Player : MonoBehaviour, IState {
     {
         state = State.Dash;
         invulnerable = true;
-        startPoint = transform.position;
+        startPoint = realPos;
         destPoint = Vector2.ClampMagnitude(lastDir * 10000, dashDistance) + startPoint;
         tAction = 0;
         gameObject.layer = LayerMask.NameToLayer("PlayerDash"); //Canvi de layer per a travessar enemics simples
         StartCoroutine(IDashCooldown());
-        attackCollider.GetComponent<Attack>().StopAttack();
-
+        attackCollider.GetComponent<AttackMelee>().StopAttack();
+        Debug.Log(destPoint);
         animator.SetTrigger("Dash");
 
         queuedInput = "";
@@ -314,32 +317,32 @@ public class Player : MonoBehaviour, IState {
     void UpdateDashPosition()
     {
          //-----Desacceleració exponencial----
-        tAction += 1;
-        //Move(MathFunctions.EaseOutExp(tAction, startPoint, destPoint, dashFrames, 5));
+        tAction += Time.deltaTime;
+        //Move(MathFunctions.EaseOutExp(tAction, startPoint, destPoint, dashTime, 5));
 
-        Vector3 tNextPos = MathFunctions.EaseOutExp(tAction, startPoint, destPoint, dashFrames, 5);
-        float tDistance = (tNextPos - MathFunctions.EaseOutExp(tAction-1, startPoint, destPoint, dashFrames, 5)).magnitude;
+        Vector3 tNextPos = MathFunctions.EaseOutExp(tAction, startPoint, destPoint, dashTime, 5);
+        float tDistance = (tNextPos - MathFunctions.EaseOutExp(tAction-Time.deltaTime, startPoint, destPoint, dashTime, 5)).magnitude;
         Vector3 tDir = (destPoint - startPoint).normalized;
         //Debug.Log(tNextPos + " " + transform.position + " " + tDistance + " " + tDir);
 
-        Move(transform.position + tDir * tDistance);
+        Move(realPos + tDir * tDistance);
 
         //float vDash = 2f;
-        //float vt = MathFunctions.EaseOutExp(tAction, vDash, 0, dashFrames, 3);
+        //float vt = MathFunctions.EaseOutExp(tAction, vDash, 0, dashTime, 3);
 
         //Debug.Log(vt);
         //Move(transform.position + (Vector3)lastDir.normalized * vt );
 
 
         //Invulnerabilitat 2/3 parts del dash
-        if (tAction >= dashFrames * 2 / 3)
+        if (tAction >= dashTime * 2 / 3)
         {
             invulnerable = false;
             gameObject.layer = LayerMask.NameToLayer("Player");
         }
 
         // Fi dash?
-        if (tAction >= dashFrames)
+        if (tAction >= dashTime)
         {
             EndDash();
         }
@@ -376,18 +379,18 @@ public class Player : MonoBehaviour, IState {
     //Moviment al atacar
     void UpdateAttack()
     {
-        tAction += 1;
+        tAction += Time.deltaTime;
 
-        if (tAction < attackMovementFrames)
+        if (tAction < attackMovementTime)
         {
-            Move(MathFunctions.EaseOutExp(tAction, startPoint, destPoint, attackMovementFrames, 5));
+            Move(MathFunctions.EaseOutExp(tAction, startPoint, destPoint, attackMovementTime, 5));
         }
         else
         {
             EndAttack();
         }
 
-        if (tAction >= attackFrames)
+        if (tAction >= attackTime)
         {
             EndAttackSequence();
         }
@@ -483,6 +486,19 @@ public class Player : MonoBehaviour, IState {
         }
     }
 
+    public void Hit(Attack attack)
+    {
+        if (!invulnerable)
+        {
+            GetDamage(attack.damage);
+            if (state != State.Dead)
+            {
+                KnockBack(attack.transform.position, attack.knockback);
+                DamageInvulnerability();
+            }
+        }
+    }
+
     public void DashCrash(Enemy enemy)
     {
         GetDamage(enemy.damage);
@@ -548,11 +564,11 @@ public class Player : MonoBehaviour, IState {
 
     private void UpdateKnockBack()
     {
-        tAction += 1;
+        tAction += Time.deltaTime;
 
-        if (tAction < knockBackFrames)
+        if (tAction < knockBackTime)
         {
-            Move(MathFunctions.EaseOutExp(tAction, startPoint, destPoint, knockBackFrames, 5));
+            Move(MathFunctions.EaseOutExp(tAction, startPoint, destPoint, knockBackTime, 5));
         }
         else
         {
@@ -565,16 +581,17 @@ public class Player : MonoBehaviour, IState {
         state = State.Fall;
         animator.SetTrigger("Fall");
 
-        StartCoroutine(FallableObject.IFallAnimation(fallPosition, gameObject, fallFrames));
+        StartCoroutine(FallableObject.IFallAnimation(fallPosition, gameObject, fallTime));
         
     }
 
-    private void EndFall()
+    public void EndFall()
     {
         transform.Find("FeetCollider").gameObject.SetActive(true);
         transform.localScale = Vector2.one;
-        transform.position = lastSafePosition + -(Vector3)lastDir * 0.5f;
+        realPos = lastSafePosition  -(Vector3)lastDir * 1;
         state = State.Idle;
+        GetDamage(1);
         DamageInvulnerability();
     }
 
@@ -590,7 +607,6 @@ public class Player : MonoBehaviour, IState {
         //Si està realitzant una acció activar la layer d'accions
         animator.SetLayerWeight(2, state == 0 ? 0 : 1);      
     }
-
 
 
     /***********************************
@@ -623,13 +639,18 @@ public class Player : MonoBehaviour, IState {
 
     IEnumerator IInvulnerabilityDamage()
     {
-        int t = 0;
-        while(t < invulnerableFrames)
+        float t = 0;
+        while(t < invulnerableTime)
         {
-            t++;
+            t+=Time.deltaTime;
             yield return null;
         }
         invulnerable = false;
         GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        realPos = transform.position;
     }
 }

@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//Enumerador d'estats genèric utilitzat pel player i els minions.
+//Enumerador d'estats genèric utilitzat pel player
 public enum State {
     Idle,
     Attack,
     Dash,
+    KnockBack,
+    Fall,
+    Dead
+};
+
+//Enumerador d'estats genèric utilitzat pels minions
+public enum MinionState
+{
+    Idle,
+    Move,
+    Attack,
+    Charge,
     KnockBack,
     Fall,
     Dead

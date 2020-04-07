@@ -33,7 +33,7 @@ public class StateFollowEffect : MonoBehaviour
         targetState = target.GetComponent<IState>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (replicateSprite)
         {

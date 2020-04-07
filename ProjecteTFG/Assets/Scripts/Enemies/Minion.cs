@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Minion : Enemy
+public class Minion : Enemy, IFallableObject
 {
+
     [HideInInspector]
-    public State state;
+    public MinionState state;
+
 
     //KnockBack
     public float knockBackResistance = 1;
-    public float knockBackDuration = 10;
+    public float knockBackDuration = 0.2f;
 
     //Action
     protected Vector3 startActionPoint;
     protected Vector3 endActionPoint;
 
     //Fall
-    public int fallFrames = 60;
+    public float fallTime = 1f;
 
     protected override void Init()
     {
@@ -25,23 +27,55 @@ public class Minion : Enemy
 
     protected override void UpdateEnemy()
     {
-        //throw new System.NotImplementedException();
+        if (state == MinionState.KnockBack)
+        {
+            UpdateKnockBack();
+        }
+        else if (state == MinionState.Move)
+        {
+            UpdateMove();
+        }
+        else if (state == MinionState.Attack)
+        {
+            UpdateAttack();
+        }
+        else if (state == MinionState.Idle)
+        {
+            tAction += Time.deltaTime;
+            if (tAction > 1)
+            {
+                state = MinionState.Move;
+            }
+        }
     }
 
     private void FixedUpdate()
     {
-        if(state == State.KnockBack)
+        
+    }
+
+    //Move
+    protected virtual void UpdateMove()
+    {
+
+    }
+
+    protected virtual void UpdateAttack()
+    {
+
+    }
+
+    protected virtual void UpdateKnockBack()
+    {
+        Vector3 nextPos = MathFunctions.EaseOutExp(tAction, startActionPoint, endActionPoint, knockBackDuration, 5);
+        realPos = nextPos;
+        PixelPerfectMovement.Move(nextPos, rb);
+
+        tAction += Time.deltaTime;
+
+        if (tAction >= knockBackDuration)
         {
-            Vector3 nextPos = MathFunctions.EaseOutExp(tAction,startActionPoint,endActionPoint,knockBackDuration, 5);
-            PixelPerfectMovement.Move(nextPos, rb);
-
-            tAction++;
-
-            if (tAction >= knockBackDuration)
-            {
-                state = State.Idle;
-            }
-
+            state = MinionState.Idle;
         }
     }
 
@@ -62,38 +96,34 @@ public class Minion : Enemy
             startActionPoint = transform.position;
             endActionPoint = startActionPoint + (Vector3)player.lastDir * knockBackValue;
 
-            state = State.KnockBack;
+            state = MinionState.KnockBack;
             tAction = 0;
         }
     }
 
     public override void Die()
     {
-        throw new System.NotImplementedException();
+        state = MinionState.Dead;
+        Destroy(gameObject);
     }
 
     public void Fall(Vector3 fallPosition)
     {
-        state = State.Fall;
+        state = MinionState.Fall;
         vulnerable = false;
-        StartCoroutine(FallableObject.IFallAnimation(fallPosition, gameObject, fallFrames));
+        StartCoroutine(FallableObject.IFallAnimation(fallPosition, gameObject, fallTime));
     }
 
     public void EndFall()
     {
-        state = State.Dead;
+        state = MinionState.Dead;
     }
 
-
-
-    private void OnCollisionStay2D(Collision2D collision)
+    protected override void PlayerHit()
     {
-        if (collision.gameObject.tag == "Player")
+        if (damage > 0)
         {
-            if(damage > 0)
-            {
-                collision.gameObject.GetComponent<Player>().EnemyHit(this);
-            }
+            player.GetComponent<Player>().EnemyHit(this);
         }
     }
 }

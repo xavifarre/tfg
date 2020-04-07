@@ -9,9 +9,9 @@ public class Cliff : MonoBehaviour
     private Tilemap tilemap;
     private Vector3 hitTilePos, pos2, pos3;
 
-    private float tFrames;
+    private float t;
 
-    private Dictionary<int, int> offsetStates;
+    private Dictionary<int, float> offsetStates;
 
     private int lastState = -1;
 
@@ -19,10 +19,10 @@ public class Cliff : MonoBehaviour
     void Start()
     {
         // {estat,frames}
-        offsetStates = new Dictionary<int, int> { { 0, 60 }, { 1, 100 } };
+        offsetStates = new Dictionary<int, float> { { 0, 1.5f }, { 1, 4f } };
 
         tilemap = transform.parent.GetComponent<Tilemap>();
-        tFrames = 0;
+        t = 0;
     }
 
     // Update is called once per frame
@@ -34,12 +34,11 @@ public class Cliff : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
         if(collision.gameObject.tag == "Player")
         {
             if (offsetStates.ContainsKey((int)collision.gameObject.GetComponent<Player>().state))
             {
-                tFrames = 0;
+                t = 0;
             }
             else
             {
@@ -60,14 +59,14 @@ public class Cliff : MonoBehaviour
             {
                 if(lastState == (int)collision.gameObject.GetComponent<Player>().state)
                 {
-                    tFrames++;
+                    t+= Time.deltaTime;
                 }
                 else
                 {
-                    tFrames = 0;
+                    t = 0;
                 }
                 lastState = (int)collision.gameObject.GetComponent<Player>().state;
-                if (tFrames >= offsetStates[(int)collision.gameObject.GetComponent<Player>().state])
+                if (t >= offsetStates[(int)collision.gameObject.GetComponent<Player>().state])
                 {
                     TriggerFall(collision);
                 }

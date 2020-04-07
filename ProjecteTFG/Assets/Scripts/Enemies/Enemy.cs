@@ -13,6 +13,7 @@ public abstract class Enemy : MonoBehaviour
 
     //Is vulnerable
     protected bool vulnerable = true;
+    protected int maxHealth;
 
     //Variable de control d'accions
     protected float tAction;
@@ -27,19 +28,22 @@ public abstract class Enemy : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
+        Debug.Log("START " +  name);
         player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         realPos = transform.position;
+
+        maxHealth = health;
         Init();
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         UpdateEnemy();
     }
@@ -47,7 +51,10 @@ public abstract class Enemy : MonoBehaviour
     //Modificar ordre de layer segons la posició y
     private void LateUpdate()
     {
-        spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(this.spriteRenderer.bounds.min).y * -1;
+        if (spriteRenderer)
+        {
+            spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(this.spriteRenderer.bounds.min).y * -1;
+        }
     }
 
     public void GetDamage(int damage)
@@ -66,6 +73,16 @@ public abstract class Enemy : MonoBehaviour
 
     protected abstract void Init();
     protected abstract void UpdateEnemy();
+    protected abstract void PlayerHit();
+
     public abstract void Hit(Attack attack);
     public abstract void Die();
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            PlayerHit();
+        }
+    }
 }

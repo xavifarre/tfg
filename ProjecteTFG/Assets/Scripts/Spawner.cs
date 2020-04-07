@@ -58,10 +58,10 @@ public class Spawner : MonoBehaviour, ISpawner
             }
         }
 
-        if (obj && spawnContainer)
-        {
-            StartSpawning();
-        }
+        //if (obj && spawnContainer)
+        //{
+        //    StartSpawning();
+        //}
     }
 
     // Update is called once per frame

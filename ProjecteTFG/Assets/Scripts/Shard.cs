@@ -64,7 +64,7 @@ public class Shard : MonoBehaviour {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 	
-	void FixedUpdate () {
+	void Update () {
 
         if (moving)
         {
@@ -189,7 +189,6 @@ public class Shard : MonoBehaviour {
     public void DestroyShard()
     {
         Stop();
-        Debug.Log(player.GetComponent<Player>());
         player.GetComponent<Player>().activeShards.Remove(this);
         sprite.enabled = false;
         GetComponent<Collider2D>().enabled = false;

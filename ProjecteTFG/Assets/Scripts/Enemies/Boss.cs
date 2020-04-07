@@ -6,6 +6,9 @@ public class Boss : Enemy
 {
     public int fase = 0;
 
+    //Vida fases
+    public List<float> ratiosDamageFase = new List<float>();
+
     public override void Die()
     {
         throw new System.NotImplementedException();
@@ -13,17 +16,39 @@ public class Boss : Enemy
 
     public override void Hit(Attack attack)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     protected override void Init()
     {
-        throw new System.NotImplementedException();
+       
     }
 
     protected override void UpdateEnemy()
     {
-        throw new System.NotImplementedException();
+       
+    }
+
+    protected override void PlayerHit()
+    {
+
+    }
+
+    protected virtual int CheckDamageFase()
+    {
+        for (int i = 0; i < ratiosDamageFase.Count; i++)
+        {
+            if (health > maxHealth * ratiosDamageFase[i])
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    protected virtual void StartFase(int f)
+    {
+        fase = f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
