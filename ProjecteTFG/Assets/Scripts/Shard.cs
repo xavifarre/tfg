@@ -8,7 +8,10 @@ public class Shard : MonoBehaviour {
     public float speed = 5f;
     public float rotSpeed = 10f;
     public float maxActiveTime = 10f;
-    public int damage = 1;
+
+    //Damage
+    public float damageVelRatio= 10f;
+    private int damage;
 
     //Velocity
     public float acceleration = 5f;
@@ -18,9 +21,8 @@ public class Shard : MonoBehaviour {
 
     bool moving = false;
     bool recalling = false;
-    float aSpeed;
 
-    GameObject player;
+    Player player;
     Rigidbody2D rb;
 
     //Origin
@@ -48,9 +50,9 @@ public class Shard : MonoBehaviour {
 
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = FindObjectOfType<Player>();
         StartCoroutine(ICheckDeath());
-        gameObject.layer = 9; //ShardInactive layer
+        gameObject.layer = LayerMask.NameToLayer("CrystalInactive"); //ShardInactive layer
 
         originPos = transform.position;
         if (targetPos == Vector3.zero)
@@ -87,7 +89,7 @@ public class Shard : MonoBehaviour {
     {
         MoveShards(target);
         recalling = true;
-        gameObject.layer = 10; //ShardActive layer
+        gameObject.layer = LayerMask.NameToLayer("CrystalActive"); //ShardActive layer
     }
 
     public void MoveShards(Vector3 target)
@@ -126,6 +128,9 @@ public class Shard : MonoBehaviour {
 
             tVel = tVel + acceleration * Time.deltaTime;
             float vel = startVel + Mathf.Pow(1 + growRate, tVel);
+
+            float rDamage = Mathf.Clamp(vel / damageVelRatio, 1, 5);
+            damage = (int)(player.baseShardDamage + (player.maxShardDamage - player.baseShardDamage) * (rDamage - 1) / 4);
 
             Vector3 movement = (targetPos - transform.position).normalized * vel * Time.deltaTime;
             if(movement.magnitude > (targetPos - transform.position).magnitude)
@@ -182,7 +187,7 @@ public class Shard : MonoBehaviour {
         targetPos = transform.position;
         tMov = 0;
         moving = false;
-        gameObject.layer = 9; //ShardInactive layer
+        gameObject.layer = LayerMask.NameToLayer("CrystalInactive"); //ShardInactive layer
         rb.velocity = Vector2.zero;
     }
 
@@ -226,7 +231,7 @@ public class Shard : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        Debug.Log(collision.name);
         if (collision.gameObject.tag == "Player")
         {
             //Debug.Log(collision.gameObject.layer);

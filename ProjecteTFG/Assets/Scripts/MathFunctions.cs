@@ -53,4 +53,37 @@ public class MathFunctions : MonoBehaviour
         }
         return index;
     }
+
+    /*
+    * Aproxima la direcció "dir" a la direcció en 90º més propera, en forma d'enter 0-3
+    * 0 -> Dreta
+    * 1 -> Amunt
+    * 2 -> Esquerra
+    * 3 -> Abaix
+    */
+    public static int GetDirection(Vector2 dir)
+    {
+        if (Mathf.Abs(dir.x) >= Mathf.Abs(dir.y))
+        {
+            if (dir.x >= 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+        else
+        {
+            if (dir.y >= 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return 3;
+            }
+        }
+    }
 }

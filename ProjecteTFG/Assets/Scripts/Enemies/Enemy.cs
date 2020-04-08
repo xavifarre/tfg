@@ -27,18 +27,21 @@ public abstract class Enemy : MonoBehaviour
     //Sprite Renderer
     private SpriteRenderer spriteRenderer;
 
+    //GameManager
+    protected GameManager gm;
+
     // Start is called before the first frame update
     protected void Start()
     {
-        Debug.Log("START " +  name);
         player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+        gm = FindObjectOfType<GameManager>();
 
         realPos = transform.position;
-
         maxHealth = health;
+
         Init();
     }
 
@@ -61,6 +64,8 @@ public abstract class Enemy : MonoBehaviour
     {
         health -= damage;
         CheckDeath();
+        ShowDamage(damage);
+        gm.tLastHit = 0;
     }
 
     protected void CheckDeath()
@@ -69,6 +74,11 @@ public abstract class Enemy : MonoBehaviour
         {
             Die();
         }
+    }
+
+    protected void ShowDamage(int damage)
+    {
+        PopupTextController.CreatePopupText(damage.ToString(), realPos);
     }
 
     protected abstract void Init();

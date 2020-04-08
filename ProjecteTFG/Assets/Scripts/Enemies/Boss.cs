@@ -11,7 +11,7 @@ public class Boss : Enemy
 
     public override void Die()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Hit(Attack attack)
@@ -53,9 +53,9 @@ public class Boss : Enemy
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerDash"))
-        {
-            collision.gameObject.SendMessage("DashCrash", this);
-        }
+        //if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerDash"))
+        //{
+        //    collision.gameObject.SendMessage("DashCrash", this);
+        //}
     }
 }

@@ -201,7 +201,7 @@ public class Spawner : MonoBehaviour, ISpawner
 
     private Vector3 RandomPos(RectArea area)
     {
-        return new Vector2(Random.Range(area.transform.position.x - area.spawnAreaSize.x / 2, area.transform.position.x + area.spawnAreaSize.x / 2), Random.Range(area.transform.position.y - area.spawnAreaSize.y / 2, area.transform.position.y + area.spawnAreaSize.y / 2));
+        return area.RandomPoint();
     }
 
     private bool MinDistanceValid(Vector3 pos)

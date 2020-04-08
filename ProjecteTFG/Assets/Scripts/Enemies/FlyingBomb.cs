@@ -31,7 +31,7 @@ public class FlyingBomb : Minion
         Vector3 direction = (endActionPoint - realPos).normalized;
         realPos = realPos + speed * direction * Time.deltaTime;
 
-        if (Vector3.Distance(endActionPoint, realPos) < 0.1f)
+        if (Vector3.Distance(endActionPoint, realPos) < 0.4f)
         {
             Explode();
         }

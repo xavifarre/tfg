@@ -30,7 +30,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 21.61692, y: -23.887413, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 3106340297965487099}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -144,14 +145,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  speed: 20
+  speed: 5
   size: 2
-  health: 100
+  health: 500
   knockBackValue: 1
   fase: 0
+  ratiosDamageFase:
+  - 1
+  - 0.6
+  - 0.4
+  - 0
   spawnersContainer: {fileID: 0}
-  dashSpeed: 30
-  dashExtraDistance: 20
+  speedFaseMultiplier: 1.5
+  lungeSpeed: 20
+  lungeDistance: 20
+  dashDuration: 0
+  dashMinimumDistance: 20
+  meleeRange: 3
+  meleeDamage: 1
+  vulnerableTime: 1
+  lastHitTimeConstraint: 2
+  sameActionLimit: 5
   summonTime:
   - 5
   - 4
@@ -159,3 +173,67 @@ MonoBehaviour:
   - 2
   state: 1
   antiRepeatWheight: 0.5
+  maxEnemies: 12
+--- !u!1 &8722744186483344814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3106340297965487099}
+  - component: {fileID: 7630518901384165604}
+  m_Layer: 8
+  m_Name: Attack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3106340297965487099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8722744186483344814}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 449336332740483369}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &7630518901384165604
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8722744186483344814}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5, y: 2.37}
+    newSize: {x: 5, y: 2.37}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5, y: 3}
+      - {x: -0.5, y: -3}
+      - {x: 2, y: -4}
+      - {x: 5, y: -4}
+      - {x: 7, y: 0}
+      - {x: 5, y: 4}
+      - {x: 2, y: 4}

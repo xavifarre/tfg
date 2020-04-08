@@ -9,18 +9,48 @@ public class Summoner : Boss
 
     //Punts de moviment
     private List<List<Vector3>> movementPoints;
+    private RectArea areaMove;
+
+    //Speed
+    public float speedFaseMultiplier = 0.2f;
+
+    //Idle
+    public float idleTime = 2f;
+
+    //Lunge
+    public float lungeSpeed = 20;
+    private Vector3 lungeDest;
+    public float lungeDistance = 20;
 
     //Dash
-    public float dashSpeed = 20;
+    public float dashDuration;
+    private Vector3 dashOrigin;
     private Vector3 dashDest;
-    public float dashExtraDistance = 20;
+    public float dashMinimumDistance = 20;
+
+    //Melee
+    public float meleeRange = 3f;
+    public int meleeDamage = 1;
+    public float meleeDelay = 0.5f;
+    public float meleeInvulnerableTime = 0.5f;
+    public float meleeRecoveryTime = 1f;
+    private SummonerMeleeAttack meleeObject;
+
+    //Vulnerable
+    public float vulnerableTime = 1f;
+    private bool firstHit = true;
+
+    //Temps que ha de passar des de que el player o un enemic es atacat per a realitzar el lunge
+    public float lastHitTimeConstraint = 2;
+    //Variable que conta quantes vegades es repeteix consecutivament una acció. Utilitzada per a triggejar el lunge quan fa molt que no el fa
+    public int sameActionLimit = 5;
+    private int sameActionCounter = 0;
 
     //Summon
     public List<float> summonTime = new List<float> { 5, 4, 3, 2 } ;
 
     //State
-    public enum SummState { Idle, Move, Dash, Summon, Melee, Die, Start};
-
+    public enum SummState { Idle, Move, Lunge, Dash, DashAttack, Summon, Melee, Damaged, Die, Start};
     public SummState state;
 
     //Next point
@@ -28,13 +58,19 @@ public class Summoner : Boss
     private int previousPoint;
     public float antiRepeatWheight = 0.5f;
 
+    //EnemiesContainer
+    public int maxEnemies = 12;
+    private GameObject enemiesContainer;
+
     protected override void Init()
     {
         InitMovementPoints();
         InitSpawners();
 
         nextPoint = Random.Range(0, movementPoints[fase].Count);
-
+        StartFase(fase);
+        enemiesContainer = GameObject.Find("Enemies");
+        meleeObject = GetComponentInChildren<SummonerMeleeAttack>();
         //StartCoroutine(MoveBetweenPoints());
     }
 
@@ -44,11 +80,28 @@ public class Summoner : Boss
         {
             UpdateMove();
         }
-        if (state == SummState.Dash)
+        if (state == SummState.Lunge)
+        {
+            UpdateLunge();
+        }
+        if (state == SummState.Dash || state == SummState.DashAttack)
         {
             UpdateDash();
         }
-        
+        if (state == SummState.Damaged)
+        {
+            if(fase < 3)
+            {
+                UpdateMove(2);
+            }
+            else
+            {
+                DashToRandom();
+                firstHit = true;
+                gameObject.layer = LayerMask.NameToLayer("Boss");
+            }
+          
+        }
     }
 
     void FixedUpdate()
@@ -62,14 +115,17 @@ public class Summoner : Boss
 
         movementPoints = new List<List<Vector3>>();
 
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
-            movementPoints.Insert(i,new List<Vector3>());
-            foreach(Transform t in mp.transform.Find(i.ToString()))
+            movementPoints.Insert(i, new List<Vector3>());
+            foreach (Transform t in mp.transform.Find(i.ToString()))
             {
                 movementPoints[i].Add(t.position);
             }
         }
+
+        areaMove = mp.transform.Find("3").GetComponent<RectArea>();
+
     }
 
     private void InitSpawners()
@@ -82,10 +138,10 @@ public class Summoner : Boss
     }
 
     //Move
-    private void UpdateMove()
+    private void UpdateMove(float spMulti = 1)
     {
         Vector3 direction = (movementPoints[fase][nextPoint] - realPos).normalized;
-        realPos = realPos + speed * direction * Time.deltaTime;
+        realPos = realPos + speed * speedFaseMultiplier * fase * spMulti * direction * Time.deltaTime;
 
         if (Vector3.Distance(movementPoints[fase][nextPoint], realPos) < 0.5f)
         {
@@ -95,31 +151,45 @@ public class Summoner : Boss
         PixelPerfectMovement.Move(realPos, rb);
     }
 
-    //Dash
-    private void UpdateDash()
+    //Lunge
+    private void UpdateLunge()
     {
-        Vector3 direction = (dashDest - realPos).normalized;
-        realPos = realPos + dashSpeed * direction * Time.deltaTime;
+        Vector3 direction = (lungeDest - realPos).normalized;
+        realPos = realPos + lungeSpeed * direction * Time.deltaTime;
 
-        if (Vector3.Distance(dashDest, realPos) < 0.5f)
+        if (Vector3.Distance(lungeDest, realPos) < 0.5f)
         {   
-            EndDash();
+            EndLunge();
         }
 
         PixelPerfectMovement.Move(realPos, rb);
     }
 
+    //Dash
+    private void UpdateDash()
+    {
+        tAction += Time.deltaTime;
+        realPos = MathFunctions.EaseOutExp(tAction, dashOrigin, dashDest, dashDuration, 5);
+
+        PixelPerfectMovement.Move(realPos, rb);
+
+        if (tAction >= dashDuration)
+        {
+            EndDash();
+        }
+
+    }
+
+    private void StartMove()
+    {
+        nextPoint = RandomAdjacentPoint();
+        state = SummState.Move;
+        sameActionCounter++;
+    }
+
     private void EndMove()
     {
-        if (Random.Range(0, 100) < 0)
-        {
-            StartDash();
-        }
-        else
-        {
-            Summon();
-            nextPoint = RandomAdjacentPoint();
-        }
+        Summon();
     }
 
     private int RandomAdjacentPoint()
@@ -157,17 +227,75 @@ public class Summoner : Boss
         return index == previousPoint && Random.Range(0, 100) / 100f < antiRepeatWheight;
     }
 
-    private void StartDash()
+    private void StartLunge()
     {
-        state = SummState.Dash;
-        dashDest = player.transform.position + (player.transform.position - realPos).normalized * dashExtraDistance;
+        state = SummState.Lunge;
+        sameActionCounter = 0;
+        lungeDest = realPos + (player.transform.position - realPos).normalized * lungeDistance;
     }
 
-    private void EndDash()
+    private void EndLunge()
     {
         nextPoint = NearestPoint();
         state = SummState.Move;
     }
+
+    private void DashToRandom()
+    {
+        dashOrigin = realPos;
+        dashDest = areaMove.RandomPoint();
+        while (Vector3.Distance(dashDest, realPos) < dashMinimumDistance)
+        {
+            dashDest = areaMove.RandomPoint();
+        }
+        tAction = 0;
+        state = SummState.Dash;
+    }
+
+    private void DashAttack()
+    {
+        dashOrigin = realPos;
+        dashDest = areaMove.RandomPoint();
+        int n = 0;
+        while (Vector3.Distance(dashDest, realPos) < dashMinimumDistance / 2 || Vector3.Distance(player.transform.position, dashDest) > meleeRange)
+        {
+            if (n > 30)
+            {
+                break;
+            }
+            n++;
+            dashDest = areaMove.RandomPoint();
+        }
+
+        if (n > 30)
+        {
+            DashToRandom();
+        }
+        else
+        {
+            tAction = 0;
+            state = SummState.DashAttack;
+        }
+    }
+
+    private void EndDash()
+    {
+        if(state == SummState.Dash)
+        {
+            StopForSeconds(idleTime);
+        }
+        else
+        {
+            Melee();
+        }
+    }
+
+    private void Melee()
+    {
+        state = SummState.Melee;
+        StartCoroutine(IMeleeAttack(player.transform.position - realPos));
+    }
+
 
     //Retorna el punt més proper al boss
     private int NearestPoint()
@@ -185,20 +313,105 @@ public class Summoner : Boss
 
     public void Summon()
     {
-        faseSpawners[fase].StartSpawning();
         state = SummState.Summon;
         StartCoroutine(ISummon());
     }
 
-    IEnumerator ISummon()
+    private void EndSummon()
     {
-        yield return new WaitForSeconds(summonTime[fase]);
-        state = SummState.Move;
+        NextAction();
+        firstHit = true;
+        gameObject.layer = LayerMask.NameToLayer("Boss");
+    }
+
+    private void NextAction()
+    {
+        if(fase == 0)
+        {
+            StartMove();
+        }
+        else if(fase == 1 || fase == 2)
+        {
+            if (CanLunge())
+            {
+                StartLunge();
+            }
+            else
+            {
+                StartMove();
+            }
+        }
+        else if (fase == 3)
+        {
+            if(Vector3.Distance(player.transform.position, realPos) < meleeRange)
+            {
+                if(Random.Range(0,2) == 0)
+                {
+                    Debug.Log("Melee");
+                    Melee();
+                }
+                else
+                {
+                    Debug.Log("DashAttack");
+                    DashAttack();
+                }
+            }
+            else if(enemiesContainer.transform.childCount < maxEnemies && state != SummState.Summon)
+            {
+                Debug.Log("Summon");
+                Summon();
+            }
+            else
+            {
+                if (Random.Range(0, 3) == 0)
+                {
+                    Debug.Log("Random2");
+                    DashToRandom();
+                }
+                else
+                {
+                    Debug.Log("DashAttack2");
+                    DashAttack();
+                }
+                
+            }
+        }
+    }
+
+    private bool CanLunge()
+    {
+        if(gm.tLastHit > lastHitTimeConstraint || sameActionCounter >= sameActionLimit)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private void StopForSeconds(float s)
+    {
+        state = SummState.Idle;
+        StartCoroutine(IStopForSeconds(s));
     }
 
     public override void Hit(Attack attack)
     {
-        GetDamage(attack.damage);
+        if (firstHit == true)
+        {
+            firstHit = false;
+            vulnerable = true;
+            state = SummState.Idle;
+            StartCoroutine(IVulnerable());
+        }
+
+        if (vulnerable)
+        {
+            GetDamage(attack.damage);
+        }
+        else
+        {
+            GetDamage(0);
+        }
+        
         if(CheckDamageFase() != fase && health > 0)
         {
             StartFase(CheckDamageFase());
@@ -206,11 +419,84 @@ public class Summoner : Boss
     }
 
 
+    protected override void StartFase(int f)
+    {
+        fase = f;
+        if(fase == 0)
+        {
+            StartMove();
+        }
+        else if (fase == 1)
+        {
+            StartMove();
+        }
+        else if (fase == 2)
+        {
+            StartMove();
+        }
+        else if (fase == 3)
+        {
+            Summon();
+        }
+    }
+
+    IEnumerator IVulnerable()
+    {
+        yield return new WaitForSeconds(vulnerableTime);
+        vulnerable = false;
+        state = SummState.Damaged;
+        gameObject.layer = LayerMask.NameToLayer("IgnoreAll");
+    }
+
+    IEnumerator ISummon()
+    {
+        yield return new WaitForSeconds(summonTime[fase] / 2);
+
+        if (firstHit)
+        {
+            faseSpawners[fase].StartSpawning();
+        }
+        else
+        {
+            faseSpawners[fase].StartSpawningHit();
+        }
+        
+        yield return new WaitForSeconds(summonTime[fase] / 2);
+        EndSummon();
+    }
+
+    IEnumerator IStopForSeconds(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        if(state == SummState.Idle)
+        {
+            NextAction();
+        }
+        
+    }
+
+    IEnumerator IMeleeAttack(Vector2 dir)
+    {
+        firstHit = false;
+        yield return new WaitForSeconds(meleeDelay);
+        if (state == SummState.Melee)
+        {
+            meleeObject.PerformAttack(dir);
+        }
+        yield return new WaitForSeconds(meleeInvulnerableTime);
+        firstHit = true;
+        yield return new WaitForSeconds(meleeRecoveryTime);
+        if (state == SummState.Melee)
+        {
+            DashToRandom();
+        }
+
+    }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(dashDest, 1);
+        Gizmos.DrawWireSphere(lungeDest, 1);
     }
 
 }

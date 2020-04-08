@@ -8,7 +8,6 @@ public class Minion : Enemy, IFallableObject
     [HideInInspector]
     public MinionState state;
 
-
     //KnockBack
     public float knockBackResistance = 1;
     public float knockBackDuration = 0.2f;
@@ -116,7 +115,7 @@ public class Minion : Enemy, IFallableObject
 
     public void EndFall()
     {
-        state = MinionState.Dead;
+        Die();
     }
 
     protected override void PlayerHit()

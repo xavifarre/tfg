@@ -28,7 +28,7 @@ public class AttackMelee : Attack
 
     public void PerformAttack(Vector2 lastDir)
     {
-        int dir = player.GetComponent<Player>().GetDirection(lastDir);
+        int dir = MathFunctions.GetDirection(lastDir);
         col.enabled = false;
         transform.eulerAngles = new Vector3(0, 0, dir * 90);
         

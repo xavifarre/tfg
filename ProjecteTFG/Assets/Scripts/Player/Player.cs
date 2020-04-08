@@ -61,7 +61,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     //Shards
     public GameObject shardObject;
-    public int ShardDamage;
+    public int baseShardDamage = 1;
+    public int maxShardDamage  = 5;
     public Vector2Int minMaxShards = new Vector2Int(3,5);
     public List<Shard> activeShards;
     public Vector2 shardRange = new Vector2(300,500);
@@ -218,39 +219,6 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         }
     }
 
-    /*
-    * Aproxima la direcció "dir" a la direcció en 90º més propera, en forma d'enter 0-3
-    * 0 -> Dreta
-    * 1 -> Amunt
-    * 2 -> Esquerra
-    * 3 -> Abaix
-    */
-    public int GetDirection(Vector2 dir)
-    {
-        if (Mathf.Abs(dir.x) >= Mathf.Abs(dir.y))
-        {
-            if (dir.x >= 0)
-            {
-                return 0;
-            }
-            else
-            {
-                return 2;
-            }
-        }
-        else
-        {
-            if (dir.y >= 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return 3;
-            }
-        }
-    }
-
     //Move to position
     public void Move(Vector3 position)
     {
@@ -308,7 +276,6 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         gameObject.layer = LayerMask.NameToLayer("PlayerDash"); //Canvi de layer per a travessar enemics simples
         StartCoroutine(IDashCooldown());
         attackCollider.GetComponent<AttackMelee>().StopAttack();
-        Debug.Log(destPoint);
         animator.SetTrigger("Dash");
 
         queuedInput = "";
@@ -465,7 +432,6 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             activeShards.Add(shard);
   
             shard.MoveShards(destList[i]);
-            shard.damage = ShardDamage;
 
             yield return new WaitForSeconds(0.01f);
         }
@@ -520,6 +486,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         {
             Die();
         }
+
+        gm.tLastHit = 0;
     }
 
     public void Die()
@@ -599,7 +567,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     private void UpdateAnimations()
     {
         //Actualitzar la ultima direcció
-        animator.SetInteger("Direction", GetDirection(lastDir));
+        animator.SetInteger("Direction", MathFunctions.GetDirection(lastDir));
 
         //Si està en moviment activar la layer de moviment
         animator.SetLayerWeight(1, GetMovementInput().magnitude == 0 ? 0 : 1);

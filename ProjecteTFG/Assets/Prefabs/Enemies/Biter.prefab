@@ -204,7 +204,7 @@ MonoBehaviour:
   damage: 1
   speed: 3
   size: 1
-  health: 5
+  health: 50
   knockBackValue: 1
   state: 0
   knockBackResistance: 1
