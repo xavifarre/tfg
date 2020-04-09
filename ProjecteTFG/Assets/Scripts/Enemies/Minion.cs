@@ -5,7 +5,6 @@ using UnityEngine;
 public class Minion : Enemy, IFallableObject
 {
 
-    [HideInInspector]
     public MinionState state;
 
     //KnockBack
@@ -15,6 +14,8 @@ public class Minion : Enemy, IFallableObject
     //Action
     protected Vector3 startActionPoint;
     protected Vector3 endActionPoint;
+
+    public float idleTime = 0.3f;
 
     //Fall
     public float fallTime = 1f;
@@ -41,9 +42,9 @@ public class Minion : Enemy, IFallableObject
         else if (state == MinionState.Idle)
         {
             tAction += Time.deltaTime;
-            if (tAction > 1)
+            if (tAction > idleTime)
             {
-                state = MinionState.Move;
+                StartMove();
             }
         }
     }
@@ -58,6 +59,7 @@ public class Minion : Enemy, IFallableObject
     {
 
     }
+
 
     protected virtual void UpdateAttack()
     {
@@ -74,8 +76,20 @@ public class Minion : Enemy, IFallableObject
 
         if (tAction >= knockBackDuration)
         {
-            state = MinionState.Idle;
+            StartIdle();
         }
+    }
+
+    protected virtual void StartMove()
+    {
+        tAction = 0;
+        state = MinionState.Move;
+    }
+
+    protected virtual void StartIdle()
+    {
+        state = MinionState.Idle;
+        tAction = 0;
     }
 
     public override void Hit(Attack attack)
@@ -118,11 +132,4 @@ public class Minion : Enemy, IFallableObject
         Die();
     }
 
-    protected override void PlayerHit()
-    {
-        if (damage > 0)
-        {
-            player.GetComponent<Player>().EnemyHit(this);
-        }
-    }
 }

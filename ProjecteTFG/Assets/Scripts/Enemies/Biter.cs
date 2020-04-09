@@ -36,7 +36,7 @@ public class Biter : Minion
 
         if (tAction >= attackDuration)
         {
-            state = MinionState.Idle;
+            StartIdle();
         }
     }
 

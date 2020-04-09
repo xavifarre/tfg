@@ -48,6 +48,8 @@ public class Summoner : Boss
 
     //Summon
     public List<float> summonTime = new List<float> { 5, 4, 3, 2 } ;
+    private enum SummType { Normal, Hit, StartFase };
+    private SummType summonType;
 
     //State
     public enum SummState { Idle, Move, Lunge, Dash, DashAttack, Summon, Melee, Damaged, Die, Start};
@@ -64,14 +66,13 @@ public class Summoner : Boss
 
     protected override void Init()
     {
+        enemiesContainer = GameObject.Find("Enemies");
+        meleeObject = GetComponentInChildren<SummonerMeleeAttack>();
+
         InitMovementPoints();
         InitSpawners();
 
-        nextPoint = Random.Range(0, movementPoints[fase].Count);
         StartFase(fase);
-        enemiesContainer = GameObject.Find("Enemies");
-        meleeObject = GetComponentInChildren<SummonerMeleeAttack>();
-        //StartCoroutine(MoveBetweenPoints());
     }
 
     protected override void UpdateEnemy()
@@ -141,7 +142,7 @@ public class Summoner : Boss
     private void UpdateMove(float spMulti = 1)
     {
         Vector3 direction = (movementPoints[fase][nextPoint] - realPos).normalized;
-        realPos = realPos + speed * speedFaseMultiplier * fase * spMulti * direction * Time.deltaTime;
+        realPos = realPos + (speed + speed * speedFaseMultiplier * fase) * spMulti * direction * Time.deltaTime;
 
         if (Vector3.Distance(movementPoints[fase][nextPoint], realPos) < 0.5f)
         {
@@ -189,7 +190,14 @@ public class Summoner : Boss
 
     private void EndMove()
     {
-        Summon();
+        if (CheckDamageFase() != fase)
+        {
+            StartFase(CheckDamageFase());
+        }
+        else if(enemiesContainer.transform.childCount < maxEnemies)
+        {
+            StartSummon();
+        }
     }
 
     private int RandomAdjacentPoint()
@@ -311,16 +319,33 @@ public class Summoner : Boss
         return movementPoints[fase].IndexOf(nearest);
     }
 
-    public void Summon()
+    public void StartSummon()
     {
         state = SummState.Summon;
         StartCoroutine(ISummon());
+    }
+
+    public void Summon()
+    {
+        if (summonType == SummType.Normal)
+        {
+            faseSpawners[fase].StartSpawning();
+        }
+        else if(summonType == SummType.Hit)
+        {
+            faseSpawners[fase].StartSpawningHit();
+        }
+        else if (summonType == SummType.StartFase)
+        {
+            faseSpawners[fase].StartSpawningStart();
+        }
     }
 
     private void EndSummon()
     {
         NextAction();
         firstHit = true;
+        summonType = SummType.Normal;
         gameObject.layer = LayerMask.NameToLayer("Boss");
     }
 
@@ -347,30 +372,25 @@ public class Summoner : Boss
             {
                 if(Random.Range(0,2) == 0)
                 {
-                    Debug.Log("Melee");
                     Melee();
                 }
                 else
                 {
-                    Debug.Log("DashAttack");
                     DashAttack();
                 }
             }
             else if(enemiesContainer.transform.childCount < maxEnemies && state != SummState.Summon)
             {
-                Debug.Log("Summon");
-                Summon();
+                StartSummon();
             }
             else
             {
                 if (Random.Range(0, 3) == 0)
                 {
-                    Debug.Log("Random2");
                     DashToRandom();
                 }
                 else
                 {
-                    Debug.Log("DashAttack2");
                     DashAttack();
                 }
                 
@@ -406,37 +426,42 @@ public class Summoner : Boss
         if (vulnerable)
         {
             GetDamage(attack.damage);
+            summonType = SummType.Normal;
         }
         else
         {
             GetDamage(0);
         }
         
-        if(CheckDamageFase() != fase && health > 0)
-        {
-            StartFase(CheckDamageFase());
-        }
+
     }
 
+    private void Presentation()
+    {
+        transform.position = movementPoints[0][0];
+        realPos = transform.position;
+        StopForSeconds(2);
+    }
 
     protected override void StartFase(int f)
     {
         fase = f;
         if(fase == 0)
         {
-            StartMove();
+            Presentation();
         }
         else if (fase == 1)
         {
-            StartMove();
+            StartLunge();
         }
         else if (fase == 2)
         {
-            StartMove();
+            StartLunge();
         }
         else if (fase == 3)
         {
-            Summon();
+            summonType = SummType.StartFase;
+            StartSummon();
         }
     }
 
@@ -451,16 +476,7 @@ public class Summoner : Boss
     IEnumerator ISummon()
     {
         yield return new WaitForSeconds(summonTime[fase] / 2);
-
-        if (firstHit)
-        {
-            faseSpawners[fase].StartSpawning();
-        }
-        else
-        {
-            faseSpawners[fase].StartSpawningHit();
-        }
-        
+        Summon();
         yield return new WaitForSeconds(summonTime[fase] / 2);
         EndSummon();
     }
@@ -472,7 +488,6 @@ public class Summoner : Boss
         {
             NextAction();
         }
-        
     }
 
     IEnumerator IMeleeAttack(Vector2 dir)

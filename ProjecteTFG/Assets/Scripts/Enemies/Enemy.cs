@@ -83,7 +83,14 @@ public abstract class Enemy : MonoBehaviour
 
     protected abstract void Init();
     protected abstract void UpdateEnemy();
-    protected abstract void PlayerHit();
+
+    protected virtual void PlayerHit()
+    {
+        if (damage > 0)
+        {
+            player.GetComponent<Player>().EnemyHit(this);
+        }
+    }
 
     public abstract void Hit(Attack attack);
     public abstract void Die();

@@ -209,6 +209,7 @@ MonoBehaviour:
   state: 0
   knockBackResistance: 1
   knockBackDuration: 0.2
+  idleTime: 0.3
   fallTime: 1
   chargeRange: 3
   chargeTime: 0.5

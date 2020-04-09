@@ -22,8 +22,10 @@ public class SummonerMeleeAttack : Attack
     IEnumerator IAttack()
     {
         coll.enabled = true;
+        transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(activeTime);
         coll.enabled = false;
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

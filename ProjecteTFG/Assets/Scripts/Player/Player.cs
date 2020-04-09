@@ -23,7 +23,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     //LastDirection
     [HideInInspector]
     public Vector2 lastDir;
-    private Vector3 movementValue;
+    [HideInInspector]
+    public Vector3 movementValue;
 
     //Dash and other movement positions
     Vector2 startPoint;

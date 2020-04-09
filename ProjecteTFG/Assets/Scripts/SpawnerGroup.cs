@@ -13,6 +13,7 @@ public class SpawnerGroup : MonoBehaviour, ISpawner
     public float antiRepeatWheight = 0;
     private List<ISpawner> spawnerGroup;
     private ISpawner hitSpawner;
+    private ISpawner startSpawner;
 
     public List<float> probability = new List<float>();
 
@@ -36,6 +37,8 @@ public class SpawnerGroup : MonoBehaviour, ISpawner
             }
         }
 
+        startSpawner = transform.GetChild(transform.childCount - 1).GetComponent<ISpawner>();
+
         foreach(ISpawner s in spawnerGroup)
         {
             if (probability.Count < spawnerGroup.Count)
@@ -52,6 +55,7 @@ public class SpawnerGroup : MonoBehaviour, ISpawner
             foreach (ISpawner sp in spawnerGroup)
             {
                 sp.StartSpawning();
+                Debug.Log(sp.ToString());
             }
         }
         else if (spawnType == SpawnType.RandomWeighted)
@@ -103,6 +107,18 @@ public class SpawnerGroup : MonoBehaviour, ISpawner
         if (hitSpawner != null)
         {
             hitSpawner.StartSpawning();
+        }
+        else
+        {
+            StartSpawning();
+        }
+    }
+
+    public void StartSpawningStart()
+    {
+        if (startSpawner != null)
+        {
+            startSpawner.StartSpawning();
         }
         else
         {

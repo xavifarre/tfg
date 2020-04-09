@@ -65,6 +65,7 @@
     <Compile Include="Assets\DamagePopup.cs" />
     <Compile Include="Assets\PopupText.cs" />
     <Compile Include="Assets\Scripts\Attack.cs" />
+    <Compile Include="Assets\Scripts\Attacks\Laser.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraLimits.cs" />

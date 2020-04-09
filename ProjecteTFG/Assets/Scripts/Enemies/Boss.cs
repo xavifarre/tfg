@@ -29,10 +29,6 @@ public class Boss : Enemy
        
     }
 
-    protected override void PlayerHit()
-    {
-
-    }
 
     protected virtual int CheckDamageFase()
     {
@@ -51,11 +47,11 @@ public class Boss : Enemy
         fase = f;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerDash"))
-        //{
-        //    collision.gameObject.SendMessage("DashCrash", this);
-        //}
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    //if (collision.gameObject.layer == LayerMask.NameToLayer("PlayerDash"))
+    //    //{
+    //    //    collision.gameObject.SendMessage("DashCrash", this);
+    //    //}
+    //}
 }

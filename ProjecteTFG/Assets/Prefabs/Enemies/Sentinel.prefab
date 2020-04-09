@@ -152,7 +152,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -202,11 +202,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  speed: 1
+  speed: 4
   size: 1
   health: 100
   knockBackValue: 1
   state: 0
   knockBackResistance: 1
   knockBackDuration: 0.2
+  idleTime: 0.3
   fallTime: 1
+  chargeTime: 1
+  attackDistance: 10
+  projectile: {fileID: 2321894346170806787, guid: 499cda66f492c1f45b13cf42b3fab306,
+    type: 3}
+  minDistanceMove: 2
+  maxDistanceMove: 6
+  minDistancePlayer: 12

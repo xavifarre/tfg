@@ -152,6 +152,7 @@ MonoBehaviour:
   state: 0
   knockBackResistance: 0.2
   knockBackDuration: 0.3
+  idleTime: 1
   fallTime: 1
   attackRange: 3
   explosionRange: 4
