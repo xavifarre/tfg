@@ -67,6 +67,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public Vector2Int minMaxShards = new Vector2Int(3,5);
     public List<Shard> activeShards;
     public Vector2 shardRange = new Vector2(300,500);
+    [HideInInspector]
+    public bool recallReady = true;
 
     //Animations
     private Animator animator;
@@ -237,7 +239,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     void CheckRecallInput()
     {
-        if (Input.GetButtonDown("Recall"))
+        if (Input.GetButtonDown("Recall") && recallReady)
         {
             RecallShards();
         }
@@ -384,7 +386,16 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     void RecallShards()
     {
         ShardEnemyManager.ResetEnemies();
-        StartCoroutine(IRecallShards());
+
+        int i = 0;
+        foreach (Shard shard in activeShards)
+        {
+            shard.TriggerRecall(transform.position - Vector3.up * 0.5f, i * 0.02f);
+            i++;
+        }
+
+        recallReady = true;
+
     }
 
     public void GenerateShards(Vector3 pos)
@@ -614,15 +625,6 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         }
         invulnerable = false;
         GetComponent<SpriteRenderer>().color = Color.white;
-    }
-
-    IEnumerator IRecallShards()
-    {
-        foreach (Shard shard in activeShards)
-        {
-            shard.Recall(transform.position - Vector3.up*0.5f);
-            yield return new WaitForFixedUpdate();
-        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)

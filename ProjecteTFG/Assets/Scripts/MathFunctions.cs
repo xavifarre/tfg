@@ -240,4 +240,28 @@ public class MathFunctions : MonoBehaviour
         float rt = 1f - t;
         return 0.5f * (aPoint - rt * rt * aStart - t * t * aEnd) / (t * rt);
     }
+
+    public static Vector3 VectorMiddlePoint(Vector3 start, Vector3 end)
+    {
+        return start + (end - start) / 2;
+    }
+
+    public static Vector3 PerpendicularVector(Vector3 v, float magnitude, int side)
+    {
+        
+        if(side == 0)
+        {
+            return new Vector2(-v.y,v.x) / Mathf.Sqrt(Mathf.Pow(v.x, 2) + Mathf.Pow(v.y, 2)) * magnitude;
+        }
+        else
+        {
+            return new Vector2(-v.y, v.x) / Mathf.Sqrt(Mathf.Pow(v.x, 2) + Mathf.Pow(v.y, 2)) * - magnitude;
+        }
+    }
+
+    //This returns a negative number if B is left of A, positive if right of A, or 0 if they are perfectly aligned.
+    public static float AngleDir(Vector2 A, Vector2 B)
+    {
+        return -A.x * B.y + A.y * B.x;
+    }
 }

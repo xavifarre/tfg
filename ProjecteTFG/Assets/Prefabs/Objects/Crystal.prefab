@@ -53,7 +53,7 @@ MonoBehaviour:
   speed: 10
   rotSpeed: 10
   maxActiveTime: 10
-  maxSpeed: 50
+  maxSpeed: 100
   maxHomingDistance: 3
   damageVelRatio: 20
   acceleration: 10
