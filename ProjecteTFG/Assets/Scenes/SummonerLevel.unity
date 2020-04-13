@@ -376,6 +376,11 @@ PrefabInstance:
       propertyPath: maxShardDamage
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 212735674124865856, guid: bc1105cebd13d6343a8d632813bf8948,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 817d3159a6d08914e9bf1b05c31c880e, type: 2}
     - target: {fileID: 1069191812492311443, guid: bc1105cebd13d6343a8d632813bf8948,
         type: 3}
       propertyPath: damage
@@ -3926,6 +3931,26 @@ PrefabInstance:
       propertyPath: m_RefResolutionY
       value: 270
       objectReference: {fileID: 0}
+    - target: {fileID: 1671922236581777188, guid: 141ef1b20292e4f41a06a49a395a97e7,
+        type: 3}
+      propertyPath: m_CropFrameX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671922236581777188, guid: 141ef1b20292e4f41a06a49a395a97e7,
+        type: 3}
+      propertyPath: m_UpscaleRT
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671922236581777188, guid: 141ef1b20292e4f41a06a49a395a97e7,
+        type: 3}
+      propertyPath: m_PixelSnapping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1671922236581777189, guid: 141ef1b20292e4f41a06a49a395a97e7,
+        type: 3}
+      propertyPath: orthographic size
+      value: 8.923935
+      objectReference: {fileID: 0}
     - target: {fileID: 1671922236581777190, guid: 141ef1b20292e4f41a06a49a395a97e7,
         type: 3}
       propertyPath: m_Name
@@ -4571,6 +4596,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Summoner
+      objectReference: {fileID: 0}
+    - target: {fileID: 449336332740483365, guid: 640c85d469e290a44ad85c5087d2fdd3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 449336332740483369, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}

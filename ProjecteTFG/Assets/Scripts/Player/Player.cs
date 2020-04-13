@@ -162,11 +162,11 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         UpdateAnimations();
     }
 
-    //Modificar ordre de layer segons la posició y
-    private void LateUpdate()
-    {
-        spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(this.spriteRenderer.bounds.min).y * -1;
-    }
+    ////Modificar ordre de layer segons la posició y
+    //private void LateUpdate()
+    //{
+    //    spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(this.spriteRenderer.bounds.min).y * -1;
+    //}
 
 
     void CheckMoveInputs()
@@ -383,10 +383,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     void RecallShards()
     {
-        foreach (Shard shard in activeShards)
-        {
-            shard.Recall(transform.position);
-        }
+        ShardEnemyManager.ResetEnemies();
+        StartCoroutine(IRecallShards());
     }
 
     public void GenerateShards(Vector3 pos)
@@ -616,6 +614,15 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         }
         invulnerable = false;
         GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    IEnumerator IRecallShards()
+    {
+        foreach (Shard shard in activeShards)
+        {
+            shard.Recall(transform.position - Vector3.up*0.5f);
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)

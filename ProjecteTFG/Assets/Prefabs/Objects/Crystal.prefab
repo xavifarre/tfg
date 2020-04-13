@@ -53,8 +53,8 @@ MonoBehaviour:
   speed: 10
   rotSpeed: 10
   maxActiveTime: 10
-  baseDamage: 3
-  maxDamage: 10
+  maxSpeed: 50
+  maxHomingDistance: 3
   damageVelRatio: 20
   acceleration: 10
   growRate: 1
@@ -78,7 +78,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4

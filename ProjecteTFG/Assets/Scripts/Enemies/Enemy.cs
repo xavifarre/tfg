@@ -51,14 +51,14 @@ public abstract class Enemy : MonoBehaviour
         UpdateEnemy();
     }
 
-    //Modificar ordre de layer segons la posició y
-    private void LateUpdate()
-    {
-        if (spriteRenderer)
-        {
-            spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(this.spriteRenderer.bounds.min).y * -1;
-        }
-    }
+    ////Modificar ordre de layer segons la posició y
+    //private void LateUpdate()
+    //{
+    //    if (spriteRenderer)
+    //    {
+    //        spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(this.spriteRenderer.bounds.min).y * -1;
+    //    }
+    //}
 
     public void GetDamage(int damage)
     {

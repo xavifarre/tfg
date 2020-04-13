@@ -97,6 +97,7 @@
     <Compile Include="Assets\Scripts\Player\AttackMelee.cs" />
     <Compile Include="Assets\Scripts\Player\DisableOnDash.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\ShardEnemyManager.cs" />
     <Compile Include="Assets\Scripts\Player\StateFollowEffect.cs" />
     <Compile Include="Assets\Scripts\PopupTextController.cs" />
     <Compile Include="Assets\Scripts\RainbowTintEffect.cs" />

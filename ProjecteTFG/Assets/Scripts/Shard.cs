@@ -8,6 +8,10 @@ public class Shard : MonoBehaviour {
     public float speed = 5f;
     public float rotSpeed = 10f;
     public float maxActiveTime = 10f;
+    public float maxSpeed = 50f;
+
+    //Range
+    public float maxHomingDistance = 3;
 
     //Damage
     public float damageVelRatio= 10f;
@@ -28,7 +32,9 @@ public class Shard : MonoBehaviour {
     //Origin
     Vector3 originPos;
     //Target dest
-    Vector3 targetPos;
+    Vector3[] targetPos = new Vector3[1];
+    int iTarget = 0;
+    Vector3 lastPos;
 
     //Last position
     Vector3 nextPos;
@@ -45,6 +51,8 @@ public class Shard : MonoBehaviour {
 
     private SpriteRenderer spriteRenderer;
 
+    private GameObject enemies;
+
     //Sprite
     public SpriteRenderer sprite;
 
@@ -55,10 +63,12 @@ public class Shard : MonoBehaviour {
         gameObject.layer = LayerMask.NameToLayer("CrystalInactive"); //ShardInactive layer
 
         originPos = transform.position;
-        if (targetPos == Vector3.zero)
+        if (targetPos[0] == Vector3.zero)
         {
-            targetPos = transform.position;
+            targetPos[0] = transform.position;
         }
+
+        enemies = GameObject.Find("Enemies");
 
         //Randomitzar rotació
         rotationValue = new Vector3(Random.Range(1, 11), Random.Range(1, 11), Random.Range(1, 11)).normalized;
@@ -66,7 +76,7 @@ public class Shard : MonoBehaviour {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 	
-	void Update () {
+	void FixedUpdate () {
 
         if (moving)
         {
@@ -74,29 +84,71 @@ public class Shard : MonoBehaviour {
         }
         else
         {
-            FloatAround();
+            //FloatAround();
         }
 
         UpdateRotation();
 	}
 
-    private void LateUpdate()
-    {
-        spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(this.spriteRenderer.bounds.min).y * -1;
-    }
+    //private void LateUpdate()
+    //{
+    //    spriteRenderer.sortingOrder = (int)Camera.main.WorldToScreenPoint(this.spriteRenderer.bounds.min).y * -1;
+    //}
 
     public void Recall(Vector3 target)
     {
-        MoveShards(target);
+
+        Ray ray = new Ray(transform.position, target - transform.position);
+        List<Vector3> enemyTargets = new List<Vector3>();
+        foreach(Transform tr in enemies.transform)
+        {
+            float distanceToRay = MathFunctions.DistanceToLine(ray, tr.position);
+           
+            if (distanceToRay  < maxHomingDistance && MathFunctions.ProjectPointOnLineSegmentSide(transform.position, target, tr.position) == 0)
+            {
+                enemyTargets.Add(tr.position);
+            }
+        }
+
+        Vector3[] points;
+        if (enemyTargets.Count > 0)
+        {
+            int randomEnemy = Random.Range(0, enemyTargets.Count);
+            if (ShardEnemyManager.EnemyIsMarked(randomEnemy) && ShardEnemyManager.enemiesMarked.Count < enemyTargets.Count)
+            {
+                randomEnemy = Random.Range(0, enemyTargets.Count);
+            }
+            Vector3 enemyTarget = enemyTargets[randomEnemy];
+            Debug.Log(randomEnemy);
+            ShardEnemyManager.MarkEnemy(randomEnemy);
+            Vector3[] curvePoints = new Vector3[] { transform.position, MathFunctions.CalculateMiddlePoint(transform.position, target, 0.5f, enemyTarget), target };
+            points = MathFunctions.MakeSmoothCurve(curvePoints, 3);
+            iTarget = 1;
+        }
+        else
+        {
+            points = new Vector3[1] { target };
+        }
+        lastPos = transform.position;
+        MoveShards(points);
         recalling = true;
         gameObject.layer = LayerMask.NameToLayer("CrystalActive"); //ShardActive layer
+    }
+
+
+    public void MoveShards(Vector3[] target)
+    {
+        tMov = 0;
+        moving = true;
+        targetPos = target;
+        originPos = transform.position;
     }
 
     public void MoveShards(Vector3 target)
     {
         tMov = 0;
         moving = true;
-        targetPos = target;
+        targetPos[0] = target;
         originPos = transform.position;
     }
 
@@ -113,42 +165,37 @@ public class Shard : MonoBehaviour {
         //    Stop();
         //}
 
-        //Exponecial
-        //A CONSIDERAR: ACTUALMENT TOTS ELS CRISTALLS TRIGUEN EL MATEIX TEMPS A FER EL RECORREGUT INDEPENDENMENT DE LA DISTÀNCIA,
-        //SERIA INTERESSANT FER QUE ELS MES PROPERS TRIGUESSIN MENYS, ES A DIR, QUE LA SEVA ACCELERACIÓ SIGUÉS LA MATEIXA
         float dur;
         
         if (recalling)
         {
-            dur = 2f;
-            targetPos = player.transform.position - Vector3.up * 0.5f;
 
-            //transform.right = targetPos - transform.position;
-            //nextPos = MathFunctions.EaseInExp(tMov, originPos, targetPos, dur, 3);
-
-            tVel = tVel + acceleration * Time.deltaTime;
-            float vel = startVel + Mathf.Pow(1 + growRate, tVel);
-
-            float rDamage = Mathf.Clamp(vel / damageVelRatio, 1, 5);
-            damage = (int)(player.baseShardDamage + (player.maxShardDamage - player.baseShardDamage) * (rDamage - 1) / 4);
-
-            Vector3 movement = (targetPos - transform.position).normalized * vel * Time.deltaTime;
-            if(movement.magnitude > (targetPos - transform.position).magnitude)
+            if ((lastPos - targetPos[iTarget]).magnitude < (lastPos - transform.position).magnitude  && (transform.position - targetPos[iTarget]).magnitude < (lastPos - transform.position).magnitude)
             {
-                transform.position = targetPos;
+                iTarget++;
+            }
+            lastPos = transform.position;
+            if(iTarget >= targetPos.Length)
+            {
                 DestroyShard();
             }
             else
             {
-                nextPos = transform.position + movement;
-                rb.MovePosition(nextPos);
+                targetPos[targetPos.Length - 1] = player.transform.position - Vector3.up * 0.5f;
+
+                tVel = tVel + acceleration * Time.deltaTime;
+                float vel = Mathf.Clamp(startVel + Mathf.Pow(1 + growRate, tVel), 0, maxSpeed);
+                rb.velocity = (targetPos[iTarget] - transform.position).normalized * vel;
+
+                float rDamage = Mathf.Clamp(vel / damageVelRatio, 1, 5);
+                damage = (int)(player.baseShardDamage + (player.maxShardDamage - player.baseShardDamage) * (rDamage - 1) / 4);
             }
-                        
+
         }
         else
         {
             dur = 0.5f;
-            nextPos = MathFunctions.EaseOutExp(tMov, originPos, targetPos, dur, 3);
+            nextPos = MathFunctions.EaseOutExp(tMov, originPos, targetPos[0], dur, 3);
             rb.MovePosition(nextPos);
 
             if (tMov >= dur)
@@ -156,8 +203,7 @@ public class Shard : MonoBehaviour {
                 Stop();
             }
         }
-        
-       
+
         tMov += Time.deltaTime;
     }
 
@@ -179,12 +225,13 @@ public class Shard : MonoBehaviour {
         float A = 0.1f, w = 0.8f;
         tFloat += Time.deltaTime;
         float ySinus = A * Mathf.Sin(w*tFloat*Mathf.PI);
-        transform.position = new Vector3(transform.position.x,targetPos.y + ySinus, transform.position.z);
+        transform.position = new Vector3(transform.position.x,targetPos[0].y + ySinus, transform.position.z);
     }
 
     public void Stop()
     {
-        targetPos = transform.position;
+        targetPos[0] = transform.position;
+        iTarget = 0;
         tMov = 0;
         moving = false;
         gameObject.layer = LayerMask.NameToLayer("CrystalInactive"); //ShardInactive layer
@@ -197,8 +244,8 @@ public class Shard : MonoBehaviour {
         player.GetComponent<Player>().activeShards.Remove(this);
         sprite.enabled = false;
         GetComponent<Collider2D>().enabled = false;
-        StartCoroutine(IDestroyShardOnTrailEnd());
-        //Destroy(gameObject);
+        spriteRenderer.enabled = false;
+        Destroy(gameObject,1f);
     }
 
     public Vector3 GetVelocity()
@@ -218,16 +265,6 @@ public class Shard : MonoBehaviour {
         }
     }
 
-    private IEnumerator IDestroyShardOnTrailEnd()
-    {
-        TrailRenderer tr = GetComponentInChildren<TrailRenderer>();
-        while (tr.positionCount > 0)
-        {
-            //tr.SetPosition(0, targetPos);
-            yield return new WaitForEndOfFrame();
-        }
-        Destroy(gameObject);
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -250,4 +287,15 @@ public class Shard : MonoBehaviour {
 
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        if (recalling)
+        {
+            for (int i = 0; i < targetPos.Length-1; i++)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(targetPos[i], targetPos[i + 1]);
+            }
+        }
+    }
 }
