@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/AttackTest.unity
     guid: 0cf64ceeb8a620b47a86d29d9039eedc
   - enabled: 1
-    path: Assets/Scenes/SummonerLevel.unity
+    path: Assets/Scenes/PreserverLevel.unity
     guid: 0771dd7e7139c794bb4a53a73231e510
   m_configObjects: {}

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
+    [Header("Boss stats")]
+    //Fase
     public int fase = 0;
 
     //Vida fases
@@ -16,7 +18,10 @@ public class Boss : Enemy
 
     public override void Hit(Attack attack)
     {
-        
+        if (vulnerable)
+        {
+            GetDamage(attack.damage);
+        }
     }
 
     protected override void Init()

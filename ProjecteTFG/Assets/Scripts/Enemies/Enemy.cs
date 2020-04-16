@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
+    [Header("Basic stats")]
     //Basic variables
     public int damage;
     public float speed;
@@ -78,7 +80,13 @@ public abstract class Enemy : MonoBehaviour
 
     protected void ShowDamage(int damage)
     {
-        PopupTextController.CreatePopupText(damage.ToString(), realPos);
+        PopupTextController.CreatePopupTextDamage(damage.ToString(), realPos);
+    }
+
+    [MenuItem("Example/Display simple Window")]
+    protected void ShowHeal(int heal)
+    {
+        PopupTextController.CreatePopupTextHeal(heal.ToString(), realPos);
     }
 
     protected abstract void Init();

@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class Minion : Enemy, IFallableObject
 {
-
+    [Header("Minion stats")]
+    [HideInInspector]
     public MinionState state;
-
-    //KnockBack
-    public float knockBackResistance = 1;
-    public float knockBackDuration = 0.2f;
 
     //Action
     protected Vector3 startActionPoint;
     protected Vector3 endActionPoint;
 
+    //Idle
     public float idleTime = 0.3f;
 
     //Fall
     public float fallTime = 1f;
+
+    [Header("Knockback")]
+    //KnockBack
+    public float knockBackResistance = 1;
+    public float knockBackDuration = 0.2f;
 
     protected override void Init()
     {
