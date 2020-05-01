@@ -72,14 +72,16 @@ public class Summoner : Boss
     private int previousPoint;
     public float antiRepeatWeight = 0.5f;
 
+    //Animator
+    private Animator animator;
 
-
-
+    
     protected override void Init()
     {
         enemiesContainer = GameObject.Find("Enemies");
         meleeObject = GetComponentInChildren<SummonerMeleeAttack>();
-
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         InitMovementPoints();
         InitSpawners();
 
@@ -194,20 +196,43 @@ public class Summoner : Boss
 
     private void StartMove()
     {
-        nextPoint = RandomAdjacentPoint();
+        animator.SetTrigger("Move");
+        float nextXMovement = (movementPoints[fase][nextPoint] - realPos).x;
+        UpdateAnimFlip(nextXMovement);
+        StartCoroutine(ICompleteAnim(Move));
+    }
+
+    private void Move()
+    {
         state = SummState.Move;
         sameActionCounter++;
     }
 
     private void EndMove()
     {
+        int prevPoint = previousPoint;
+        int actualPoint = nextPoint;
+        nextPoint = RandomAdjacentPoint();
+
+        animator.SetTrigger("EndAction");
+        animator.SetBool("EndMoveReversed", actualPoint % 2 != 0 || actualPoint % 2 == 0 && prevPoint == nextPoint);
+
+        StartCoroutine(ICompleteAnim(EndMoveFinished));
+    }
+
+    private void EndMoveFinished()
+    {
         if (CheckDamageFase() != fase)
         {
             StartFase(CheckDamageFase());
         }
-        else if(enemiesContainer.transform.childCount < maxEnemies)
+        else if (enemiesContainer.transform.childCount < maxEnemies)
         {
             StartSummon();
+        }
+        else
+        {
+            StopForSeconds(idleTime);
         }
     }
 
@@ -248,15 +273,24 @@ public class Summoner : Boss
 
     private void StartLunge()
     {
-        state = SummState.Lunge;
+        
         sameActionCounter = 0;
         lungeDest = realPos + (player.transform.position - realPos).normalized * lungeDistance;
+
+        //StartCoroutine(IPrepLounge());
+    }
+
+    private void Lunge()
+    {
+        state = SummState.Lunge;
     }
 
     private void EndLunge()
     {
         nextPoint = NearestPoint();
         state = SummState.Move;
+
+        animator.SetTrigger("EndAction");
     }
 
     private void DashToRandom()
@@ -269,6 +303,10 @@ public class Summoner : Boss
         }
         tAction = 0;
         state = SummState.Dash;
+
+        animator.SetTrigger("Dash");
+        float nextXMovement = (dashDest - realPos).x;
+        UpdateAnimFlip(nextXMovement);
     }
 
     private void DashAttack()
@@ -294,6 +332,10 @@ public class Summoner : Boss
         {
             tAction = 0;
             state = SummState.DashAttack;
+
+            animator.SetTrigger("Dash");
+            float nextXMovement = (dashDest - realPos).x;
+            UpdateAnimFlip(nextXMovement);
         }
     }
 
@@ -301,6 +343,7 @@ public class Summoner : Boss
     {
         if(state == SummState.Dash)
         {
+            animator.SetTrigger("EndAction");
             StopForSeconds(idleTime);
         }
         else
@@ -312,7 +355,13 @@ public class Summoner : Boss
     private void Melee()
     {
         state = SummState.Melee;
-        StartCoroutine(IMeleeAttack(player.transform.position - realPos));
+        Vector2 dir = player.transform.position - realPos;
+        StartCoroutine(IMeleeAttack(dir));
+
+        animator.SetTrigger("Slash");
+        animator.SetInteger("SlashDirection", MathFunctions.GetDirection(dir));
+        int x = MathFunctions.GetDirection(dir) == 1 ? -1 : 1;
+        UpdateAnimFlip(x);
     }
 
 
@@ -333,6 +382,7 @@ public class Summoner : Boss
     public void StartSummon()
     {
         state = SummState.Summon;
+
         StartCoroutine(ISummon());
     }
 
@@ -350,6 +400,9 @@ public class Summoner : Boss
         {
             faseSpawners[fase].StartSpawningStart();
         }
+
+        animator.SetTrigger("EndAction");
+        animator.SetInteger("Fase", fase);
     }
 
     private void EndSummon()
@@ -431,6 +484,12 @@ public class Summoner : Boss
             firstHit = false;
             vulnerable = true;
             state = SummState.Idle;
+
+            if (fase < 3)
+            {
+                animator.SetTrigger("Damage");
+            }
+
             StartCoroutine(IVulnerable());
         }
 
@@ -443,8 +502,6 @@ public class Summoner : Boss
         {
             GetDamage(0);
         }
-        
-
     }
 
     private void Presentation()
@@ -476,6 +533,25 @@ public class Summoner : Boss
         }
     }
 
+    public void UpdateAnimFlip(float nextXMovement)
+    {
+        Debug.Log(nextXMovement);
+        if (nextXMovement > 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
+    }
+
+    public void Flip()
+    {
+        spriteRenderer.flipX = !spriteRenderer.flipX;
+    }
+    
+
     IEnumerator IVulnerable()
     {
         yield return new WaitForSeconds(vulnerableTime);
@@ -487,7 +563,7 @@ public class Summoner : Boss
     IEnumerator ISummon()
     {
         yield return new WaitForSeconds(summonTime[fase] / 2);
-        Summon();
+        animator.SetTrigger("Summon");
         yield return new WaitForSeconds(summonTime[fase] / 2);
         EndSummon();
     }
@@ -511,6 +587,7 @@ public class Summoner : Boss
         }
         yield return new WaitForSeconds(meleeInvulnerableTime);
         firstHit = true;
+
         yield return new WaitForSeconds(meleeRecoveryTime);
         if (state == SummState.Melee)
         {
@@ -518,6 +595,31 @@ public class Summoner : Boss
         }
 
     }
+
+    IEnumerator ICompleteAnim(System.Action nextAction)
+    {
+        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+        yield return new WaitForSeconds(clipInfo[0].clip.length);
+        nextAction();
+    }
+
+
+
+    IEnumerator IPrepareLunge()
+    {
+        if((lungeDest - realPos).x > 0)
+        {
+            animator.SetTrigger("EndMoveReversed");
+        }
+
+        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+        yield return new WaitForSeconds(clipInfo[0].clip.length);
+        Move();
+    }
+
+    //animator.SetTrigger("Lunge");
+    //    float nextXMovement = (lungeDest - realPos).x;
+    //UpdateAnimFlip(nextXMovement);
 
     private void OnDrawGizmosSelected()
     {

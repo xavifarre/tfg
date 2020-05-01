@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Explosion : Attack
 {
+    public float duration;
     public GameObject particles;
+
 
     private void Start()
     {
@@ -12,7 +14,7 @@ public class Explosion : Attack
         {
             Instantiate(particles, transform.position, Quaternion.identity);
         }
-        
+        Destroy(gameObject, duration);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

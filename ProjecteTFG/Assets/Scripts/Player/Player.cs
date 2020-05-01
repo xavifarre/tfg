@@ -449,7 +449,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     }
 
 
-    public void EnemyHit(Enemy enemy)
+    public void Hit(Enemy enemy)
     {
         if (!invulnerable)
         {
@@ -457,7 +457,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             if (state != State.Dead)
             {
                 KnockBack(enemy.transform.position, enemy.knockBackValue);
-                DamageInvulnerability();
+                DamageInvulnerability(enemy.damage);
             }
         }
     }
@@ -470,7 +470,20 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             if (state != State.Dead)
             {
                 KnockBack(attack.transform.position, attack.knockback);
-                DamageInvulnerability();
+                DamageInvulnerability(attack.damage);
+            }
+        }
+    }
+
+    public void Hit(Blade blade, Vector3 knockbackMotion)
+    {
+        if (!invulnerable)
+        {
+            GetDamage(blade.damage);
+            if (state != State.Dead)
+            {
+                KnockBack(knockbackMotion);
+                DamageInvulnerability(blade.damage);
             }
         }
     }
@@ -515,10 +528,13 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         return health <= 0;
     }
 
-    public void DamageInvulnerability()
+    public void DamageInvulnerability(int damage)
     {
         invulnerable = true;
-        GetComponent<SpriteRenderer>().color = Color.red;
+        if(damage > 0)
+        {
+            GetComponent<SpriteRenderer>().color = Color.red;
+        }
         StartCoroutine(IInvulnerabilityDamage());
     }
 
@@ -528,6 +544,18 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
         startPoint = transform.position;
         destPoint = Vector2.ClampMagnitude(direction * 10000, knockBackDistance*value) + startPoint;
+
+        animator.SetTrigger("Hit");
+
+        state = State.KnockBack;
+        tAction = 0;
+    }
+
+
+    public void KnockBack(Vector3 knockbackMotion)
+    {
+        startPoint = transform.position;
+        destPoint = knockbackMotion + (Vector3)startPoint;
 
         animator.SetTrigger("Hit");
 
@@ -570,7 +598,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         realPos = lastSafePosition  -(Vector3)lastDir * 1;
         state = State.Idle;
         GetDamage(1);
-        DamageInvulnerability();
+        DamageInvulnerability(1);
     }
 
     //Actualitzar els paràmetres d'animació

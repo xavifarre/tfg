@@ -264,4 +264,92 @@ public class MathFunctions : MonoBehaviour
     {
         return -A.x * B.y + A.y * B.x;
     }
+
+    //Calculate the intersection point of two lines. Returns true if lines intersect, otherwise false.
+    //Note that in 3d, two lines do not intersect most of the time. So if the two lines are not in the 
+    //same plane, use ClosestPointsOnTwoLines() instead.
+    public static bool LineLineIntersection(out Vector3 intersection, Vector3 linePoint1, Vector3 lineVec1, Vector3 linePoint2, Vector3 lineVec2)
+    {
+
+        Vector3 lineVec3 = linePoint2 - linePoint1;
+        Vector3 crossVec1and2 = Vector3.Cross(lineVec1, lineVec2);
+        Vector3 crossVec3and2 = Vector3.Cross(lineVec3, lineVec2);
+
+        float planarFactor = Vector3.Dot(lineVec3, crossVec1and2);
+
+        //is coplanar, and not parrallel
+        if (Mathf.Abs(planarFactor) < 0.0001f && crossVec1and2.sqrMagnitude > 0.0001f)
+        {
+            float s = Vector3.Dot(crossVec3and2, crossVec1and2) / crossVec1and2.sqrMagnitude;
+            intersection = linePoint1 + (lineVec1 * s);
+            return true;
+        }
+        else
+        {
+            intersection = Vector3.zero;
+            return false;
+        }
+    }
+
+
+    //Parabolic throw
+
+    public static bool ProjectileLaunchAngle(float speed, float distance, float yOffset, float gravity, out float angle0, out float angle1)
+    {
+        angle0 = angle1 = 0;
+
+        float speedSquared = speed * speed;
+
+        float operandA = Mathf.Pow(speed, 4);
+        float operandB = gravity * (gravity * (distance * distance) + (2 * yOffset * speedSquared));
+
+        // Target is not in range
+        if (operandB > operandA)
+            return false;
+
+        float root = Mathf.Sqrt(operandA - operandB);
+
+        angle0 = Mathf.Atan((speedSquared + root) / (gravity * distance));
+        angle1 = Mathf.Atan((speedSquared - root) / (gravity * distance));
+
+        return true;
+    }
+
+    public static float ProjectileLaunchSpeed(float distance, float yOffset, float gravity, float angle)
+    {
+        float speed = (distance * Mathf.Sqrt(gravity) * Mathf.Sqrt(1 / Mathf.Cos(angle))) / Mathf.Sqrt(2 * distance * Mathf.Sin(angle) + 2 * yOffset * Mathf.Cos(angle));
+
+        return speed;
+    }
+
+    public static Vector2[] ProjectileArcPoints(int iterations, float speed, float distance, float gravity, float angle, int direction, Vector2 offset)
+    {
+        float iterationSize = distance / iterations;
+
+        float radians = angle;
+
+        Vector2[] points = new Vector2[iterations + 1];
+
+        for (int i = 0; i <= iterations; i++)
+        {
+            float x = iterationSize * i;
+            float t = x / (speed * Mathf.Cos(radians));
+            float y = -0.5f * gravity * (t * t) + speed * Mathf.Sin(radians) * t;
+
+            Vector2 p = new Vector2(x * direction, y);
+
+            points[i] = p + offset;
+        }
+
+        return points;
+    }
+
+    public static float ProjectileTimeOfFlight(float speed, float angle, float yOffset, float gravity)
+    {
+        float ySpeed = speed * Mathf.Sin(angle);
+
+        float time = (ySpeed + Mathf.Sqrt((ySpeed * ySpeed) + 2 * gravity * yOffset)) / gravity;
+
+        return time;
+    }
 }

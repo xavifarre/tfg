@@ -27,7 +27,7 @@ public abstract class Enemy : MonoBehaviour
     protected Player player;
 
     //Sprite Renderer
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
 
     //GameManager
     protected GameManager gm;
@@ -96,7 +96,7 @@ public abstract class Enemy : MonoBehaviour
     {
         if (damage > 0)
         {
-            player.GetComponent<Player>().EnemyHit(this);
+            player.GetComponent<Player>().Hit(this);
         }
     }
 

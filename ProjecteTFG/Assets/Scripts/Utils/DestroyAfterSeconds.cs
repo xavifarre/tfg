@@ -5,15 +5,8 @@ using UnityEngine;
 public class DestroyAfterSeconds : MonoBehaviour
 {
     public float seconds;
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Destroy(gameObject,seconds);
+        Destroy(gameObject, seconds);
     }
 }

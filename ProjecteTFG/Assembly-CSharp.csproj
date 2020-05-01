@@ -62,8 +62,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Barrel.cs" />
     <Compile Include="Assets\Blade.cs" />
+    <Compile Include="Assets\Powder.cs" />
     <Compile Include="Assets\Scripts\Attacks\Attack.cs" />
+    <Compile Include="Assets\Scripts\Attacks\BarrelPopable.cs" />
+    <Compile Include="Assets\Scripts\Attacks\BarrelProximity.cs" />
+    <Compile Include="Assets\Scripts\Attacks\BarrelThrowable.cs" />
+    <Compile Include="Assets\Scripts\Attacks\BarrelTrigger.cs" />
     <Compile Include="Assets\Scripts\Attacks\Explosion.cs" />
     <Compile Include="Assets\Scripts\Attacks\Laser.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
@@ -107,6 +113,7 @@
     <Compile Include="Assets\Scripts\Utils\MathFunctions.cs" />
     <Compile Include="Assets\Scripts\Utils\ParticleDestroyer.cs" />
     <Compile Include="Assets\Scripts\Utils\RectArea.cs" />
+    <Compile Include="Assets\ShadowController.cs" />
     <None Include="Assets\Shaders\LightCircle.shader" />
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>

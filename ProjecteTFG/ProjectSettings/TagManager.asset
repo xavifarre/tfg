@@ -9,6 +9,9 @@ TagManager:
   - SpawnLoop
   - SpawnHit
   - EnemyAttack
+  - PlayerAttack
+  - Barrel
+  - BarrelInvulnerable
   layers:
   - Default
   - TransparentFX
@@ -28,8 +31,8 @@ TagManager:
   - FeetCollider
   - IgnoreAll
   - EnemyAttack
-  - 
-  - 
+  - ObstacleObject
+  - PlayerEnteredTrigger
   - 
   - 
   - 

@@ -13,7 +13,7 @@ public class RectArea : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if(!transform.parent.GetComponent<Spawner>() || transform.parent.GetComponent<Spawner>().type == 0)
+        if(!transform.parent || !transform.parent.GetComponent<Spawner>() || transform.parent.GetComponent<Spawner>().type == 0)
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireCube(transform.position, (Vector3)spawnAreaSize + Vector3.forward);

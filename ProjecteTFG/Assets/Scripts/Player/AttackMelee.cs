@@ -7,7 +7,7 @@ public class AttackMelee : Attack
     public float timeActive = 0.2f;
     public GameObject hitParticles;
 
-    private GameObject player;
+    private Player player;
     private Collider2D col;
     private float t;
     private bool stop = false;
@@ -15,7 +15,7 @@ public class AttackMelee : Attack
     // Start is called before the first frame update
     void Start()
     {
-        player = transform.parent.gameObject;
+        player = transform.parent.GetComponent<Player>();
         col = GetComponent<Collider2D>();
         col.enabled = false;
     }
@@ -55,24 +55,42 @@ public class AttackMelee : Attack
     }
 
 
+    private void Impact(Collider2D collider)
+    {
+        float impactOffset = 1;
+        if (collider.tag == "Enemy")
+        {
+            //Impacte depenent de la mida
+            impactOffset = collider.gameObject.GetComponent<Enemy>().size / 2;
+        }
+        Vector3 impactPoint = collider.transform.position + (transform.position - collider.transform.position).normalized * impactOffset;
+
+        //Instanciar particules
+        GameObject particles = Instantiate(hitParticles);
+        particles.transform.position = impactPoint;
+
+        //Crida a la funció de generació de cristalls
+        player.GenerateShards(impactPoint);
+    }
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
 
         if(collider.gameObject.tag == "Enemy")
         {
-            //Impacte depenent de la mida
-            float impactOffset = collider.gameObject.GetComponent<Enemy>().size/2;
-            Vector3 impactPoint = collider.transform.position + (transform.position - collider.transform.position).normalized * impactOffset;
-            
-            //Instanciar particules
-            GameObject particles = Instantiate(hitParticles);
-            particles.transform.position = impactPoint;
-
-            //Crida a la funció de generació de cristalls
-            player.SendMessage("GenerateShards", impactPoint);
-
+            Impact(collider);
             //Envia el hit al enemic
             collider.GetComponent<Enemy>().Hit(this);
+        }
+        else if(collider.gameObject.tag == "Barrel")
+        {
+            BarrelProximity barrel = collider.GetComponent<BarrelProximity>();
+            if (barrel.IsHitable())
+            {
+                Impact(collider);
+                //Envia el hit al barril
+                barrel.Hit(this);
+            }
         }
     }
 }

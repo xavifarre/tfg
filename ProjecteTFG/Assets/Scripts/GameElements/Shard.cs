@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shard : MonoBehaviour {
+public class Shard : Attack {
 
     //Basic
     public float speed = 5f;
@@ -15,7 +15,6 @@ public class Shard : MonoBehaviour {
 
     //Damage
     public float damageVelRatio= 10f;
-    private int damage;
 
     //Velocity
     public float acceleration = 5f;
@@ -354,6 +353,14 @@ public class Shard : MonoBehaviour {
             //collision.gameObject.SendMessage("Damage");
             //DestroyShard();
             collision.GetComponent<Enemy>().GetDamage(damage);
+        }
+        else if (collision.gameObject.tag == "Barrel")
+        {
+            BarrelProximity barrel = collision.GetComponent<BarrelProximity>();
+            if (barrel.IsHitable())
+            {
+                barrel.Hit(this);
+            }
         }
         else
         {

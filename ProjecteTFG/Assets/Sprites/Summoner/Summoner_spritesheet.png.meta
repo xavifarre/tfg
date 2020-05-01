@@ -1,0 +1,3344 @@
+fileFormatVersion: 2
+guid: 4b31f0865df12d14eb8bc0c7d32afc5d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -843648794271013745
+    second: Summoner_spritesheet_0
+  - first:
+      213: -3099567040815041218
+    second: Summoner_spritesheet_1
+  - first:
+      213: -4039024513910564813
+    second: Summoner_spritesheet_2
+  - first:
+      213: -4041692329686070186
+    second: Summoner_spritesheet_3
+  - first:
+      213: 2501051202051288771
+    second: Summoner_spritesheet_4
+  - first:
+      213: -6047686149657122136
+    second: Summoner_spritesheet_5
+  - first:
+      213: -5950858005577971274
+    second: Summoner_spritesheet_6
+  - first:
+      213: -6311492500743460072
+    second: Summoner_spritesheet_7
+  - first:
+      213: 6048630056722638353
+    second: Summoner_spritesheet_8
+  - first:
+      213: 4593489469282070316
+    second: Summoner_spritesheet_9
+  - first:
+      213: -2374382436124538388
+    second: Summoner_spritesheet_10
+  - first:
+      213: 3400083620859340404
+    second: Summoner_spritesheet_11
+  - first:
+      213: -9057851422852317829
+    second: Summoner_spritesheet_12
+  - first:
+      213: -8091658302539936396
+    second: Summoner_spritesheet_13
+  - first:
+      213: -1123934478610356952
+    second: Summoner_spritesheet_14
+  - first:
+      213: 3761752597577095907
+    second: Summoner_spritesheet_15
+  - first:
+      213: -2849139427689576997
+    second: Summoner_spritesheet_16
+  - first:
+      213: 4479206148911879604
+    second: Summoner_spritesheet_17
+  - first:
+      213: 4544909572642158055
+    second: Summoner_spritesheet_18
+  - first:
+      213: -4477407528395007238
+    second: Summoner_spritesheet_19
+  - first:
+      213: 6226099848739947942
+    second: Summoner_spritesheet_20
+  - first:
+      213: 8497492329766080598
+    second: Summoner_spritesheet_21
+  - first:
+      213: 3875690394539305429
+    second: Summoner_spritesheet_22
+  - first:
+      213: 4230715839563516254
+    second: Summoner_spritesheet_23
+  - first:
+      213: -3197757239051688735
+    second: Summoner_spritesheet_24
+  - first:
+      213: 949350779924462427
+    second: Summoner_spritesheet_25
+  - first:
+      213: 7600143798276307352
+    second: Summoner_spritesheet_26
+  - first:
+      213: 4872983575896751100
+    second: Summoner_spritesheet_27
+  - first:
+      213: 2524141209046766101
+    second: Summoner_spritesheet_28
+  - first:
+      213: 5979449004218119722
+    second: Summoner_spritesheet_29
+  - first:
+      213: 8385984649059915133
+    second: Summoner_spritesheet_30
+  - first:
+      213: 6634255504976682857
+    second: Summoner_spritesheet_31
+  - first:
+      213: -2865749167092719792
+    second: Summoner_spritesheet_32
+  - first:
+      213: 2697171489225256423
+    second: Summoner_spritesheet_33
+  - first:
+      213: 9029961108519649299
+    second: Summoner_spritesheet_34
+  - first:
+      213: 1804626533642028982
+    second: Summoner_spritesheet_35
+  - first:
+      213: 3484165015825908756
+    second: Summoner_spritesheet_36
+  - first:
+      213: 2529883831613036722
+    second: Summoner_spritesheet_37
+  - first:
+      213: 8828909088090162028
+    second: Summoner_spritesheet_38
+  - first:
+      213: 3711406360985325381
+    second: Summoner_spritesheet_39
+  - first:
+      213: 5532682045013584102
+    second: Summoner_spritesheet_40
+  - first:
+      213: -5634178223180607254
+    second: Summoner_spritesheet_41
+  - first:
+      213: 4155801243264281297
+    second: Summoner_spritesheet_42
+  - first:
+      213: 5623602610620893155
+    second: Summoner_spritesheet_43
+  - first:
+      213: 1737791954198354837
+    second: Summoner_spritesheet_44
+  - first:
+      213: 4892510661315596443
+    second: Summoner_spritesheet_45
+  - first:
+      213: -5479859320297479413
+    second: Summoner_spritesheet_46
+  - first:
+      213: -4048218018462526376
+    second: Summoner_spritesheet_47
+  - first:
+      213: -3412400015901656819
+    second: Summoner_spritesheet_48
+  - first:
+      213: 2628307992446904447
+    second: Summoner_spritesheet_49
+  - first:
+      213: 8593472243140544869
+    second: Summoner_spritesheet_50
+  - first:
+      213: 2327534185536240536
+    second: Summoner_spritesheet_51
+  - first:
+      213: -3818792114255013660
+    second: Summoner_spritesheet_52
+  - first:
+      213: 128681408271444652
+    second: Summoner_spritesheet_53
+  - first:
+      213: -255668278914015020
+    second: Summoner_spritesheet_54
+  - first:
+      213: 3574325101716304359
+    second: Summoner_spritesheet_55
+  - first:
+      213: -5984498242224853687
+    second: Summoner_spritesheet_56
+  - first:
+      213: 4158831322284242354
+    second: Summoner_spritesheet_57
+  - first:
+      213: 5256145834165302443
+    second: Summoner_spritesheet_58
+  - first:
+      213: -157983741247646505
+    second: Summoner_spritesheet_59
+  - first:
+      213: 3034809657612058787
+    second: Summoner_spritesheet_60
+  - first:
+      213: -4972919391759760065
+    second: Summoner_spritesheet_61
+  - first:
+      213: -5651552718760651483
+    second: Summoner_spritesheet_62
+  - first:
+      213: -983930048634629480
+    second: Summoner_spritesheet_63
+  - first:
+      213: -6136977604430961255
+    second: Summoner_spritesheet_64
+  - first:
+      213: 2445640687610851049
+    second: Summoner_spritesheet_65
+  - first:
+      213: -6668310288962787904
+    second: Summoner_spritesheet_66
+  - first:
+      213: -7158125074361302405
+    second: Summoner_spritesheet_67
+  - first:
+      213: -7713772954070069203
+    second: Summoner_spritesheet_68
+  - first:
+      213: 230306470693428816
+    second: Summoner_spritesheet_69
+  - first:
+      213: 6507142752465436812
+    second: Summoner_spritesheet_70
+  - first:
+      213: -7306680477623410986
+    second: Summoner_spritesheet_71
+  - first:
+      213: -8171420482068882758
+    second: Summoner_spritesheet_72
+  - first:
+      213: 3621569676733232711
+    second: Summoner_spritesheet_73
+  - first:
+      213: -7912556885594323301
+    second: Summoner_spritesheet_74
+  - first:
+      213: 4427530289575353623
+    second: Summoner_spritesheet_75
+  - first:
+      213: -5522395319705005335
+    second: Summoner_spritesheet_76
+  - first:
+      213: 2536199314846153551
+    second: Summoner_spritesheet_77
+  - first:
+      213: 7046892658466056940
+    second: Summoner_spritesheet_78
+  - first:
+      213: -1942882758394256385
+    second: Summoner_spritesheet_79
+  - first:
+      213: 693652698331160109
+    second: Summoner_spritesheet_80
+  - first:
+      213: 4119876552804434102
+    second: Summoner_spritesheet_81
+  - first:
+      213: -429990625464311677
+    second: Summoner_spritesheet_82
+  - first:
+      213: -8288309992289503006
+    second: Summoner_spritesheet_83
+  - first:
+      213: 7470905857597035461
+    second: Summoner_spritesheet_84
+  - first:
+      213: -6739060858845503134
+    second: Summoner_spritesheet_85
+  - first:
+      213: -283613155952925353
+    second: Summoner_spritesheet_86
+  - first:
+      213: 3854751742804358592
+    second: Summoner_spritesheet_87
+  - first:
+      213: 8270874890191987656
+    second: Summoner_spritesheet_88
+  - first:
+      213: -6877103575363546559
+    second: Summoner_spritesheet_89
+  - first:
+      213: -1342056967942272213
+    second: Summoner_spritesheet_90
+  - first:
+      213: 7801374072706765846
+    second: Summoner_spritesheet_91
+  - first:
+      213: -1510208471910689342
+    second: Summoner_spritesheet_92
+  - first:
+      213: -2431039123833413388
+    second: Summoner_spritesheet_93
+  - first:
+      213: 2842244659746217283
+    second: Summoner_spritesheet_94
+  - first:
+      213: 4190353909134633354
+    second: Summoner_spritesheet_95
+  - first:
+      213: 8018875119798330803
+    second: Summoner_spritesheet_96
+  - first:
+      213: -5671735052568004781
+    second: Summoner_spritesheet_97
+  - first:
+      213: -7890130971055421862
+    second: Summoner_spritesheet_98
+  - first:
+      213: 291953998851994429
+    second: Summoner_spritesheet_99
+  - first:
+      213: -2664338914338896547
+    second: Summoner_spritesheet_100
+  - first:
+      213: -2148907384188500923
+    second: Summoner_spritesheet_101
+  - first:
+      213: -8085441085142177119
+    second: Summoner_spritesheet_102
+  - first:
+      213: 5178087707553368556
+    second: Summoner_spritesheet_103
+  - first:
+      213: -7325000366652670060
+    second: Summoner_spritesheet_104
+  - first:
+      213: -5696212172190344319
+    second: Summoner_spritesheet_105
+  - first:
+      213: -5069336792092164071
+    second: Summoner_spritesheet_106
+  - first:
+      213: -3789858645654947997
+    second: Summoner_spritesheet_107
+  - first:
+      213: -21975491346693467
+    second: Summoner_spritesheet_108
+  - first:
+      213: 1665307251305901218
+    second: Summoner_spritesheet_109
+  - first:
+      213: 7883811912577613435
+    second: Summoner_spritesheet_110
+  - first:
+      213: 317975983620767316
+    second: Summoner_spritesheet_111
+  - first:
+      213: 7604385833391069892
+    second: Summoner_spritesheet_112
+  - first:
+      213: 5398175311982948410
+    second: Summoner_spritesheet_113
+  - first:
+      213: 8325173714322845442
+    second: Summoner_spritesheet_114
+  - first:
+      213: -3187254763665256789
+    second: Summoner_spritesheet_115
+  - first:
+      213: 6432523875400502979
+    second: Summoner_spritesheet_116
+  - first:
+      213: 5155280118386531074
+    second: Summoner_spritesheet_117
+  - first:
+      213: 4436629745542030520
+    second: Summoner_spritesheet_118
+  - first:
+      213: -7412915624171153381
+    second: Summoner_spritesheet_119
+  - first:
+      213: -6188369508894853214
+    second: Summoner_spritesheet_120
+  - first:
+      213: -727733832643004227
+    second: Summoner_spritesheet_121
+  - first:
+      213: -8122741515493966642
+    second: Summoner_spritesheet_122
+  - first:
+      213: -4282448476041160607
+    second: Summoner_spritesheet_123
+  - first:
+      213: -7525209744709547075
+    second: Summoner_spritesheet_124
+  - first:
+      213: 3248155466856281633
+    second: Summoner_spritesheet_125
+  - first:
+      213: 249476686710344410
+    second: Summoner_spritesheet_126
+  - first:
+      213: -5268794579329613353
+    second: Summoner_spritesheet_127
+  - first:
+      213: -6018203146662728986
+    second: Summoner_spritesheet_128
+  - first:
+      213: 6803803426567129125
+    second: Summoner_spritesheet_129
+  - first:
+      213: 4840405540726726795
+    second: Summoner_spritesheet_130
+  - first:
+      213: 8170505646428205889
+    second: Summoner_spritesheet_131
+  - first:
+      213: 8786306209814273525
+    second: Summoner_spritesheet_132
+  - first:
+      213: -146799363730181339
+    second: Summoner_spritesheet_133
+  - first:
+      213: -7814646776221308656
+    second: Summoner_spritesheet_134
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Summoner_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1372
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f842a4634e1ca44f0800000000000000
+      internalID: -843648794271013745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 1372
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e35f5b6d2302cf4d0800000000000000
+      internalID: -3099567040815041218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 1372
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3381441ba9082f7c0800000000000000
+      internalID: -4039024513910564813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 1372
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65c04ad6d3609e7c0800000000000000
+      internalID: -4041692329686070186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 1372
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cea45f21d485b220800000000000000
+      internalID: 2501051202051288771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1274
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8aa23a82d7d421ca0800000000000000
+      internalID: -6047686149657122136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 1274
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b94cb44c2e4a6da0800000000000000
+      internalID: -5950858005577971274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 1274
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81be4a2a2031968a0800000000000000
+      internalID: -6311492500743460072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 1274
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11624b45dfc01f350800000000000000
+      internalID: 6048630056722638353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 1274
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2f2e00c55a5fbf30800000000000000
+      internalID: 4593489469282070316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1176
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce9cedd11cf7c0fd0800000000000000
+      internalID: -2374382436124538388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 1176
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 476e1fbe9068f2f20800000000000000
+      internalID: 3400083620859340404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 1176
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7dfe981f1c0c4280800000000000000
+      internalID: -9057851422852317829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 1176
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47d444135a7a4bf80800000000000000
+      internalID: -8091658302539936396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_14
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 1176
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 825ad9beb8bf660f0800000000000000
+      internalID: -1123934478610356952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_15
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 1176
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ea5c7f8e0e643430800000000000000
+      internalID: 3761752597577095907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_16
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 1176
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd5c00139c2d578d0800000000000000
+      internalID: -2849139427689576997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_17
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 1176
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b553a5b246592e30800000000000000
+      internalID: 4479206148911879604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1078
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e5bb952d23c21f30800000000000000
+      internalID: 4544909572642158055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_19
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 1078
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afa1b53439d0dd1c0800000000000000
+      internalID: -4477407528395007238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_20
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 1078
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a5024c33dc876650800000000000000
+      internalID: 6226099848739947942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_21
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 1078
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 650505590482de570800000000000000
+      internalID: 8497492329766080598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_22
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 1078
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d9a8e921e739c530800000000000000
+      internalID: 3875690394539305429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_23
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 1078
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e594dca04a586ba30800000000000000
+      internalID: 4230715839563516254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_24
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 1078
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e4e368cbb84f93d0800000000000000
+      internalID: -3197757239051688735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_25
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 1078
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5b33a42185cc2d00800000000000000
+      internalID: 949350779924462427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 899b52a6482297960800000000000000
+      internalID: 7600143798276307352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_27
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfb73ad7eb050a340800000000000000
+      internalID: 4872983575896751100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_28
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51258206e0d870320800000000000000
+      internalID: 2524141209046766101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_29
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a26fbf850354bf250800000000000000
+      internalID: 5979449004218119722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_30
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7558138b90016470800000000000000
+      internalID: 8385984649059915133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_31
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96f90536b3c911c50800000000000000
+      internalID: 6634255504976682857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_32
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05f1110e050da38d0800000000000000
+      internalID: -2865749167092719792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_33
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ed2591ed274e6520800000000000000
+      internalID: 2697171489225256423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_34
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31008e019cdd05d70800000000000000
+      internalID: 9029961108519649299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_35
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b74af165425b0910800000000000000
+      internalID: 1804626533642028982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_36
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 414852b3f9d3a5030800000000000000
+      internalID: 3484165015825908756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_37
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b89c42e0f3fb1320800000000000000
+      internalID: 2529883831613036722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_38
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6305ddb906968a70800000000000000
+      internalID: 8828909088090162028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_39
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54fc7a3eb60918330800000000000000
+      internalID: 3711406360985325381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_40
+      rect:
+        serializedVersion: 2
+        x: 1288
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e8673ca10908cc40800000000000000
+      internalID: 5532682045013584102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_41
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 980
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae01416d1c06fc1b0800000000000000
+      internalID: -5634178223180607254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 882
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dae4ed563f5ca930800000000000000
+      internalID: 4155801243264281297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_43
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 882
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e7840c77cc0b0e40800000000000000
+      internalID: 5623602610620893155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_44
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 882
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59b568b3390ed1810800000000000000
+      internalID: 1737791954198354837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_45
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 882
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b90178b5680b5e340800000000000000
+      internalID: 4892510661315596443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_46
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 882
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b032e825bf0a3f3b0800000000000000
+      internalID: -5479859320297479413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_47
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 784
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 854943c1927d1d7c0800000000000000
+      internalID: -4048218018462526376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_48
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 784
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d09f4a4e348b4a0d0800000000000000
+      internalID: -3412400015901656819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_49
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 784
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f782e1a9130a97420800000000000000
+      internalID: 2628307992446904447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_50
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 784
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56942979975224770800000000000000
+      internalID: 8593472243140544869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_51
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 784
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89b377b82001d4020800000000000000
+      internalID: 2327534185536240536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_52
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 784
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e854ce0ecce00bc0800000000000000
+      internalID: -3818792114255013660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_53
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 686
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caa673d1f0b29c100800000000000000
+      internalID: 128681408271444652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_54
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 686
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d0aefe0e0fa37cf0800000000000000
+      internalID: -255668278914015020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_55
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 686
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e1ff8f0ebd8a9130800000000000000
+      internalID: 3574325101716304359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_56
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 686
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94dec315e8ac2fca0800000000000000
+      internalID: -5984498242224853687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_57
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 686
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b5358d9d0327b930800000000000000
+      internalID: 4158831322284242354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_58
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 686
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba47215b9c491f840800000000000000
+      internalID: 5256145834165302443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_59
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 686
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d495a6df9abecdf0800000000000000
+      internalID: -157983741247646505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_60
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 686
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a044e2fd4fcd1a20800000000000000
+      internalID: 3034809657612058787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_61
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 686
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f35028d2924acfab0800000000000000
+      internalID: -4972919391759760065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_62
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 686
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 525d0e8deb6a191b0800000000000000
+      internalID: -5651552718760651483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_63
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 686
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 892dc4775d06852f0800000000000000
+      internalID: -983930048634629480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_64
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 686
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9956d55426315daa0800000000000000
+      internalID: -6136977604430961255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_65
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 588
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ee69417f39a0f120800000000000000
+      internalID: 2445640687610851049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_66
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 588
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c56a465f176573a0800000000000000
+      internalID: -6668310288962787904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_67
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 588
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b72c0e49b2b39ac90800000000000000
+      internalID: -7158125074361302405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_68
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 588
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2053aa1e5c23f490800000000000000
+      internalID: -7713772954070069203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_69
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 588
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05ed72fc386323300800000000000000
+      internalID: 230306470693428816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c80c5776bd30e4a50800000000000000
+      internalID: 6507142752465436812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_71
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6de99fb61d4799a90800000000000000
+      internalID: -7306680477623410986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_72
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abadee79d58499e80800000000000000
+      internalID: -8171420482068882758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_73
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 746b20fde66624230800000000000000
+      internalID: 3621569676733232711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_74
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9644116f63f03290800000000000000
+      internalID: -7912556885594323301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_75
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71ddb6e175fb17d30800000000000000
+      internalID: 4427530289575353623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_76
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e214b337b28c53b0800000000000000
+      internalID: -5522395319705005335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_77
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4b7ef8e6d3623320800000000000000
+      internalID: 2536199314846153551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_78
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cea6d2e69879bc160800000000000000
+      internalID: 7046892658466056940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_79
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff3eda1dc6e7905e0800000000000000
+      internalID: -1942882758394256385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_80
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2e1589347950a900800000000000000
+      internalID: 693652698331160109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_81
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b08e5095edbc2930800000000000000
+      internalID: 4119876552804434102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_82
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 380a378edcd580af0800000000000000
+      internalID: -429990625464311677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_83
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 490
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e87341b9f10afc80800000000000000
+      internalID: -8288309992289503006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_84
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c3d4708b4dfda760800000000000000
+      internalID: 7470905857597035461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_85
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26166cc9adb0a72a0800000000000000
+      internalID: -6739060858845503134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_86
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7556cc95657601cf0800000000000000
+      internalID: -283613155952925353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_87
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c5fb276944de7530800000000000000
+      internalID: 3854751742804358592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_88
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c3679344ec08c270800000000000000
+      internalID: 8270874890191987656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_89
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14213e21cbe9f80a0800000000000000
+      internalID: -6877103575363546559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_90
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2b86755c4e006de0800000000000000
+      internalID: -1342056967942272213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_91
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61411abb26c044c60800000000000000
+      internalID: 7801374072706765846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_92
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c55afe6569aa0be0800000000000000
+      internalID: -1510208471910689342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_93
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f025dc0cc6334ed0800000000000000
+      internalID: -2431039123833413388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_94
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34d9cec857ea17720800000000000000
+      internalID: 2842244659746217283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_95
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a89a32dcda0272a30800000000000000
+      internalID: 4190353909134633354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_96
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b52cc58f64c84f60800000000000000
+      internalID: 8018875119798330803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_97
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 392
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3577d831503f941b0800000000000000
+      internalID: -5671735052568004781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_98
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a560fee7faf908290800000000000000
+      internalID: -7890130971055421862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_99
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d33f3587d9a3d0400800000000000000
+      internalID: 291953998851994429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_100
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d558499afdd560bd0800000000000000
+      internalID: -2664338914338896547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_101
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5440b369e1c8d22e0800000000000000
+      internalID: -2148907384188500923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_102
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aa60cbeb2ebacf80800000000000000
+      internalID: -8085441085142177119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_103
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce90988d5534cd740800000000000000
+      internalID: 5178087707553368556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_104
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49fbf0ed9fe585a90800000000000000
+      internalID: -7325000366652670060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_105
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18b965f853df2f0b0800000000000000
+      internalID: -5696212172190344319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_106
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 910478ccb0916a9b0800000000000000
+      internalID: -5069336792092164071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_107
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3673bcc24a7b76bc0800000000000000
+      internalID: -3789858645654947997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_108
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a20484386de1bff0800000000000000
+      internalID: -21975491346693467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_109
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ac68f33f1c5c1710800000000000000
+      internalID: 1665307251305901218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_110
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7e7e2d0a2de86d60800000000000000
+      internalID: 7883811912577613435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_111
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 294
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45e32dee87da96400800000000000000
+      internalID: 317975983620767316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_112
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ca994e20a4388960800000000000000
+      internalID: 7604385833391069892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_113
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a30f60278db2aea40800000000000000
+      internalID: 5398175311982948410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_114
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20fe1af6265f88370800000000000000
+      internalID: 8325173714322845442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_115
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bae8f03eda894c3d0800000000000000
+      internalID: -3187254763665256789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_116
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ce477a326ae44950800000000000000
+      internalID: 6432523875400502979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_117
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20b101e24fb3b8740800000000000000
+      internalID: 5155280118386531074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_118
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b4e6fe4f33129d30800000000000000
+      internalID: 4436629745542030520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_119
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b18d55fd388002990800000000000000
+      internalID: -7412915624171153381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_120
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a7b67318be7e1aa0800000000000000
+      internalID: -6188369508894853214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_121
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db8b7465fe196e5f0800000000000000
+      internalID: -727733832643004227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_122
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eccf9a6b0a9364f80800000000000000
+      internalID: -8122741515493966642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_123
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16857a8eccfa194c0800000000000000
+      internalID: -4282448476041160607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_124
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 196
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbb87428b95119790800000000000000
+      internalID: -7525209744709547075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_125
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 98
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12636390034c31d20800000000000000
+      internalID: 3248155466856281633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_126
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 98
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ada8c1b89b1567300800000000000000
+      internalID: 249476686710344410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_127
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 98
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d10e80de3b71e6b0800000000000000
+      internalID: -5268794579329613353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_128
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 98
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eaa709bf1c0b7ca0800000000000000
+      internalID: -6018203146662728986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_129
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 98
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5288e1a1b27fb6e50800000000000000
+      internalID: 6803803426567129125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_130
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8069d791339c2340800000000000000
+      internalID: 4840405540726726795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_131
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 0
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1433da2a897736170800000000000000
+      internalID: 8170505646428205889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_132
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 0
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fdd9cb22fa3fe970800000000000000
+      internalID: 8786306209814273525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_133
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 523fb97a1c676fdf0800000000000000
+      internalID: -146799363730181339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Summoner_spritesheet_134
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 0
+        width: 92
+        height: 98
+      alignment: 9
+      pivot: {x: 0.6086957, y: 0.4693877}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0196d2a292ccc8390800000000000000
+      internalID: -7814646776221308656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
