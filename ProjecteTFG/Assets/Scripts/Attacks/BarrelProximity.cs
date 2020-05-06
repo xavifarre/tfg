@@ -32,6 +32,7 @@ public class BarrelProximity : Barrel
         shadowController = GetComponent<ShadowController>();
         perserver = FindObjectOfType<Perserver>();
 
+        ChangeLayerIgnoreAll();
         //transform.position = destPos;
     }
 
@@ -54,7 +55,6 @@ public class BarrelProximity : Barrel
         bool reached = MathFunctions.ProjectileLaunchAngle(speed, horizontalDistance, yOffset, gravity, out float angle0, out float angle1);
         arcPoints = MathFunctions.ProjectileArcPoints(iterations, speed, horizontalDistance, gravity, angle0, direction, launchPosition);
         flightTime = MathFunctions.ProjectileTimeOfFlight(speed, angle0, yOffset, gravity);
-        Debug.Log(reached);
         StartCoroutine(ILaunch(iterations, launchPosition));
     }
 
@@ -63,6 +63,7 @@ public class BarrelProximity : Barrel
         state = BarrelState.Active;
         triggerObject.SetActive(true);
         GetComponent<SpriteRenderer>().color = colorActive;
+        ResetLayer();
     }
 
     public void DisableBarrel()
@@ -91,6 +92,16 @@ public class BarrelProximity : Barrel
     public bool IsHitable()
     {
         return state == BarrelState.Active || state == BarrelState.AboutToExplode;
+    }
+
+    private void ChangeLayerIgnoreAll()
+    {
+        gameObject.layer = LayerMask.NameToLayer("IgnoreAll");
+    }
+
+    private void ResetLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("ObstacleObject");
     }
 
     public IEnumerator ICountDown()

@@ -16,14 +16,21 @@ public class Perserver : Boss
 
     //Ability
     public enum Ability { Spin, SpinHeal, ExpandingSpin, UndodgeableSpin, PowderDrop, BarrelPop, BarrelToss, BarrelDrop, DoubleSlash, Heal, None };
-    [HideInInspector]
     public Ability currentAbility;
+    private Ability previousAbility;
 
     //Current ability routine
     public IEnumerator currentAbilityRoutine;
     //Heal controller rotuine
     private IEnumerator healRoutine;
     private bool healing = false;
+
+    //Player hit control for triggering some abilities
+    [HideInInspector]
+    public int hitControl;
+
+    //Movement
+    private Vector3 actionDest;
 
     [Header("Blades")]
     //Blades
@@ -40,7 +47,6 @@ public class Perserver : Boss
 
     //Abilities stats
     [Header("Abilities")]
-
 
     //Spin
     public _Spin spinStats;
@@ -90,6 +96,7 @@ public class Perserver : Boss
         public float evaluationRate;
         public int iterationsForExpanding;
         public float lagTime;
+        public float minimumDistanceToPlayer;
     }
 
 
@@ -154,7 +161,7 @@ public class Perserver : Boss
     [System.Serializable]
     public struct _BarrelDrop
     {
-        public int nBarrels;
+        public List<int> nBarrels;
         public float castInterval;
         public float preparationDuration;
         public float preparationRadius;
@@ -216,6 +223,8 @@ public class Perserver : Boss
         }
 
         barrelContainer = GameObject.Find("BarrelContainer");
+
+        EvaluateSituation();
     }
 
     protected override void UpdateEnemy()
@@ -292,11 +301,18 @@ public class Perserver : Boss
         }
         else if (distancia == 1)
         {
-
+            DoubleSlash();
         }
         else if (distancia == 2)
         {
-
+            if(previousAbility == Ability.BarrelDrop)
+            {
+                DoubleSlash(true);
+            }
+            else
+            {
+                BarrelDrop();
+            }
         }
     }
 
@@ -324,7 +340,7 @@ public class Perserver : Boss
     // 0-> Curta, 1 -> Mitja, 2 -> Llarga
     public int CheckDistanceToPlayer()
     {
-        float distance = Vector3.Distance(transform.position, player.transform.position);
+        float distance = DistanceToPlayer();
         if(distance <= shortDistance)
         {
             return 0;
@@ -339,6 +355,39 @@ public class Perserver : Boss
         }
     }
 
+    public float DistanceToPlayer()
+    {
+        return Vector3.Distance(transform.position, player.transform.position);
+    }
+
+    private void MoveToPlayer(float speedMultiplier = 1)
+    {
+        Vector3 direction = (player.transform.position - realPos).normalized;
+        float movSpeed = speed + speed * speedMultiplier;
+        realPos = realPos + movSpeed * direction * Time.deltaTime;
+        PixelPerfectMovement.Move(realPos, transform);
+    }
+
+    private void MoveToDest(float speedMultiplier = 1)
+    {
+        Vector3 direction = (actionDest - realPos).normalized;
+        float movSpeed = speed + speed * speedMultiplier;
+        realPos = realPos + movSpeed * direction * Time.deltaTime;
+        PixelPerfectMovement.Move(realPos, transform);
+    }
+
+    private Vector3 FindRandomMovePoint(float minimumDistanceToPlayer = 0)
+    {
+        int n = 0;
+        Vector3 destPoint = walkableArea.RandomPoint();
+        while (Vector3.Distance(destPoint,player.transform.position) < minimumDistanceToPlayer && n < 20)
+        {
+            destPoint = walkableArea.RandomPoint();
+        }
+
+        return destPoint;
+    }
+
     /*********************************************
     *                  ABILITIES                 *
     *********************************************/
@@ -349,56 +398,61 @@ public class Perserver : Boss
 
     public void Spin()
     {
-        CastAbilityBlade(Blade.BladeAbility.Spin);
         currentAbility = Ability.Spin;
+        currentAbilityRoutine = ISpin();
+        StartCoroutine(currentAbilityRoutine);
+        CastAbilityBlade(Blade.BladeAbility.Spin);
     }
 
     public void ExpandingSpin()
     {
-        CastAbilityBlade(Blade.BladeAbility.ExpandingSpin, false);
         currentAbility = Ability.ExpandingSpin;
+        CastAbilityBlade(Blade.BladeAbility.ExpandingSpin, false);
     }
 
     public void UndodgeableSpin()
     {
-        CastAbilityBlade(Blade.BladeAbility.UndodgeableSpin, false);
         currentAbility = Ability.UndodgeableSpin;
+        CastAbilityBlade(Blade.BladeAbility.UndodgeableSpin, false);
     }
 
     public void PowderDrop()
     {
-        CastAbilityBlade(Blade.BladeAbility.PowderDrop);
         currentAbility = Ability.PowderDrop;
+        CastAbilityBlade(Blade.BladeAbility.PowderDrop);
     }
 
     public void BarrelPop()
     {
-        CastAbilityBlade(Blade.BladeAbility.BarrelPop);
         currentAbility = Ability.BarrelPop;
+        CastAbilityBlade(Blade.BladeAbility.BarrelPop);
     }
 
     public void BarrelToss()
     {
-        CastAbilityBlade(Blade.BladeAbility.BarrelToss);
         currentAbility = Ability.BarrelToss;
+        CastAbilityBlade(Blade.BladeAbility.BarrelToss);
     }
 
     public void BarrelDrop()
     {
-        CastAbilityBlade(Blade.BladeAbility.BarrelDrop);
         currentAbility = Ability.BarrelDrop;
+        CastAbilityBlade(Blade.BladeAbility.BarrelDrop);
     }
 
-    public void DoubleSlash()
+    public void DoubleSlash(bool aproaching = false)
     {
-        CastAbilityBlade(Blade.BladeAbility.DoubleSlash);
         currentAbility = Ability.DoubleSlash;
+        actionDest = FindRandomMovePoint();
+        currentAbilityRoutine = IDoubleSlash(aproaching);
+        StartCoroutine(currentAbilityRoutine);
+        CastAbilityBlade(Blade.BladeAbility.DoubleSlash);
     }
 
     public void SpinHeal()
     {
-        CastAbilityBlade(Blade.BladeAbility.SpinHeal);
         currentAbility = Ability.SpinHeal;
+        CastAbilityBlade(Blade.BladeAbility.SpinHeal);
     }
 
     public void CastAbilityBlade(Blade.BladeAbility ability, bool randomMotion = true)
@@ -411,6 +465,41 @@ public class Perserver : Boss
                 blade.motionDirection = motionDirection;
             }
             blade.StartAbility(ability);      
+        }
+    }
+
+    #endregion
+
+    #region Ability Rutines
+
+    private IEnumerator ISpin()
+    {
+        Debug.Log(currentAbility.ToString());
+        while(currentAbility == Ability.Spin)
+        {
+            if(DistanceToPlayer() > spinStats.minimumDistanceToPlayer)
+            {
+                MoveToPlayer();
+            }
+            yield return null;
+        }
+    }
+
+    private IEnumerator IDoubleSlash(bool aproaching)
+    {
+        float t = 0;
+        while (currentAbility == Ability.DoubleSlash && t < doubleSlashStats.chargeDuration)
+        {
+            if (aproaching && DistanceToPlayer() > mediumDistance)
+            {
+                MoveToPlayer();
+            }
+            else
+            {
+                MoveToDest();
+            }
+            t += Time.deltaTime;
+            yield return null;
         }
     }
 
@@ -482,7 +571,7 @@ public class Perserver : Boss
 
     public IEnumerator IBarrelDrop()
     {
-        for (int i = 0; i < barrelDropStats.nBarrels; i++)
+        for (int i = 0; i < barrelDropStats.nBarrels[fase]; i++)
         {
             LaunchBarrel();
             yield return new WaitForSeconds(barrelDropStats.castInterval);
@@ -499,65 +588,37 @@ public class Perserver : Boss
 
     public void EndAbility(Ability ability, float lagTime)
     {
+        previousAbility = currentAbility;
         currentAbility = Ability.None;
+
+        if (currentAbilityRoutine != null)
+        {
+            StopCoroutine(currentAbilityRoutine);
+        }
         currentAbilityRoutine = ILagTime(ability, lagTime);
-
-        if(ability == Ability.Spin)
-        {
-            EndSpin();
-        }
-        else if (ability == Ability.ExpandingSpin)
-        {
-            EndExpandingSpin();
-        }
-        else if (ability == Ability.UndodgeableSpin)
-        {
-            EndUndodgeableSpin();
-        }
-        else if (ability == Ability.PowderDrop)
-        {
-            EndPowderDrop();
-        }
-        else if (ability == Ability.BarrelPop)
-        {
-            EndBarrelPop();
-        }
-        else if (ability == Ability.BarrelToss)
-        {
-            EndBarrelToss();
-        }
-        else if (ability == Ability.BarrelDrop)
-        {
-            EndBarrelDrop();
-        }
-        else if (ability == Ability.DoubleSlash)
-        {
-            EndDoubleSlash();
-        }
-        else if (ability == Ability.Heal)
-        {
-            EndHeal();
-        }
-        else if (ability == Ability.SpinHeal)
-        {
-            EndSpinHeal();
-        }
-
+        StartCoroutine(currentAbilityRoutine);
     }
 
     public void EndSpin()
     {
-
+        EvaluateSituation();
     }
 
     public void EndExpandingSpin()
     {
-
+        if(CheckDistanceToPlayer() == 0)
+        {
+            UndodgeableSpin();
+        }
+        else
+        {
+            EvaluateSituation();
+        }
     }
 
     public void EndUndodgeableSpin()
     {
-
+        EvaluateSituation();
     }
 
     public void EndPowderDrop()
@@ -577,12 +638,23 @@ public class Perserver : Boss
 
     public void EndBarrelDrop()
     {
-
+        EvaluateSituation();
     }
 
     public void EndDoubleSlash()
     {
-
+        if(hitControl > 0 && CheckDistanceToPlayer() == 0)
+        {
+            Spin();
+        }
+        else if(CheckDistanceToPlayer() == 1)
+        {
+            DoubleSlash();
+        }
+        else
+        {
+            EvaluateSituation();
+        }
     }
 
     public void EndHeal()
@@ -707,4 +779,12 @@ public class Perserver : Boss
     }
 
     #endregion
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, shortDistance);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, mediumDistance);
+    }
 }

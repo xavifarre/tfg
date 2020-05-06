@@ -309,7 +309,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277910349}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.95014, y: -25.228384, z: 0}
+  m_LocalPosition: {x: 20, y: -25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1342815917}
@@ -384,6 +384,7 @@ MonoBehaviour:
   damage: 1
   knockback: 6
   speedKnockbackFactor: 3
+  inclination: 1.2
   bladeId: 0
   motionDirection: 0
   perserver: {fileID: 0}
@@ -483,7 +484,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!4 &815669993 stripped
 Transform:
@@ -763,11 +764,10 @@ GameObject:
   - component: {fileID: 1342815917}
   - component: {fileID: 1342815921}
   - component: {fileID: 1342815920}
-  - component: {fileID: 1342815918}
   - component: {fileID: 1342815922}
   m_Layer: 12
   m_Name: Perserver
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -780,7 +780,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1342815916}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6667805, y: 1.340971, z: 0}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 489152745}
@@ -788,32 +788,6 @@ Transform:
   m_Father: {fileID: 277910350}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1342815918
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342815916}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!61 &1342815920
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -903,16 +877,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  speed: 0
+  speed: 1
   size: 0
   health: 0
   knockBackValue: 1
   fase: 0
   ratiosDamageFase: []
   state: 0
-  shortDistance: 2
-  mediumDistance: 6
+  shortDistance: 4
+  mediumDistance: 8
   currentAbility: 0
+  hitControl: 0
   basicRadius: 1
   basicAngularSpeed: 0
   barrelPopPosition: {x: 0, y: 0, z: 0}
@@ -923,9 +898,10 @@ MonoBehaviour:
     radius: 1
     duration: 10
     growDuration: 1
-    evaluationRate: 0
-    iterationsForExpanding: 0
+    evaluationRate: 0.5
+    iterationsForExpanding: 10
     lagTime: 0
+    minimumDistanceToPlayer: 1
   spinHealStats:
     damage: 1
     angularSpeed: 2
@@ -976,7 +952,7 @@ MonoBehaviour:
       type: 3}
     lagTime: 0
   barrelDropStats:
-    nBarrels: 5
+    nBarrels: 02000000020000000300000004000000
     castInterval: 0.5
     preparationDuration: 0.2
     preparationRadius: 1.5
@@ -990,13 +966,13 @@ MonoBehaviour:
     lagTime: 0
   doubleSlashStats:
     damage: 1
-    expandDistance: 0.3
+    expandDistance: 1
     expandDelay: 0.3
-    speed: 40
-    chargeDuration: 1
-    recoverDuration: 2
+    speed: 30
+    chargeDuration: 2
+    recoverDuration: 0.5
     recoverDelay: 0.5
-    lagTime: 0
+    lagTime: 1
   healStats:
     minHealAmount: 1
     maxHealAmount: 5
@@ -1191,6 +1167,7 @@ MonoBehaviour:
   damage: 1
   knockback: 6
   speedKnockbackFactor: 3
+  inclination: 1.2
   bladeId: 1
   motionDirection: 0
   perserver: {fileID: 0}
@@ -1290,7 +1267,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1 &1754734455
 GameObject:

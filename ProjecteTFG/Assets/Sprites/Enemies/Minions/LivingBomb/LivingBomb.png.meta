@@ -1,0 +1,1087 @@
+fileFormatVersion: 2
+guid: 57931549426765a488fd1b259d796477
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7842847172865879270
+    second: LivingBomb_0
+  - first:
+      213: -7882732669448113434
+    second: LivingBomb_1
+  - first:
+      213: 703371237480959415
+    second: LivingBomb_2
+  - first:
+      213: 1386011723991687526
+    second: LivingBomb_3
+  - first:
+      213: 2566798026501615687
+    second: LivingBomb_4
+  - first:
+      213: 6905204741595356157
+    second: LivingBomb_5
+  - first:
+      213: -875496741500401950
+    second: LivingBomb_6
+  - first:
+      213: 402135607432916572
+    second: LivingBomb_7
+  - first:
+      213: 4454566165084704800
+    second: LivingBomb_8
+  - first:
+      213: -7721850935267099940
+    second: LivingBomb_9
+  - first:
+      213: -987961470058404864
+    second: LivingBomb_10
+  - first:
+      213: -3418703580895160386
+    second: LivingBomb_11
+  - first:
+      213: -1940550404832326554
+    second: LivingBomb_12
+  - first:
+      213: -7411908884543252651
+    second: LivingBomb_13
+  - first:
+      213: -4582669291995074559
+    second: LivingBomb_14
+  - first:
+      213: -8163857891563316693
+    second: LivingBomb_15
+  - first:
+      213: -8476502753047733998
+    second: LivingBomb_16
+  - first:
+      213: 8623402138947283962
+    second: LivingBomb_17
+  - first:
+      213: -4197416728799895767
+    second: LivingBomb_18
+  - first:
+      213: -414114652088318107
+    second: LivingBomb_19
+  - first:
+      213: -79488283926874201
+    second: LivingBomb_20
+  - first:
+      213: 6825152268677153765
+    second: LivingBomb_21
+  - first:
+      213: 1743367901689189624
+    second: LivingBomb_22
+  - first:
+      213: -8507157454034810597
+    second: LivingBomb_23
+  - first:
+      213: -1282273391507935774
+    second: LivingBomb_24
+  - first:
+      213: 5666877996530309005
+    second: LivingBomb_25
+  - first:
+      213: 1852239391091569148
+    second: LivingBomb_26
+  - first:
+      213: -4506692085040309925
+    second: LivingBomb_27
+  - first:
+      213: 4647429642629583153
+    second: LivingBomb_28
+  - first:
+      213: -8832346482661576624
+    second: LivingBomb_29
+  - first:
+      213: -7495513486259456474
+    second: LivingBomb_30
+  - first:
+      213: 6392478466861639705
+    second: LivingBomb_31
+  - first:
+      213: 2583305386124554393
+    second: LivingBomb_32
+  - first:
+      213: 5459622553154253176
+    second: LivingBomb_33
+  - first:
+      213: -5650661463302021788
+    second: LivingBomb_34
+  - first:
+      213: -5455874632319583537
+    second: LivingBomb_35
+  - first:
+      213: 6885911795985756512
+    second: LivingBomb_36
+  - first:
+      213: 4945757371518539436
+    second: LivingBomb_37
+  - first:
+      213: 8027260192112596507
+    second: LivingBomb_38
+  - first:
+      213: 7244073571465338347
+    second: LivingBomb_0
+  - first:
+      213: 6561473415334423686
+    second: LivingBomb_1
+  - first:
+      213: 6468696163878523472
+    second: LivingBomb_2
+  - first:
+      213: 5018176274992796844
+    second: LivingBomb_3
+  - first:
+      213: -6977373563382200406
+    second: LivingBomb_4
+  - first:
+      213: 4288412046624270548
+    second: LivingBomb_5
+  - first:
+      213: -7235437601346204550
+    second: LivingBomb_6
+  - first:
+      213: -7914143739220000373
+    second: LivingBomb_7
+  - first:
+      213: 5057817532710297150
+    second: LivingBomb_8
+  - first:
+      213: 1316658259489427152
+    second: LivingBomb_9
+  - first:
+      213: 2892154624562591619
+    second: LivingBomb_10
+  - first:
+      213: 303318760071632323
+    second: LivingBomb_11
+  - first:
+      213: 4961207696612094803
+    second: LivingBomb_12
+  - first:
+      213: 5046481354725343791
+    second: LivingBomb_13
+  - first:
+      213: 2872758969259827532
+    second: LivingBomb_14
+  - first:
+      213: -5255434864291996058
+    second: LivingBomb_15
+  - first:
+      213: -9214013940469254576
+    second: LivingBomb_16
+  - first:
+      213: -2940630106125256858
+    second: LivingBomb_17
+  - first:
+      213: 6835408611299139445
+    second: LivingBomb_18
+  - first:
+      213: 3745972675973804906
+    second: LivingBomb_19
+  - first:
+      213: -673738592691000247
+    second: LivingBomb_20
+  - first:
+      213: -2092483368131340181
+    second: LivingBomb_21
+  - first:
+      213: 7430367464502288830
+    second: LivingBomb_22
+  - first:
+      213: -8332426474113115837
+    second: LivingBomb_23
+  - first:
+      213: -5558350997937566483
+    second: LivingBomb_24
+  - first:
+      213: -3005238763876914747
+    second: LivingBomb_25
+  - first:
+      213: 6208777197637915349
+    second: LivingBomb_26
+  - first:
+      213: 8877666386398091690
+    second: LivingBomb_27
+  - first:
+      213: 4348755086531991635
+    second: LivingBomb_28
+  - first:
+      213: -8226064075214780558
+    second: LivingBomb_29
+  - first:
+      213: 1115130349887499422
+    second: LivingBomb_30
+  - first:
+      213: 443454796701715215
+    second: LivingBomb_31
+  - first:
+      213: -3355347102988932376
+    second: LivingBomb_32
+  - first:
+      213: -6820785093631656532
+    second: LivingBomb_33
+  - first:
+      213: -8671012415406204419
+    second: LivingBomb_34
+  - first:
+      213: 6939499469279111240
+    second: LivingBomb_35
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LivingBomb_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 164
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bed9cf1588e188460800000000000000
+      internalID: 7244073571465338347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_1
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 164
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68c6d2c9e490f0b50800000000000000
+      internalID: 6561473415334423686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_2
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 164
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05259ef63ec65c950800000000000000
+      internalID: 6468696163878523472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_3
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 164
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca41d331cb424a540800000000000000
+      internalID: 5018176274992796844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_4
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 164
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa7076936b36b2f90800000000000000
+      internalID: -6977373563382200406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_5
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 164
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d8ab811900838b30800000000000000
+      internalID: 4288412046624270548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_6
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 164
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7c414926df869b90800000000000000
+      internalID: -7235437601346204550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_7
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 164
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b81096a33305b2290800000000000000
+      internalID: -7914143739220000373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_8
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 164
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3e90ff9f3af03640800000000000000
+      internalID: 5057817532710297150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0de837706b5b54210800000000000000
+      internalID: 1316658259489427152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_10
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3877e88ce4ff22820800000000000000
+      internalID: 2892154624562591619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_11
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c518c32eca953400800000000000000
+      internalID: 303318760071632323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_12
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3537f7d4d10c9d440800000000000000
+      internalID: 4961207696612094803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_13
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2249020e04b80640800000000000000
+      internalID: 5046481354725343791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_14
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c41ac00ef071ed720800000000000000
+      internalID: 2872758969259827532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_15
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66e1cadd5d1f017b0800000000000000
+      internalID: -5255434864291996058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_16
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05635da932f312080800000000000000
+      internalID: -9214013940469254576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_17
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 667b594af78c037d0800000000000000
+      internalID: -2940630106125256858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_18
+      rect:
+        serializedVersion: 2
+        x: 1458
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57f912b9aef3cde50800000000000000
+      internalID: 6835408611299139445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_19
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a63fcb14d4e5cf330800000000000000
+      internalID: 3745972675973804906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_20
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94c6e2fc15666a6f0800000000000000
+      internalID: -673738592691000247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_21
+      rect:
+        serializedVersion: 2
+        x: 1944
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b685e10967106f2e0800000000000000
+      internalID: -2092483368131340181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_22
+      rect:
+        serializedVersion: 2
+        x: 2106
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb1674857d7fd1760800000000000000
+      internalID: 7430367464502288830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_23
+      rect:
+        serializedVersion: 2
+        x: 2268
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3495d65d4464d5c80800000000000000
+      internalID: -8332426474113115837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_24
+      rect:
+        serializedVersion: 2
+        x: 2430
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dec4efe7735ccd2b0800000000000000
+      internalID: -5558350997937566483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_25
+      rect:
+        serializedVersion: 2
+        x: 2592
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c9e1e5444f3b46d0800000000000000
+      internalID: -3005238763876914747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_26
+      rect:
+        serializedVersion: 2
+        x: 2754
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d2d0ca37f10a2650800000000000000
+      internalID: 6208777197637915349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_27
+      rect:
+        serializedVersion: 2
+        x: 2916
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa91fa3ea8ec33b70800000000000000
+      internalID: 8877666386398091690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_28
+      rect:
+        serializedVersion: 2
+        x: 3078
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35899e3e5b1e95c30800000000000000
+      internalID: 4348755086531991635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_29
+      rect:
+        serializedVersion: 2
+        x: 3240
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2778831ae4627dd80800000000000000
+      internalID: -8226064075214780558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_30
+      rect:
+        serializedVersion: 2
+        x: 3402
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9c2d4f152db97f00800000000000000
+      internalID: 1115130349887499422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_31
+      rect:
+        serializedVersion: 2
+        x: 3564
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0b495fb9c7772600800000000000000
+      internalID: 443454796701715215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_32
+      rect:
+        serializedVersion: 2
+        x: 3726
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ea653456996f61d0800000000000000
+      internalID: -3355347102988932376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_33
+      rect:
+        serializedVersion: 2
+        x: 3888
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cad3ecc6814b751a0800000000000000
+      internalID: -6820785093631656532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_34
+      rect:
+        serializedVersion: 2
+        x: 4050
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df916b036206aa780800000000000000
+      internalID: -8671012415406204419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LivingBomb_35
+      rect:
+        serializedVersion: 2
+        x: 4212
+        y: 0
+        width: 162
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5740741, y: 0.5182927}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 848a461100e0e4060800000000000000
+      internalID: 6939499469279111240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: 1b30f0f69eead7346b671d889391eb08, type: 3}
+      name: _Emission
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

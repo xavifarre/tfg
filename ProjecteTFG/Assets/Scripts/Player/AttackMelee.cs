@@ -69,13 +69,17 @@ public class AttackMelee : Attack
         GameObject particles = Instantiate(hitParticles);
         particles.transform.position = impactPoint;
 
+        if(LayerMask.NameToLayer("Boss") == collider.gameObject.layer)
+        {
+            player.destPoint = transform.position + ((Vector3)player.destPoint - player.transform.position) / 3;
+        }
+
         //Crida a la funció de generació de cristalls
         player.GenerateShards(impactPoint);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-
         if(collider.gameObject.tag == "Enemy")
         {
             Impact(collider);

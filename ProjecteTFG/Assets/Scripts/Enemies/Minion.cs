@@ -104,7 +104,7 @@ public class Minion : Enemy, IFallableObject
         }
     }
 
-    private void KnockBack(float knockBack)
+    protected virtual void KnockBack(float knockBack)
     {
         if (knockBackResistance > 0)
         {

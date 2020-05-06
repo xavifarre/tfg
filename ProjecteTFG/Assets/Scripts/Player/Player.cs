@@ -27,8 +27,10 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public Vector3 movementValue;
 
     //Dash and other movement positions
-    Vector2 startPoint;
-    Vector2 destPoint;
+    [HideInInspector]
+    public Vector2 startPoint;
+    [HideInInspector]
+    public Vector2 destPoint;
     Vector3 lastSafePosition;
 
     //Dash

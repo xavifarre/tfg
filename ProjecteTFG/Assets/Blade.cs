@@ -10,6 +10,7 @@ public class Blade : Attack
     //Basic stats
     private float basicRadius = 1f;
     private float basicAngularSpeed = 1f;
+    public float inclination;
     public int bladeId;
 
     //Circle movement
@@ -51,12 +52,16 @@ public class Blade : Attack
     //RigidBody
     private Rigidbody2D rb;
 
+    //Layer
+    private int defaultLayer;
+
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
         trail = transform.GetComponentInChildren<TrailRenderer>();
+        defaultLayer = gameObject.layer;
     }
 
 
@@ -75,15 +80,18 @@ public class Blade : Attack
         defaultPosition = transform.localPosition;
     }
 
+
     private void CircleMovement()
     {
 
         lastPos = transform.position;
         previousAngle = currentAngle;
         currentAngle += angularSpeed * Time.deltaTime * motionDirection;
-        Vector3 circlePos = new Vector2(Mathf.Sin(currentAngle), Mathf.Cos(currentAngle)) * currentRadius;
+        Vector3 circlePos = new Vector2(Mathf.Sin(currentAngle), Mathf.Cos(currentAngle)/ inclination) * currentRadius;
         Vector3 nextPosition = circleCenter + circlePos;
+
         SmoothTrail();
+
         transform.localPosition = nextPosition;
         
     }
@@ -95,7 +103,7 @@ public class Blade : Attack
         for (int i = 1; i <= iterations; i++)
         {
             float angle = Mathf.Lerp(previousAngle, currentAngle, i / (iterations*1f) );
-            Vector3 circlePos = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * currentRadius;
+            Vector3 circlePos = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)/ inclination) * currentRadius;
             Vector3 nextPosition = perserver.transform.position + circleCenter + circlePos;
             trail.AddPosition(nextPosition);
         }
@@ -103,6 +111,11 @@ public class Blade : Attack
 
     public void StartAbility(BladeAbility ability)
     {
+        if (currentAbilityRoutine != null)
+        {
+            StopCoroutine(currentAbilityRoutine);
+        }
+
         if (ability == BladeAbility.Spin)
         {
             currentAbilityRoutine = ISpin(perserver.spinStats);
@@ -113,18 +126,10 @@ public class Blade : Attack
         }
         else if (ability == BladeAbility.ExpandingSpin)
         {
-            if (currentAbilityRoutine != null)
-            {
-                StopCoroutine(currentAbilityRoutine);
-            }
             currentAbilityRoutine = IExpandingSpin(perserver.expandingSpinStats);
         }
         else if (ability == BladeAbility.UndodgeableSpin)
         {
-            if (currentAbilityRoutine != null)
-            {
-                StopCoroutine(currentAbilityRoutine);
-            }
             currentAbilityRoutine = IUndodgeableSpin(perserver.undodgeableSpinStats);
         }
         else if (ability == BladeAbility.PowderDrop)
@@ -179,6 +184,7 @@ public class Blade : Attack
             if(tEv >= stats.evaluationRate && perserver.CheckDistanceToPlayer() == 0)
             {
                 tNear++;
+                tEv %= stats.evaluationRate;
                 if(tNear > stats.iterationsForExpanding)
                 {
                     perserver.ExpandingSpin();
@@ -187,6 +193,7 @@ public class Blade : Attack
 
             CircleMovement();
             t += Time.deltaTime;
+            tEv += Time.deltaTime;
             yield return null;
         }
 
@@ -335,6 +342,10 @@ public class Blade : Attack
 
         poppingBlade = bladeId == 0 && motionDirection == -1 || bladeId == 1 && motionDirection == 1;
 
+        if (!poppingBlade)
+        {
+            ChangeLayerIgnore();
+        }
 
         while (t < stats.placementDuration)
         {
@@ -365,7 +376,8 @@ public class Blade : Attack
             while (t < stats.popDuration)
             {
                 t += Time.deltaTime;
-                float radiusToBarrel = (perserver.transform.position - perserver.barrelPopPosition).magnitude;
+                Vector2 vectorToBarrel = (perserver.transform.position - perserver.barrelPopPosition);
+                float radiusToBarrel = new Vector2(vectorToBarrel.x, vectorToBarrel.y * inclination).magnitude;
                 currentRadius = Mathf.Lerp(previousRadius, radiusToBarrel, t / stats.popDuration);
                 angularSpeed = Mathf.Lerp(stats.preparationSpeed, stats.popSpeed, t / stats.popDuration);
                 CircleMovement();
@@ -402,6 +414,10 @@ public class Blade : Attack
             }
 
             transform.localPosition = defaultPosition;
+        }
+        else
+        {
+            ResetLayer();
         }
 
         if (bladeId == 0)
@@ -507,7 +523,7 @@ public class Blade : Attack
         while (!reachedDest)
         {
             movementValue = slashDir * stats.speed * Time.deltaTime;
-            if(movementValue.magnitude > Vector3.Distance(transform.position, destPos))
+            if(movementValue.magnitude >= Vector3.Distance(transform.position, destPos))
             {
                 movementValue = destPos - transform.position;
                 reachedDest = true;
@@ -591,16 +607,22 @@ public class Blade : Attack
     public Vector3 GetKnockbackDirectionFromCenter()
     {
         Vector3 direction = (transform.localPosition - circleCenter).normalized;
-        if ((transform.localPosition - circleCenter).magnitude < currentRadius)
-        {
-            return direction * -1;
-        }
         return direction;
     }
 
     public float GetKnockbackValue()
     {
         return Mathf.Clamp(angularSpeed / speedKnockbackFactor, 0, knockback);
+    }
+
+    private void ChangeLayerIgnore()
+    {
+        gameObject.layer = LayerMask.NameToLayer("IgnoreAll");
+    }
+
+    private void ResetLayer()
+    {
+        gameObject.layer = defaultLayer;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

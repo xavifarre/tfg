@@ -7,21 +7,25 @@ public class SummonerMeleeAttack : Attack
     private Collider2D coll;
     public float activeTime = 0.3f;
 
+    public ParticleSystem particles;
+
     private void Start()
     {
         coll = GetComponent<Collider2D>();
+        particles.Stop();
     }
 
-    public void PerformAttack(Vector2 vdir)
+    public void PerformAttack(int dir)
     {
-        int dir = MathFunctions.GetDirection(vdir);
         transform.eulerAngles = new Vector3(0, 0, dir * 90);
         StartCoroutine(IAttack());
+       
     }
 
     IEnumerator IAttack()
     {
         coll.enabled = true;
+        particles.Play();
         transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(activeTime);
         coll.enabled = false;

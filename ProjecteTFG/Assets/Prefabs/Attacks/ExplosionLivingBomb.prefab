@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7554063630496329520}
   - component: {fileID: 7554063630496329521}
   - component: {fileID: 1866684189333613793}
+  - component: {fileID: 409092002}
   m_Layer: 17
   m_Name: ExplosionLivingBomb
   m_TagString: EnemyAttack
@@ -101,11 +102,12 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -922912191
-  m_SortingLayer: 1
+  m_SortingLayerID: 528159245
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: be543e3891d95fc41b34e30cc75686dd, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.29803923}
+  m_Sprite: {fileID: 5986030973748356752, guid: 6fb856ea908a51c41bbaa80a3bb4be43,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -115,3 +117,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &409092002
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7554063630496329523}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ece13399b313897478cb0de83f231637, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

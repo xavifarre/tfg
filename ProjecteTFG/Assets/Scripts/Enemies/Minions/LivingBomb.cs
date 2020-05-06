@@ -5,11 +5,23 @@ public class LivingBomb : Minion
 {
     [Header("Attack")]
     //Attack
-    public float attackRange = 3f;
+    public float attackRange = 5f;
 
     //Range
     public float explosionRange = 4f;
     public GameObject explosionCollider;
+
+    public float explosionChargeTime = 0.5f;
+
+    private bool preparingExplosion = false;
+
+    protected override void Init()
+    {
+        if((player.transform.position.x - realPos.x) > 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+    }
 
     //Move
     protected override void UpdateMove()
@@ -31,9 +43,9 @@ public class LivingBomb : Minion
         Vector3 direction = (endActionPoint - realPos).normalized;
         realPos = realPos + speed * direction * Time.deltaTime;
 
-        if (Vector3.Distance(endActionPoint, realPos) < 0.4f)
+        if (Vector3.Distance(endActionPoint, realPos) < 1f)
         {
-            Explode();
+            StopToExplode();
         }
 
         PixelPerfectMovement.Move(realPos, rb);
@@ -44,6 +56,18 @@ public class LivingBomb : Minion
         endActionPoint = player.transform.position;
         tAction = 0;
         state = MinionState.Attack;
+        PrepareExplosion();
+    }
+
+    public void PrepareExplosion()
+    {
+        preparingExplosion = true;
+        animator.SetTrigger("Explode");
+    }
+
+    public void StopToExplode()
+    {
+        state = MinionState.Idle;
     }
 
     public void Explode()
@@ -56,22 +80,30 @@ public class LivingBomb : Minion
         Die();
     }
 
+    protected override void KnockBack(float knockBack)
+    {
+        base.KnockBack(knockBack);
+        animator.SetTrigger("Explode");
+
+    }
+
     protected override void UpdateKnockBack()
     {
         Vector3 nextPos = MathFunctions.EaseOutExp(tAction, startActionPoint, endActionPoint, knockBackDuration, 5);
         realPos = nextPos;
         PixelPerfectMovement.Move(nextPos, rb);
 
+        transform.Rotate(0, 0, 300 * Time.deltaTime, Space.Self);
         tAction += Time.deltaTime;
 
         if (tAction >= knockBackDuration)
         {
-            Explode();
+            state = MinionState.Dead;
         }
     }
 
     protected override void PlayerHit()
     {
-        Explode();
+        //Explode();
     }
 }

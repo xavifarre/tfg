@@ -11,6 +11,11 @@ public class Boss : Enemy
     //Vida fases
     public List<float> ratiosDamageFase = new List<float>();
 
+    //Knockback
+    protected Vector3 startKnockback;
+    protected Vector3 endKnockback;
+    protected float timeKnockback;
+
     public override void Die()
     {
         
@@ -34,6 +39,14 @@ public class Boss : Enemy
        
     }
 
+
+    protected virtual void KnockBack(float knockBack, float knockbackTime)
+    {
+        startKnockback = transform.position;
+        endKnockback = startKnockback + (Vector3)player.lastDir * knockBack;
+        timeKnockback = knockbackTime;
+        tAction = 0;
+    }
 
     protected virtual int CheckDamageFase()
     {

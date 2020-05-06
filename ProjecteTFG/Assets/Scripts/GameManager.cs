@@ -16,4 +16,16 @@ public class GameManager : MonoBehaviour
     {
         tLastHit += Time.deltaTime;
     }
+
+    public void SlowDownGame(float tScale, float time)
+    {
+        StartCoroutine(ISlowTime(tScale, time));
+    }
+
+    private IEnumerator ISlowTime(float tScale, float time)
+    {
+        Time.timeScale = tScale;
+        yield return new WaitForSeconds(time);
+        Time.timeScale = 1;
+    }
 }

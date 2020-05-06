@@ -14,7 +14,13 @@ public class Explosion : Attack
         {
             Instantiate(particles, transform.position, Quaternion.identity);
         }
-        Destroy(gameObject, duration);
+        StartCoroutine(IDisableExplosionCollider(duration));
+    }
+
+    private IEnumerator IDisableExplosionCollider(float dur)
+    {
+        yield return new WaitForSeconds(dur);
+        GetComponent<Collider2D>().enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -30,5 +36,10 @@ public class Explosion : Attack
             //Envia el hit al player
             collider.GetComponent<Player>().Hit(this);
         }
+    }
+
+    public void DestroyExplosion()
+    {
+        Destroy(gameObject);
     }
 }

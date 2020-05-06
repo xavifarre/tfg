@@ -199,6 +199,7 @@ MonoBehaviour:
   dead: 0
   state: 0
   lastDir: {x: 0, y: 0}
+  movementValue: {x: 0, y: 0, z: 0}
   dashDistance: 5
   dashTime: 0.4
   dashCd: 0
@@ -211,10 +212,12 @@ MonoBehaviour:
   fallTime: 1
   shardObject: {fileID: 1028228151706104, guid: adefcabf1c17acc48a788833313ba98d,
     type: 3}
-  ShardDamage: 1
+  baseShardDamage: 1
+  maxShardDamage: 5
   minMaxShards: {x: 0, y: 2}
   activeShards: []
   shardRange: {x: 300, y: 500}
+  recallReady: 1
   textActionCD: {fileID: 0}
 --- !u!95 &31920802
 Animator:
@@ -248,7 +251,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0, y: -0.39362088}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.4827586}
@@ -259,7 +262,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.6}
+  m_Size: {x: 0.5, y: 0.81275827}
   m_EdgeRadius: 0
 --- !u!1 &2057860584640033592
 GameObject:
@@ -479,7 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abf98edc7226e5e48802f613de26ae27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 10
   knockback: 1
   timeActive: 0.2
   hitParticles: {fileID: 3515946934629492340, guid: 4cbeb24d30f505e4db754f2ee7df6d77,

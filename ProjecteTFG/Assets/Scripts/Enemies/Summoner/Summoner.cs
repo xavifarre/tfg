@@ -31,10 +31,12 @@ public class Summoner : Boss
     public float meleeInvulnerableTime = 0.5f;
     public float meleeRecoveryTime = 1f;
     private SummonerMeleeAttack meleeObject;
+    public float lastFaseDashAttackProbability = 0.5f;
 
     [Header("Summon")]
     //Summon
-    public List<float> summonTime = new List<float> { 5, 4, 3, 2 } ;
+    public List<float> summonTime = new List<float> { 4, 4, 4, 3 } ;
+    public List<float> summonPreparationTime = new List<float> { 1, 1, 1, 1 };
     private enum SummType { Normal, Hit, StartFase };
     private SummType summonType;
 
@@ -48,7 +50,6 @@ public class Summoner : Boss
 
     //State
     public enum SummState { Idle, Move, Lunge, Dash, DashAttack, Summon, Melee, Damaged, Die, Start};
-    [HideInInspector]
     public SummState state;
 
 
@@ -72,18 +73,29 @@ public class Summoner : Boss
     private int previousPoint;
     public float antiRepeatWeight = 0.5f;
 
-    //Animator
-    private Animator animator;
+    //Knockback
+    public float knockBackHit = 2;
+    public float knockbackTime = 0.5f;
+
+    //Materials
+    [Header("Materials")]
+    private Material defaultMaterial;
+    public Material disolveMaterial;
+    public Material disolveMaterialDie;
+
+    [Header("Particles")]
+    public GameObject dieParticles;
 
     
     protected override void Init()
     {
         enemiesContainer = GameObject.Find("Enemies");
         meleeObject = GetComponentInChildren<SummonerMeleeAttack>();
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        defaultMaterial = spriteRenderer.material;
         InitMovementPoints();
         InitSpawners();
+        firstHit = false;
 
         StartFase(fase);
     }
@@ -104,17 +116,7 @@ public class Summoner : Boss
         }
         if (state == SummState.Damaged)
         {
-            if(fase < 3)
-            {
-                UpdateMove(2);
-            }
-            else
-            {
-                DashToRandom();
-                firstHit = true;
-                gameObject.layer = LayerMask.NameToLayer("Boss");
-            }
-          
+            UpdateMove(2);
         }
     }
 
@@ -194,9 +196,24 @@ public class Summoner : Boss
 
     }
 
-    private void StartMove()
+    //Knockback
+    private IEnumerator IKnockBack()
+    {
+        float t = 0;
+        while(t < timeKnockback)
+        {
+            t += Time.deltaTime;
+            Vector3 nextPos = MathFunctions.EaseOutExp(t, startKnockback, endKnockback, timeKnockback, 5);
+            realPos = nextPos;
+            PixelPerfectMovement.Move(nextPos, rb);
+            yield return null;
+        }
+    }
+
+    private void StartMove()    
     {
         animator.SetTrigger("Move");
+        ResetLayer();
         float nextXMovement = (movementPoints[fase][nextPoint] - realPos).x;
         UpdateAnimFlip(nextXMovement);
         StartCoroutine(ICompleteAnim(Move));
@@ -204,29 +221,36 @@ public class Summoner : Boss
 
     private void Move()
     {
+        firstHit = true;
         state = SummState.Move;
         sameActionCounter++;
     }
 
     private void EndMove()
     {
-        int prevPoint = previousPoint;
-        int actualPoint = nextPoint;
-        nextPoint = RandomAdjacentPoint();
+        state = SummState.Idle;
+        if (CheckDamageFase() != fase)
+        {
+            animator.SetTrigger("EndAction");
+            StartFase(CheckDamageFase());
+        }
+        else
+        {
+            int prevPoint = previousPoint;
+            int actualPoint = nextPoint;
+            nextPoint = RandomAdjacentPoint();
 
-        animator.SetTrigger("EndAction");
-        animator.SetBool("EndMoveReversed", actualPoint % 2 != 0 || actualPoint % 2 == 0 && prevPoint == nextPoint);
+            animator.SetTrigger("EndAction");
+            animator.SetBool("EndMoveReversed", actualPoint % 2 != 0 || actualPoint % 2 == 0 && prevPoint == nextPoint);
 
-        StartCoroutine(ICompleteAnim(EndMoveFinished));
+            StartCoroutine(ICompleteAnim(EndMoveFinished));
+        }
     }
 
     private void EndMoveFinished()
     {
-        if (CheckDamageFase() != fase)
-        {
-            StartFase(CheckDamageFase());
-        }
-        else if (enemiesContainer.transform.childCount < maxEnemies)
+       
+        if (enemiesContainer.transform.childCount < maxEnemies)
         {
             StartSummon();
         }
@@ -253,15 +277,15 @@ public class Summoner : Boss
     {
         if(fase == 0)
         {
-            return point == (nextPoint + 1)% movementPoints[fase].Count || point == (nextPoint - 1) % movementPoints[fase].Count;
+            return point == MathFunctions.Mod((nextPoint + 1), movementPoints[fase].Count) || point == MathFunctions.Mod((nextPoint - 1), movementPoints[fase].Count);
         }
         if (fase == 1)
         {
-            return point == (nextPoint + 1) % movementPoints[fase].Count || point == (nextPoint - 1) % movementPoints[fase].Count;
+            return point == MathFunctions.Mod((nextPoint + 1), movementPoints[fase].Count) || point == MathFunctions.Mod((nextPoint - 1), movementPoints[fase].Count);
         }
         if (fase == 2)
         {
-            return point % (movementPoints[fase].Count / 2) == (nextPoint + 1)% (movementPoints[fase].Count/2) || point % (movementPoints[fase].Count / 2) == (nextPoint - 1) % (movementPoints[fase].Count/2);
+            return MathFunctions.Mod(point , (movementPoints[fase].Count / 2)) == MathFunctions.Mod((nextPoint + 1), (movementPoints[fase].Count / 2)) || MathFunctions.Mod(point, (movementPoints[fase].Count / 2)) == MathFunctions.Mod((nextPoint - 1), (movementPoints[fase].Count/2));
         }
         return true;
     }
@@ -271,26 +295,35 @@ public class Summoner : Boss
         return index == previousPoint && Random.Range(0, 100) / 100f < antiRepeatWeight;
     }
 
-    private void StartLunge()
+    private void PrepareLunge(bool startFaseLunge = false)
     {
-        
         sameActionCounter = 0;
         lungeDest = realPos + (player.transform.position - realPos).normalized * lungeDistance;
 
-        //StartCoroutine(IPrepLounge());
+        StartCoroutine(IPrepareLunge(startFaseLunge));
     }
 
-    private void Lunge()
+    private void StartLunge()
     {
+        lungeDest = realPos + (player.transform.position - realPos).normalized * lungeDistance;
+        ResetLayer();
         state = SummState.Lunge;
     }
 
     private void EndLunge()
     {
-        nextPoint = NearestPoint();
-        state = SummState.Move;
-
+        state = SummState.Idle;
         animator.SetTrigger("EndAction");
+        nextPoint = NearestPoint();
+
+        StartCoroutine(ICompleteAnim(RecoverLunge));
+    }
+
+    private void RecoverLunge()
+    {
+        animator.SetTrigger("EndAction");
+        animator.SetBool("EndMoveReversed", (movementPoints[fase][nextPoint] - realPos).x < 0);
+        StartCoroutine(ICompleteAnim(StartMove));
     }
 
     private void DashToRandom()
@@ -304,64 +337,93 @@ public class Summoner : Boss
         tAction = 0;
         state = SummState.Dash;
 
-        animator.SetTrigger("Dash");
-        float nextXMovement = (dashDest - realPos).x;
-        UpdateAnimFlip(nextXMovement);
+        ChangeLayerIgnore();
+
+        StartDashAnim();
     }
 
     private void DashAttack()
     {
         dashOrigin = realPos;
-        dashDest = areaMove.RandomPoint();
-        int n = 0;
-        while (Vector3.Distance(dashDest, realPos) < dashMinimumDistance / 2 || Vector3.Distance(player.transform.position, dashDest) > meleeRange)
-        {
-            if (n > 30)
-            {
-                break;
-            }
-            n++;
-            dashDest = areaMove.RandomPoint();
-        }
+        Vector2 randomOffset = new Vector2(Random.Range(-100000,100000)/100000f, Random.Range(-100000, 100000) / 100000f).normalized * meleeRange;
 
-        if (n > 30)
-        {
-            DashToRandom();
-        }
-        else
-        {
-            tAction = 0;
-            state = SummState.DashAttack;
+        dashDest = player.transform.position + (Vector3)randomOffset;
 
-            animator.SetTrigger("Dash");
-            float nextXMovement = (dashDest - realPos).x;
-            UpdateAnimFlip(nextXMovement);
-        }
+        tAction = 0;
+        state = SummState.DashAttack;
+
+        ChangeLayerIgnore();
+
+        StartDashAnim();
+
+    }
+
+    private void ChangeLayerIgnore()
+    {
+        gameObject.layer = LayerMask.NameToLayer("IgnoreAll");
+    }
+
+    private void ResetLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("Boss");
+        spriteRenderer.color = Color.white;
+    }
+
+    private void StartDashAnim()
+    {
+        animator.SetTrigger("Dash");
+        float nextXMovement = (dashDest - realPos).x;
+        UpdateAnimFlip(nextXMovement);
+
+        float xDest = (player.transform.position - dashDest).x, xMov = (dashDest - dashOrigin).x;
+        bool hasToReverse = xDest > 0 && xMov < 0 || xDest < 0 && xMov > 0;
+
+        StartCoroutine(IDashReverse(hasToReverse));
+        StartCoroutine(IDashDisolve());
     }
 
     private void EndDash()
     {
-        if(state == SummState.Dash)
+        ResetLayer();
+
+        if (state == SummState.Dash)
         {
-            animator.SetTrigger("EndAction");
-            StopForSeconds(idleTime);
+            state = SummState.Idle;
+            CallStopForSeconds();
+
         }
         else
         {
-            Melee();
+            state = SummState.Melee;
+            StartCoroutine(ITriggerMelee());
         }
     }
 
-    private void Melee()
+    private void CallStopForSeconds()
+    {
+        StopForSeconds(idleTime);
+    }
+
+    private void StartMelee()
     {
         state = SummState.Melee;
-        Vector2 dir = player.transform.position - realPos;
-        StartCoroutine(IMeleeAttack(dir));
+        StartCoroutine(IMeleeAttack());      
+    }
+
+
+    private void Melee()
+    {
+        int dir = MathFunctions.GetDirection(player.transform.position - realPos);
 
         animator.SetTrigger("Slash");
-        animator.SetInteger("SlashDirection", MathFunctions.GetDirection(dir));
-        int x = MathFunctions.GetDirection(dir) == 1 ? -1 : 1;
+        animator.SetInteger("SlashDirection", dir);
+        float x = (player.transform.position - realPos).x;
         UpdateAnimFlip(x);
+    }
+
+    public void PerformMelee()
+    {
+        meleeObject.PerformAttack(animator.GetInteger("SlashDirection"));
     }
 
 
@@ -392,7 +454,7 @@ public class Summoner : Boss
         {
             faseSpawners[fase].StartSpawning();
         }
-        else if(summonType == SummType.Hit)
+        else if (summonType == SummType.Hit)
         {
             faseSpawners[fase].StartSpawningHit();
         }
@@ -407,10 +469,10 @@ public class Summoner : Boss
 
     private void EndSummon()
     {
+        ResetLayer();
         NextAction();
         firstHit = true;
         summonType = SummType.Normal;
-        gameObject.layer = LayerMask.NameToLayer("Boss");
     }
 
     private void NextAction()
@@ -423,7 +485,7 @@ public class Summoner : Boss
         {
             if (CanLunge())
             {
-                StartLunge();
+                PrepareLunge();
             }
             else
             {
@@ -436,7 +498,7 @@ public class Summoner : Boss
             {
                 if(Random.Range(0,2) == 0)
                 {
-                    Melee();
+                    StartMelee();
                 }
                 else
                 {
@@ -445,11 +507,19 @@ public class Summoner : Boss
             }
             else if(enemiesContainer.transform.childCount < maxEnemies && state != SummState.Summon)
             {
-                StartSummon();
+                if (Random.value > lastFaseDashAttackProbability)
+                {
+                    StartSummon();
+                }
+                else
+                {
+                    DashAttack();
+                }
+                    
             }
             else
             {
-                if (Random.Range(0, 3) == 0)
+                if (Random.value > lastFaseDashAttackProbability)
                 {
                     DashToRandom();
                 }
@@ -479,28 +549,35 @@ public class Summoner : Boss
 
     public override void Hit(Attack attack)
     {
-        if (firstHit == true)
+        if(fase < 3)
         {
-            firstHit = false;
-            vulnerable = true;
-            state = SummState.Idle;
-
-            if (fase < 3)
+            if (firstHit == true)
             {
+                firstHit = false;
+                vulnerable = true;
+                state = SummState.Idle;
+
+                KnockBack(knockBackHit, knockbackTime);
+                StartCoroutine(IKnockBack());
+
                 animator.SetTrigger("Damage");
+
+                StartCoroutine(IVulnerable());
             }
 
-            StartCoroutine(IVulnerable());
-        }
-
-        if (vulnerable)
-        {
-            GetDamage(attack.damage);
-            summonType = SummType.Normal;
+            if (vulnerable)
+            {
+                GetDamage(attack.damage);
+                summonType = SummType.Normal;
+            }
+            else
+            {
+                GetDamage(0);
+            }
         }
         else
         {
-            GetDamage(0);
+            GetDamage(attack.damage);
         }
     }
 
@@ -508,6 +585,7 @@ public class Summoner : Boss
     {
         transform.position = movementPoints[0][0];
         realPos = transform.position;
+        nextPoint = RandomAdjacentPoint();
         StopForSeconds(2);
     }
 
@@ -520,22 +598,83 @@ public class Summoner : Boss
         }
         else if (fase == 1)
         {
-            StartLunge();
+            PrepareLunge();
         }
         else if (fase == 2)
         {
-            StartLunge();
+            PrepareLunge();
         }
         else if (fase == 3)
         {
             summonType = SummType.StartFase;
             StartSummon();
+            //DashToRandom();
+        }
+    }
+
+    public override void Die()
+    {
+        StopAllCoroutines();
+        base.Die();
+        state = SummState.Die;
+        ChangeLayerIgnore();
+        animator.SetTrigger("Die");
+
+        KnockBack(3, 0.5f);
+        StartCoroutine(IKnockBack());
+
+        gm.SlowDownGame(0.2f, 0.5f);
+
+        KillAllMinions();
+    }
+
+    public void DieAnim()
+    {
+        Time.timeScale = 1f;
+        StartCoroutine(IDie());
+
+        Instantiate(dieParticles, transform.position, Quaternion.Euler(-90,0,0));
+    }
+
+    IEnumerator IDie()
+    {
+        float t = 0;
+        float shakeDuration = 3;
+        StartCoroutine(IDieDisolve(shakeDuration));
+
+        Vector3 diePosition = transform.position;
+
+        while(t < shakeDuration)
+        {
+            t += Time.deltaTime;
+            transform.position = new Vector3(Random.Range(-100000, 100000) / 100000f, Random.Range(-100000, 100000) / 100000f).normalized * t / shakeDuration / 2 + diePosition;
+            yield return new WaitForFixedUpdate();
+        }
+        Destroy(gameObject);
+    }
+
+    private IEnumerator IDieDisolve(float shakeDuration)
+    {
+        float t = 0;
+        spriteRenderer.material = disolveMaterialDie;
+        while (t < shakeDuration)
+        {
+            t += Time.deltaTime;
+            spriteRenderer.material.SetFloat("_Fade", Mathf.Lerp(1, 0, t / shakeDuration));
+            yield return null;
+        }
+    }
+
+    private void KillAllMinions()
+    {
+        foreach(Minion minion in enemiesContainer.transform.GetComponentsInChildren<Minion>())
+        {
+            minion.Die();
         }
     }
 
     public void UpdateAnimFlip(float nextXMovement)
     {
-        Debug.Log(nextXMovement);
         if (nextXMovement > 0)
         {
             spriteRenderer.flipX = true;
@@ -555,16 +694,16 @@ public class Summoner : Boss
     IEnumerator IVulnerable()
     {
         yield return new WaitForSeconds(vulnerableTime);
-        vulnerable = false;
         state = SummState.Damaged;
-        gameObject.layer = LayerMask.NameToLayer("IgnoreAll");
+        vulnerable = false;
+        ChangeLayerIgnore();
     }
 
     IEnumerator ISummon()
     {
-        yield return new WaitForSeconds(summonTime[fase] / 2);
+        yield return new WaitForSeconds(summonPreparationTime[fase]);
         animator.SetTrigger("Summon");
-        yield return new WaitForSeconds(summonTime[fase] / 2);
+        yield return new WaitForSeconds(summonTime[fase]);
         EndSummon();
     }
 
@@ -577,20 +716,33 @@ public class Summoner : Boss
         }
     }
 
-    IEnumerator IMeleeAttack(Vector2 dir)
+    IEnumerator ITriggerMelee()
     {
-        firstHit = false;
+        AnimatorClipInfo[] clipInfo;
+        clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+        while (clipInfo[0].clip.name != "idle")
+        {
+            clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+
+            yield return null;
+        }
+
+        StartMelee();
+    }
+
+    IEnumerator IMeleeAttack()
+    {
         yield return new WaitForSeconds(meleeDelay);
         if (state == SummState.Melee)
         {
-            meleeObject.PerformAttack(dir);
+            Melee();
         }
         yield return new WaitForSeconds(meleeInvulnerableTime);
         firstHit = true;
-
         yield return new WaitForSeconds(meleeRecoveryTime);
         if (state == SummState.Melee)
         {
+            
             DashToRandom();
         }
 
@@ -605,21 +757,58 @@ public class Summoner : Boss
 
 
 
-    IEnumerator IPrepareLunge()
+    IEnumerator IPrepareLunge(bool startFaseLunge)
     {
-        if((lungeDest - realPos).x > 0)
+        AnimatorClipInfo[] clipInfo;
+        if (startFaseLunge)
         {
-            animator.SetTrigger("EndMoveReversed");
+            animator.SetTrigger("EndAction");
+            animator.SetBool("EndMoveReversed", (lungeDest - realPos).x < 0);
+            clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+            yield return new WaitForSeconds(clipInfo[0].clip.length);
+            yield return null; 
         }
-
-        AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+        animator.SetTrigger("Move");
+        clipInfo = animator.GetCurrentAnimatorClipInfo(0);
         yield return new WaitForSeconds(clipInfo[0].clip.length);
-        Move();
+        yield return null;
+        animator.SetTrigger("Lunge");
+        clipInfo = animator.GetCurrentAnimatorClipInfo(0);
+        yield return new WaitForSeconds(clipInfo[0].clip.length);
+        yield return null;
+        StartLunge();
     }
 
-    //animator.SetTrigger("Lunge");
-    //    float nextXMovement = (lungeDest - realPos).x;
-    //UpdateAnimFlip(nextXMovement);
+    private IEnumerator IDashReverse(bool hasToReverse)
+    {
+        float dashAnimDuration = (0.834f/2) / 1.5f;
+        yield return new WaitForSeconds(dashAnimDuration);
+        if (hasToReverse)
+        {
+            Flip();
+        }
+    }
+
+    private IEnumerator IDashDisolve()
+    {
+        float t = 0;
+        spriteRenderer.material = disolveMaterial;
+        float dashAnimDuration = 0.834f / 1.5f;
+        while (t < dashAnimDuration)
+        {
+            t += Time.deltaTime;
+            if(t < dashAnimDuration / 2)
+            {
+                spriteRenderer.material.SetFloat("_Fade", Mathf.Lerp(1, 0, t / (dashAnimDuration / 2)));
+            }
+            else
+            {
+                spriteRenderer.material.SetFloat("_Fade", Mathf.Lerp(0, 1, (t - dashAnimDuration / 2) / (dashAnimDuration / 2)));
+            }
+            yield return null;
+        }
+        spriteRenderer.material = defaultMaterial;
+    }
 
     private void OnDrawGizmosSelected()
     {
