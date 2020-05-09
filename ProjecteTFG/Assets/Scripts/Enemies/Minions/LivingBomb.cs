@@ -13,60 +13,47 @@ public class LivingBomb : Minion
 
     public float explosionChargeTime = 0.5f;
 
-    private bool preparingExplosion = false;
+    [Header("Float")]
+    public float floatAmplitude;
+    public float floatAngularSpeed;
+    private ShadowController shadowController;
 
     protected override void Init()
     {
-        if((player.transform.position.x - realPos.x) > 0)
-        {
-            spriteRenderer.flipX = true;
-        }
+        UpdateSpriteFlip();
+        shadowController = GetComponentInChildren<ShadowController>();
     }
 
     //Move
     protected override void UpdateMove()
     {
+        tAction += Time.deltaTime;
         Vector3 direction = (player.transform.position - realPos).normalized;
         realPos = realPos + speed * direction * Time.deltaTime;
 
+        Vector3 floatingPosition = realPos + FloatY() * Vector3.up;
+        shadowController.height = FloatY();
+
+        UpdateSpriteFlip();
+
         if (Vector3.Distance(player.transform.position, realPos) < attackRange)
-        {
-            Attack();
-        }
-
-        PixelPerfectMovement.Move(realPos, rb);
-    }
-
-    //Attack
-    protected override void UpdateAttack()
-    {
-        Vector3 direction = (endActionPoint - realPos).normalized;
-        realPos = realPos + speed * direction * Time.deltaTime;
-
-        if (Vector3.Distance(endActionPoint, realPos) < 1f)
         {
             StopToExplode();
         }
 
-        PixelPerfectMovement.Move(realPos, rb);
+        PixelPerfectMovement.Move(floatingPosition, rb);
     }
 
-    private void Attack()
+    //Fa flotar el enemic en forma de funció sinusoidal
+    private float FloatY()
     {
-        endActionPoint = player.transform.position;
-        tAction = 0;
-        state = MinionState.Attack;
-        PrepareExplosion();
+        return floatAmplitude * Mathf.Sin(floatAngularSpeed * tAction * Mathf.PI);
     }
 
-    public void PrepareExplosion()
-    {
-        preparingExplosion = true;
-        animator.SetTrigger("Explode");
-    }
 
     public void StopToExplode()
     {
+        animator.SetTrigger("Explode");
         state = MinionState.Idle;
     }
 
@@ -84,7 +71,7 @@ public class LivingBomb : Minion
     {
         base.KnockBack(knockBack);
         animator.SetTrigger("Explode");
-
+        shadowController.gameObject.SetActive(false);
     }
 
     protected override void UpdateKnockBack()

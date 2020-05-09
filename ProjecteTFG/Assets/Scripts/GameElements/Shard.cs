@@ -342,7 +342,6 @@ public class Shard : Attack {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         if (collision.gameObject.tag == "Player")
         {
             //Debug.Log(collision.gameObject.layer);

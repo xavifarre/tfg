@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 2797286826219907100}
   - component: {fileID: 2797286826219907101}
   - component: {fileID: 2981978223284453312}
+  - component: {fileID: -1858110285891660205}
   m_Layer: 11
   m_Name: Slasher
   m_TagString: Enemy
@@ -206,6 +207,9 @@ MonoBehaviour:
   size: 1
   health: 100
   knockBackValue: 1
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  hitColorDuration: 0.05
+  hitMaterial: {fileID: 2100000, guid: 00b2286b10131024ca63aab6387d9618, type: 2}
   state: 0
   idleTime: 0.2
   fallTime: 1
@@ -215,3 +219,17 @@ MonoBehaviour:
   chargeTime: 2
   attackDuration: 1
   attackDistance: 15
+--- !u!114 &-1858110285891660205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797286826219907088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe2cb490492410488c97ba86261e5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1
+  disolveMaterialDie: {fileID: 2100000, guid: 7201f8099e12b604bab1b15ece999cf9, type: 2}

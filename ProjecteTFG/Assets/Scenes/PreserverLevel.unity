@@ -878,11 +878,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   speed: 1
-  size: 0
-  health: 0
-  knockBackValue: 1
+  size: 2
+  health: 700
+  knockBackValue: 0
   fase: 0
-  ratiosDamageFase: []
+  ratiosDamageFase:
+  - 1
+  - 0.6
+  - 0.4
+  - 0
+  speedMultiplierPerFase:
+  - 1
+  - 1
+  - 1
+  - 1.5
+  lagTimeMultiplierPerFase:
+  - 1
+  - 0.9
+  - 0.75
+  - 0.5
+  bladeSpeedMultiplierPerFase:
+  - 1
+  - 1.1
+  - 1.2
+  - 1.5
   state: 0
   shortDistance: 4
   mediumDistance: 8
@@ -907,17 +926,27 @@ MonoBehaviour:
     angularSpeed: 2
     maxAngularSpeed: 10
     maxRadius: 5
-    duration: 10
+    expandDuration: 3
+    duration:
+    - 3
+    - 3
+    - 3
+    - 3
     recallDuration: 2
-    lagTime: 0
+    lagTime: 1
   expandingSpinStats:
     damage: 1
     angularSpeed: 2
     maxAngularSpeed: 6
     maxRadius: 5
     recallDuration: 2
-    duration: 10
-    lagTime: 0
+    expandDuration: 3
+    duration:
+    - 3
+    - 3
+    - 3
+    - 999999
+    lagTime: 1
   undodgeableSpinStats:
     damage: 0
     angularMaxSpeed: 20
@@ -929,9 +958,14 @@ MonoBehaviour:
     spinSpeed: 10
     spinDuration: 1
     powderDelay: 2
+    cooldown:
+    - 0
+    - 20
+    - 15
+    - 7
     powderObject: {fileID: 2717376308328360770, guid: fbf939d7af509af488dd7154642b58bc,
       type: 3}
-    lagTime: 0
+    lagTime: 1
   barrelPopStats:
     popSpeed: 12
     recallSpeed: 12
@@ -943,14 +977,14 @@ MonoBehaviour:
     recallDuration: 1
     barrelObject: {fileID: 3066623751402234074, guid: 321221df4e92b004fa4d69d806ffc7c1,
       type: 3}
-    lagTime: 0
+    lagTime: 1
   barrelTossStats:
     spinSpeed: 20
     spinDuration: 0.5
     barrelSpeed: 10
     barrelObject: {fileID: 2920582230278171630, guid: 4873bfe7255dcd544b7ee52284a03f67,
       type: 3}
-    lagTime: 0
+    lagTime: 1
   barrelDropStats:
     nBarrels: 02000000020000000300000004000000
     castInterval: 0.5
@@ -963,7 +997,7 @@ MonoBehaviour:
     throwArcIterations: 20
     barrelObject: {fileID: 8885304137747474907, guid: cf3421b3fa2912841b7ba0004dfe40a3,
       type: 3}
-    lagTime: 0
+    lagTime: 1
   doubleSlashStats:
     damage: 1
     expandDistance: 1
@@ -979,7 +1013,7 @@ MonoBehaviour:
     healRate: 0.2
     evaluationRate: 1
     firstEvaluationMultiplier: 0.5
-    lagTime: 0
+    lagTime: 1
   walkableArea: {fileID: 1825370123}
 --- !u!1 &1636417938
 GameObject:

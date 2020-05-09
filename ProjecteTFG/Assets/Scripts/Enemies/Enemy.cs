@@ -34,6 +34,14 @@ public abstract class Enemy : MonoBehaviour
 
     protected Animator animator;
 
+    protected Material defaultMaterial;
+
+    [Header("Hit")]
+    public Color hitColor = Color.red;
+    public float hitColorDuration = 0.05f;
+    public Material hitMaterial;
+    private IEnumerator hitRoutine;
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -41,6 +49,7 @@ public abstract class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+        defaultMaterial = spriteRenderer.material;
         gm = FindObjectOfType<GameManager>();
 
         realPos = transform.position;
@@ -71,6 +80,7 @@ public abstract class Enemy : MonoBehaviour
         health -= damage;
         CheckDeath();
         ShowDamage(damage);
+        DamageTick();
         gm.tLastHit = 0;
     }
 
@@ -87,7 +97,6 @@ public abstract class Enemy : MonoBehaviour
         PopupTextController.CreatePopupTextDamage(damage.ToString(), realPos);
     }
 
-    [MenuItem("Example/Display simple Window")]
     protected void ShowHeal(int heal)
     {
         PopupTextController.CreatePopupTextHeal(heal.ToString(), realPos);
@@ -107,6 +116,30 @@ public abstract class Enemy : MonoBehaviour
     public abstract void Hit(Attack attack);
     public abstract void Die();
 
+    protected void ChangeLayerIgnore()
+    {
+        gameObject.layer = LayerMask.NameToLayer("IgnoreAll");
+    }
+
+    protected void DamageTick()
+    {
+        if(hitRoutine != null)
+        {
+            StopCoroutine(hitRoutine);
+        }
+        hitRoutine = IDamageTick();
+        StartCoroutine(hitRoutine);
+    }
+
+    protected IEnumerator IDamageTick()
+    {
+        hitMaterial.color = hitColor;
+        spriteRenderer.material = hitMaterial;
+        yield return new WaitForSeconds(hitColorDuration);
+        spriteRenderer.material = defaultMaterial;
+        hitRoutine = null;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -114,4 +147,6 @@ public abstract class Enemy : MonoBehaviour
             PlayerHit();
         }
     }
+
+
 }

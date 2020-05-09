@@ -13,11 +13,28 @@ public class Biter : Minion
     public float attackDuration = 1;
     public float attackDistance = 5f;
 
+    private ParticleSystem smokeParticles;
+    private Vector3 particlesStartPosition;
+
+    private Collider2D colliderInstance;
+    private Vector3 colliderStartOffset;
+
+    protected override void Init()
+    {
+        smokeParticles = GetComponentInChildren<ParticleSystem>();
+        particlesStartPosition = smokeParticles.transform.localPosition;
+
+        colliderInstance = GetComponent<Collider2D>();
+        colliderStartOffset = colliderInstance.offset;
+    }
+
     //Move
     protected override void UpdateMove()
     {
         Vector3 direction = (player.transform.position - realPos).normalized;
         realPos = realPos + speed * direction * Time.deltaTime;
+
+        UpdateSpriteFlip();
 
         if (Vector3.Distance(player.transform.position, realPos) < chargeRange)
         {
@@ -44,7 +61,9 @@ public class Biter : Minion
     private void Charge()
     {
         state = MinionState.Charge;
+        animator.SetTrigger("Charge");
         StartCoroutine(ICharge());
+
     }
 
     private void Attack()
@@ -53,6 +72,8 @@ public class Biter : Minion
         endActionPoint = realPos + (player.transform.position - startActionPoint).normalized * attackDistance;
         tAction = 0;
         state = MinionState.Attack;
+        animator.SetTrigger("Bite");
+        UpdateSpriteFlip();
     }
 
     IEnumerator ICharge()
@@ -62,5 +83,26 @@ public class Biter : Minion
         {
             Attack();
         }
+    }
+
+    protected override void UpdateSpriteFlip()
+    {
+        base.UpdateSpriteFlip();
+        if (spriteRenderer.flipX)
+        {
+            colliderInstance.offset = new Vector2(-colliderStartOffset.x, colliderStartOffset.y);
+            smokeParticles.transform.localPosition = new Vector3(-particlesStartPosition.x, particlesStartPosition.y, particlesStartPosition.z);
+        }
+        else
+        {
+            colliderInstance.offset = new Vector2(colliderStartOffset.x, colliderStartOffset.y);
+            smokeParticles.transform.localPosition = particlesStartPosition;
+        }
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        smokeParticles.Stop();
     }
 }

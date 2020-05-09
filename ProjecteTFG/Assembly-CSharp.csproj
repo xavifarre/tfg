@@ -62,16 +62,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Barrel.cs" />
-    <Compile Include="Assets\Blade.cs" />
-    <Compile Include="Assets\Powder.cs" />
     <Compile Include="Assets\Scripts\Attacks\Attack.cs" />
+    <Compile Include="Assets\Scripts\Attacks\Barrel.cs" />
     <Compile Include="Assets\Scripts\Attacks\BarrelPopable.cs" />
     <Compile Include="Assets\Scripts\Attacks\BarrelProximity.cs" />
     <Compile Include="Assets\Scripts\Attacks\BarrelThrowable.cs" />
     <Compile Include="Assets\Scripts\Attacks\BarrelTrigger.cs" />
     <Compile Include="Assets\Scripts\Attacks\Explosion.cs" />
     <Compile Include="Assets\Scripts\Attacks\Laser.cs" />
+    <Compile Include="Assets\Scripts\Attacks\Powder.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraLimits.cs" />
@@ -79,8 +78,12 @@
     <Compile Include="Assets\Scripts\Camera\CameraTrigger.cs" />
     <Compile Include="Assets\Scripts\Camera\PixelCam.cs" />
     <Compile Include="Assets\Scripts\Camera\PixelPerfectMovement.cs" />
+    <Compile Include="Assets\Scripts\Effects\DieEffect.cs" />
     <Compile Include="Assets\Scripts\Effects\FollowEffect.cs" />
     <Compile Include="Assets\Scripts\Effects\RainbowTintEffect.cs" />
+    <Compile Include="Assets\Scripts\Effects\Shadows\ShadowController.cs" />
+    <Compile Include="Assets\Scripts\Effects\Shadows\ShadowCopySprite.cs" />
+    <Compile Include="Assets\Scripts\Effects\ThunderEffect.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Minion.cs" />
@@ -88,7 +91,8 @@
     <Compile Include="Assets\Scripts\Enemies\Minions\LivingBomb.cs" />
     <Compile Include="Assets\Scripts\Enemies\Minions\Sentinel.cs" />
     <Compile Include="Assets\Scripts\Enemies\Minions\Slasher.cs" />
-    <Compile Include="Assets\Scripts\Enemies\Perserver.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Perserv\Blade.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Perserv\Perserver.cs" />
     <Compile Include="Assets\Scripts\Enemies\Summoner\Summoner.cs" />
     <Compile Include="Assets\Scripts\Enemies\Summoner\SummonerMeleeAttack.cs" />
     <Compile Include="Assets\Scripts\GameElements\Cliff.cs" />
@@ -113,8 +117,6 @@
     <Compile Include="Assets\Scripts\Utils\MathFunctions.cs" />
     <Compile Include="Assets\Scripts\Utils\ParticleDestroyer.cs" />
     <Compile Include="Assets\Scripts\Utils\RectArea.cs" />
-    <Compile Include="Assets\ShadowController.cs" />
-    <Compile Include="Assets\ThunderEffect.cs" />
     <None Include="Assets\Shaders\LightCircle.shader" />
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>

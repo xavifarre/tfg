@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Minion : Enemy, IFallableObject
 {
-    [Header("Minion stats")]
+    
     [HideInInspector]
     public MinionState state;
 
@@ -12,6 +12,7 @@ public class Minion : Enemy, IFallableObject
     protected Vector3 startActionPoint;
     protected Vector3 endActionPoint;
 
+    [Header("Minion stats")]
     //Idle
     public float idleTime = 0.3f;
 
@@ -120,7 +121,18 @@ public class Minion : Enemy, IFallableObject
     public override void Die()
     {
         state = MinionState.Dead;
-        Destroy(gameObject);
+        ChangeLayerIgnore();
+        animator.enabled = false;
+
+        DieEffect dieEffect = GetComponent<DieEffect>();
+        if (dieEffect)
+        {
+            dieEffect.TriggerDie();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Fall(Vector3 fallPosition)
@@ -135,4 +147,15 @@ public class Minion : Enemy, IFallableObject
         Die();
     }
 
+    protected virtual void UpdateSpriteFlip()
+    {
+        if ((player.transform.position.x - realPos.x) > 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
+    }
 }

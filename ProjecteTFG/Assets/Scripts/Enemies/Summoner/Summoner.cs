@@ -79,7 +79,6 @@ public class Summoner : Boss
 
     //Materials
     [Header("Materials")]
-    private Material defaultMaterial;
     public Material disolveMaterial;
     public Material disolveMaterialDie;
 
@@ -97,7 +96,7 @@ public class Summoner : Boss
         InitSpawners();
         firstHit = false;
 
-        StartFase(fase);
+        StartCoroutine(IPresentation());
     }
 
     protected override void UpdateEnemy()
@@ -228,6 +227,7 @@ public class Summoner : Boss
 
     private void EndMove()
     {
+        ChangeLayerIgnore();
         state = SummState.Idle;
         if (CheckDamageFase() != fase)
         {
@@ -358,15 +358,9 @@ public class Summoner : Boss
 
     }
 
-    private void ChangeLayerIgnore()
-    {
-        gameObject.layer = LayerMask.NameToLayer("IgnoreAll");
-    }
-
     private void ResetLayer()
     {
         gameObject.layer = LayerMask.NameToLayer("Boss");
-        spriteRenderer.color = Color.white;
     }
 
     private void StartDashAnim()
@@ -444,7 +438,6 @@ public class Summoner : Boss
     public void StartSummon()
     {
         state = SummState.Summon;
-
         StartCoroutine(ISummon());
     }
 
@@ -581,20 +574,23 @@ public class Summoner : Boss
         }
     }
 
-    private void Presentation()
+    private IEnumerator IPresentation()
     {
+        ChangeLayerIgnore();
         transform.position = movementPoints[0][0];
         realPos = transform.position;
         nextPoint = RandomAdjacentPoint();
-        StopForSeconds(2);
+        yield return new WaitForSeconds(2f);
+        StartFase(0);
     }
+
 
     protected override void StartFase(int f)
     {
         fase = f;
         if(fase == 0)
         {
-            Presentation();
+            StartSummon();
         }
         else if (fase == 1)
         {
@@ -607,8 +603,8 @@ public class Summoner : Boss
         else if (fase == 3)
         {
             summonType = SummType.StartFase;
-            StartSummon();
-            //DashToRandom();
+            //StartSummon();
+            DashToRandom();
         }
     }
 

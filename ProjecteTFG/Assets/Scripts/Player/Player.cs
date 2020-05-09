@@ -18,7 +18,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     //Actions
     public State state;
-    float tAction;
+    private float tAction;
 
     //LastDirection
     [HideInInspector]
@@ -31,18 +31,16 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public Vector2 startPoint;
     [HideInInspector]
     public Vector2 destPoint;
-    Vector3 lastSafePosition;
+    private Vector3 lastSafePosition;
 
+    [Header("Dash")]
     //Dash
     public float dashDistance = 5;
     public float dashTime = 0.2f;
     public float dashCd = 3;
     bool dashReady = true;
 
-    //Invulnerable
-    bool invulnerable = false;
-    public float invulnerableTime = 0.2f;
-
+    [Header("Attack")]
     //Attack
     GameObject attackCollider;
     int consecutiveAttacks = 0;
@@ -51,17 +49,19 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public float attackMovementDistance = 0.5f;
 
     //InputQueue
-    string queuedInput = "";
+    private string queuedInput = "";
 
+    [Header("Knockback")]
     //KnockBack
     public float knockBackTime = 20;
     public float knockBackDistance = 2;
 
+    [Header("Fall")]
     //Fall
     public float fallTime = 1f;
     private Vector3 fallSpawnPosition;
 
-
+    [Header("Shards")]
     //Shards
     public GameObject shardObject;
     public int baseShardDamage = 1;
@@ -71,6 +71,16 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public Vector2 shardRange = new Vector2(300,500);
     [HideInInspector]
     public bool recallReady = true;
+
+    [Header("Hit")]
+    //Invulnerable
+    private bool invulnerable = false;
+    public float invulnerableTime = 0.2f;
+    //Hit
+    public Color hitColor = Color.red;
+    public float hitColorDuration = 0.05f;
+    public Material hitMaterial;
+    private IEnumerator hitRoutine;
 
     //Animations
     private Animator animator;
@@ -84,6 +94,9 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     //Game manager
     private GameManager gm;
 
+    //Default material
+    protected Material defaultMaterial;
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -92,6 +105,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         animator = GetComponent<Animator>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+        defaultMaterial = spriteRenderer.material;
 
         gm = FindObjectOfType<GameManager>();
 
@@ -278,7 +292,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         startPoint = realPos;
         destPoint = Vector2.ClampMagnitude(lastDir * 10000, dashDistance) + startPoint;
         tAction = 0;
-        gameObject.layer = LayerMask.NameToLayer("PlayerDash"); //Canvi de layer per a travessar enemics simples
+        ChangeLayerDash(); //Canvi de layer per a travessar enemics simples
         StartCoroutine(IDashCooldown());
         attackCollider.GetComponent<AttackMelee>().StopAttack();
         animator.SetTrigger("Dash");
@@ -310,7 +324,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         if (tAction >= dashTime * 2 / 3)
         {
             invulnerable = false;
-            gameObject.layer = LayerMask.NameToLayer("Player");
+            ResetLayer();
         }
 
         // Fi dash?
@@ -498,18 +512,18 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     public void GetDamage(int damage)
     {
-        //Stop all actions
-        //state = State.Idle;
 
         //Reset player layer
-        gameObject.layer = LayerMask.NameToLayer("Player");
+        ResetLayer();
 
-        //Take damage
-        health -= damage;
-
-        if (HasDied())
+        if(damage > 0)
         {
-            Die();
+            DamageTick();
+            health -= damage;
+            if (HasDied())
+            {
+                Die();
+            }
         }
 
         gm.tLastHit = 0;
@@ -520,7 +534,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         state = State.Dead;
         Debug.Log("DEAD");
 
-        gameObject.layer = LayerMask.NameToLayer("IgnoreAll");
+        ChangeLayerIgnore();
 
         animator.SetTrigger("Die");
     }
@@ -533,11 +547,17 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public void DamageInvulnerability(int damage)
     {
         invulnerable = true;
-        if(damage > 0)
-        {
-            GetComponent<SpriteRenderer>().color = Color.red;
-        }
         StartCoroutine(IInvulnerabilityDamage());
+    }
+
+    protected void DamageTick()
+    {
+        if (hitRoutine != null)
+        {
+            StopCoroutine(hitRoutine);
+        }
+        hitRoutine = IDamageTick();
+        StartCoroutine(hitRoutine);
     }
 
     public void KnockBack(Vector3 pusherPos, float value)
@@ -616,6 +636,21 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         animator.SetLayerWeight(2, state == 0 ? 0 : 1);      
     }
 
+    private void ResetLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("Player");
+    }
+
+
+    private void ChangeLayerDash()
+    {
+        gameObject.layer = LayerMask.NameToLayer("PlayerDash");
+    }
+
+    protected void ChangeLayerIgnore()
+    {
+        gameObject.layer = LayerMask.NameToLayer("IgnoreAll");
+    }
 
     /***********************************
                 GETTERS
@@ -660,5 +695,14 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     private void OnCollisionStay2D(Collision2D collision)
     {
         realPos = transform.position;
+    }
+
+    protected IEnumerator IDamageTick()
+    {
+        hitMaterial.color = hitColor;
+        spriteRenderer.material = hitMaterial;
+        yield return new WaitForSeconds(hitColorDuration);
+        spriteRenderer.material = defaultMaterial;
+        hitRoutine = null;
     }
 }
