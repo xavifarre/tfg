@@ -16,6 +16,10 @@ public class Boss : Enemy
     protected Vector3 endKnockback;
     protected float timeKnockback;
 
+    [Header("Boss kill slowdown")]
+    public float killSlowTime = 3f;
+    public float killSlowScale = 0.2f;
+
     public override void Die()
     {
         

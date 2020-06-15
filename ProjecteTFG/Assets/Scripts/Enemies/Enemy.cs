@@ -42,6 +42,8 @@ public abstract class Enemy : MonoBehaviour
     public Material hitMaterial;
     private IEnumerator hitRoutine;
 
+    protected ShadowCopySprite shadow;
+
     // Start is called before the first frame update
     protected void Start()
     {
@@ -51,6 +53,8 @@ public abstract class Enemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultMaterial = spriteRenderer.material;
         gm = FindObjectOfType<GameManager>();
+
+        shadow = GetComponentInChildren<ShadowCopySprite>();
 
         realPos = transform.position;
         maxHealth = health;
@@ -105,7 +109,7 @@ public abstract class Enemy : MonoBehaviour
     protected abstract void Init();
     protected abstract void UpdateEnemy();
 
-    protected virtual void PlayerHit()
+    public virtual void PlayerHit()
     {
         if (damage > 0)
         {
@@ -139,14 +143,20 @@ public abstract class Enemy : MonoBehaviour
         spriteRenderer.material = defaultMaterial;
         hitRoutine = null;
     }
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        PlayerHit();
+    //    }
+    //}
 
-    private void OnTriggerStay2D(Collider2D collision)
+    protected void FadeShadow()
     {
-        if (collision.gameObject.tag == "Player")
+        if (shadow)
         {
-            PlayerHit();
+            shadow.Fade();
         }
     }
-
 
 }

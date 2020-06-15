@@ -62,6 +62,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BiterAttackCollider.cs" />
+    <Compile Include="Assets\GenericInteractuableObject.cs" />
+    <Compile Include="Assets\HitScreen.cs" />
+    <Compile Include="Assets\InteractPopUp.cs" />
+    <Compile Include="Assets\PauseCanvas.cs" />
+    <Compile Include="Assets\PlayerInteract.cs" />
     <Compile Include="Assets\Scripts\Attacks\Attack.cs" />
     <Compile Include="Assets\Scripts\Attacks\Barrel.cs" />
     <Compile Include="Assets\Scripts\Attacks\BarrelPopable.cs" />
@@ -71,6 +77,7 @@
     <Compile Include="Assets\Scripts\Attacks\Explosion.cs" />
     <Compile Include="Assets\Scripts\Attacks\Laser.cs" />
     <Compile Include="Assets\Scripts\Attacks\Powder.cs" />
+    <Compile Include="Assets\Scripts\ButtonPopUp.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraLimits.cs" />
@@ -101,7 +108,9 @@
     <Compile Include="Assets\Scripts\GameElements\Spawner.cs" />
     <Compile Include="Assets\Scripts\GameElements\SpawnerGroup.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Globals.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IFallableObject.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IInteractuableObject.cs" />
     <Compile Include="Assets\Scripts\Interfaces\ISpawner.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IState.cs" />
     <Compile Include="Assets\Scripts\Player\AttackMelee.cs" />
@@ -117,6 +126,7 @@
     <Compile Include="Assets\Scripts\Utils\MathFunctions.cs" />
     <Compile Include="Assets\Scripts\Utils\ParticleDestroyer.cs" />
     <Compile Include="Assets\Scripts\Utils\RectArea.cs" />
+    <Compile Include="Assets\Stairs.cs" />
     <None Include="Assets\Shaders\LightCircle.shader" />
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
       <HintPath>C:/Users/xavix/Documents/GDDV/TFG/TFGRepo/tfg/ProjecteTFG/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>

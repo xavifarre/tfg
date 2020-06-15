@@ -20,7 +20,8 @@ public class LivingBomb : Minion
 
     protected override void Init()
     {
-        UpdateSpriteFlip();
+        base.Init();
+
         shadowController = GetComponentInChildren<ShadowController>();
     }
 
@@ -89,7 +90,7 @@ public class LivingBomb : Minion
         }
     }
 
-    protected override void PlayerHit()
+    public override void PlayerHit()
     {
         //Explode();
     }

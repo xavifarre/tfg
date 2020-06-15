@@ -619,7 +619,7 @@ public class Summoner : Boss
         KnockBack(3, 0.5f);
         StartCoroutine(IKnockBack());
 
-        gm.SlowDownGame(0.2f, 0.5f);
+        gm.SlowDownGame(killSlowScale, killSlowTime);
 
         KillAllMinions();
     }
@@ -627,6 +627,7 @@ public class Summoner : Boss
     public void DieAnim()
     {
         Time.timeScale = 1f;
+        FadeShadow();
         StartCoroutine(IDie());
 
         Instantiate(dieParticles, transform.position, Quaternion.Euler(-90,0,0));
@@ -636,8 +637,8 @@ public class Summoner : Boss
     {
         float t = 0;
         float shakeDuration = 3;
-        StartCoroutine(IDieDisolve(shakeDuration));
 
+        StartCoroutine(IDieDisolve(shakeDuration));
         Vector3 diePosition = transform.position;
 
         while(t < shakeDuration)

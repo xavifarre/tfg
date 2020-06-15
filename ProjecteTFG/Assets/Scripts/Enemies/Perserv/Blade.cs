@@ -104,7 +104,7 @@ public class Blade : Attack
         float angleToPlayer = Vector2.SignedAngle(player.transform.position - perserver.transform.position, Vector3.right) * Mathf.Deg2Rad + basicAngle;
         float sinToPlayer = Mathf.Sin(angleToPlayer);
         float cosToPlayer = Mathf.Cos(angleToPlayer);
-        Debug.Log(sinToPlayer + " " + cosToPlayer + " " + angleToPlayer);
+        //Debug.Log(sinToPlayer + " " + cosToPlayer + " " + angleToPlayer);
         Vector3 circlePos = new Vector2(sinToPlayer, cosToPlayer / inclination) * currentRadius;
         Vector3 nextPosition = circleCenter + circlePos;
         transform.localPosition = nextPosition;

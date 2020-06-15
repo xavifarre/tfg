@@ -25,6 +25,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public Vector2 lastDir;
     [HideInInspector]
     public Vector3 movementValue;
+    public Vector3 speedModifier = new Vector3(1,1,1);
 
     //Dash and other movement positions
     [HideInInspector]
@@ -37,16 +38,23 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     //Dash
     public float dashDistance = 5;
     public float dashTime = 0.2f;
-    public float dashCd = 3;
+    public float dashCd = 2;
+    public float dashMaxConsecutive = 3;
+    public float dashMaxTimeConsecutives = 0.5f;
+    private float dashConsecutiveCounter;
+    private float dashLastTimestamp = -1;
+
     bool dashReady = true;
+
 
     [Header("Attack")]
     //Attack
+    public float attackTime = 0.4f;
+    public float attackMovementTime = 0.2f;
+    public float attackMovementDistance = 0.5f;
     GameObject attackCollider;
     int consecutiveAttacks = 0;
-    public float attackTime = 0.4f;
-    public float attackMovementTime= 0.2f;
-    public float attackMovementDistance = 0.5f;
+
 
     //InputQueue
     private string queuedInput = "";
@@ -81,6 +89,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public float hitColorDuration = 0.05f;
     public Material hitMaterial;
     private IEnumerator hitRoutine;
+    public ParticleSystem hitParticles;
 
     //Animations
     private Animator animator;
@@ -96,6 +105,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     //Default material
     protected Material defaultMaterial;
+
 
     void Start()
     {
@@ -118,7 +128,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         if (state == State.Idle)
         {
             //Move
-            realPos = realPos + movementValue * Time.deltaTime * speed;
+            Vector3 mov = new Vector3(movementValue.x * speedModifier.x, movementValue.y * speedModifier.y, 1);
+            realPos = realPos + mov * Time.deltaTime * speed;
             Move(realPos);
             //transform.position = transform.position + movement * Time.deltaTime * speed;
         }
@@ -145,39 +156,42 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     private void Update()
     {
-        //Check Queue attack input
-        if (state == State.Attack)
+        if (!gm.gamePaused)
         {
-            QueueAttackInput();
+            //Check Queue attack input
+            if (state == State.Attack)
+            {
+                QueueAttackInput();
+            }
+
+            CheckRecallInput();
+
+            //Check inputs
+            if (state == State.Idle)
+            {
+                CheckMoveInputs();
+                CheckAttackInput();
+
+                //Store last safe position (used for spawning when player falls)
+                lastSafePosition = transform.position;
+            }
+
+            if (CanDash())
+            {
+                CheckDashInput();
+            }
+
+            if (Input.GetKeyDown("u"))
+            {
+                Die();
+            }
+            if (Input.GetKeyDown("i"))
+            {
+                Fall(transform.position);
+            }
+
+            UpdateAnimations();
         }
-
-        CheckRecallInput();
-
-        //Check inputs
-        if (state == State.Idle)
-        {
-            CheckMoveInputs();
-            CheckAttackInput();
-
-            //Store last safe position (used for spawning when player falls)
-            lastSafePosition = transform.position;
-        }
-
-        if (CanDash())
-        {
-            CheckDashInput();
-        }        
-
-        if (Input.GetKeyDown("u"))
-        {
-            Die();
-        }
-        if (Input.GetKeyDown("i"))
-        {
-            Fall(transform.position);
-        }
-
-        UpdateAnimations();
     }
 
     ////Modificar ordre de layer segons la posició y
@@ -293,11 +307,26 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         destPoint = Vector2.ClampMagnitude(lastDir * 10000, dashDistance) + startPoint;
         tAction = 0;
         ChangeLayerDash(); //Canvi de layer per a travessar enemics simples
-        StartCoroutine(IDashCooldown());
+
         attackCollider.GetComponent<AttackMelee>().StopAttack();
         animator.SetTrigger("Dash");
-
         queuedInput = "";
+
+        //Consecutive dashes
+        if(dashLastTimestamp == -1 || Time.time - dashLastTimestamp < dashMaxTimeConsecutives)
+        {
+            dashConsecutiveCounter++;
+            if (dashConsecutiveCounter >= dashMaxConsecutive)
+            {
+                StartCoroutine(IDashCooldown());
+            }
+        }
+        else
+        {
+            dashConsecutiveCounter = 1;
+        }
+       
+        dashLastTimestamp = Time.time;
     }
 
     void UpdateDashPosition()
@@ -518,8 +547,13 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
         if(damage > 0)
         {
-            DamageTick();
             health -= damage;
+            hitParticles.Play();
+            DamageTick();
+            gm.hitScreen.ShowScreen();
+            //gm.SlowDownGame(0, 0.5f);
+            //gm.Shake(0.1f, 1f);
+
             if (HasDied())
             {
                 Die();
@@ -533,7 +567,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     {
         state = State.Dead;
         Debug.Log("DEAD");
-
+        gm.ShowDeathScreen();
+        
         ChangeLayerIgnore();
 
         animator.SetTrigger("Die");
@@ -669,14 +704,14 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     {
         dashReady = false;
         float tCooldownDash = 0;
-        while(tCooldownDash < dashCd)
+        while (tCooldownDash < dashCd)
         {
-            yield return new WaitForSeconds(0.1f);
-            tCooldownDash += 0.1f;
-            tCooldownDash = (float)System.Math.Round(tCooldownDash,2);
-            textActionCD.text = "Dash CD: " + System.Math.Round((dashCd - tCooldownDash),2);
+            yield return null;
+            tCooldownDash += Time.deltaTime;
+            //tCooldownDash = (float)System.Math.Round(tCooldownDash, 2);
+            //textActionCD.text = "Dash CD: " + System.Math.Round((dashCd - tCooldownDash), 2);
         }
-            
+
         dashReady = true;
     }
 
@@ -705,4 +740,5 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         spriteRenderer.material = defaultMaterial;
         hitRoutine = null;
     }
+
 }

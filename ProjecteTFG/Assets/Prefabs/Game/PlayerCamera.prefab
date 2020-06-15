@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AssetsPPU: 16
-  m_RefResolutionX: 480
-  m_RefResolutionY: 270
+  m_RefResolutionX: 592
+  m_RefResolutionY: 333
   m_UpscaleRT: 1
   m_PixelSnapping: 0
   m_CropFrameX: 0
@@ -113,6 +113,7 @@ MonoBehaviour:
   smoothTime: 0.3
   facingOffset: 2
   offset: {x: 0, y: 0, z: -10}
+  cameraLimits: {fileID: 0}
 --- !u!114 &1671922236581777191
 MonoBehaviour:
   m_ObjectHideFlags: 0

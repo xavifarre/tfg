@@ -33,7 +33,6 @@ public class ThunderEffect : MonoBehaviour
 
             if (rand < probabilityPerSecond * Time.deltaTime)
             {
-                Debug.Log(rand);
                 StartThunder();
                 t = 0;
             }

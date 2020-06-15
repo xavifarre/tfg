@@ -19,6 +19,8 @@ public class Biter : Minion
     private Collider2D colliderInstance;
     private Vector3 colliderStartOffset;
 
+    public Collider2D attackCollider;
+
     protected override void Init()
     {
         smokeParticles = GetComponentInChildren<ParticleSystem>();
@@ -26,6 +28,8 @@ public class Biter : Minion
 
         colliderInstance = GetComponent<Collider2D>();
         colliderStartOffset = colliderInstance.offset;
+
+        base.Init();
     }
 
     //Move
@@ -76,6 +80,12 @@ public class Biter : Minion
         UpdateSpriteFlip();
     }
 
+    protected override void KnockBack(float knockBack)
+    {
+        base.KnockBack(knockBack);
+        attackCollider.enabled = false;
+    }
+
     IEnumerator ICharge()
     {
         yield return new WaitForSeconds(chargeTime);
@@ -88,21 +98,22 @@ public class Biter : Minion
     protected override void UpdateSpriteFlip()
     {
         base.UpdateSpriteFlip();
-        if (spriteRenderer.flipX)
-        {
-            colliderInstance.offset = new Vector2(-colliderStartOffset.x, colliderStartOffset.y);
-            smokeParticles.transform.localPosition = new Vector3(-particlesStartPosition.x, particlesStartPosition.y, particlesStartPosition.z);
-        }
-        else
-        {
-            colliderInstance.offset = new Vector2(colliderStartOffset.x, colliderStartOffset.y);
-            smokeParticles.transform.localPosition = particlesStartPosition;
-        }
+        //if (spriteRenderer.flipX)
+        //{
+        //    colliderInstance.offset = new Vector2(-colliderStartOffset.x, colliderStartOffset.y);
+        //    smokeParticles.transform.localPosition = new Vector3(-particlesStartPosition.x, particlesStartPosition.y, particlesStartPosition.z);
+        //}
+        //else
+        //{
+        //    colliderInstance.offset = new Vector2(colliderStartOffset.x, colliderStartOffset.y);
+        //    smokeParticles.transform.localPosition = particlesStartPosition;
+        //}
     }
 
     public override void Die()
     {
         base.Die();
+        attackCollider.enabled = false;
         smokeParticles.Stop();
     }
 }

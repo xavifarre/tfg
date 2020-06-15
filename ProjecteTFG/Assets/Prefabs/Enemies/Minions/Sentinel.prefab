@@ -213,11 +213,13 @@ MonoBehaviour:
   state: 0
   idleTime: 0.3
   fallTime: 1
+  spawnParticles: {fileID: 2385001905612765532, guid: a072f2dbb9d9ff640aeaed4fff1c5284,
+    type: 3}
   knockBackResistance: 1
   knockBackDuration: 0.2
   chargeTime: 1
   attackDistance: 10
-  projectile: {fileID: 2321894346170806787, guid: 499cda66f492c1f45b13cf42b3fab306,
+  projectile: {fileID: 7227898949899986149, guid: 8913f0059d6e243409a77e849ddeb742,
     type: 3}
   minDistanceMove: 2
   maxDistanceMove: 6

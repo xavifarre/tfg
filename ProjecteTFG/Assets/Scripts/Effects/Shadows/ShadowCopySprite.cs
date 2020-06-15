@@ -9,6 +9,8 @@ public class ShadowCopySprite : MonoBehaviour
     private SpriteRenderer own;
     public bool copySprite = false;
 
+    public float fadeTime = 1;
+
     private Vector3 startPos;
 
     // Start is called before the first frame update
@@ -21,8 +23,7 @@ public class ShadowCopySprite : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        own.flipX = other.flipX;
+       
 
         if (!copySprite)
         {
@@ -30,7 +31,29 @@ public class ShadowCopySprite : MonoBehaviour
         }
         if (copySprite)
         {
+            own.flipX = other.flipX;
             own.sprite = other.sprite;
+        }
+    }
+
+    public void Fade()
+    {
+        if (gameObject.activeSelf)
+        {
+            StartCoroutine(IFade());
+        }  
+    }
+
+    private IEnumerator IFade()
+    {
+        float t = 0;
+        Color color = own.color;
+
+        while(t < fadeTime)
+        {
+            t += Time.deltaTime;
+            own.color = new Color(color.r, color.g, color.b, Mathf.Lerp(color.a, 0, t / fadeTime));
+            yield return null;
         }
     }
 }

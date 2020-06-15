@@ -19,14 +19,20 @@ public class Minion : Enemy, IFallableObject
     //Fall
     public float fallTime = 1f;
 
+    public ParticleSystem spawnParticles;
+
     [Header("Knockback")]
     //KnockBack
     public float knockBackResistance = 1;
     public float knockBackDuration = 0.2f;
 
+
     protected override void Init()
     {
-
+        ParticleSystem p = Instantiate(spawnParticles);
+        p.transform.position = realPos;
+        Destroy(p.gameObject, p.main.duration);
+        UpdateSpriteFlip();
     }
 
     protected override void UpdateEnemy()
@@ -124,6 +130,8 @@ public class Minion : Enemy, IFallableObject
         ChangeLayerIgnore();
         animator.enabled = false;
 
+        FadeShadow();
+
         DieEffect dieEffect = GetComponent<DieEffect>();
         if (dieEffect)
         {
@@ -151,11 +159,13 @@ public class Minion : Enemy, IFallableObject
     {
         if ((player.transform.position.x - realPos.x) > 0)
         {
-            spriteRenderer.flipX = true;
+            //spriteRenderer.flipX = true;
+            transform.localScale = new Vector3(-1, 1, 1);
         }
         else
         {
-            spriteRenderer.flipX = false;
+            //spriteRenderer.flipX = false;
+            transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }
