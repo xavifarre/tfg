@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Summoner : Boss
 {
@@ -85,7 +86,9 @@ public class Summoner : Boss
     [Header("Particles")]
     public GameObject dieParticles;
 
-    
+
+    public Image blackScreen;
+
     protected override void Init()
     {
         enemiesContainer = GameObject.Find("Enemies");
@@ -576,11 +579,22 @@ public class Summoner : Boss
 
     private IEnumerator IPresentation()
     {
+        float t = 0;
+        blackScreen.color = new Color(0, 0, 0, 1);
+        yield return new WaitForSeconds(2);
+        t = 0;
+        while (t < 5)
+        {
+            t += Time.deltaTime;
+            blackScreen.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, t / 5));
+            yield return null;
+        }
+
         ChangeLayerIgnore();
         transform.position = movementPoints[0][0];
         realPos = transform.position;
         nextPoint = RandomAdjacentPoint();
-        yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(2f);
         StartFase(0);
     }
 
