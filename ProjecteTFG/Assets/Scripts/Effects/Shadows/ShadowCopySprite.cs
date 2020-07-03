@@ -23,8 +23,6 @@ public class ShadowCopySprite : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-
         if (!copySprite)
         {
             transform.localPosition = own.flipX ? new Vector3(-startPos.x, startPos.y, startPos.z) : new Vector3(startPos.x, startPos.y, startPos.z);

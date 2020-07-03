@@ -92,6 +92,10 @@ public class MathFunctions : MonoBehaviour
         return ((k %= n) < 0) ? k + n : k;
     }
 
+    public static float Mod(float k, float n)
+    {
+        return ((k %= n) < 0) ? k + n : k;
+    }
 
     public static float DistanceToLine(Ray ray, Vector3 point)
     {

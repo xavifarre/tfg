@@ -13,9 +13,6 @@ public class GameManager : MonoBehaviour
     private ColorAdjustments volumeColors;
     private Bloom volumeBloom;
 
-    public SpriteRenderer deathScreen;
-    public HitScreen hitScreen;
-
     [HideInInspector]
     public float tLastHit = 0;
     private Player player;
@@ -70,28 +67,6 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void ShowDeathScreen()
-    {
-        player.GetComponent<SpriteRenderer>().sortingLayerName = "DeathScreen";
-        StartCoroutine(IDeathScreen());
-    }
-
-    private IEnumerator IDeathScreen()
-    {
-        yield return new WaitForSecondsRealtime(0.1f);
-
-        float fadeDuration = 2;
-        float t = 0;
-        deathScreen.gameObject.SetActive(true);
-        Color c = deathScreen.color;
-        while (t < fadeDuration)
-        {
-            t+= Time.deltaTime;
-            float alpha = Mathf.Lerp(0, 1, t / fadeDuration);
-            deathScreen.color = new Color(c.r, c.g, c.b, alpha);
-            yield return null;
-        }
-    }
 
     //Camera shake
     public void Shake(float duration, float magnitude)

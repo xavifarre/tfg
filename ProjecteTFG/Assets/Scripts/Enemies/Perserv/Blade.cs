@@ -13,6 +13,7 @@ public class Blade : Attack
     private float basicAngle;
     public float inclination;
     public int bladeId;
+    public float bladeRecoveryTime = 1;
 
     //Circle movement
     private float currentAngle;
@@ -85,7 +86,6 @@ public class Blade : Attack
 
     private void CircleMovement()
     {
-
         lastPos = transform.position;
         previousAngle = currentAngle;
         currentAngle += angularSpeed * Time.deltaTime * motionDirection * perserver.GetBladeSpeedMultiplier();
@@ -95,12 +95,31 @@ public class Blade : Attack
         SmoothTrail();
 
         transform.localPosition = nextPosition;
+    }   
 
+    public float GetCurrentAngle()
+    {
+        float angle = MathFunctions.Mod(Vector2.SignedAngle(transform.localPosition, Vector3.right) * Mathf.Deg2Rad + Mathf.PI / 2, 2*Mathf.PI);
+        //Debug.Log("Blade " + bladeId + " angle " + (Vector2.SignedAngle(transform.localPosition, Vector3.right) * Mathf.Deg2Rad) + " angle2 " + angle + " pos " + transform.localPosition);
+        return angle;
+    }
+
+    public float GetAngle(Vector2 pos)
+    {
+        float angle = MathFunctions.Mod(Vector2.SignedAngle(pos, Vector3.right) * Mathf.Deg2Rad + Mathf.PI / 2, 2*Mathf.PI);
+        //Debug.Log(angle);
+        return angle;
+    }
+
+    public float GetAngleToPlayer()
+    {
+        float angle = MathFunctions.Mod(Vector2.SignedAngle(player.transform.position - perserver.transform.position, Vector3.right) * Mathf.Deg2Rad + basicAngle, 2 * Mathf.PI);
+        Debug.Log(angle);
+        return angle;
     }
 
     private void BladeAngleLookAtPlayer()
     {
-        
         float angleToPlayer = Vector2.SignedAngle(player.transform.position - perserver.transform.position, Vector3.right) * Mathf.Deg2Rad + basicAngle;
         float sinToPlayer = Mathf.Sin(angleToPlayer);
         float cosToPlayer = Mathf.Cos(angleToPlayer);
@@ -112,7 +131,6 @@ public class Blade : Attack
 
     private void SmoothTrail()
     {
-
         int iterations = (int)(angularSpeed * perserver.bladeSpeedMultiplierPerFase[perserver.fase]) / 10;
         for (int i = 1; i <= iterations; i++)
         {
@@ -123,8 +141,10 @@ public class Blade : Attack
         }
     }
 
+
     public void StartAbility(BladeAbility ability)
     {
+        ResetLayer();
         if (currentAbilityRoutine != null)
         {
             StopCoroutine(currentAbilityRoutine);
@@ -222,7 +242,20 @@ public class Blade : Attack
             yield return null;
         }
 
-        if(bladeId == 0)
+        //Recover
+        float previousAngle = GetCurrentAngle();
+        currentRadius = basicRadius;
+        t = 0;
+        while (t < bladeRecoveryTime)
+        {
+            t += Time.deltaTime;
+            currentAngle = Mathf.Lerp(previousAngle, GetAngle(defaultPosition), t / bladeRecoveryTime);
+            CircleMovement();
+            yield return null;
+        }
+
+
+        if (bladeId == 0)
         {
             perserver.EndAbility(Perserver.Ability.Spin, stats.lagTime);
         }
@@ -266,6 +299,20 @@ public class Blade : Attack
             yield return null;
         }
 
+        //Recover
+        float previousAngle = GetCurrentAngle();
+        currentRadius = basicRadius;
+
+        t = 0;
+        while (t < bladeRecoveryTime)
+        {
+            t += Time.deltaTime;
+            currentAngle = Mathf.Lerp(previousAngle, GetAngle(defaultPosition), t / bladeRecoveryTime);
+            CircleMovement();
+            yield return null;
+        }
+
+
         if (bladeId == 0)
         {
             perserver.EndAbility(Perserver.Ability.ExpandingSpin, stats.lagTime);
@@ -307,6 +354,7 @@ public class Blade : Attack
         angularSpeed = 0;
         CircleMovement();
 
+
         if (bladeId == 0)
         {
             perserver.EndAbility(Perserver.Ability.UndodgeableSpin, stats.lagTime);
@@ -318,6 +366,8 @@ public class Blade : Attack
     public IEnumerator IPowderDrop(Perserver._PowderDrop stats)
     {
         float t = 0;
+
+        ChangeLayerIgnore();
 
         angularSpeed = stats.spinSpeed;
         while (t < stats.spinDuration/2)
@@ -344,7 +394,25 @@ public class Blade : Attack
             yield return null;
         }
 
-        yield return new WaitForSeconds(stats.powderDelay);
+
+        //Recover
+        float previousAngle = GetCurrentAngle();
+        currentRadius = basicRadius;
+
+        t = 0;
+        while (t < bladeRecoveryTime)
+        {
+            t += Time.deltaTime;
+            currentAngle = Mathf.Lerp(previousAngle, GetAngle(defaultPosition), t / bladeRecoveryTime);
+            CircleMovement();
+            yield return null;
+        }
+
+        if (stats.powderDelay - t > 0)
+        {
+            yield return new WaitForSeconds(stats.powderDelay - t);
+        }
+
 
         if (bladeId == 0)
         {
@@ -442,6 +510,19 @@ public class Blade : Attack
             ResetLayer();
         }
 
+        //Recover
+        float previousAngle = GetCurrentAngle();
+        currentRadius = basicRadius;
+
+        t = 0;
+        while (t < bladeRecoveryTime)
+        {
+            t += Time.deltaTime;
+            currentAngle = Mathf.Lerp(previousAngle, GetAngle(defaultPosition), t / bladeRecoveryTime);
+            CircleMovement();
+            yield return null;
+        }
+
         if (bladeId == 0)
         {
             perserver.EndAbility(Perserver.Ability.BarrelPop, stats.lagTime);
@@ -464,7 +545,20 @@ public class Blade : Attack
         }
         transform.localPosition = defaultPosition;
 
-        if(bladeId == 0)
+        //Recover
+        float previousAngle = GetCurrentAngle();
+        currentRadius = basicRadius;
+
+        t = 0;
+        while (t < bladeRecoveryTime)
+        {
+            t += Time.deltaTime;
+            currentAngle = Mathf.Lerp(previousAngle, GetAngle(defaultPosition), t / bladeRecoveryTime);
+            CircleMovement();
+            yield return null;
+        }
+
+        if (bladeId == 0)
         {
             perserver.ThrowBarrel();
             perserver.EndAbility(Perserver.Ability.BarrelToss, stats.lagTime);
@@ -496,6 +590,7 @@ public class Blade : Attack
             yield return null;
         }
 
+
         if (bladeId == 0)
         {
             perserver.StartBarrelDrop();
@@ -507,13 +602,24 @@ public class Blade : Attack
     public IEnumerator IDoubleSlash(Perserver._DoubleSlash stats)
     {
         damage = stats.damage;
+        //Charge
+        angularSpeed = 0;
 
         float t = 0;
 
-        Vector3 initialPosition = transform.localPosition;
+        //Lerp angle to player
+        float previousAngle = GetCurrentAngle();
+        currentRadius = basicRadius;
 
-        //Charge
-        angularSpeed = 0;
+        while (t < 0.5f)
+        {
+            t += Time.deltaTime;
+            currentAngle = Mathf.Lerp(previousAngle, GetAngleToPlayer(), t / 0.5f);
+            CircleMovement();
+            yield return null;
+        }
+
+
        
         while(t < stats.chargeDuration)
         {
@@ -562,9 +668,13 @@ public class Blade : Attack
         while(t < stats.recoverDuration)
         {
             t += Time.deltaTime;
-            transform.localPosition = Vector3.Lerp(destPos - transform.parent.position, initialPosition, t / stats.recoverDuration);
+            transform.localPosition = Vector3.Lerp(destPos - transform.parent.position, defaultPosition, t / stats.recoverDuration);
             yield return null;
         }
+
+        //Recover
+        currentAngle = GetCurrentAngle();
+        currentRadius = basicRadius;
 
         if (bladeId == 0)
         {
@@ -621,6 +731,19 @@ public class Blade : Attack
             yield return null;
         }
 
+        //Recover
+        float previousAngle = GetCurrentAngle();
+        currentRadius = basicRadius;
+
+        t = 0;
+        while (t < bladeRecoveryTime)
+        {
+            t += Time.deltaTime;
+            currentAngle = Mathf.Lerp(previousAngle, GetAngle(defaultPosition), t / bladeRecoveryTime);
+            CircleMovement();
+            yield return null;
+        }
+
         if (bladeId == 0)
         {
             perserver.EndAbility(Perserver.Ability.SpinHeal, stats.lagTime);
@@ -643,6 +766,10 @@ public class Blade : Attack
 
     public float GetKnockbackValue()
     {
+        if(perserver.currentAbility == Perserver.Ability.DoubleSlash)
+        {
+            return perserver.doubleSlashStats.knockback;
+        }
         return Mathf.Clamp(angularSpeed * perserver.GetBladeSpeedMultiplier() / speedKnockbackFactor, 0, knockback);
     }
 

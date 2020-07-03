@@ -46,6 +46,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     bool dashReady = true;
 
+    public ParticleSystem dashParticles;
+    public TrailRenderer dashTrail;
 
     [Header("Attack")]
     //Attack
@@ -80,9 +82,10 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     [HideInInspector]
     public bool recallReady = true;
 
-    [Header("Hit")]
+
     //Invulnerable
     private bool invulnerable = false;
+    [Header("Hit")]
     public float invulnerableTime = 0.2f;
     //Hit
     public Color hitColor = Color.red;
@@ -94,6 +97,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     //Animations
     private Animator animator;
 
+    [Header("UI")]
     //UI
     public Text textActionCD;
 
@@ -106,6 +110,9 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     //Default material
     protected Material defaultMaterial;
 
+
+    [Header("Audio")]
+    public SoundController soundController; 
 
     void Start()
     {
@@ -312,8 +319,11 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         animator.SetTrigger("Dash");
         queuedInput = "";
 
+        dashParticles.Play();
+        dashTrail.emitting = true;
+
         //Consecutive dashes
-        if(dashLastTimestamp == -1 || Time.time - dashLastTimestamp < dashMaxTimeConsecutives)
+        if (dashLastTimestamp == -1 || Time.time - dashLastTimestamp < dashMaxTimeConsecutives)
         {
             dashConsecutiveCounter++;
             if (dashConsecutiveCounter >= dashMaxConsecutive)
@@ -326,7 +336,11 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             dashConsecutiveCounter = 1;
         }
        
+
         dashLastTimestamp = Time.time;
+
+        //Play sound
+        soundController.PlaySound("player_dash");
     }
 
     void UpdateDashPosition()
@@ -365,6 +379,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     void EndDash()
     {
+        dashTrail.emitting = false;
         state = State.Idle;
     }
 
@@ -389,6 +404,9 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         startPoint = transform.position;
         destPoint = Vector2.ClampMagnitude(lastDir * 10000, attackMovementDistance) + startPoint;
         state = State.Attack;
+
+        //Play sound
+        soundController.PlaySound("player_slash0" + Random.Range(1, 4));
     }
 
     //Moviment al atacar
@@ -550,7 +568,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             health -= damage;
             hitParticles.Play();
             DamageTick();
-            gm.hitScreen.ShowScreen();
+            ScreenManager.instance.hitScreen.ShowScreen();
             //gm.SlowDownGame(0, 0.5f);
             //gm.Shake(0.1f, 1f);
 
@@ -567,9 +585,10 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     {
         state = State.Dead;
         Debug.Log("DEAD");
-        gm.ShowDeathScreen();
+        ScreenManager.instance.ShowDeathScreen();
         
         ChangeLayerIgnore();
+        DisableAllColliders();
 
         animator.SetTrigger("Die");
     }
@@ -602,7 +621,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         startPoint = transform.position;
         destPoint = Vector2.ClampMagnitude(direction * 10000, knockBackDistance*value) + startPoint;
 
-        animator.SetTrigger("Hit");
+        UpdateKnockbackAnim(direction);
 
         state = State.KnockBack;
         tAction = 0;
@@ -614,10 +633,18 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         startPoint = transform.position;
         destPoint = knockbackMotion + (Vector3)startPoint;
 
-        animator.SetTrigger("Hit");
+        UpdateKnockbackAnim(knockbackMotion);
 
         state = State.KnockBack;
         tAction = 0;
+    }
+
+    public void UpdateKnockbackAnim(Vector2 direction)
+    {
+        lastDir = direction.x >= 0 ? new Vector2(-1, 0) : new Vector2(1, 0);
+
+        animator.SetTrigger("Hit");
+        animator.SetInteger("Direction", MathFunctions.GetDirection(lastDir));
     }
 
     private void EndKnockBack()
@@ -653,6 +680,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         transform.Find("FeetCollider").gameObject.SetActive(true);
         transform.localScale = Vector2.one;
         realPos = lastSafePosition  -(Vector3)lastDir * 1;
+        Move(realPos);
         state = State.Idle;
         GetDamage(1);
         DamageInvulnerability(1);
@@ -686,6 +714,19 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     {
         gameObject.layer = LayerMask.NameToLayer("IgnoreAll");
     }
+
+    protected void DisableAllColliders()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Collider2D collider = transform.GetChild(i).GetComponent<Collider2D>();
+            if (collider)
+            {
+                collider.gameObject.SetActive(false);
+            }
+        }
+    }
+
 
     /***********************************
                 GETTERS

@@ -190,6 +190,7 @@ public class Perserver : Boss
         public float expandDistance;
         public float expandDelay;
         public float speed;
+        public float knockback;
         public float chargeDuration;
         public float recoverDuration;
         public float recoverDelay;

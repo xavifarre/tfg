@@ -53,6 +53,9 @@ public class Summoner : Boss
     public enum SummState { Idle, Move, Lunge, Dash, DashAttack, Summon, Melee, Damaged, Die, Start};
     public SummState state;
 
+    [Header("Float")]
+    public float floatAmplitude;
+    public float floatAngularSpeed;
 
     [Header("Misc")]
     //Speed modifier
@@ -77,6 +80,9 @@ public class Summoner : Boss
     //Knockback
     public float knockBackHit = 2;
     public float knockbackTime = 0.5f;
+
+    //Shadow
+    public ShadowController shadowController;
 
     //Materials
     [Header("Materials")]
@@ -158,15 +164,26 @@ public class Summoner : Boss
     //Move
     private void UpdateMove(float spMulti = 1)
     {
+        tAction += Time.deltaTime;
         Vector3 direction = (movementPoints[fase][nextPoint] - realPos).normalized;
         realPos = realPos + (speed + speed * speedFaseMultiplier * fase) * spMulti * direction * Time.deltaTime;
+
+        Vector3 floatingPosition = realPos + FloatY() * Vector3.up;
+        shadowController.height = FloatY();
 
         if (Vector3.Distance(movementPoints[fase][nextPoint], realPos) < 0.5f)
         {
             EndMove();
         }
 
-        PixelPerfectMovement.Move(realPos, rb);
+        PixelPerfectMovement.Move(floatingPosition, rb);
+    }
+
+    //Fa flotar el enemic en forma de funció sinusoidal
+    private float FloatY()
+    {
+
+        return floatAmplitude * Mathf.Sin(floatAngularSpeed * tAction * Mathf.PI);
     }
 
     //Lunge
@@ -214,6 +231,7 @@ public class Summoner : Boss
 
     private void StartMove()    
     {
+        tAction = 0;
         animator.SetTrigger("Move");
         ResetLayer();
         float nextXMovement = (movementPoints[fase][nextPoint] - realPos).x;
@@ -579,16 +597,8 @@ public class Summoner : Boss
 
     private IEnumerator IPresentation()
     {
-        float t = 0;
-        blackScreen.color = new Color(0, 0, 0, 1);
-        yield return new WaitForSeconds(2);
-        t = 0;
-        while (t < 5)
-        {
-            t += Time.deltaTime;
-            blackScreen.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, t / 5));
-            yield return null;
-        }
+        ScreenManager.instance.StartFadeShowScreen(5, 2);
+        yield return new WaitForSeconds(7f);
 
         ChangeLayerIgnore();
         transform.position = movementPoints[0][0];
