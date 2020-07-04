@@ -32,9 +32,12 @@ public class Perserver : Boss
     //Player hit control for triggering some abilities
     [HideInInspector]
     public int hitControl;
+    private float hitTimeStamp;
+    private float damageAccumulated;
 
     //Movement
     private Vector3 actionDest;
+
 
     [Header("Blades")]
     //Blades
@@ -85,6 +88,8 @@ public class Perserver : Boss
     //Heal
     public _Heal healStats;
 
+    public float bladeRecoverDelay = 0.5f;
+
     public RectArea walkableArea;
 
     #endregion
@@ -124,10 +129,15 @@ public class Perserver : Boss
     public struct _UndodgeableSpin
     {
         public int damage;
+        public float knockback;
+        public float radius;
         public float angularMaxSpeed;
-        public float duration;
+        public float expandDuration;
         public float recoverDuration;
         public float lagTime;
+        public float minDamageTrigger;
+        public float timePassedTrigger;
+        public UndodgeableSpinCollider collider;
     }
 
     [System.Serializable]
@@ -206,6 +216,7 @@ public class Perserver : Boss
         public float evaluationRate;
         public float firstEvaluationMultiplier;
         public float lagTime;
+        public ParticleSystem healParticles;
     }
 
     [System.Serializable]
@@ -232,7 +243,7 @@ public class Perserver : Boss
             blade.perserver = this;
             blade.InitPosition();
         }
-
+        undodgeableSpinStats.collider.Initialize(undodgeableSpinStats);
         barrelContainer = GameObject.Find("BarrelContainer");
 
         StartCoroutine(IPresentation());
@@ -439,6 +450,7 @@ public class Perserver : Boss
     protected override void StartFase(int i)
     {
         fase = i;
+        hitTimeStamp = 0;
         PowderDrop();
     }
 
@@ -504,7 +516,32 @@ public class Perserver : Boss
         {
             StopHeal();
         }
-        CheckFaseChange();
+        if (!CheckFaseChange())
+        {
+            CheckDamageAmountInLastSeconds(attack.damage);
+        }
+    }
+
+    public void CheckDamageAmountInLastSeconds(float dmg)
+    {
+        hitControl++;
+        if(Time.time - hitTimeStamp < undodgeableSpinStats.timePassedTrigger)
+        {
+
+            damageAccumulated += dmg;
+            if (damageAccumulated >= undodgeableSpinStats.minDamageTrigger)
+            {
+                Debug.Log("ATTACK");
+                UndodgeableSpin();
+                damageAccumulated = 0;
+            }
+        }
+        else
+        {
+            damageAccumulated = 0;
+        }
+
+        hitTimeStamp = Time.time;
     }
 
     public float GetBladeSpeedMultiplier()
@@ -583,6 +620,7 @@ public class Perserver : Boss
 
     public void DoubleSlash(bool aproaching = false)
     {
+        hitControl = 0;
         currentAbility = Ability.DoubleSlash;
         actionDest = FindRandomMovePoint();
         currentAbilityRoutine = IDoubleSlash(aproaching);
@@ -598,6 +636,7 @@ public class Perserver : Boss
 
     public void CastAbilityBlade(Blade.BladeAbility ability, bool randomMotion = true)
     {
+        undodgeableSpinStats.collider.Disable();
         int motionDirection = Random.Range(0, 2) * 2 - 1;
         foreach (Blade blade in blades)
         {
@@ -759,14 +798,16 @@ public class Perserver : Boss
 
     public void EndExpandingSpin()
     {
-        if(CheckDistanceToPlayer() == 0)
-        {
-            UndodgeableSpin();
-        }
-        else
-        {
-            EvaluateSituation();
-        }
+        //if(CheckDistanceToPlayer() == 0)
+        //{
+        //    UndodgeableSpin();
+        //}
+        //else
+        //{
+        //    EvaluateSituation();
+        //}
+
+        EvaluateSituation();
     }
 
     public void EndUndodgeableSpin()
@@ -963,6 +1004,7 @@ public class Perserver : Boss
     {
         healing = true;
         healRoutine = IHeal();
+        healStats.healParticles.Play();
         StartCoroutine(healRoutine);
     }
 
@@ -982,6 +1024,7 @@ public class Perserver : Boss
     public void StopHeal()
     {
         healing = false;
+        healStats.healParticles.Stop();
         StopCoroutine(healRoutine);
     }
 

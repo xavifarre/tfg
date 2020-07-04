@@ -89,7 +89,7 @@ public class AttackMelee : Attack
         else if(collider.gameObject.tag == "Barrel")
         {
             BarrelProximity barrel = collider.GetComponent<BarrelProximity>();
-            if (barrel.IsHitable())
+            if (barrel && barrel.IsHitable())
             {
                 Impact(collider);
                 //Envia el hit al barril

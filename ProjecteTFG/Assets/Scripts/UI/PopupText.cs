@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,6 @@ public class PopupText : MonoBehaviour
 
     public void SetText(string s)
     {
-        transform.GetChild(0).GetComponent<Text>().text = s;
+        transform.GetChild(0).GetComponent<TextMeshPro>().text = s;
     }
 }

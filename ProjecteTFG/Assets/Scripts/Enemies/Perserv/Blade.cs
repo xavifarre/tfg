@@ -114,7 +114,6 @@ public class Blade : Attack
     public float GetAngleToPlayer()
     {
         float angle = MathFunctions.Mod(Vector2.SignedAngle(player.transform.position - perserver.transform.position, Vector3.right) * Mathf.Deg2Rad + basicAngle, 2 * Mathf.PI);
-        Debug.Log(angle);
         return angle;
     }
 
@@ -243,6 +242,8 @@ public class Blade : Attack
         }
 
         //Recover
+        yield return new WaitForSeconds(perserver.bladeRecoverDelay);
+
         float previousAngle = GetCurrentAngle();
         currentRadius = basicRadius;
         t = 0;
@@ -300,6 +301,8 @@ public class Blade : Attack
         }
 
         //Recover
+        yield return new WaitForSeconds(perserver.bladeRecoverDelay);
+
         float previousAngle = GetCurrentAngle();
         currentRadius = basicRadius;
 
@@ -329,30 +332,46 @@ public class Blade : Attack
         float initialRadius = currentRadius;
         float initialSpeed = angularSpeed;
 
+        stats.collider.Enable();
+
+        while (currentRadius != stats.radius)
+        {
+            t += Time.deltaTime;
+            currentRadius = Mathf.Lerp(initialRadius, stats.radius, t / stats.expandDuration);
+            angularSpeed = Mathf.Lerp(initialSpeed, stats.angularMaxSpeed, t / stats.expandDuration);
+            CircleMovement();
+
+            yield return null;
+        }
+
+        t = 0;
+
         while (currentRadius != basicRadius)
         {
             t += Time.deltaTime;
-            currentRadius = Mathf.Lerp(initialRadius, basicRadius, t / stats.recoverDuration);
-            angularSpeed = Mathf.Lerp(initialSpeed, stats.angularMaxSpeed, t / stats.recoverDuration);
+            currentRadius = Mathf.Lerp(stats.radius, basicRadius, t / stats.recoverDuration);
+            angularSpeed = Mathf.Lerp(stats.angularMaxSpeed, 0, t / stats.recoverDuration);
             CircleMovement();
 
             yield return null;
         }
 
-        t %= stats.recoverDuration;
+        stats.collider.Disable();
 
-        angularSpeed = stats.angularMaxSpeed;
-        while(t < stats.duration)
+        //Recover
+        yield return new WaitForSeconds(perserver.bladeRecoverDelay);
+
+        float previousAngle = GetCurrentAngle();
+        currentRadius = basicRadius;
+
+        t = 0;
+        while (t < bladeRecoveryTime)
         {
             t += Time.deltaTime;
+            currentAngle = Mathf.Lerp(previousAngle, GetAngle(defaultPosition), t / bladeRecoveryTime);
             CircleMovement();
-
             yield return null;
         }
-
-        currentAngle = startingAngle;
-        angularSpeed = 0;
-        CircleMovement();
 
 
         if (bladeId == 0)
@@ -511,6 +530,8 @@ public class Blade : Attack
         }
 
         //Recover
+        yield return new WaitForSeconds(perserver.bladeRecoverDelay);
+
         float previousAngle = GetCurrentAngle();
         currentRadius = basicRadius;
 
@@ -545,7 +566,16 @@ public class Blade : Attack
         }
         transform.localPosition = defaultPosition;
 
+
+        if (bladeId == 0)
+        {
+            perserver.ThrowBarrel();
+            perserver.EndAbility(Perserver.Ability.BarrelToss, stats.lagTime);
+        }
+
         //Recover
+        yield return new WaitForSeconds(perserver.bladeRecoverDelay);
+
         float previousAngle = GetCurrentAngle();
         currentRadius = basicRadius;
 
@@ -556,12 +586,6 @@ public class Blade : Attack
             currentAngle = Mathf.Lerp(previousAngle, GetAngle(defaultPosition), t / bladeRecoveryTime);
             CircleMovement();
             yield return null;
-        }
-
-        if (bladeId == 0)
-        {
-            perserver.ThrowBarrel();
-            perserver.EndAbility(Perserver.Ability.BarrelToss, stats.lagTime);
         }
 
         currentAbilityRoutine = null;
@@ -673,6 +697,8 @@ public class Blade : Attack
         }
 
         //Recover
+        yield return new WaitForSeconds(perserver.bladeRecoverDelay);
+
         currentAngle = GetCurrentAngle();
         currentRadius = basicRadius;
 
@@ -732,6 +758,8 @@ public class Blade : Attack
         }
 
         //Recover
+        yield return new WaitForSeconds(perserver.bladeRecoverDelay);
+
         float previousAngle = GetCurrentAngle();
         currentRadius = basicRadius;
 
