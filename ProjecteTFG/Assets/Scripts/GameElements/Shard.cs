@@ -186,7 +186,7 @@ public class Shard : Attack {
         
         if (recalling)
         {
-            targetPos = player.transform.position - Vector3.up * 0.5f;
+            targetPos = player.transform.position + Vector3.up * 0.5f;
             lastPos = transform.position;
 
             tVel = tVel + acceleration * Time.deltaTime;

@@ -521,8 +521,6 @@ public class Blade : Attack
                 CircleMovement();
                 yield return null;
             }
-
-            transform.localPosition = defaultPosition;
         }
         else
         {

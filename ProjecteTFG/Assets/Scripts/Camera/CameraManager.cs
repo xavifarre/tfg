@@ -4,16 +4,25 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+    public static CameraManager instance;
+
     public int currentArea;
-    public CameraLimits[] cameraLimits;
+    public GameObject areaContainer;
+    private List<CameraLimits> cameraLimits;
+
+    public CameraFollowPlayer mainCamera;
+
     // Start is called before the first frame update
     void Start()
     {
-        //cameraLimits = new CameraLimits[10];
-        //foreach(CameraLimits cl in FindObjectsOfType<CameraLimits>())
-        //{
-        //    cameraLimits[cl.area] = cl;
-        //}
+        instance = this;
+
+        cameraLimits = new List<CameraLimits>();
+        
+        foreach (CameraLimits cl in areaContainer.GetComponentsInChildren<CameraLimits>())
+        {
+            cameraLimits.Add(cl);
+        }
     }
 
     // Update is called once per frame
@@ -29,7 +38,7 @@ public class CameraManager : MonoBehaviour
 
     public Vector3 ClampPositionOnArea(Vector3 desiredPosition)
     {
-        if (cameraLimits[currentArea])
+        if (cameraLimits[currentArea].hasLimits)
         {
             if (cameraLimits[currentArea].box)
             {
@@ -41,5 +50,4 @@ public class CameraManager : MonoBehaviour
         }
         return desiredPosition;
     }
-
 }

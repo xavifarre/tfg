@@ -62,6 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DashParticles.cs" />
+    <Compile Include="Assets\ParticlePlayer.cs" />
     <Compile Include="Assets\ScreenManager.cs" />
     <Compile Include="Assets\Scripts\Attacks\Attack.cs" />
     <Compile Include="Assets\Scripts\Attacks\Barrel.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="Assets\Scripts\Camera\CameraFollowPlayer.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraLimits.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraManager.cs" />
-    <Compile Include="Assets\Scripts\Camera\CameraTrigger.cs" />
     <Compile Include="Assets\Scripts\Camera\PixelCam.cs" />
     <Compile Include="Assets\Scripts\Camera\PixelPerfectMovement.cs" />
     <Compile Include="Assets\Scripts\Effects\DieEffect.cs" />

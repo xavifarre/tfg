@@ -12,7 +12,7 @@ public class PopupTextController : MonoBehaviour
     {
         if (!worldCanvas)
         {
-            worldCanvas = GameObject.Find("WorldCanvas");
+            worldCanvas = GameObject.Find("DamageNumbersCanvas");
         }
         
         if (!popupDamage)

@@ -46,7 +46,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     bool dashReady = true;
 
-    public ParticleSystem dashParticles;
+    public DashParticles dashLineParticles;
+    //public ParticleSystem dashParticles;
     public TrailRenderer dashTrail;
 
     [Header("Attack")]
@@ -81,6 +82,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public Vector2 shardRange = new Vector2(300,500);
     [HideInInspector]
     public bool recallReady = true;
+    public ParticlePlayer recallParticles;
 
 
     //Invulnerable
@@ -319,7 +321,9 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         animator.SetTrigger("Dash");
         queuedInput = "";
 
-        dashParticles.Play();
+
+        DashParticles particlesInstance = Instantiate(dashLineParticles, transform);
+        particlesInstance.PlayParticles((destPoint - startPoint).normalized);
         dashTrail.emitting = true;
 
         //Consecutive dashes
@@ -386,7 +390,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     //Atac bàsic a melee. S'alterna dreta i esquerra
     void MeleeAttack()
     {
-        invulnerable = true;
+        invulnerable = false;
         attackCollider.SendMessage("PerformAttack", lastDir);
         consecutiveAttacks++;
 
@@ -453,9 +457,11 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         int i = 0;
         foreach (Shard shard in activeShards)
         {
-            shard.TriggerRecall(transform.position - Vector3.up * 0.5f, i * 0.02f);
+            shard.TriggerRecall(transform.position + Vector3.up * 0.5f, i * 0.02f);
             i++;
         }
+
+        recallParticles.PlayParticles();
 
         recallReady = true;
 
