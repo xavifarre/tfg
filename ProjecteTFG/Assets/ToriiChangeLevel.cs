@@ -7,39 +7,34 @@ using UnityEngine.SceneManagement;
 public class ToriiChangeLevel : MonoBehaviour
 {
 
-    public float changeLevelDistance = 10f;
-    public bool xAxis = true;
+    public string level;
+    public float transitionDuration;
     public Image blackScreen;
-
-    private Vector3 enterPoint; 
-
-    private void Start()
-    {
-
-    }
 
 
     public void TransitionToLevel()
     {
-        SceneManager.LoadScene("SummonerLevel");
+        StartCoroutine(ITransitionLevel());
+        
+    }
+
+    private IEnumerator ITransitionLevel()
+    {
+        Color c = blackScreen.color;
+        float t = 0;
+        while(t < transitionDuration)
+        {
+            t += Time.deltaTime;
+            blackScreen.color = new Color(c.r, c.g, c.b, Mathf.Lerp(0, 1, t / transitionDuration));
+            yield return null;
+        }
+
+        SceneManager.LoadScene(level);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        enterPoint = collision.transform.position;
+        TransitionToLevel();
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            Color c = blackScreen.color;
-            float distance = Mathf.Abs(xAxis ? collision.transform.position.x - enterPoint.x : collision.transform.position.y - enterPoint.y);
-            blackScreen.color = new Color(c.r, c.g, c.b, Mathf.Lerp(0, 1, distance/ changeLevelDistance));
-            if(distance > changeLevelDistance)
-            {
-                TransitionToLevel();
-            }
-        }
-    }
 }

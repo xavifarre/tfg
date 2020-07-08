@@ -597,6 +597,7 @@ public class Summoner : Boss
 
     private IEnumerator IPresentation()
     {
+        gm.BlockInputs(true);
         transform.position = movementPoints[0][0];
         ScreenManager.instance.StartFadeShowScreen(5, 2);
         yield return new WaitForSeconds(1f);
@@ -610,6 +611,7 @@ public class Summoner : Boss
         nextPoint = RandomAdjacentPoint();
         StartFase(0);
         yield return new WaitForSeconds(4f);
+        gm.BlockInputs(false);
         CameraManager.instance.mainCamera.FollowPlayer(1f);
     }
 

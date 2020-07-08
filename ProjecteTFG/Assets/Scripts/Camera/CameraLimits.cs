@@ -11,10 +11,25 @@ public class CameraLimits : MonoBehaviour
     public bool box = true;
     private CameraManager cm;
 
+    private PolygonCollider2D boundsPolygon;
+
     // Start is called before the first frame update
     void Start()
     {
         cm = FindObjectOfType<CameraManager>();
+
+        limits = new List<Vector2>();
+        foreach (Transform child in transform)
+        {
+            limits.Add(child.position);
+        }
+
+        if (hasLimits && !box)
+        {
+            GameObject child = transform.GetChild(0).gameObject;
+            boundsPolygon = child.AddComponent<PolygonCollider2D>();
+            child.layer = LayerMask.NameToLayer("IgnoreAll");
+        }
     }
     private void Update()
     {
@@ -23,6 +38,15 @@ public class CameraLimits : MonoBehaviour
         {
             limits.Add(child.position);
         }
+        if (boundsPolygon)
+        {
+            Debug.Log("changed!");
+            for (int i = 0; i < limits.Count; i++)
+            {
+                limits[i] = limits[i] - (Vector2)boundsPolygon.transform.position;
+            }
+            boundsPolygon.points = limits.ToArray();
+        } 
     }
 
     public bool IsOutsideLimit(Vector3 point)
@@ -30,6 +54,12 @@ public class CameraLimits : MonoBehaviour
         return !Poly.ContainsPoint(limits.ToArray(), point);
     }
 
+
+    public Vector3 GetClosestPoint(Vector3 pos)
+    {
+        Vector2 closestPoint = boundsPolygon.ClosestPoint(pos);
+        return new Vector3(closestPoint.x, closestPoint.y, pos.z);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

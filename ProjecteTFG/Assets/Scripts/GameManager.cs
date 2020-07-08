@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public bool gamePaused = false;
+    [HideInInspector]
+    public bool inputsBlocked = false;
 
     private void Start()
     {
@@ -53,6 +55,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         PauseCanvas.Hide();
         return false;
+    }
+
+    public void BlockInputs(bool block)
+    {
+        inputsBlocked = block;
     }
 
     public void SlowDownGame(float tScale, float time)

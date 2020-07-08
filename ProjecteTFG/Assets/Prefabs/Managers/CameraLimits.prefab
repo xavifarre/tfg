@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 488906055943869202}
   - component: {fileID: 488906055943869204}
   - component: {fileID: 488906055943869205}
-  m_Layer: 0
-  m_Name: Area0Start
+  m_Layer: 19
+  m_Name: CameraLimits
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

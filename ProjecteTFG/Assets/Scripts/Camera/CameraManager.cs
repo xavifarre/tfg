@@ -12,6 +12,8 @@ public class CameraManager : MonoBehaviour
 
     public CameraFollowPlayer mainCamera;
 
+    private Vector2 camPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +49,23 @@ public class CameraManager : MonoBehaviour
 
                 desiredPosition = new Vector3(clampedX, clampedY, desiredPosition.z);
             }
+            else
+            {
+                bool outside = cameraLimits[currentArea].IsOutsideLimit(desiredPosition);
+                if (outside)
+                {
+                    desiredPosition = cameraLimits[currentArea].GetClosestPoint(desiredPosition);
+                }
+                Debug.Log(outside + " Closest point: " + desiredPosition);
+            }
         }
+        camPos = desiredPosition;
         return desiredPosition;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(camPos, 0.2f);
     }
 }

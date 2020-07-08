@@ -9,7 +9,9 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public float speed;
 
     //Health state
-    public float health;
+    public int health;
+    private int maxHealth;
+    
     [HideInInspector]
     public bool dead = false;
 
@@ -129,6 +131,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         gm = FindObjectOfType<GameManager>();
 
         realPos = transform.position;
+        maxHealth = health;
+        HealthBar.Initialize(maxHealth,health);
     }
 
     private void FixedUpdate()
@@ -161,11 +165,13 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         {
             UpdateKnockBack();
         }
+
+        rb2d.velocity = Vector3.zero;
     }
 
     private void Update()
     {
-        if (!gm.gamePaused)
+        if (!gm.inputsBlocked)
         {
             //Check Queue attack input
             if (state == State.Attack)
@@ -572,6 +578,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         if(damage > 0)
         {
             health -= damage;
+            HealthBar.UpdateBar(health);
             hitParticles.Play();
             DamageTick();
             ScreenManager.instance.hitScreen.ShowScreen();

@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\Sounds\SoundController.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonPopUp.cs" />
     <Compile Include="Assets\Scripts\UI\DamagePopup.cs" />
+    <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\Scripts\UI\InteractPopUp.cs" />
     <Compile Include="Assets\Scripts\UI\PauseCanvas.cs" />
     <Compile Include="Assets\Scripts\UI\PopupText.cs" />

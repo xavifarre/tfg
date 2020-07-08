@@ -22,6 +22,7 @@ public class ScreenManager : MonoBehaviour
     public void ShowDeathScreen()
     {
         player.GetComponent<SpriteRenderer>().sortingLayerName = "DeathScreen";
+        HealthBar.Hide();
         StartCoroutine(IDeathScreen());
     }
 
