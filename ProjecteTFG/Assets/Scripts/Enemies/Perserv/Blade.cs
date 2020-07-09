@@ -809,6 +809,12 @@ public class Blade : Attack
         gameObject.layer = defaultLayer;
     }
 
+    public void DisableBlade()
+    {
+        StopAllCoroutines();
+        enabled = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")

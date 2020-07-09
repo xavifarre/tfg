@@ -17,7 +17,9 @@ public class CameraFollowPlayer : MonoBehaviour
     private CameraManager cm;
 
     private Vector3 desiredPosition;
-    
+    private Vector3 realPos;
+
+    private float lastTime = 0;
 
     private void Start()
     {
@@ -36,9 +38,9 @@ public class CameraFollowPlayer : MonoBehaviour
             desiredPosition = cm.ClampPositionOnArea(desiredPosition);
         }
 
-        Vector3 smoothedPosition = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothTime);
+        realPos = Vector3.SmoothDamp(realPos, desiredPosition, ref velocity, smoothTime);
 
-        PixelPerfectMovement.Move(smoothedPosition, transform);
+        PixelPerfectMovement.Move(realPos, transform);
     }
 
     public void SetDestination(Vector3 dest, float smoothDuration = -1)

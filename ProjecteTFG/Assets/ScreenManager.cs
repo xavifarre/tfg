@@ -22,6 +22,7 @@ public class ScreenManager : MonoBehaviour
     public void ShowDeathScreen()
     {
         player.GetComponent<SpriteRenderer>().sortingLayerName = "DeathScreen";
+        player.GetComponent<SpriteRenderer>().sortingOrder = 2;
         HealthBar.Hide();
         StartCoroutine(IDeathScreen());
     }
@@ -36,7 +37,7 @@ public class ScreenManager : MonoBehaviour
         Color c = deathScreen.color;
         while (t < fadeDuration)
         {
-            t += Time.deltaTime;
+            t += Time.unscaledDeltaTime;
             float alpha = Mathf.Lerp(0, 1, t / fadeDuration);
             deathScreen.color = new Color(c.r, c.g, c.b, alpha);
             yield return null;
@@ -56,7 +57,7 @@ public class ScreenManager : MonoBehaviour
         t = 0;
         while (t < duration)
         {
-            t += Time.deltaTime;
+            t += Time.unscaledDeltaTime;
             blackScreen.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, t / 5));
             yield return null;
         }

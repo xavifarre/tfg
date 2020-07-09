@@ -64,6 +64,7 @@ public class LivingBomb : Minion
 
         GameObject explosion = Instantiate(explosionCollider, transform.position, Quaternion.identity);
         explosion.transform.localScale = Vector3.one * explosionRange;
+        explosion.GetComponent<Explosion>().damage = damage;
 
         Die();
     }

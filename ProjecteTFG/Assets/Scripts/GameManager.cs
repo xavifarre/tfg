@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool inputsBlocked = false;
 
+    private GameObject enemyContainer;
+
     private void Start()
     {
         instance = this;
@@ -32,6 +34,8 @@ public class GameManager : MonoBehaviour
         //Initialize postProcessiong volume
         rpVolume.profile.TryGet(out volumeColors);
         rpVolume.profile.TryGet(out volumeBloom);
+
+        enemyContainer = GameObject.Find("Enemies");
     }
 
     private void Update()
@@ -41,6 +45,11 @@ public class GameManager : MonoBehaviour
         {
             gamePaused = gamePaused ? ResumeGame() : PauseGame();
         }
+    }
+
+    public void StopGame()
+    {
+        Time.timeScale = 0;
     }
 
     public bool PauseGame()
@@ -107,6 +116,22 @@ public class GameManager : MonoBehaviour
         }
 
         Camera.main.transform.position = originalCamPos;
+    }
+
+    public void DisableEnemies()
+    {
+        if (enemyContainer)
+        {
+            foreach (Transform child in enemyContainer.transform)
+            {
+                Enemy enemy = child.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.StopAllCoroutines();
+                    enemy.DisableEnemy();
+                }
+            }
+        }
     }
 
 }

@@ -216,6 +216,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 301840775, guid: 2499ede042284c748936e80a41fff409, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301840775, guid: 2499ede042284c748936e80a41fff409, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 321819676, guid: 2499ede042284c748936e80a41fff409, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2020786501}
+    - target: {fileID: 898813151, guid: 2499ede042284c748936e80a41fff409, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2020786501}
+    - target: {fileID: 1056141787, guid: 2499ede042284c748936e80a41fff409, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2020786501}
+    - target: {fileID: 1103588806, guid: 2499ede042284c748936e80a41fff409, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 684336671583538014, guid: 2499ede042284c748936e80a41fff409,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2020786501}
+    - target: {fileID: 684336671583538014, guid: 2499ede042284c748936e80a41fff409,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8083161216687571520, guid: 2499ede042284c748936e80a41fff409,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2020786501}
+    - target: {fileID: 8083161216763925703, guid: 2499ede042284c748936e80a41fff409,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 2020786501}
     - target: {fileID: 8083161217026493752, guid: 2499ede042284c748936e80a41fff409,
         type: 3}
       propertyPath: m_Name
@@ -616,10 +660,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2266603467777641538}
     m_Modifications:
+    - target: {fileID: 2712022672169861259, guid: ef8b07ff654dd3f4c8f6c9ad39e9dff5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712022672169861259, guid: ef8b07ff654dd3f4c8f6c9ad39e9dff5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3643647576024215856, guid: ef8b07ff654dd3f4c8f6c9ad39e9dff5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3643647576024215856, guid: ef8b07ff654dd3f4c8f6c9ad39e9dff5,
         type: 3}
@@ -917,7 +971,7 @@ MonoBehaviour:
   barrelPopPosition: {x: 0, y: 0, z: 0}
   barrelPopped: 0
   spinStats:
-    damage: 1
+    damage: 10
     angularSpeed: 4
     radius: 2
     duration: 10
@@ -927,7 +981,7 @@ MonoBehaviour:
     lagTime: 0
     minimumDistanceToPlayer: 1
   spinHealStats:
-    damage: 1
+    damage: 10
     angularSpeed: 2
     maxAngularSpeed: 10
     maxRadius: 5
@@ -940,7 +994,7 @@ MonoBehaviour:
     recallDuration: 2
     lagTime: 1
   expandingSpinStats:
-    damage: 1
+    damage: 10
     angularSpeed: 2
     maxAngularSpeed: 6
     maxRadius: 5
@@ -1009,7 +1063,7 @@ MonoBehaviour:
       type: 3}
     lagTime: 1
   doubleSlashStats:
-    damage: 1
+    damage: 10
     expandDistance: 1
     expandDelay: 0.3
     speed: 30
@@ -1429,6 +1483,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3510682228817514383, guid: f60e4aef86894354c9272a09cff58615,
     type: 3}
   m_PrefabInstance: {fileID: 1908288785}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &2020786501 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2712022672169861236, guid: ef8b07ff654dd3f4c8f6c9ad39e9dff5,
+    type: 3}
+  m_PrefabInstance: {fileID: 975529014}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2051821151
 GameObject:
@@ -6607,6 +6667,7 @@ MonoBehaviour:
   rpVolume: {fileID: 873582738}
   tLastHit: 0
   gamePaused: 0
+  inputsBlocked: 0
 --- !u!114 &4972217792938699510
 MonoBehaviour:
   m_ObjectHideFlags: 0

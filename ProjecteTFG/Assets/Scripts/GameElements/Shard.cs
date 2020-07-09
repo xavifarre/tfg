@@ -60,6 +60,10 @@ public class Shard : Attack {
     //Trail
     private TrailRenderer trail;
 
+    //Accumulated damage
+    [HideInInspector]
+    public int accumulatedDamage;
+
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<Player>();
@@ -309,7 +313,7 @@ public class Shard : Attack {
     public void DestroyShard()
     {
         Stop();
-        player.activeShards.Remove(this);
+        player.ShardPicked(this);
         sprite.enabled = false;
         GetComponent<Collider2D>().enabled = false;
         spriteRenderer.enabled = false;
@@ -352,6 +356,7 @@ public class Shard : Attack {
             //collision.gameObject.SendMessage("Damage");
             //DestroyShard();
             collision.GetComponent<Enemy>().GetDamage(damage);
+            accumulatedDamage += damage;
         }
         else if (collision.gameObject.tag == "Barrel")
         {
@@ -359,6 +364,7 @@ public class Shard : Attack {
             if (barrel.IsHitable())
             {
                 barrel.Hit(this);
+                accumulatedDamage += 1;
             }
         }
         else

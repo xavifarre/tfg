@@ -22,7 +22,7 @@ public class HitScreen : MonoBehaviour
         float t = 0;
         while(t < fadeTime)
         {
-            t += Time.deltaTime;
+            t += Time.unscaledDeltaTime;
             hitScreenImage.color = new Color(c.r, c.g, c.b, Mathf.Lerp(1, 0, t / fadeTime));
             yield return null;
         }

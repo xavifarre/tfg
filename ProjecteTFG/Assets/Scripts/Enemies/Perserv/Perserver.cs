@@ -565,6 +565,15 @@ public class Perserver : Boss
         StartFase(0);
     }
 
+    public override void DisableEnemy()
+    {
+        foreach(Blade b in blades)
+        {
+            b.DisableBlade();
+        }
+        base.DisableEnemy();
+    }
+
     /*********************************************
     *                  ABILITIES                 *
     *********************************************/

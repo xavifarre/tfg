@@ -8,6 +8,8 @@ public class Summoner : Boss
 
     [Header("Lunge")]
     //Lunge
+    public int lungeDamage = 20;
+    public float lungeKnockback = 3;
     public float lungeSpeed = 20;
     private Vector3 lungeDest;
     public float lungeDistance = 20;
@@ -16,6 +18,7 @@ public class Summoner : Boss
     //Variable que conta quantes vegades es repeteix consecutivament una acció. Utilitzada per a triggejar el lunge quan fa molt que no el fa
     public int sameActionLimit = 2;
     private int sameActionCounter = 0;
+    public Attack lungeObject;
 
     [Header("Dash")]
     //Dash
@@ -235,7 +238,7 @@ public class Summoner : Boss
         animator.SetTrigger("Move");
         ResetLayer();
         float nextXMovement = (movementPoints[fase][nextPoint] - realPos).x;
-        UpdateAnimFlip(nextXMovement);
+        //UpdateAnimFlip(nextXMovement);
         StartCoroutine(ICompleteAnim(Move));
     }
 
@@ -252,7 +255,6 @@ public class Summoner : Boss
         state = SummState.Idle;
         if (CheckDamageFase() != fase)
         {
-            animator.SetTrigger("EndAction");
             StartFase(CheckDamageFase());
         }
         else
@@ -327,6 +329,9 @@ public class Summoner : Boss
     private void StartLunge()
     {
         lungeDest = realPos + (player.transform.position - realPos).normalized * lungeDistance;
+        lungeObject.gameObject.SetActive(true);
+        lungeObject.damage = lungeDamage;
+        lungeObject.knockback = lungeKnockback;
         ResetLayer();
         state = SummState.Lunge;
     }
@@ -334,6 +339,7 @@ public class Summoner : Boss
     private void EndLunge()
     {
         state = SummState.Idle;
+        lungeObject.gameObject.SetActive(false);
         animator.SetTrigger("EndAction");
         nextPoint = NearestPoint();
 
@@ -342,8 +348,8 @@ public class Summoner : Boss
 
     private void RecoverLunge()
     {
+        animator.SetBool("EndMoveReversed", HasToFlip((movementPoints[fase][nextPoint] - realPos).x));
         animator.SetTrigger("EndAction");
-        animator.SetBool("EndMoveReversed", (movementPoints[fase][nextPoint] - realPos).x < 0);
         StartCoroutine(ICompleteAnim(StartMove));
     }
 
@@ -563,7 +569,9 @@ public class Summoner : Boss
 
     public override void Hit(Attack attack)
     {
-        if(fase < 3)
+        lungeObject.gameObject.SetActive(false);
+
+        if (fase < 3)
         {
             if (firstHit == true)
             {
@@ -598,17 +606,21 @@ public class Summoner : Boss
     private IEnumerator IPresentation()
     {
         gm.BlockInputs(true);
-        transform.position = movementPoints[0][0];
-        ScreenManager.instance.StartFadeShowScreen(5, 2);
-        yield return new WaitForSeconds(1f);
-        CameraManager.instance.mainCamera.SetDestination(transform.position, 5);
 
-        yield return new WaitForSeconds(5f);
-
+        //Initialize boss
         ChangeLayerIgnore();
         transform.position = movementPoints[0][0];
         realPos = transform.position;
         nextPoint = RandomAdjacentPoint();
+        float nextXMovement = (movementPoints[fase][nextPoint] - realPos).x;
+        UpdateAnimFlip(nextXMovement);
+
+        ScreenManager.instance.StartFadeShowScreen(5, 2);
+        yield return new WaitForSeconds(1f);
+        CameraManager.instance.mainCamera.SetDestination(transform.position, 3);
+
+        yield return new WaitForSeconds(5f);
+
         StartFase(0);
         yield return new WaitForSeconds(4f);
         gm.BlockInputs(false);
@@ -625,11 +637,11 @@ public class Summoner : Boss
         }
         else if (fase == 1)
         {
-            PrepareLunge();
+            PrepareLunge(true);
         }
         else if (fase == 2)
         {
-            PrepareLunge();
+            PrepareLunge(true);
         }
         else if (fase == 3)
         {
@@ -713,6 +725,12 @@ public class Summoner : Boss
         }
     }
 
+    public bool HasToFlip(float nextXMovement)
+    {
+        return nextXMovement < 0 && spriteRenderer.flipX || nextXMovement > 0 && !spriteRenderer.flipX;
+    }
+
+
     public void Flip()
     {
         spriteRenderer.flipX = !spriteRenderer.flipX;
@@ -791,7 +809,7 @@ public class Summoner : Boss
         if (startFaseLunge)
         {
             animator.SetTrigger("EndAction");
-            animator.SetBool("EndMoveReversed", (lungeDest - realPos).x < 0);
+            animator.SetBool("EndMoveReversed", HasToFlip((lungeDest - realPos).x));
             clipInfo = animator.GetCurrentAnimatorClipInfo(0);
             yield return new WaitForSeconds(clipInfo[0].clip.length);
             yield return null; 

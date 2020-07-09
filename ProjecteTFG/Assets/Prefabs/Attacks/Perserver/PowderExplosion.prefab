@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cb0803a409e9554ba138ad30bf471bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 15
   knockback: 3
   duration: 0.2
   particles: {fileID: 0}

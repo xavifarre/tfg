@@ -85,12 +85,14 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     [HideInInspector]
     public bool recallReady = true;
     public ParticlePlayer recallParticles;
+    public ParticleSystem shardHealParticles;
 
 
     //Invulnerable
     private bool invulnerable = false;
     [Header("Hit")]
     public float invulnerableTime = 0.2f;
+    public float invulnerableBlinkTime = 0.1f;
     //Hit
     public Color hitColor = Color.red;
     public float hitColorDuration = 0.05f;
@@ -466,9 +468,11 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             shard.TriggerRecall(transform.position + Vector3.up * 0.5f, i * 0.02f);
             i++;
         }
-
-        recallParticles.PlayParticles();
-
+        if(activeShards.Count > 0)
+        {
+            recallParticles.PlayParticles();
+        }
+        
         recallReady = true;
 
     }
@@ -532,7 +536,6 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             if (state != State.Dead)
             {
                 KnockBack(enemy.transform.position, enemy.knockBackValue);
-                DamageInvulnerability(enemy.damage);
             }
         }
     }
@@ -545,7 +548,6 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             if (state != State.Dead)
             {
                 KnockBack(attack.transform.position, attack.knockback);
-                DamageInvulnerability(attack.damage);
             }
         }
     }
@@ -558,7 +560,6 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             if (state != State.Dead)
             {
                 KnockBack(knockbackMotion);
-                DamageInvulnerability(blade.damage);
             }
         }
     }
@@ -589,6 +590,10 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             {
                 Die();
             }
+            else
+            {
+                DamageInvulnerability();
+            }
         }
 
         gm.tLastHit = 0;
@@ -597,12 +602,14 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public void Die()
     {
         state = State.Dead;
-        Debug.Log("DEAD");
+        //gm.DisableEnemies();
+        gm.StopGame();
         ScreenManager.instance.ShowDeathScreen();
         
         ChangeLayerIgnore();
         DisableAllColliders();
 
+        animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         animator.SetTrigger("Die");
     }
 
@@ -611,10 +618,11 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         return health <= 0;
     }
 
-    public void DamageInvulnerability(int damage)
+    public void DamageInvulnerability()
     {
+
         invulnerable = true;
-        StartCoroutine(IInvulnerabilityDamage());
+        StartCoroutine(IInvulnerabilityDamage());       
     }
 
     protected void DamageTick()
@@ -696,7 +704,28 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         Move(realPos);
         state = State.Idle;
         GetDamage(1);
-        DamageInvulnerability(1);
+    }
+
+    public void ShardPicked(Shard shard)
+    {
+        activeShards.Remove(shard);
+        Debug.Log(shard.accumulatedDamage);
+        if(shard.accumulatedDamage > 0)
+        {
+            ShardHeal(shard.accumulatedDamage);
+        }
+    }
+
+    public void ShardHeal(int shardDamage)
+    {
+        health += shardDamage;
+        health += shardDamage;
+        if(health > maxHealth)
+        {
+            health = maxHealth;
+        }
+        HealthBar.UpdateBar(health);
+        shardHealParticles.Play();
     }
 
     //Actualitzar els paràmetres d'animació
@@ -771,14 +800,20 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     IEnumerator IInvulnerabilityDamage()
     {
-        float t = 0;
-        while(t < invulnerableTime)
+        float t = 0, tBlink = 0;
+        while (t < invulnerableTime)
         {
-            t+=Time.deltaTime;
+            t+=Time.unscaledDeltaTime;
+            tBlink += Time.unscaledDeltaTime;
+            if(tBlink > invulnerableBlinkTime)
+            {
+                spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, Mathf.Abs(spriteRenderer.color.a - 1));
+                tBlink = 0;
+            }
             yield return null;
         }
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1);
         invulnerable = false;
-        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -790,7 +825,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     {
         hitMaterial.color = hitColor;
         spriteRenderer.material = hitMaterial;
-        yield return new WaitForSeconds(hitColorDuration);
+        yield return new WaitForSecondsRealtime(hitColorDuration);
         spriteRenderer.material = defaultMaterial;
         hitRoutine = null;
     }
