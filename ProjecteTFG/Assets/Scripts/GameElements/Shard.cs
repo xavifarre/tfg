@@ -60,9 +60,9 @@ public class Shard : Attack {
     //Trail
     private TrailRenderer trail;
 
-    //Accumulated damage
+    //Accumulated heal
     [HideInInspector]
-    public int accumulatedDamage;
+    public float accumulatedHeal;
 
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
@@ -222,6 +222,7 @@ public class Shard : Attack {
                     {
                         movementCompleted = true;
                         lastPoint = targetPos;
+                        player.ShardPicked(this);
                         DestroyShard();
                     }
                 }
@@ -313,7 +314,7 @@ public class Shard : Attack {
     public void DestroyShard()
     {
         Stop();
-        player.ShardPicked(this);
+        player.activeShards.Remove(this);
         sprite.enabled = false;
         GetComponent<Collider2D>().enabled = false;
         spriteRenderer.enabled = false;
@@ -356,7 +357,28 @@ public class Shard : Attack {
             //collision.gameObject.SendMessage("Damage");
             //DestroyShard();
             collision.GetComponent<Enemy>().GetDamage(damage);
-            accumulatedDamage += damage;
+
+            float heal;
+            if(collision.GetComponent<Minion>() != null)
+            {
+                heal = damage * player.recallHealMultiplierFromMinions;
+                if (player.healFromMinionsCounter + (int)heal > player.maxHealFromMinions)
+                {
+                    heal = player.maxHealFromMinions - player.healFromMinionsCounter;
+                    player.healFromMinionsCounter = player.maxHealFromMinions;
+                }
+                else
+                {
+                    player.healFromMinionsCounter += heal;
+                }
+            }
+            else
+            {
+                heal = damage * player.recallHealMultiplier;
+            }
+
+            accumulatedHeal += heal;
+
         }
         else if (collision.gameObject.tag == "Barrel")
         {
@@ -364,7 +386,7 @@ public class Shard : Attack {
             if (barrel.IsHitable())
             {
                 barrel.Hit(this);
-                accumulatedDamage += 1;
+                accumulatedHeal += 1;
             }
         }
         else

@@ -79,7 +79,7 @@ public abstract class Enemy : MonoBehaviour
     //    }
     //}
 
-    public void GetDamage(int damage)
+    public virtual void GetDamage(int damage)
     {
         health -= damage;
         CheckDeath();

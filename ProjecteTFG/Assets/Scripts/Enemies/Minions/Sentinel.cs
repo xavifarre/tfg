@@ -21,6 +21,7 @@ public class Sentinel : Minion
 
     protected override void Init()
     {
+        base.Init();
         areaMove = GameObject.Find("MovementPoints").transform.Find("3").GetComponent<RectArea>();
     }
 
@@ -60,6 +61,8 @@ public class Sentinel : Minion
         Vector2 dir = (player.transform.position + (Vector3)player.lastDir.normalized * player.movementValue.magnitude - realPos).normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         Attack instance = Instantiate(projectile, realPos, Quaternion.AngleAxis(angle -90,Vector3.forward));
+        instance.damage = damage;
+        instance.knockback = knockBackValue;
         StartIdle();
     }
 

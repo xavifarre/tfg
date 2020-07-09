@@ -248,14 +248,14 @@ MonoBehaviour:
   damage: 5
   speed: 5
   size: 2
-  health: 500
+  health: 400
   knockBackValue: 1
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   hitColorDuration: 0.05
   hitMaterial: {fileID: 2100000, guid: 00b2286b10131024ca63aab6387d9618, type: 2}
   fase: 0
   ratiosDamageFase:
-  - 1
+  - 0.8
   - 0.6
   - 0.4
   - 0
@@ -263,11 +263,11 @@ MonoBehaviour:
   killSlowScale: 0.2
   lungeDamage: 20
   lungeKnockback: 3
-  lungeSpeed: 50
+  lungeSpeed: 40
   lungeDistance: 40
   lastHitTimeConstraint: 1
   sameActionLimit: 2
-  lungeObject: {fileID: 7995797522612425011}
+  lungeObject: {fileID: 86301287}
   dashDuration: 1
   dashMinimumDistance: 10
   meleeRange: 3
@@ -332,14 +332,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5544540440511880910}
   - component: {fileID: 6192663607770281148}
-  - component: {fileID: 7995797522612425011}
+  - component: {fileID: 86301287}
   m_Layer: 17
   m_Name: LungeCollider
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5544540440511880910
 Transform:
   m_ObjectHideFlags: 0
@@ -370,7 +370,7 @@ CircleCollider2D:
   m_Offset: {x: 0.20321274, y: 0}
   serializedVersion: 2
   m_Radius: 1.2112465
---- !u!114 &7995797522612425011
+--- !u!114 &86301287
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5362402486559979400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ab95e799eb32bf47b20a4d2f252d7d1, type: 3}
+  m_Script: {fileID: 11500000, guid: d2bd499442507b941a0b5f26fa5ac20a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5

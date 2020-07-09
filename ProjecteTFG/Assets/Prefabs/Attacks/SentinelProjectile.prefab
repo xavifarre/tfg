@@ -99,6 +99,7 @@ MonoBehaviour:
   damage: 1
   knockback: 1
   speed: 20
+  duration: 3
 --- !u!1 &5197805562374381776
 GameObject:
   m_ObjectHideFlags: 0

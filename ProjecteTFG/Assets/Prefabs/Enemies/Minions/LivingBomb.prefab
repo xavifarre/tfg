@@ -140,7 +140,7 @@ MonoBehaviour:
   damage: 20
   speed: 8
   size: 1
-  health: 100
+  health: 99999
   knockBackValue: 1
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   hitColorDuration: 0.05

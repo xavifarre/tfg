@@ -69,6 +69,15 @@ public class LivingBomb : Minion
         Die();
     }
 
+    public override void GetDamage(int damage)
+    {
+        base.GetDamage(damage);
+        if(damage < 10)
+        {
+            Explode();
+        }
+    }
+
     protected override void KnockBack(float knockBack)
     {
         base.KnockBack(knockBack);

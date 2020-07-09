@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 5961536192951770722}
   - component: {fileID: 4965305155705781539}
   - component: {fileID: -559878581876763386}
+  - component: {fileID: -5943776190285766641}
   m_Layer: 11
   m_Name: Sentinel
   m_TagString: Enemy
@@ -202,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399e7f4eaa4a8c849960d27cbcc92052, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 10
   speed: 4
   size: 1
   health: 100
@@ -238,3 +239,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 1
   disolveMaterialDie: {fileID: 2100000, guid: 7201f8099e12b604bab1b15ece999cf9, type: 2}
+--- !u!95 &-5943776190285766641
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5961536192951770735}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

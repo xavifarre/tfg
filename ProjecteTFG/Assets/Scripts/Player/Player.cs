@@ -9,8 +9,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public float speed;
 
     //Health state
-    public int health;
-    private int maxHealth;
+    public float health;
+    private float maxHealth;
     
     [HideInInspector]
     public bool dead = false;
@@ -80,7 +80,13 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public int baseShardDamage = 1;
     public int maxShardDamage  = 5;
     public Vector2Int minMaxShards = new Vector2Int(3,5);
+    [HideInInspector]
     public List<Shard> activeShards;
+    public float recallHealMultiplier = 1;
+    public float recallHealMultiplierFromMinions = 0.5f;
+    public float maxHealFromMinions = 10;
+    [HideInInspector]
+    public float healFromMinionsCounter = 0;
     public Vector2 shardRange = new Vector2(300,500);
     [HideInInspector]
     public bool recallReady = true;
@@ -134,7 +140,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
         realPos = transform.position;
         maxHealth = health;
-        HealthBar.Initialize(maxHealth,health);
+        HealthBar.Initialize((int)maxHealth,(int)health);
     }
 
     private void FixedUpdate()
@@ -471,6 +477,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         if(activeShards.Count > 0)
         {
             recallParticles.PlayParticles();
+            healFromMinionsCounter = 0;
         }
         
         recallReady = true;
@@ -575,11 +582,11 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
         //Reset player layer
         ResetLayer();
-
-        if(damage > 0)
+        dashTrail.emitting = false;
+        if (damage > 0)
         {
             health -= damage;
-            HealthBar.UpdateBar(health);
+            HealthBar.UpdateBar((int)health);
             hitParticles.Play();
             DamageTick();
             ScreenManager.instance.hitScreen.ShowScreen();
@@ -708,23 +715,21 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     public void ShardPicked(Shard shard)
     {
-        activeShards.Remove(shard);
-        Debug.Log(shard.accumulatedDamage);
-        if(shard.accumulatedDamage > 0)
+        if(shard.accumulatedHeal > 0)
         {
-            ShardHeal(shard.accumulatedDamage);
+            ShardHeal(shard.accumulatedHeal);
         }
+        Debug.Log(healFromMinionsCounter);
     }
 
-    public void ShardHeal(int shardDamage)
+    public void ShardHeal(float accumulatedHeal)
     {
-        health += shardDamage;
-        health += shardDamage;
+        health += accumulatedHeal;
         if(health > maxHealth)
         {
             health = maxHealth;
         }
-        HealthBar.UpdateBar(health);
+        HealthBar.UpdateBar((int)health);
         shardHealParticles.Play();
     }
 

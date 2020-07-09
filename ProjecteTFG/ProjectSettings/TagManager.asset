@@ -59,9 +59,9 @@ TagManager:
   - name: Effects
     uniqueID: 1909916999
     locked: 0
-  - name: DeathScreen
-    uniqueID: 4256919825
-    locked: 0
   - name: UI
     uniqueID: 606494689
+    locked: 0
+  - name: DeathScreen
+    uniqueID: 4256919825
     locked: 0

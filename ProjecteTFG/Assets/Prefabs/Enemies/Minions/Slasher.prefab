@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 2797286826219907101}
   - component: {fileID: 2981978223284453312}
   - component: {fileID: -1858110285891660205}
+  - component: {fileID: 5321421054821036932}
   m_Layer: 11
   m_Name: Slasher
   m_TagString: Enemy
@@ -235,3 +236,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 1
   disolveMaterialDie: {fileID: 2100000, guid: 7201f8099e12b604bab1b15ece999cf9, type: 2}
+--- !u!95 &5321421054821036932
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2797286826219907088}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
