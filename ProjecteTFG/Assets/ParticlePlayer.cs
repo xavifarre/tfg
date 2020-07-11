@@ -13,4 +13,12 @@ public class ParticlePlayer : MonoBehaviour
             particles.Play();
         }
     }
+
+    public void StopParticles()
+    {
+        foreach (ParticleSystem particles in particleList)
+        {
+            particles.Stop();
+        }
+    }
 }

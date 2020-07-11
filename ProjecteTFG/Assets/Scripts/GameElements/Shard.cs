@@ -288,7 +288,7 @@ public class Shard : Attack {
         {
             velocity = 0;
         }
-        sprite.transform.Rotate(rotationValue * (velocity+minSpeedRotation) * rotationMultiplier);
+        sprite.transform.Rotate(rotationValue * (velocity+minSpeedRotation) * rotationMultiplier * Time.deltaTime);
     }
 
     //Fa flotar el fragment en forma de funció sinusoidal

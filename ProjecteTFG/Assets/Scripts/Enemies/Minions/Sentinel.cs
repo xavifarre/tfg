@@ -9,7 +9,7 @@ public class Sentinel : Minion
 
     //Attack
     public float attackDistance = 10f;
-    public Attack projectile;
+    public Laser projectile;
 
     [Header("Movement")]
     //Move
@@ -60,7 +60,7 @@ public class Sentinel : Minion
     {
         Vector2 dir = (player.transform.position + (Vector3)player.lastDir.normalized * player.movementValue.magnitude - realPos).normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        Attack instance = Instantiate(projectile, realPos, Quaternion.AngleAxis(angle -90,Vector3.forward));
+        Laser instance = Instantiate(projectile, realPos, Quaternion.AngleAxis(angle -90,Vector3.forward));
         instance.damage = damage;
         instance.knockback = knockBackValue;
         StartIdle();

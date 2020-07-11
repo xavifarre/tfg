@@ -4352,6 +4352,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 277910350}
     m_Modifications:
+    - target: {fileID: 258478012, guid: 640c85d469e290a44ad85c5087d2fdd3, type: 3}
+      propertyPath: damage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 258478012, guid: 640c85d469e290a44ad85c5087d2fdd3, type: 3}
+      propertyPath: knockback
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
       propertyPath: spawnersContainer
@@ -4364,23 +4372,33 @@ PrefabInstance:
       objectReference: {fileID: 834637918}
     - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
-      propertyPath: knockBackValue
-      value: 1
+      propertyPath: ratiosDamageFase.Array.data[1]
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
-      propertyPath: knockBackHit
-      value: 1.5
+      propertyPath: ratiosDamageFase.Array.data[2]
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
+        type: 3}
+      propertyPath: maxEnemies
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
+        type: 3}
+      propertyPath: ratiosDamageFase.Array.data[0]
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
+        type: 3}
+      propertyPath: health
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 449336332740483365, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
       propertyPath: m_Name
       value: Summoner
-      objectReference: {fileID: 0}
-    - target: {fileID: 449336332740483365, guid: 640c85d469e290a44ad85c5087d2fdd3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 449336332740483369, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}

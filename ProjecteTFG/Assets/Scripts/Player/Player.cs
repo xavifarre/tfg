@@ -179,7 +179,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     private void Update()
     {
-        if (!gm.inputsBlocked)
+        if (!gm.inputsBlocked && !gm.gamePaused)
         {
             //Check Queue attack input
             if (state == State.Attack)

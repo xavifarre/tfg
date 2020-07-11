@@ -94,9 +94,9 @@ public class Summoner : Boss
 
     [Header("Particles")]
     public GameObject dieParticles;
-
-
-    public Image blackScreen;
+    public ParticleSystem moveParticles;
+    public ParticleSystem lungeParticles;
+    public TrailRenderer lungeTrail;
 
     protected override void Init()
     {
@@ -236,6 +236,7 @@ public class Summoner : Boss
     {
         tAction = 0;
         animator.SetTrigger("Move");
+        moveParticles.Play();
         ResetLayer();
         float nextXMovement = (movementPoints[fase][nextPoint] - realPos).x;
         //UpdateAnimFlip(nextXMovement);
@@ -253,6 +254,7 @@ public class Summoner : Boss
     {
         ChangeLayerIgnore();
         state = SummState.Idle;
+        moveParticles.Stop();
         if (CheckDamageFase() != fase)
         {
             StartFase(CheckDamageFase());
@@ -329,6 +331,8 @@ public class Summoner : Boss
     private void StartLunge()
     {
         lungeDest = realPos + (player.transform.position - realPos).normalized * lungeDistance;
+        lungeParticles.Play();
+        lungeTrail.emitting = true;
         lungeObject.gameObject.SetActive(true);
         lungeObject.damage = lungeDamage;
         lungeObject.knockback = lungeKnockback;
@@ -339,6 +343,8 @@ public class Summoner : Boss
     private void EndLunge()
     {
         state = SummState.Idle;
+        lungeParticles.Stop();
+        lungeTrail.emitting = false;
         lungeObject.gameObject.SetActive(false);
         animator.SetTrigger("EndAction");
         nextPoint = NearestPoint();
@@ -571,6 +577,10 @@ public class Summoner : Boss
     {
         lungeObject.gameObject.SetActive(false);
 
+        moveParticles.Stop();
+        lungeParticles.Stop();
+        lungeTrail.emitting = false;
+
         if (fase < 3)
         {
             if (firstHit == true)
@@ -646,6 +656,7 @@ public class Summoner : Boss
         else if (fase == 3)
         {
             summonType = SummType.StartFase;
+            animator.SetTrigger("EndAction");
             //StartSummon();
             DashToRandom();
         }
@@ -741,6 +752,7 @@ public class Summoner : Boss
     {
         yield return new WaitForSeconds(vulnerableTime);
         state = SummState.Damaged;
+        moveParticles.Play();
         vulnerable = false;
         ChangeLayerIgnore();
     }

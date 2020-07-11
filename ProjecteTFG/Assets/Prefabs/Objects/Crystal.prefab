@@ -60,9 +60,10 @@ MonoBehaviour:
   damageVelRatio: 20
   acceleration: 10
   growRate: 1
-  rotationMultiplier: 10
+  rotationMultiplier: 800
   minSpeedRotation: 0.3
   sprite: {fileID: 1885380926212553377}
+  accumulatedHeal: 0
 --- !u!50 &50605670455134394
 Rigidbody2D:
   serializedVersion: 4
