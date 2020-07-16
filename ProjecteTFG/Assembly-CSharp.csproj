@@ -129,7 +129,8 @@
     <Compile Include="Assets\Scripts\UI\DamagePopup.cs" />
     <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\Scripts\UI\InteractPopUp.cs" />
-    <Compile Include="Assets\Scripts\UI\PauseCanvas.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseMenu\PauseCanvas.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseMenu\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\UI\PopupText.cs" />
     <Compile Include="Assets\Scripts\UI\PopupTextController.cs" />
     <Compile Include="Assets\Scripts\Utils\Classes.cs" />
