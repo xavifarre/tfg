@@ -14,6 +14,11 @@ public class SoundController : MonoBehaviour
 
     public void PlaySound(string id, float delay = 0)
     {
+        if(audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+
         audioSource.clip = SoundCollection.sounds[id];
         audioSource.PlayDelayed(delay);
     }

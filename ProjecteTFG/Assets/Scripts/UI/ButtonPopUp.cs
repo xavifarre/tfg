@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ButtonPopUp : MonoBehaviour
 {
+    public static ButtonPopUp instance;
+
     public Vector2 offset = new Vector2(1, 1);
     public List<GameObject> buttonObjList;
     public List<string> buttonNamesList;
@@ -13,6 +15,7 @@ public class ButtonPopUp : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<Player>();
+        instance = this;
     }
 
     private void Update()
@@ -32,6 +35,7 @@ public class ButtonPopUp : MonoBehaviour
 
     public void Show(string action)
     {
+        Debug.Log(action);
         currentId = buttonNamesList.IndexOf(action);
         buttonObjList[currentId].SetActive(true);
         transform.position = (Vector2)player.transform.position + offset;
@@ -42,5 +46,10 @@ public class ButtonPopUp : MonoBehaviour
     {
         buttonObjList[currentId].SetActive(false);
         currentId = -1;
+    }
+
+    public bool IsShowing()
+    {
+        return currentId != -1;
     }
 }

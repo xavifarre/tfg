@@ -29,6 +29,8 @@ public class Biter : Minion
         colliderInstance = GetComponent<Collider2D>();
         colliderStartOffset = colliderInstance.offset;
 
+        soundController.PlaySound("biter_spawn",0.1f);
+
         base.Init();
     }
 
@@ -67,7 +69,7 @@ public class Biter : Minion
         state = MinionState.Charge;
         animator.SetTrigger("Charge");
         StartCoroutine(ICharge());
-
+        
     }
 
     private void Attack()
@@ -78,6 +80,7 @@ public class Biter : Minion
         state = MinionState.Attack;
         animator.SetTrigger("Bite");
         UpdateSpriteFlip();
+        soundController.PlaySound("biter_attack0" + (Random.Range(0, 2) + 1));
     }
 
     protected override void KnockBack(float knockBack)
@@ -93,6 +96,12 @@ public class Biter : Minion
         {
             Attack();
         }
+    }
+
+    public override void GetDamage(int damage)
+    {
+        soundController.PlaySound("biter_hit");
+        base.GetDamage(damage);
     }
 
     protected override void UpdateSpriteFlip()
@@ -115,5 +124,6 @@ public class Biter : Minion
         base.Die();
         attackCollider.enabled = false;
         smokeParticles.Stop();
+        soundController.PlaySound("biter_die");
     }
 }

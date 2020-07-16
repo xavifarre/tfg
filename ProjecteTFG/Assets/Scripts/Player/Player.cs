@@ -751,6 +751,10 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
+    private void ChangeLayerIgnoreEnemies()
+    {
+        gameObject.layer = LayerMask.NameToLayer("PlayerIgnoreEnemies");
+    }
 
     private void ChangeLayerDash()
     {
@@ -806,6 +810,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     IEnumerator IInvulnerabilityDamage()
     {
         float t = 0, tBlink = 0;
+        ChangeLayerIgnoreEnemies();
         while (t < invulnerableTime)
         {
             t+=Time.unscaledDeltaTime;
@@ -818,6 +823,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             yield return null;
         }
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1);
+        ResetLayer();
         invulnerable = false;
     }
 

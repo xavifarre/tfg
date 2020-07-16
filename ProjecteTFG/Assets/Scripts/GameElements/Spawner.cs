@@ -33,12 +33,14 @@ public class Spawner : MonoBehaviour, ISpawner
     private bool spawning = false;
     private int spawnLoops = 0;
     private Player player;
+    private Summoner summoner;
 
 
     // Use this for initialization
     void Start ()
     {
         player = FindObjectOfType<Player>();
+        summoner = FindObjectOfType<Summoner>();
 
         if (type == Type.Points)
         {
@@ -110,11 +112,43 @@ public class Spawner : MonoBehaviour, ISpawner
 
     public void StartSpawning()
     {
+        StartCoroutine(IStartSpawining());
+    }
+
+    private IEnumerator IStartSpawining()
+    {
+        summoner.NotifySummon(SpawnType());
+        yield return new WaitForSeconds(0.5f);
         t = spawnInterval;
         spawnLoops = 0;
         iSeq = 0;
         iUsed = new List<int>();
         spawning = true;
+    }
+
+    private int SpawnType()
+    {
+        if(obj.GetComponent<Biter>() != null)
+        {
+            return 0;
+        }
+        else if(obj.GetComponent<LivingBomb>() != null)
+        {
+            return 1;
+        }
+        else if(obj.GetComponent<Slasher>() != null)
+        {
+            return 2;
+        }
+        else if(obj.GetComponent<Sentinel>() != null)
+        {
+            return 3;
+        }
+        else
+        {
+            return -1;
+        }
+
     }
 
     public void StopSpawning()

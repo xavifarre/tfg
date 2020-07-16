@@ -214,7 +214,7 @@ MonoBehaviour:
   state: 0
   idleTime: 0.3
   fallTime: 1
-  spawnParticles: {fileID: 2385001905612765532, guid: a072f2dbb9d9ff640aeaed4fff1c5284,
+  spawnParticles: {fileID: 2385001905612765532, guid: 86a00fc6bced70b4785af3d285f8abbe,
     type: 3}
   knockBackResistance: 1
   knockBackDuration: 0.2

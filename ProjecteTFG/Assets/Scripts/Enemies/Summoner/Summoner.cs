@@ -52,6 +52,9 @@ public class Summoner : Boss
     public int maxEnemies = 12;
     private GameObject enemiesContainer;
 
+    public ElectricitySummon electricitySummon;
+    private List<int> summonColors;
+
     //State
     public enum SummState { Idle, Move, Lunge, Dash, DashAttack, Summon, Melee, Damaged, Die, Start};
     public SummState state;
@@ -93,8 +96,9 @@ public class Summoner : Boss
     public Material disolveMaterialDie;
 
     [Header("Particles")]
-    public GameObject dieParticles;
+    public ParticlePlayer dieParticles;
     public ParticleSystem moveParticles;
+    public ParticleSystem dashParticles;
     public ParticleSystem lungeParticles;
     public TrailRenderer lungeTrail;
 
@@ -399,11 +403,15 @@ public class Summoner : Boss
     private void StartDashAnim()
     {
         animator.SetTrigger("Dash");
+        
         float nextXMovement = (dashDest - realPos).x;
         UpdateAnimFlip(nextXMovement);
 
+        PlayDashParticles(realPos, dashDest);
+
         float xDest = (player.transform.position - dashDest).x, xMov = (dashDest - dashOrigin).x;
         bool hasToReverse = xDest > 0 && xMov < 0 || xDest < 0 && xMov > 0;
+
 
         StartCoroutine(IDashReverse(hasToReverse));
         StartCoroutine(IDashDisolve());
@@ -411,6 +419,7 @@ public class Summoner : Boss
 
     private void EndDash()
     {
+        dashParticles.Stop();
         ResetLayer();
 
         if (state == SummState.Dash)
@@ -424,6 +433,14 @@ public class Summoner : Boss
             state = SummState.Melee;
             StartCoroutine(ITriggerMelee());
         }
+    }
+
+    private void PlayDashParticles(Vector2 from, Vector2 to)
+    {
+        ParticleSystem.MainModule main = dashParticles.main;
+        main.startRotation = Vector2.SignedAngle(to - from, Vector2.right) * Mathf.Deg2Rad;
+
+        dashParticles.Play();
     }
 
     private void CallStopForSeconds()
@@ -472,6 +489,7 @@ public class Summoner : Boss
     {
         state = SummState.Summon;
         StartCoroutine(ISummon());
+        summonColors = new List<int>();
     }
 
     public void Summon()
@@ -491,6 +509,7 @@ public class Summoner : Boss
 
         animator.SetTrigger("EndAction");
         animator.SetInteger("Fase", fase);
+
     }
 
     private void EndSummon()
@@ -499,6 +518,33 @@ public class Summoner : Boss
         NextAction();
         firstHit = true;
         summonType = SummType.Normal;
+    }
+
+    public void NotifySummon(int type)
+    {
+        summonColors.Add(type);
+        if(summonColors.Count == 1)
+        {
+            StartCoroutine(IWaitSummonColors());
+        }
+    }
+
+    private IEnumerator IWaitSummonColors()
+    {
+        float t = 0;
+        while(t < 0.5f)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+        if(summonColors.Count == 1)
+        {
+            electricitySummon.PlayAnim(summonColors[0], summonColors[0]);
+        }
+        else
+        {
+            electricitySummon.PlayAnim(summonColors[0], summonColors[1]);
+        }
     }
 
     private void NextAction()
@@ -588,6 +634,8 @@ public class Summoner : Boss
                 firstHit = false;
                 vulnerable = true;
                 state = SummState.Idle;
+
+                UpdateAnimFlip(player.transform.position.x - realPos.x);
 
                 KnockBack(knockBackHit, knockbackTime);
                 StartCoroutine(IKnockBack());
@@ -752,6 +800,7 @@ public class Summoner : Boss
     {
         yield return new WaitForSeconds(vulnerableTime);
         state = SummState.Damaged;
+        UpdateAnimFlip(movementPoints[fase][nextPoint].x - realPos.x);
         moveParticles.Play();
         vulnerable = false;
         ChangeLayerIgnore();

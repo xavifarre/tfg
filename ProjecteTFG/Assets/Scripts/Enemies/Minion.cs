@@ -29,9 +29,12 @@ public class Minion : Enemy, IFallableObject
 
     protected override void Init()
     {
-        ParticleSystem p = Instantiate(spawnParticles);
-        p.transform.position = realPos;
-        Destroy(p.gameObject, p.main.duration);
+        if (spawnParticles)
+        {
+            ParticleSystem p = Instantiate(spawnParticles);
+            p.transform.position = realPos;
+            Destroy(p.gameObject, p.main.duration);
+        }
         UpdateSpriteFlip();
     }
 
