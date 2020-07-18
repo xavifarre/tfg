@@ -5,26 +5,26 @@ using System;
 [System.Serializable]
 public class SaveData
 {
-    //Essential
-    public static int bossesDefeated;
-    public static bool swordPicked;
+    //Game state
+    public GameState gameState = GameState.Zero;
 
     //Stats
-    public static float deathCount;
-    public static float killCount;
-    public static float damageCount;
-    public static float crystalCount;
+    public float deathCount;
+    public float damageReceivedCount;
+    public float killCount;
+    public float damageDealtCount;
+    public float crystalCount;
 
     //Timestamp
     public DateTime dateTime;
 
     public SaveData()
     {
-        bossesDefeated = Globals.bossesDefeated;
-        swordPicked = Globals.swordPicked;
+        gameState = Globals.gameState;
         deathCount = Globals.deathCount;
+        damageReceivedCount = Globals.damageReceivedCount;
         killCount = Globals.killCount;
-        damageCount = Globals.damageCount;
+        damageDealtCount = Globals.damageDealtCount;
         crystalCount = Globals.crystalCount;
 
         dateTime = DateTime.Now;

@@ -724,6 +724,8 @@ public class Summoner : Boss
         gm.SlowDownGame(killSlowScale, killSlowTime);
 
         KillAllMinions();
+
+        Globals.gameState = GameState.SummonerDefeated;
     }
 
     public void DieAnim()

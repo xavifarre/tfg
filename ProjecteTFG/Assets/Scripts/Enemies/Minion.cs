@@ -135,6 +135,8 @@ public class Minion : Enemy, IFallableObject
 
         FadeShadow();
 
+        Globals.killCount += 1;
+
         DieEffect dieEffect = GetComponent<DieEffect>();
         if (dieEffect)
         {

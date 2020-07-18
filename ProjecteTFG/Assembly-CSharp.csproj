@@ -65,7 +65,9 @@
   <ItemGroup>
     <Compile Include="Assets\DashParticles.cs" />
     <Compile Include="Assets\ElectricitySummon.cs" />
+    <Compile Include="Assets\GameLoader.cs" />
     <Compile Include="Assets\ParticlePlayer.cs" />
+    <Compile Include="Assets\RainObject.cs" />
     <Compile Include="Assets\ScreenManager.cs" />
     <Compile Include="Assets\Scripts\Attacks\Attack.cs" />
     <Compile Include="Assets\Scripts\Attacks\Barrel.cs" />
@@ -138,6 +140,7 @@
     <Compile Include="Assets\Scripts\Utils\MathFunctions.cs" />
     <Compile Include="Assets\Scripts\Utils\ParticleDestroyer.cs" />
     <Compile Include="Assets\Scripts\Utils\RectArea.cs" />
+    <Compile Include="Assets\StartGameObject.cs" />
     <Compile Include="Assets\ToriiChangeLevel.cs" />
     <Compile Include="Assets\TutorialManager.cs" />
     <Compile Include="Assets\UndodgeableSpinCollider.cs" />

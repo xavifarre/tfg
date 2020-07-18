@@ -589,7 +589,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             HealthBar.UpdateBar((int)health);
             hitParticles.Play();
             DamageTick();
-            ScreenManager.instance.hitScreen.ShowScreen();
+            ScreenManager.instance.ShowHitScreen();
             //gm.SlowDownGame(0, 0.5f);
             //gm.Shake(0.1f, 1f);
 
@@ -601,6 +601,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             {
                 DamageInvulnerability();
             }
+            Globals.damageReceivedCount += damage;
         }
 
         gm.tLastHit = 0;
@@ -618,6 +619,9 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
         animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         animator.SetTrigger("Die");
+
+        Globals.deathCount += 1;
+
     }
 
     public bool HasDied()
@@ -719,6 +723,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         {
             ShardHeal(shard.accumulatedHeal);
         }
+        Globals.crystalCount += 1;
         Debug.Log(healFromMinionsCounter);
     }
 

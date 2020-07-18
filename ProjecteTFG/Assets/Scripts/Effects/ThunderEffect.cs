@@ -13,11 +13,9 @@ public class ThunderEffect : MonoBehaviour
     public bool fade;
 
     private Color initialColor;
-    private Camera cam;
 
     private void Start()
     {
-        cam = FindObjectOfType<Camera>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         initialColor = spriteRenderer.color;
         spriteRenderer.enabled = false;
@@ -37,7 +35,6 @@ public class ThunderEffect : MonoBehaviour
                 t = 0;
             }
         }
-        transform.position = (Vector2)cam.transform.position;
     }
 
     private void StartThunder()

@@ -1,16 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
     public Image selector;
     public List<RectTransform> items;
+    public List<RectTransform> confirmItems;
     private int currentIndex = 0;
-    public int defaultIndex = 0;
+    private int previousIndex = 0;
     public float offsetX = 50;
     public float sizeY = 30;
     private float timeOffset = 0.2f;
@@ -22,6 +25,12 @@ public class PauseMenu : MonoBehaviour
     public AudioMixer audioMixer;
 
     private List<Resolution> resolutions;
+
+    public GameObject mainMenu;
+    public GameObject confirmMenu;
+    public TextMeshProUGUI confirmText;
+
+    private Action confirmAction;
 
     private Slider sliderVolume;
     private TMP_Dropdown resolutionDropdown;
@@ -36,7 +45,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (gameObject.activeSelf)
         {
-            
+
             if (Input.GetAxis("Vertical") >= 0.8f && tPrevious >= timeOffset)
             {
                 MoveUp();
@@ -46,50 +55,31 @@ public class PauseMenu : MonoBehaviour
                 MoveDown();
             }
 
-            if (currentIndex == 0)
+            if (confirmMenu.activeSelf)
             {
                 if (Input.GetAxis("Horizontal") >= 0.8f && tPrevious >= timeOffset)
                 {
-                    ResolutionUp();
+                    MoveDown();
                 }
                 else if (Input.GetAxis("Horizontal") <= -0.8f && tPrevious >= timeOffset)
                 {
-                    ResolutionDown();
+                    MoveUp();
                 }
             }
-            else if (currentIndex == 1)
+
+
+            if (mainMenu.activeSelf)
             {
-                if (Input.GetAxis("Horizontal") >= 0.8f && tPrevious >= timeOffset)
-                {
-                    ToggleFullScreen();
-                }
-                else if (Input.GetAxis("Horizontal") <= -0.8f && tPrevious >= timeOffset)
-                {
-                    ToggleFullScreen();
-                }
+                ControlMainMenu();               
             }
-            else if (currentIndex == 2)
+            else if (confirmMenu.activeSelf)
             {
-                if (Input.GetAxis("Horizontal") >= 0.8f)
-                {
-                    VolumeUp();
-                }
-                else if (Input.GetAxis("Horizontal") <= -0.8f)
-                {
-                    VolumeDown();
-                }
-                
+                ControlConfirm();
             }
 
 
-            if (Input.GetButtonDown("Interact"))
-            {
-                ClickOption();
-            }
 
-            
-
-            if(t >= tBlink && tBlink != -1)
+            if (t >= tBlink && tBlink != -1)
             {
                 t -= tBlink;
                 selector.enabled = !selector.enabled;
@@ -114,32 +104,57 @@ public class PauseMenu : MonoBehaviour
 
     private void Init()
     {
-        currentIndex = defaultIndex;
-        tPrevious = timeOffset;
-        UpdateSelector();
+        ShowMain();
         UpdateTextFullScreen(Screen.fullScreen);
+    }
+
+    public void ShowMain()
+    {
+        tPrevious = timeOffset;
+        currentIndex = previousIndex;
+        mainMenu.SetActive(true);
+        confirmMenu.SetActive(false);
+        UpdateSelector();
+    }
+
+    public void ShowConfirm()
+    {
+        tPrevious = timeOffset;
+        currentIndex = 1;
+        mainMenu.SetActive(false);
+        confirmMenu.SetActive(true);
+        confirmText.color = Color.white;
+        confirmItems[0].GetComponent<TextMeshProUGUI>().color = Color.white;
+        UpdateSelector();
     }
 
     private void MoveUp()
     {
         tPrevious = 0;
-        currentIndex = MathFunctions.Mod(currentIndex - 1, items.Count);
+        List<RectTransform> currentList = mainMenu.activeSelf ? items : confirmItems;
+        currentIndex = MathFunctions.Mod(currentIndex - 1, currentList.Count);
+        if(mainMenu.activeSelf) previousIndex = currentIndex;
         UpdateSelector();
     }
 
     private void MoveDown()
     {
         tPrevious = 0;
-        currentIndex = MathFunctions.Mod(currentIndex + 1, items.Count);
+        List<RectTransform> currentList = mainMenu.activeSelf ? items : confirmItems;
+        currentIndex = MathFunctions.Mod(currentIndex + 1, currentList.Count);
+        if (mainMenu.activeSelf) previousIndex = currentIndex;
         UpdateSelector();
     }
 
     private void UpdateSelector()
     {
-        RectTransform rect = items[currentIndex];
-        selector.rectTransform.anchoredPosition = rect.anchoredPosition;
+        List<RectTransform> currentList = mainMenu.activeSelf ? items : confirmItems;
+        GameObject currentObject = mainMenu.activeSelf ? mainMenu : confirmMenu;
+        RectTransform rect = currentList[currentIndex];
+        selector.rectTransform.anchoredPosition = rect.anchoredPosition + (Vector2)currentObject.transform.localPosition;
         selector.rectTransform.sizeDelta = new Vector2(rect.sizeDelta.x + offsetX, sizeY);
-        if(currentIndex == 3)
+
+        if(currentIndex >= 3 || confirmMenu.activeSelf)
         {
             selector.transform.GetChild(0).gameObject.SetActive(false);
             selector.transform.GetChild(1).gameObject.SetActive(false);
@@ -150,8 +165,58 @@ public class PauseMenu : MonoBehaviour
             selector.transform.GetChild(1).gameObject.SetActive(true);
         }
     }
+    
+    public void ControlMainMenu()
+    {
+        if (currentIndex == 0)
+        {
+            if (Input.GetAxis("Horizontal") >= 0.8f && tPrevious >= timeOffset)
+            {
+                ResolutionUp();
+            }
+            else if (Input.GetAxis("Horizontal") <= -0.8f && tPrevious >= timeOffset)
+            {
+                ResolutionDown();
+            }
+        }
+        else if (currentIndex == 1)
+        {
+            if (Input.GetAxis("Horizontal") >= 0.8f && tPrevious >= timeOffset)
+            {
+                ToggleFullScreen();
+            }
+            else if (Input.GetAxis("Horizontal") <= -0.8f && tPrevious >= timeOffset)
+            {
+                ToggleFullScreen();
+            }
+        }
+        else if (currentIndex == 2)
+        {
+            if (Input.GetAxis("Horizontal") >= 0.8f)
+            {
+                VolumeUp();
+            }
+            else if (Input.GetAxis("Horizontal") <= -0.8f)
+            {
+                VolumeDown();
+            }
+        }
 
-    private void ClickOption()
+        if (Input.GetButtonDown("Interact"))
+        {
+            ClickOptionMainMenu();
+        }
+    }    
+    
+    public void ControlConfirm()
+    {
+        if (Input.GetButtonDown("Interact"))
+        {
+            ClickOptionConfirmMenu();
+        }
+    }
+
+    private void ClickOptionMainMenu()
     {
         if(currentIndex == 0)
         {
@@ -161,9 +226,33 @@ public class PauseMenu : MonoBehaviour
         {
             ToggleFullScreen();
         }
-        else if(currentIndex == 3)
+        else if (currentIndex == 3)
+        {
+            confirmAction = ReturnLobby;
+            confirmText.text = "Do you want to return to lobby?";
+            ShowConfirm();
+        }
+        else if (currentIndex == 4)
+        {
+            confirmAction = QuestionRestartGame;
+            confirmText.text = "Do you want to restart the save file?";
+            ShowConfirm();
+        }
+        else if(currentIndex == 5)
         {
             Resume();
+        }
+    }
+
+    private void ClickOptionConfirmMenu()
+    {
+        if (currentIndex == 0)
+        {
+            confirmAction();
+        }
+        else if (currentIndex == 1)
+        {
+            Init();
         }
     }
 
@@ -209,6 +298,28 @@ public class PauseMenu : MonoBehaviour
         }
         sliderVolume.value -= audioIncrementValue;
         audioMixer.SetFloat("Volume", sliderVolume.value);
+    }
+
+    private void ReturnLobby()
+    {
+        Debug.Log("Return lobby");
+        Resume();
+    }
+
+    private void QuestionRestartGame()
+    {
+        confirmAction = ConfirmRestartGame;
+        confirmText.text = "Are you sure you want to delete all data? You cannot revert this action";
+        ShowConfirm();
+        confirmText.color = Color.red;
+        confirmItems[0].GetComponent<TextMeshProUGUI>().color = Color.red;
+    }
+
+    private void ConfirmRestartGame()
+    {
+        SaveSystem.DeleteGame();
+        Resume();
+        SceneManager.LoadScene("GameLoader");
     }
 
     private void Resume()

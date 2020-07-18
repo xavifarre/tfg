@@ -25,6 +25,18 @@ public enum MinionState
     Dead
 };
 
+//Enumerador d'estats genèric utilitzat pels minions
+public enum GameState
+{
+    Zero,
+    Started,
+    SwordPicked,
+    SummonerDefeated,
+    PerserverDefeated,
+    End
+};
+
+
 //Classe Poligon per a comprovar si un punt està dins d'un poligon donat
 public static class Poly
 {

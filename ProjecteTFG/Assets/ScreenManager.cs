@@ -7,9 +7,9 @@ public class ScreenManager : MonoBehaviour
 {
     public static ScreenManager instance;
 
-    public Image deathScreen;
-    public HitScreen hitScreen;
-    public Image blackScreen;
+    private Image deathScreen;
+    private HitScreen hitScreen;
+    private Image blackScreen;
 
     private Player player;
 
@@ -17,6 +17,14 @@ public class ScreenManager : MonoBehaviour
     {
         instance = this;
         player = FindObjectOfType<Player>();
+        deathScreen = GameObject.Find("DeathImage").GetComponent<Image>();
+        hitScreen = FindObjectOfType<HitScreen>();
+        blackScreen = GameObject.Find("ScreenOverlay").GetComponent<Image>();
+    }
+
+    public void ShowHitScreen()
+    {
+        hitScreen.ShowScreen();
     }
 
     public void ShowDeathScreen()
@@ -33,7 +41,7 @@ public class ScreenManager : MonoBehaviour
 
         float fadeDuration = 2;
         float t = 0;
-        deathScreen.gameObject.SetActive(true);
+        deathScreen.enabled = true;
         Color c = deathScreen.color;
         while (t < fadeDuration)
         {
@@ -59,6 +67,25 @@ public class ScreenManager : MonoBehaviour
         {
             t += Time.unscaledDeltaTime;
             blackScreen.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, t / 5));
+            yield return null;
+        }
+    }
+
+    public void StartFadeHideScreen(float duration, float delay = 0)
+    {
+        StartCoroutine(IFadeHideScreen(duration, delay));
+    }
+
+    private IEnumerator IFadeHideScreen(float duration, float delay)
+    {
+        float t = 0;
+        blackScreen.color = new Color(0, 0, 0, 0);
+        yield return new WaitForSeconds(delay);
+        t = 0;
+        while (t < duration)
+        {
+            t += Time.unscaledDeltaTime;
+            blackScreen.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, t / 5));
             yield return null;
         }
     }

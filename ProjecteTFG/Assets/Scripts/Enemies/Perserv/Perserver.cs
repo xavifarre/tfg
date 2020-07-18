@@ -234,6 +234,8 @@ public class Perserver : Boss
 
     #endregion
 
+    #region Basic functions
+
     protected override void Init()
     {
         blades = new List<Blade>();
@@ -573,6 +575,14 @@ public class Perserver : Boss
         }
         base.DisableEnemy();
     }
+
+    public override void Die()
+    {
+        base.Die();
+        Globals.gameState = GameState.PerserverDefeated;
+    }
+
+    #endregion
 
     /*********************************************
     *                  ABILITIES                 *

@@ -8,13 +8,22 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/AttackTest.unity
-    guid: 0cf64ceeb8a620b47a86d29d9039eedc
-  - enabled: 0
-    path: Assets/Scenes/PreserverLevel.unity
-    guid: 0771dd7e7139c794bb4a53a73231e510
+  - enabled: 1
+    path: Assets/Scenes/GameLoader.unity
+    guid: fd81ca2b5d2f73741bcb8395379b5f8d
+  - enabled: 1
+    path: Assets/Scenes/MenuLevel.unity
+    guid: 46a4e3f5e8fd2bd4a9b3d69061f32504
+  - enabled: 1
+    path: Assets/Scenes/StartingLevel.unity
+    guid: 6cb8d121e0d5be84da9ae64a072a2ade
+  - enabled: 1
+    path: Assets/Scenes/ToriiLevel.unity
+    guid: efe1bdf6bdd3a654984851f37ae43013
   - enabled: 1
     path: Assets/Scenes/SummonerLevel.unity
     guid: 8fd4966f01eadfd4790242c557628889
+  - enabled: 1
+    path: Assets/Scenes/PreserverLevel.unity
+    guid: 0771dd7e7139c794bb4a53a73231e510
   m_configObjects: {}

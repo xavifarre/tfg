@@ -22,7 +22,7 @@ public class Boss : Enemy
 
     public override void Die()
     {
-        
+        Globals.killCount += 1;
     }
 
     public override void Hit(Attack attack)

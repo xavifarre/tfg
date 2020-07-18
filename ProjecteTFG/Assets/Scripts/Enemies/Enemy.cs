@@ -79,6 +79,7 @@ public abstract class Enemy : MonoBehaviour
         CheckDeath();
         ShowDamage(damage);
         DamageTick();
+        Globals.damageDealtCount += damage;
         gm.tLastHit = 0;
     }
 

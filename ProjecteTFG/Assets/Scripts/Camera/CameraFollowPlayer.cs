@@ -19,8 +19,6 @@ public class CameraFollowPlayer : MonoBehaviour
     private Vector3 desiredPosition;
     private Vector3 realPos;
 
-    private float lastTime = 0;
-
     private void Start()
     {
         cm = FindObjectOfType<CameraManager>();

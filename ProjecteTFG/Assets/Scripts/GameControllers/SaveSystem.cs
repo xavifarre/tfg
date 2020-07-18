@@ -16,7 +16,7 @@ public static class SaveSystem
         stream.Close();
     }
 
-    public static SaveData LoadGame()
+    public static void LoadGame()
     {
         if (File.Exists(path))
         {
@@ -26,13 +26,17 @@ public static class SaveSystem
             SaveData data = formatter.Deserialize(stream) as SaveData;
             stream.Close();
 
-            return data;
+            Globals.LoadGlobals(data);
         }
         else
         {
-            Debug.LogError("Save file not found in " + path);
-            return null;
+            Debug.LogWarning("Save file not found in " + path);
         }
 
+    }
+
+    public static void DeleteGame()
+    {
+        File.Delete(path);
     }
 }
