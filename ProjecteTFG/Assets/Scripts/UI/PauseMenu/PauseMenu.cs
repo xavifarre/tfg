@@ -242,6 +242,12 @@ public class PauseMenu : MonoBehaviour
         {
             Resume();
         }
+        else if (currentIndex == 6)
+        {
+            confirmAction = QuitGame;
+            confirmText.text = "Do you want to close the game?";
+            ShowConfirm();
+        }
     }
 
     private void ClickOptionConfirmMenu()
@@ -306,6 +312,11 @@ public class PauseMenu : MonoBehaviour
         Resume();
     }
 
+    private void QuitGame()
+    {
+        Application.Quit();
+    }
+
     private void QuestionRestartGame()
     {
         confirmAction = ConfirmRestartGame;
@@ -327,6 +338,7 @@ public class PauseMenu : MonoBehaviour
         tPrevious = 0;
         GameManager.instance.ResumeGame();
     }
+
     private void UpdateTextFullScreen(bool isFull)
     {
         items[1].GetComponent<TextMeshProUGUI>().text = isFull ? "Yes" : "No";

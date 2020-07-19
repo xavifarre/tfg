@@ -724,7 +724,6 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             ShardHeal(shard.accumulatedHeal);
         }
         Globals.crystalCount += 1;
-        Debug.Log(healFromMinionsCounter);
     }
 
     public void ShardHeal(float accumulatedHeal)

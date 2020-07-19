@@ -27,5 +27,14 @@ public static class SoundCollection
         {"biter_die", Resources.Load<AudioClip>("Audio/Enemies/Biter/biter_die")},
 
         #endregion
+
+        #region Enviroment
+
+        {"rain", Resources.Load<AudioClip>("Audio/Enviroment/rain")},
+        {"thunder01", Resources.Load<AudioClip>("Audio/Enviroment/thunder01")},
+        {"thunder02", Resources.Load<AudioClip>("Audio/Enviroment/thunder02")},
+        {"thunder03", Resources.Load<AudioClip>("Audio/Enviroment/thunder03")},
+
+        #endregion
     };
 }

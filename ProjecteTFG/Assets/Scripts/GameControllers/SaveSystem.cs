@@ -37,6 +37,7 @@ public static class SaveSystem
 
     public static void DeleteGame()
     {
+        Globals.ResetGlobals();
         File.Delete(path);
     }
 }

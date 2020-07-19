@@ -141,6 +141,7 @@
     <Compile Include="Assets\Scripts\Utils\ParticleDestroyer.cs" />
     <Compile Include="Assets\Scripts\Utils\RectArea.cs" />
     <Compile Include="Assets\StartGameObject.cs" />
+    <Compile Include="Assets\StartLevelManager.cs" />
     <Compile Include="Assets\ToriiChangeLevel.cs" />
     <Compile Include="Assets\TutorialManager.cs" />
     <Compile Include="Assets\UndodgeableSpinCollider.cs" />

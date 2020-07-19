@@ -52,6 +52,7 @@ public class ScreenManager : MonoBehaviour
         }
     }
 
+
     public void StartFadeShowScreen(float duration, float delay = 0)
     {
         StartCoroutine(IFadeShowScreen(duration, delay));

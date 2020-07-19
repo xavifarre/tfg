@@ -14,6 +14,12 @@ public class ThunderEffect : MonoBehaviour
 
     private Color initialColor;
 
+    public SoundController soundController1;
+    public SoundController soundController2;
+    public SoundController soundController3;
+
+    private int lastRand = -1;
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -49,7 +55,30 @@ public class ThunderEffect : MonoBehaviour
 
         float ti = 0;
 
-        while(ti < duration)
+        int rand = Random.Range(0, 3);
+        while(lastRand == rand)
+        {
+            rand = Random.Range(0, 3);
+        }
+        lastRand = rand;
+        if(rand == 0)
+        {
+            soundController1.PlaySound("thunder01");
+            soundController1.RandomPitch(0.5f, 1.5f);
+        }
+        else if(rand == 1)
+        {
+            soundController2.PlaySound("thunder02");
+            soundController2.RandomPitch(0.5f, 1.5f);
+        }        
+        else if(rand == 2)
+        {
+            soundController3.PlaySound("thunder03");
+            soundController3.RandomPitch(0.5f, 1.5f);
+        }
+
+
+        while (ti < duration)
         {
             ti += Time.deltaTime;
             if (fade)
