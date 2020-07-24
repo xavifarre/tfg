@@ -43,7 +43,8 @@ public class GameManager : MonoBehaviour
         tLastHit += Time.deltaTime;
         if (Input.GetButtonDown("Pause"))
         {
-            gamePaused = gamePaused ? ResumeGame() : PauseGame();
+            if (gamePaused) ResumeGame();
+            else PauseGame();
         }
     }
 
@@ -52,18 +53,20 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    public bool PauseGame()
+    public void PauseGame()
     {
         Time.timeScale = 0;
         PauseCanvas.Show();
-        return true;
+        gamePaused = true;
+        AudioListener.pause = true;
     }
 
-    public bool ResumeGame()
+    public void ResumeGame()
     {
         Time.timeScale = 1;
         PauseCanvas.Hide();
-        return false;
+        gamePaused = false;
+        AudioListener.pause = false;
     }
 
     public void BlockInputs(bool block)

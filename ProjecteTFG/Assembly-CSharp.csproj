@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\Effects\Shadows\ShadowCopySprite.cs" />
     <Compile Include="Assets\Scripts\Effects\ThunderEffect.cs" />
     <Compile Include="Assets\Scripts\Enemies\Boss.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Destroyer\Destroyer.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Minion.cs" />
     <Compile Include="Assets\Scripts\Enemies\Minions\Attacks\BiterAttackCollider.cs" />
