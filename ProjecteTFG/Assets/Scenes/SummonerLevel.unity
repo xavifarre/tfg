@@ -3437,7 +3437,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 864447219}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -4575,7 +4575,7 @@ PrefabInstance:
     - target: {fileID: 2712022672169861259, guid: ef8b07ff654dd3f4c8f6c9ad39e9dff5,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.56
+      value: -4.7
       objectReference: {fileID: 0}
     - target: {fileID: 2712022672169861259, guid: ef8b07ff654dd3f4c8f6c9ad39e9dff5,
         type: 3}
@@ -4685,27 +4685,37 @@ PrefabInstance:
     - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
       propertyPath: ratiosDamageFase.Array.data[0]
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
       propertyPath: ratiosDamageFase.Array.data[1]
-      value: 0.6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
       propertyPath: ratiosDamageFase.Array.data[2]
-      value: 0.4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
       propertyPath: maxEnemies
-      value: 0
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
+        type: 3}
+      propertyPath: health
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 449336332740483365, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
       propertyPath: m_Name
       value: Summoner
+      objectReference: {fileID: 0}
+    - target: {fileID: 449336332740483365, guid: 640c85d469e290a44ad85c5087d2fdd3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 449336332740483369, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}

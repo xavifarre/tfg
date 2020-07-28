@@ -361,4 +361,14 @@ public class MathFunctions : MonoBehaviour
 
         return time;
     }
+
+    public static float HzToRadSeg(float hz)
+    {
+        return hz * 2 * Mathf.PI;
+    }
+
+    public static float RadSegToHz(float rads)
+    {
+        return rads / (2 * Mathf.PI);
+    }
 }

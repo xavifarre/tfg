@@ -11,6 +11,11 @@ public class RectArea : MonoBehaviour
         return new Vector2(Random.Range(transform.position.x - spawnAreaSize.x / 2, transform.position.x + spawnAreaSize.x / 2), Random.Range(transform.position.y - spawnAreaSize.y / 2, transform.position.y + spawnAreaSize.y / 2));
     }
 
+    public bool isInside(Vector2 pos)
+    {
+        return pos.x > transform.position.x - spawnAreaSize.x / 2 && pos.x < transform.position.x + spawnAreaSize.x / 2 && pos.y > transform.position.y - spawnAreaSize.y / 2 && pos.y < transform.position.y + spawnAreaSize.y / 2;
+    }
+
     private void OnDrawGizmosSelected()
     {
         if(!transform.parent || !transform.parent.GetComponent<Spawner>() || transform.parent.GetComponent<Spawner>().type == 0)

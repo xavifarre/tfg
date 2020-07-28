@@ -570,6 +570,13 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             }
         }
     }
+    public void HitByTime(int damage)
+    {
+        if (!invulnerable)
+        {
+            GetDamage(damage, false);
+        }
+    }
 
     public void DashCrash(Enemy enemy)
     {
@@ -577,7 +584,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         KnockBack(enemy.transform.position, enemy.knockBackValue);
     }
 
-    public void GetDamage(int damage)
+    public void GetDamage(int damage, bool setInvulnerable = true)
     {
 
         //Reset player layer
@@ -597,7 +604,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             {
                 Die();
             }
-            else
+            else if(setInvulnerable)
             {
                 DamageInvulnerability();
             }

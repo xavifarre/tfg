@@ -36,13 +36,17 @@ public class Slasher : Minion
 
         if (tAction >= attackDuration)
         {
+            animator.SetTrigger("EndAction");
+            UpdateSpriteFlip();
             StartIdle();
         }
     }
 
     private void Charge()
     {
+        UpdateSpriteFlip();
         state = MinionState.Charge;
+        animator.SetTrigger("Attack");
         StartCoroutine(ICharge());
     }
 
@@ -52,6 +56,7 @@ public class Slasher : Minion
         endActionPoint = realPos + (player.transform.position + (Vector3)player.lastDir.normalized * player.movementValue.magnitude - startActionPoint).normalized * attackDistance;
         tAction = 0;
         state = MinionState.Attack;
+        UpdateSpriteFlip();
     }
 
     IEnumerator ICharge()
@@ -61,5 +66,12 @@ public class Slasher : Minion
         {
             Attack();
         }
+    }
+
+    protected override void KnockBack(float knockBack)
+    {
+        base.KnockBack(knockBack);
+        animator.SetTrigger("EndAction");
+        UpdateSpriteFlip();
     }
 }
