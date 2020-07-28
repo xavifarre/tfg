@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -122,6 +123,12 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     //Default material
     protected Material defaultMaterial;
 
+    [Header("Animators")]
+    public AnimatorController swordlessAnimatorController;
+    public AnimatorController baseAnimatorController;
+    public Material baseMaterial;
+    public Material glowMaterial;
+    public bool swordPicked;
 
     [Header("Audio")]
     public SoundController soundController; 
@@ -134,7 +141,17 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         animator = GetComponent<Animator>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
-        defaultMaterial = spriteRenderer.material;
+
+
+        if (Globals.gameState < GameState.SwordPicked || !swordPicked)
+        {
+            ChangeSpriteToSwordless();
+        }
+        else
+        {
+            ChangeSpriteToDefault();
+        }
+
 
         gm = FindObjectOfType<GameManager>();
 
@@ -181,20 +198,25 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     {
         if (!gm.inputsBlocked && !gm.gamePaused)
         {
-            //Check Queue attack input
-            if (state == State.Attack)
+            if (swordPicked)
             {
-                QueueAttackInput();
-            }
+                //Check Queue attack input
+                if (state == State.Attack)
+                {
+                    QueueAttackInput();
+                }
 
-            CheckRecallInput();
+                CheckRecallInput();
+            }
 
             //Check inputs
             if (state == State.Idle)
             {
                 CheckMoveInputs();
-                CheckAttackInput();
-
+                if (swordPicked)
+                {
+                    CheckAttackInput();
+                }
                 //Store last safe position (used for spawning when player falls)
                 lastSafePosition = transform.position;
             }
@@ -319,7 +341,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     bool CanDash()
     {
-        return state == State.Idle || state == State.Attack;
+        return (state == State.Idle || state == State.Attack) && swordPicked;
     }
 
     void Dash()
@@ -744,6 +766,13 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         shardHealParticles.Play();
     }
 
+    public void PickSword()
+    {
+        ChangeSpriteToDefault();
+        swordPicked = true;
+        Globals.gameState = GameState.SwordPicked;
+    }
+
     //Actualitzar els paràmetres d'animació
     private void UpdateAnimations()
     {
@@ -753,8 +782,11 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         //Si està en moviment activar la layer de moviment
         animator.SetLayerWeight(1, GetMovementInput().magnitude == 0 ? 0 : 1);
 
-        //Si està realitzant una acció activar la layer d'accions
-        animator.SetLayerWeight(2, state == 0 ? 0 : 1);      
+        if (swordPicked)
+        {
+            //Si està realitzant una acció activar la layer d'accions
+            animator.SetLayerWeight(2, state == 0 ? 0 : 1);
+        }
     }
 
     private void ResetLayer()
@@ -775,6 +807,20 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     protected void ChangeLayerIgnore()
     {
         gameObject.layer = LayerMask.NameToLayer("IgnoreAll");
+    }
+
+    public void ChangeSpriteToSwordless()
+    {
+        animator.runtimeAnimatorController = swordlessAnimatorController;
+        spriteRenderer.material = baseMaterial;
+        defaultMaterial = baseMaterial;
+    }
+
+    public void ChangeSpriteToDefault()
+    {
+        animator.runtimeAnimatorController = baseAnimatorController;
+        spriteRenderer.material = glowMaterial;
+        defaultMaterial = glowMaterial;
     }
 
     protected void DisableAllColliders()

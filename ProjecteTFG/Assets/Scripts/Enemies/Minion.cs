@@ -110,7 +110,10 @@ public class Minion : Enemy, IFallableObject
         if (vulnerable)
         {
             GetDamage(attack.damage);
-            KnockBack(attack.knockback);
+            if(state != MinionState.Dead)
+            {
+                KnockBack(attack.knockback);
+            }
         }
     }
 

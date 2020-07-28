@@ -119,6 +119,7 @@
     <Compile Include="Assets\Scripts\GameElements\Spawner.cs" />
     <Compile Include="Assets\Scripts\GameElements\SpawnerGroup.cs" />
     <Compile Include="Assets\Scripts\GameElements\Stairs.cs" />
+    <Compile Include="Assets\Scripts\GameElements\SwordPickUp.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Globals.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IFallableObject.cs" />

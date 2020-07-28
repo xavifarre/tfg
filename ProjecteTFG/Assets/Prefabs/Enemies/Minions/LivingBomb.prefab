@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2329354534192860890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.890587, y: -27.814335, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4510587002399973590}
@@ -142,6 +142,7 @@ MonoBehaviour:
   size: 1
   health: 99999
   knockBackValue: 1
+  soundController: {fileID: 0}
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   hitColorDuration: 0.05
   hitMaterial: {fileID: 2100000, guid: 00b2286b10131024ca63aab6387d9618, type: 2}

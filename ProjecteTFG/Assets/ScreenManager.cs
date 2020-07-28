@@ -86,7 +86,7 @@ public class ScreenManager : MonoBehaviour
         while (t < duration)
         {
             t += Time.unscaledDeltaTime;
-            blackScreen.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, t / 5));
+            blackScreen.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, t / duration));
             yield return null;
         }
     }

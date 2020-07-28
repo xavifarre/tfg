@@ -23,7 +23,11 @@ public class CameraFollowPlayer : MonoBehaviour
     {
         cm = FindObjectOfType<CameraManager>();
         player = FindObjectOfType<Player>();
-
+        if (followingPlayer)
+        {
+            transform.position = player.transform.position + offset;
+        }
+        realPos = transform.position;
         smoothTime = defaultSmoothTime;
     }
 

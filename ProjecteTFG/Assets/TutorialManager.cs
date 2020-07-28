@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
+    public static TutorialManager instance;
+
     // Start is called before the first frame update
     void Start()
     {
-        StartTutorial();
+        instance = this;
     }
 
     // Update is called once per frame

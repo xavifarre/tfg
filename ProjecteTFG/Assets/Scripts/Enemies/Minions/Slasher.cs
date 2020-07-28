@@ -52,8 +52,6 @@ public class Slasher : Minion
 
     private void Attack()
     {
-        startActionPoint = realPos;
-        endActionPoint = realPos + (player.transform.position + (Vector3)player.lastDir.normalized * player.movementValue.magnitude - startActionPoint).normalized * attackDistance;
         tAction = 0;
         state = MinionState.Attack;
         UpdateSpriteFlip();
@@ -61,7 +59,10 @@ public class Slasher : Minion
 
     IEnumerator ICharge()
     {
-        yield return new WaitForSeconds(chargeTime);
+        yield return new WaitForSeconds(chargeTime * 0.7f);
+        startActionPoint = realPos;
+        endActionPoint = realPos + (player.transform.position + (Vector3)player.lastDir.normalized * player.movementValue.magnitude * player.speed * chargeTime * 0.5f - startActionPoint).normalized * attackDistance;
+        yield return new WaitForSeconds(chargeTime * 0.3f);
         if (state == MinionState.Charge)
         {
             Attack();
