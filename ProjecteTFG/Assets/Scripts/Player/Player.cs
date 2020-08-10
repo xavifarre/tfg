@@ -143,13 +143,14 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
 
-        if (Globals.gameState < GameState.SwordPicked || !swordPicked)
+        if (Globals.gameState >= GameState.SwordPicked || swordPicked)
         {
-            ChangeSpriteToSwordless();
+            swordPicked = true;
+            ChangeSpriteToDefault();
         }
         else
         {
-            ChangeSpriteToDefault();
+            ChangeSpriteToSwordless();
         }
 
 
@@ -743,7 +744,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         realPos = lastSafePosition  -(Vector3)lastDir * 1;
         Move(realPos);
         state = State.Idle;
-        GetDamage(1);
+        GetDamage(5);
     }
 
     public void ShardPicked(Shard shard)
@@ -779,13 +780,18 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         //Actualitzar la ultima direcció
         animator.SetInteger("Direction", MathFunctions.GetDirection(lastDir));
 
-        //Si està en moviment activar la layer de moviment
-        animator.SetLayerWeight(1, GetMovementInput().magnitude == 0 ? 0 : 1);
-
         if (swordPicked)
         {
+            //Si està en moviment activar la layer de moviment
+            animator.SetLayerWeight(1, GetMovementInput().magnitude == 0 ? 0 : 1);
+
             //Si està realitzant una acció activar la layer d'accions
             animator.SetLayerWeight(2, state == 0 ? 0 : 1);
+        }
+        else
+        {
+            //Si està en moviment activar la layer de moviment sense espasa
+            animator.SetLayerWeight(4, GetMovementInput().magnitude == 0 ? 0 : 1);
         }
     }
 
@@ -811,16 +817,17 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     public void ChangeSpriteToSwordless()
     {
-        animator.runtimeAnimatorController = swordlessAnimatorController;
         spriteRenderer.material = baseMaterial;
         defaultMaterial = baseMaterial;
+        animator.SetLayerWeight(3, 1);
+
     }
 
     public void ChangeSpriteToDefault()
     {
-        animator.runtimeAnimatorController = baseAnimatorController;
         spriteRenderer.material = glowMaterial;
         defaultMaterial = glowMaterial;
+        animator.SetLayerWeight(3, 0);
     }
 
     protected void DisableAllColliders()

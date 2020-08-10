@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destroyer : Boss
+public class Destroyer : Boss, IState
 {
     #region Variables
 
     public List<float> lagTimeMultiplierPerFase;
 
+    private State state;
+
     [Header("Distance evaluation")]
     public float shortDistance = 2;
     public float mediumDistance = 6;
-
 
     //Abilities
     public enum Ability { Slash, Dash, CrystalsUp, OrbitalStrike, SwordsCircle, DashSlam, HorizontalPierce, None };
@@ -51,6 +52,11 @@ public class Destroyer : Boss
 
     [Header("Misc")]
     public RectArea walkableArea;
+
+    [Header("Particles")]
+    public ParticlePlayer dieParticles;
+    public TrailRenderer dashTrail;
+    public DashParticles dashParticles;
 
     #endregion
 
@@ -205,6 +211,8 @@ public class Destroyer : Boss
 
     protected override void UpdateEnemy()
     {
+        UpdateDashTrail();
+
         if (Input.GetKeyDown("j"))
         {
             Slash();
@@ -265,17 +273,17 @@ public class Destroyer : Boss
         else if (distancia == 1)
         {
             float rand = Random.value;
-            if(rand < fase0Medium[0])
+            if (rand < fase0Medium[0])
             {
                 CastAbility(Ability.Slash);
             }
-            else if(rand < fase0Medium[1])
+            else if (rand < fase0Medium[1])
             {
                 CastAbility(Ability.HorizontalPierce);
             }
             else if (rand < fase0Medium[2])
             {
-                CastAbility(Ability.Dash,false);
+                CastAbility(Ability.Dash, false);
             }
             else
             {
@@ -420,14 +428,32 @@ public class Destroyer : Boss
         StartFase(0);
     }
 
+    public override void Hit(Attack attack)
+    {
+        base.Hit(attack);
+        CheckFaseChange();
+    }
+
     public override void Die()
     {
         base.Die();
+        StopAllCoroutines();
+        state = State.Dead;
+        ChangeLayerIgnore();
+        StartCoroutine(IDieAnim());
+        gm.SlowDownGame(killSlowScale, killSlowTime);
         Globals.gameState = GameState.End;
+        SaveSystem.SaveGame();
+    }
+
+    private IEnumerator IDieAnim()
+    {
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(IDie());
+        Instantiate(dieParticles, transform.position, Quaternion.Euler(-90, 0, 0));
     }
 
     #endregion
-
 
     #region Abilities functions
 
@@ -441,7 +467,7 @@ public class Destroyer : Boss
             {
                 Slash();
             }
-            else if(ability == Ability.Dash)
+            else if (ability == Ability.Dash)
             {
                 Dash(dashIn);
             }
@@ -486,7 +512,7 @@ public class Destroyer : Boss
         StopAbility();
         currentAbilityRoutine = IDash(dashIn);
         StartCoroutine(currentAbilityRoutine);
-    }    
+    }
 
     public void CrystalsUp()
     {
@@ -530,7 +556,7 @@ public class Destroyer : Boss
 
     public void StopAbility()
     {
-        if(currentAbilityRoutine != null)
+        if (currentAbilityRoutine != null)
         {
             StopCoroutine(currentAbilityRoutine);
         }
@@ -546,6 +572,8 @@ public class Destroyer : Boss
         yield return new WaitForSeconds(slashStats.prepDuration);
 
         int iSlash = 0;
+
+        while (iSlash < slashStats.slashesPerFase[fase] || (iSlash == slashStats.slashesPerFase[fase] && CheckDistanceToPlayer() == 0 && fase <= 1))
 
         while(iSlash < slashStats.slashesPerFase[fase] || (iSlash == slashStats.slashesPerFase[fase] && CheckDistanceToPlayer() == 0))
         {
@@ -582,7 +610,7 @@ public class Destroyer : Boss
             yield return new WaitForSeconds(slashStats.timeBetweenSlashes[fase]);
 
             iSlash += 1;
-            if(fase == 2 && Random.value < slashStats.extraSlashProb)
+            if (fase == 2 && Random.value < slashStats.extraSlashProb)
             {
                 iSlash = -1;
             }
@@ -598,7 +626,7 @@ public class Destroyer : Boss
 
         StartCoroutine(ICooldownDash());
 
-        if(dashIn)
+        if (dashIn)
         {
             destPoint = Random.Range(0, 2) == 0 ? FindRandomMovePoint(0, shortDistance, dashStats.minDistance) : FindRandomMovePoint(shortDistance, mediumDistance, dashStats.minDistance);
         }
@@ -606,6 +634,10 @@ public class Destroyer : Boss
         {
             destPoint = FindRandomMovePoint(mediumDistance, 10000, dashStats.minDistance);
         }
+
+        state = State.Dash;
+        ChangeLayerIgnore();
+        SpawnDashParticles(startPoint, destPoint);
 
         float t = 0;
         while (t < dashStats.duration)
@@ -615,6 +647,8 @@ public class Destroyer : Boss
             PixelPerfectMovement.Move(realPos, rb);
             yield return null;
         }
+        state = State.Idle;
+        ResetLayer();
 
         EndAbility(Ability.Dash, dashStats.lagTime);
     }
@@ -634,33 +668,33 @@ public class Destroyer : Boss
             crystal.damage = crystalsUpStats.damage;
             crystal.knockback = crystalsUpStats.knockback;
             Vector3 spawnPoint = Random.insideUnitCircle.normalized * Random.Range(crystalsUpStats.spawnMinRadius, crystalsUpStats.spawnMaxRadius);
-            while (IsNearOthersCrystals(spawnPoint + transform.position, crystalList, crystalsUpStats.crystalMinDistance/crystalsUpStats.nCrystals))
+            while (IsNearOthersCrystals(spawnPoint + transform.position, crystalList, crystalsUpStats.crystalMinDistance / crystalsUpStats.nCrystals))
             {
                 spawnPoint = Random.insideUnitCircle.normalized * Random.Range(crystalsUpStats.spawnMinRadius, crystalsUpStats.spawnMaxRadius);
             }
             crystal.transform.position = transform.position + spawnPoint;
             crystalList.Add(crystal);
             crystal.Float();
-            yield return new WaitForSeconds(crystalsUpStats.crystalSpawnDuration/crystalsUpStats.nCrystals);
+            yield return new WaitForSeconds(crystalsUpStats.crystalSpawnDuration / crystalsUpStats.nCrystals);
         }
         crystalsUpStats.circleObject.SetActive(false);
         yield return new WaitForSeconds(crystalsUpStats.castDelay);
 
-        foreach(CrystalDestroyer crystal in crystalList)
+        foreach (CrystalDestroyer crystal in crystalList)
         {
             crystal.AttackPlayer(crystalsUpStats.crystalSpeed, crystalsUpStats.crystalDuration);
-            yield return new WaitForSeconds(crystalsUpStats.crystalCastDuration/crystalsUpStats.nCrystals);
+            yield return new WaitForSeconds(crystalsUpStats.crystalCastDuration / crystalsUpStats.nCrystals);
         }
 
         EndAbility(Ability.CrystalsUp, crystalsUpStats.lagTime);
     }
-    
+
     private IEnumerator IOrbitalStrike()
     {
         orbitalStrikeStats.circleObject.SetActive(true);
         orbitalStrikeStats.circleObject.transform.localScale = Vector3.one * orbitalStrikeStats.circleRadius;
         yield return new WaitForSeconds(orbitalStrikeStats.prepDuration);
-        
+
         OrbitalStrike strike = Instantiate(orbitalStrikeStats.orbitalObject, player.transform.position, Quaternion.identity);
         strike.damage = orbitalStrikeStats.damage;
         strike.transform.localScale = Vector3.one * orbitalStrikeStats.orbitalRadius;
@@ -670,9 +704,9 @@ public class Destroyer : Boss
         orbitalStrikeStats.circleObject.SetActive(false);
 
         EndAbility(Ability.OrbitalStrike, orbitalStrikeStats.lagTime);
-        
+
     }
-    
+
     private IEnumerator ISwordsCircle()
     {
         StartCoroutine(ICooldownSwordsCircle());
@@ -680,7 +714,7 @@ public class Destroyer : Boss
         yield return new WaitForSeconds(swordsCircleStats.prepDuration);
         List<SwordDestroyer> swords = new List<SwordDestroyer>();
         int motionDir = Random.Range(0, 2) == 0 ? 1 : -1;
-        while(swords.Count < swordsCircleStats.nSwords)
+        while (swords.Count < swordsCircleStats.nSwords)
         {
             SwordDestroyer sword = Instantiate(swordsCircleStats.swordObject);
             sword.damage = swordsCircleStats.damage;
@@ -688,10 +722,10 @@ public class Destroyer : Boss
             sword.transform.localScale = swordsCircleStats.swordSize;
             sword.StartRotating(MathFunctions.HzToRadSeg(swordsCircleStats.swordFrequency), swordsCircleStats.spawnRadius, motionDir, this, swordsCircleStats.chargeDuration, swordsCircleStats.minRadius);
             swords.Add(sword);
-            yield return new WaitForSeconds((1/swordsCircleStats.swordFrequency) / swordsCircleStats.nSwords);
+            yield return new WaitForSeconds((1 / swordsCircleStats.swordFrequency) / swordsCircleStats.nSwords);
         }
 
-        foreach(SwordDestroyer sword in swords)
+        foreach (SwordDestroyer sword in swords)
         {
             sword.Charge(swords);
         }
@@ -717,14 +751,17 @@ public class Destroyer : Boss
             yield return null;
         }
     }
-    
+
     private IEnumerator IDashSlam()
     {
         yield return new WaitForSeconds(dashSlamStats.prepDuration);
         Vector3 startPoint = realPos;
         Vector3 destPoint = player.transform.position + (Vector3)player.lastDir.normalized * player.movementValue.magnitude * player.speed * dashSlamStats.dashDuration;
 
-        
+        state = State.Dash;
+        ChangeLayerIgnore();
+        SpawnDashParticles(startPoint, destPoint);
+
         float t = 0;
         while (t < dashSlamStats.dashDuration * 0.3f)
         {
@@ -735,6 +772,9 @@ public class Destroyer : Boss
             PixelPerfectMovement.Move(realPos, rb);
             yield return null;
         }
+
+        ResetLayer();
+        state = State.Idle;
 
         DashSlam slam = dashSlamStats.slamObject;
         slam.transform.localScale = dashSlamStats.slamRadius * Vector3.one;
@@ -775,6 +815,10 @@ public class Destroyer : Boss
             Debug.Log(walkableArea.isInside(destPoint) + " " + destPoint);
         }
 
+        state = State.Dash;
+        ChangeLayerIgnore();
+        SpawnDashParticles(startPoint, destPoint);
+
         float t = 0;
         while (t < dashStats.duration)
         {
@@ -783,6 +827,9 @@ public class Destroyer : Boss
             PixelPerfectMovement.Move(realPos, rb);
             yield return null;
         }
+
+        ResetLayer();
+        state = State.Idle;
         yield return new WaitForSeconds(horizontalPierceStats.prepDuration);
 
         horizontalPierceStats.pierceObject.gameObject.SetActive(true);
@@ -826,11 +873,11 @@ public class Destroyer : Boss
 
     #region Extra functions
 
-    private bool IsNearOthersCrystals(Vector3 candidate, List<CrystalDestroyer> crystals, float minDistance) 
+    private bool IsNearOthersCrystals(Vector3 candidate, List<CrystalDestroyer> crystals, float minDistance)
     {
-        foreach(CrystalDestroyer crystal in crystals)
+        foreach (CrystalDestroyer crystal in crystals)
         {
-            if(Vector3.Distance(crystal.transform.position, candidate) < minDistance)
+            if (Vector3.Distance(crystal.transform.position, candidate) < minDistance)
             {
                 return true;
             }
@@ -858,6 +905,29 @@ public class Destroyer : Boss
     }
 
     #endregion
+
+    #region Other
+
+    public State GetState()
+    {
+        return state;
+    }
+
+    private void UpdateDashTrail()
+    {
+        dashTrail.emitting = state == State.Dash;
+    }
+
+    private void SpawnDashParticles(Vector3 startPos, Vector3 endPos)
+    {
+        float speedMod = (endPos - startPos).magnitude;
+        DashParticles particlesInstance = Instantiate(dashParticles);
+        particlesInstance.transform.position = startPos;
+        particlesInstance.PlayParticles((endPos - startPos).normalized, speedMod * 10);
+    }
+
+    #endregion
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -872,6 +942,6 @@ public class Destroyer : Boss
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, crystalsUpStats.spawnMaxRadius);
         }
-       
+
     }
 }

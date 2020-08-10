@@ -93,7 +93,6 @@ public class Summoner : Boss
     //Materials
     [Header("Materials")]
     public Material disolveMaterial;
-    public Material disolveMaterialDie;
 
     [Header("Particles")]
     public ParticlePlayer dieParticles;
@@ -393,11 +392,6 @@ public class Summoner : Boss
 
         StartDashAnim();
 
-    }
-
-    private void ResetLayer()
-    {
-        gameObject.layer = LayerMask.NameToLayer("Boss");
     }
 
     private void StartDashAnim()
@@ -735,35 +729,6 @@ public class Summoner : Boss
         StartCoroutine(IDie());
 
         Instantiate(dieParticles, transform.position, Quaternion.Euler(-90,0,0));
-    }
-
-    IEnumerator IDie()
-    {
-        float t = 0;
-        float shakeDuration = 3;
-
-        StartCoroutine(IDieDisolve(shakeDuration));
-        Vector3 diePosition = transform.position;
-
-        while(t < shakeDuration)
-        {
-            t += Time.deltaTime;
-            transform.position = new Vector3(Random.Range(-100000, 100000) / 100000f, Random.Range(-100000, 100000) / 100000f).normalized * t / shakeDuration / 2 + diePosition;
-            yield return new WaitForFixedUpdate();
-        }
-        Destroy(gameObject);
-    }
-
-    private IEnumerator IDieDisolve(float shakeDuration)
-    {
-        float t = 0;
-        spriteRenderer.material = disolveMaterialDie;
-        while (t < shakeDuration)
-        {
-            t += Time.deltaTime;
-            spriteRenderer.material.SetFloat("_Fade", Mathf.Lerp(1, 0, t / shakeDuration));
-            yield return null;
-        }
     }
 
     private void KillAllMinions()

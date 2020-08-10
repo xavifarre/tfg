@@ -20,6 +20,8 @@ public class Boss : Enemy
     public float killSlowTime = 3f;
     public float killSlowScale = 0.2f;
 
+    public Material disolveMaterialDie;
+
     public override void Die()
     {
         Globals.killCount += 1;
@@ -62,6 +64,39 @@ public class Boss : Enemy
             }
         }
         return -1;
+    }
+    protected IEnumerator IDie()
+    {
+        float t = 0;
+        float shakeDuration = 3;
+
+        StartCoroutine(IDieDisolve(shakeDuration));
+        Vector3 diePosition = transform.position;
+
+        while (t < shakeDuration)
+        {
+            t += Time.deltaTime;
+            transform.position = new Vector3(Random.Range(-100000, 100000) / 100000f, Random.Range(-100000, 100000) / 100000f).normalized * t / shakeDuration / 2 + diePosition;
+            yield return new WaitForFixedUpdate();
+        }
+        Destroy(gameObject);
+    }
+
+    protected IEnumerator IDieDisolve(float shakeDuration)
+    {
+        float t = 0;
+        spriteRenderer.material = disolveMaterialDie;
+        while (t < shakeDuration)
+        {
+            t += Time.deltaTime;
+            spriteRenderer.material.SetFloat("_Fade", Mathf.Lerp(1, 0, t / shakeDuration));
+            yield return null;
+        }
+    }
+
+    protected void ResetLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer("Boss");
     }
 
     protected virtual void StartFase(int f)
