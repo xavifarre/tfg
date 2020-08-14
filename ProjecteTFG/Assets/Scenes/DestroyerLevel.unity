@@ -176,21 +176,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114939774282884152, guid: bc1105cebd13d6343a8d632813bf8948,
-        type: 3}
-      propertyPath: swordPicked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114939774282884152, guid: bc1105cebd13d6343a8d632813bf8948,
-        type: 3}
-      propertyPath: baseMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-    - target: {fileID: 114939774282884152, guid: bc1105cebd13d6343a8d632813bf8948,
-        type: 3}
-      propertyPath: glowMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 817d3159a6d08914e9bf1b05c31c880e, type: 2}
     - target: {fileID: 5385542337759519491, guid: bc1105cebd13d6343a8d632813bf8948,
         type: 3}
       propertyPath: m_Enabled

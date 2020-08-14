@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 2763209839440074465}
   - component: {fileID: 2763209839440074464}
   - component: {fileID: 6298920753837348144}
+  - component: {fileID: 6520278047971830243}
   m_Layer: 17
-  m_Name: PowderExplosion
+  m_Name: BarrelExplosion
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,8 +105,9 @@ SpriteRenderer:
   m_SortingLayerID: 528159245
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: be543e3891d95fc41b34e30cc75686dd, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.024403572, a: 0.29803923}
+  m_Sprite: {fileID: -7053555759572848587, guid: 745d1ef99e1962544ae2380c38a97bf1,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -115,3 +117,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6520278047971830243
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2763209839440074466}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0b62dd59555ef754aba2634dba5a0cce, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

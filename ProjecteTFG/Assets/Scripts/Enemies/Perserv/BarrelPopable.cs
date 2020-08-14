@@ -6,6 +6,10 @@ public class BarrelPopable : Barrel
     [HideInInspector]
     public Perserver perserver;
 
+    private void Start()
+    {
+        Init();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

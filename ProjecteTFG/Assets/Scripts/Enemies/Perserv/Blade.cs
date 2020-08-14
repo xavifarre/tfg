@@ -815,6 +815,16 @@ public class Blade : Attack
         enabled = false;
     }
 
+    public void DieBlade()
+    {
+        trail.enabled = false;
+        DieEffect dieEffect = GetComponent<DieEffect>();
+        if (dieEffect)
+        {
+            dieEffect.TriggerDie();
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")

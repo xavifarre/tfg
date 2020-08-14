@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScreenManager : MonoBehaviour
@@ -50,6 +51,10 @@ public class ScreenManager : MonoBehaviour
             deathScreen.color = new Color(c.r, c.g, c.b, alpha);
             yield return null;
         }
+
+        yield return new WaitForSecondsRealtime(5f);
+
+        SceneManager.LoadScene("ToriiLevel");
     }
 
 

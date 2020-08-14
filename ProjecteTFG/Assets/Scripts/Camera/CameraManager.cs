@@ -44,10 +44,19 @@ public class CameraManager : MonoBehaviour
         {
             if (cameraLimits[currentArea].box)
             {
-                float clampedX = Mathf.Clamp(desiredPosition.x, cameraLimits[currentArea].limits[0].x, cameraLimits[currentArea].limits[1].x);
-                float clampedY = Mathf.Clamp(desiredPosition.y, cameraLimits[currentArea].limits[1].y, cameraLimits[currentArea].limits[0].y);
+                float clampedX = Mathf.Clamp(
+                    desiredPosition.x,
+                    cameraLimits[currentArea].limits[0].x,
+                    cameraLimits[currentArea].limits[1].x);
+                float clampedY = Mathf.Clamp(
+                    desiredPosition.y,
+                    cameraLimits[currentArea].limits[1].y,
+                    cameraLimits[currentArea].limits[0].y);
 
-                desiredPosition = new Vector3(clampedX, clampedY, desiredPosition.z);
+                desiredPosition = new Vector3(
+                    clampedX,
+                    clampedY,
+                    desiredPosition.z);
             }
             else
             {

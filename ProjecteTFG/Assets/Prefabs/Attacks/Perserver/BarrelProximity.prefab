@@ -40,7 +40,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8885304137348659417}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -125,6 +125,9 @@ GameObject:
   - component: {fileID: 8885304137747474852}
   - component: {fileID: 8885304137747474907}
   - component: {fileID: 8147185664210455229}
+  - component: {fileID: 544950460970342256}
+  - component: {fileID: 1145369034226446962}
+  - component: {fileID: 4665886391380786529}
   m_Layer: 18
   m_Name: BarrelProximity
   m_TagString: Barrel
@@ -187,7 +190,7 @@ SpriteRenderer:
   m_SortingLayerID: 528159245
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: be543e3891d95fc41b34e30cc75686dd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c71809cf1c74dce48b329327d27d04dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -239,6 +242,8 @@ MonoBehaviour:
   colorActive: {r: 1, g: 0.8635323, b: 0, a: 1}
   colorAboutToExplode: {r: 1, g: 0.46095705, b: 0, a: 1}
   destPos: {x: 0, y: 0, z: 0}
+  defaultMaterial: {fileID: 2100000, guid: 7201f8099e12b604bab1b15ece999cf9, type: 2}
+  solidMaterial: {fileID: 2100000, guid: ab75de57c7dc27944bba1d3d97725b1b, type: 2}
 --- !u!114 &8147185664210455229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +260,60 @@ MonoBehaviour:
   shadow: {fileID: 5576366457043818946}
   minScale: 0.1
   maxHeight: 20
+--- !u!95 &544950460970342256
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885304137747474855}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21ab9c5c9271fdf48b54c2211c38a69d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &1145369034226446962
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885304137747474855}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &4665886391380786529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885304137747474855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe2cb490492410488c97ba86261e5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1
+  disolveMaterialDie: {fileID: 2100000, guid: 7201f8099e12b604bab1b15ece999cf9, type: 2}
 --- !u!1001 &1290331283524168189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -265,12 +324,12 @@ PrefabInstance:
     - target: {fileID: 1548347365437627838, guid: e2637ce0e653f814285f6673b0353f50,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 1548347365437627838, guid: e2637ce0e653f814285f6673b0353f50,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.72
       objectReference: {fileID: 0}
     - target: {fileID: 1548347365437627838, guid: e2637ce0e653f814285f6673b0353f50,
         type: 3}
@@ -316,6 +375,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548347365437627838, guid: e2637ce0e653f814285f6673b0353f50,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668448722382762047, guid: e2637ce0e653f814285f6673b0353f50,
         type: 3}

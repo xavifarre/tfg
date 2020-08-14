@@ -23,10 +23,11 @@ public class DieEffect : MonoBehaviour
     IEnumerator IDie()
     {
         float t = 0;
+        Material m = disolveMaterialDie;
         while (t < duration)
         {
             t += Time.deltaTime;
-            spriteRenderer.material = disolveMaterialDie;
+            spriteRenderer.material = m;
             spriteRenderer.material.SetFloat("_Fade", Mathf.Lerp(1, 0, t / duration));
             yield return null;
         }

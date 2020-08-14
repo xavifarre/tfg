@@ -6,10 +6,15 @@ public class Barrel : Attack
 {
     public float explosionRadius;
     public Explosion explosion;
-    
 
     protected bool exploded = false;
 
+    protected Animator animator;
+
+    protected void Init()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void Explode()
     {
@@ -24,8 +29,10 @@ public class Barrel : Attack
         exp.knockback = knockback;
         exp.damage = damage;
         exploded = true;
-        Destroy(gameObject, explosion.duration);
+        Destroy(gameObject, 2);
 
     }
+
+
 
 }

@@ -13,10 +13,12 @@ public class BarrelThrowable: Barrel
     private Vector3 direction;
     private float movementValue;
 
+
     // Use this for initialization
     void Start()
     {
-
+        Init();
+        animator.SetTrigger("RollThrow");
     }
 
     // Update is called once per frame
@@ -30,8 +32,7 @@ public class BarrelThrowable: Barrel
             }
         }
 
-        t += Time.deltaTime;
-        Vector3 movementVector = direction * speed * t;
+        Vector3 movementVector = direction * speed * Time.deltaTime;
         movementValue -= movementVector.magnitude;
 
         if(movementValue < 0)

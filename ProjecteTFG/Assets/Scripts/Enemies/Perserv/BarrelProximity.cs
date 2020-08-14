@@ -22,17 +22,23 @@ public class BarrelProximity : Barrel
     private Vector2[] arcPoints;
     private float flightTime;
 
+    public Material defaultMaterial;
+    public Material solidMaterial;
+
     private Perserver perserver;
     private ShadowController shadowController;
     
     // Use this for initialization
     void Start()
     {
-        GetComponent<SpriteRenderer>().color = colorInactive;
+        //GetComponent<SpriteRenderer>().color = colorInactive;
         shadowController = GetComponent<ShadowController>();
         perserver = FindObjectOfType<Perserver>();
 
         ChangeLayerIgnoreAll();
+
+        Init();
+        animator.SetTrigger("RollUp");
         //transform.position = destPos;
     }
 
@@ -61,15 +67,22 @@ public class BarrelProximity : Barrel
     public void ActivateBarrel()
     {
         state = BarrelState.Active;
+        animator.SetTrigger("Floor");
         triggerObject.SetActive(true);
-        GetComponent<SpriteRenderer>().color = colorActive;
+        //GetComponent<SpriteRenderer>().color = colorActive;
         ResetLayer();
     }
 
     public void DisableBarrel()
     {
         state = BarrelState.Destroyed;
-        Destroy(gameObject);
+        animator.SetTrigger("Destroy");
+        GetComponent<Collider2D>().enabled = false;
+        DieEffect dieEffect = GetComponent<DieEffect>();
+        if (dieEffect)
+        {
+            dieEffect.TriggerDie();
+        }
     }
 
     public void Hit(Attack attack)
@@ -85,8 +98,7 @@ public class BarrelProximity : Barrel
     {
         state = BarrelState.AboutToExplode;
         StartCoroutine(ICountDown());
-        GetComponent<SpriteRenderer>().color = colorAboutToExplode;
-
+        //GetComponent<SpriteRenderer>().color = colorAboutToExplode;
     }
 
     public bool IsHitable()
@@ -106,7 +118,16 @@ public class BarrelProximity : Barrel
 
     public IEnumerator ICountDown()
     {
-        yield return new WaitForSeconds(explosionDelay);
+        animator.SetTrigger("Active");
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        int times = 10;
+        for (int i = 0; i < times && state == BarrelState.AboutToExplode; i++)
+        {
+            spriteRenderer.material = i % 2 == 0 ? solidMaterial : defaultMaterial;
+            yield return new WaitForSeconds(explosionDelay/times);
+
+        }
+        spriteRenderer.material = defaultMaterial;
         if (state == BarrelState.AboutToExplode)
         {
             Explode();
@@ -135,6 +156,7 @@ public class BarrelProximity : Barrel
         ActivateBarrel();
     }
 
+
     private void OnDrawGizmosSelected()
     {
         for (int i = 0; i < arcPoints.Length - 1 ; i++)
@@ -149,6 +171,7 @@ public class BarrelProximity : Barrel
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.gameObject);
         if(collision.tag == "Enemy" || collision.tag == "EnemyAttack")
         {
             if(state == BarrelState.Active || state == BarrelState.AboutToExplode)

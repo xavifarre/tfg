@@ -33,6 +33,11 @@ public class CameraFollowPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
+        UpdatePosition();
+    }
+
+    private void UpdatePosition()
+    {
         if (followingPlayer)
         {
             desiredPosition = player.transform.position + offset + (Vector3)player.lastDir * facingOffset;

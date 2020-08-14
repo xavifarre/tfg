@@ -22,14 +22,19 @@ public class ParticleDestroyer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i=particles.Count-1; i>=0;i--)
+        CheckParticlesEnd();
+    }
+
+    private void CheckParticlesEnd()
+    {
+        for (int i = particles.Count - 1; i >= 0; i--)
         {
             if (!particles[i].isPlaying)
             {
                 particles.Remove(particles[i]);
             }
         }
-        
+
         if (particles.Count <= 0)
         {
             Destroy(gameObject);

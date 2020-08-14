@@ -309,6 +309,7 @@ public class PauseMenu : MonoBehaviour
     private void ReturnLobby()
     {
         Debug.Log("Return lobby");
+        SceneManager.LoadScene("ToriiLevel");
         Resume();
     }
 

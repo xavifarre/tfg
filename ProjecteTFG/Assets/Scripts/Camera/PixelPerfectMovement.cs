@@ -24,7 +24,10 @@ public class PixelPerfectMovement : MonoBehaviour
             Mathf.RoundToInt(moveVector.y * pixelsPerUnit),
             moveVector.z);
 
-        Vector3 vectorClamped = new Vector3(vectorInPixels.x / pixelsPerUnit, vectorInPixels.y / pixelsPerUnit, moveVector.z);
+        Vector3 vectorClamped = new Vector3(
+            vectorInPixels.x / pixelsPerUnit, 
+            vectorInPixels.y / pixelsPerUnit, 
+            moveVector.z);
 
         return vectorClamped;
     }

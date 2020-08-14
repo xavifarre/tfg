@@ -14,8 +14,8 @@ public class Powder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.localScale = Vector3.one * radius;
-        Destroy(gameObject, delay + explosion.duration);
+        //transform.localScale = Vector3.one * radius;
+        Destroy(gameObject, delay + 2);
     }
 
     // Update is called once per frame
@@ -33,6 +33,7 @@ public class Powder : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<CircleCollider2D>().enabled = false;
         Explosion exp = Instantiate(explosion, transform);
+        exp.transform.localScale = Vector3.one * radius;
         exploded = true;
     }
 }

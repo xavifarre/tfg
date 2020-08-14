@@ -55,6 +55,7 @@ public class Perserver : Boss
     //Cooldowns
     private bool cooldownPowderDrop = false;
 
+
     //Abilities stats
     [Header("Abilities")]
 
@@ -91,6 +92,15 @@ public class Perserver : Boss
     public float bladeRecoverDelay = 0.5f;
 
     public RectArea walkableArea;
+
+    [Header("Animations")]
+    public Animator bodyAnimator;
+    public Animator legsAnimator;
+    public SpriteRenderer legsSprite;
+    private Vector3 previousPos;
+
+    [Header("Particles")]
+    public ParticlePlayer dieParticles;
 
     #endregion
 
@@ -147,6 +157,9 @@ public class Perserver : Boss
         public float spinSpeed;
         public float spinDuration;
         public float powderDelay;
+        public float dropInterval;
+        public float nSpawn;
+        public float explosionRadius;
         public List<float> cooldown;
         public Powder powderObject;
         public float lagTime;
@@ -214,6 +227,7 @@ public class Perserver : Boss
         public int maxHealAmount;
         public float healRate;
         public float evaluationRate;
+        public float healDelay;
         public float firstEvaluationMultiplier;
         public float lagTime;
         public ParticleSystem healParticles;
@@ -248,7 +262,7 @@ public class Perserver : Boss
         undodgeableSpinStats.collider.Initialize(undodgeableSpinStats);
         barrelContainer = GameObject.Find("BarrelContainer");
 
-        StartCoroutine(IPresentation());
+        //StartCoroutine(IPresentation());
     }
 
     protected override void UpdateEnemy()
@@ -293,6 +307,12 @@ public class Perserver : Boss
         {
             SpinHeal();
         }
+
+        legsAnimator.SetBool("Moving", previousPos != realPos);
+
+        previousPos = realPos;
+
+
     }
 
 
@@ -494,9 +514,11 @@ public class Perserver : Boss
 
     private void Move(Vector3 direction, float speedMultiplier)
     {
+
         float movSpeed = speed + speed * speedMultiplier * speedMultiplierPerFase[fase];
         realPos = realPos + movSpeed * direction * Time.deltaTime;
         PixelPerfectMovement.Move(realPos, transform);
+        UpdateSpriteFlip();
     }
 
     private Vector3 FindRandomMovePoint(float minimumDistanceToPlayer = 0)
@@ -555,7 +577,10 @@ public class Perserver : Boss
     {
         if(CheckDamageFase() != fase)
         {
-            StartFase(CheckDamageFase());
+            if(health > 0)
+            {
+                StartFase(CheckDamageFase());
+            }
             return true;
         }
         return false;
@@ -580,6 +605,41 @@ public class Perserver : Boss
     {
         base.Die();
         Globals.gameState = GameState.PerserverDefeated;
+        StopAllCoroutines();
+        foreach (Blade b in blades)
+        {
+            b.StopAllCoroutines();
+        }
+        ChangeLayerIgnore();
+        StartCoroutine(IDieAnim());
+        gm.SlowDownGame(killSlowScale, killSlowTime);
+        Globals.gameState = GameState.End;
+        SaveSystem.SaveGame();
+    }
+
+    private IEnumerator IDieAnim()
+    {
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(IDie());
+        foreach (Blade b in blades)
+        {
+            b.DieBlade();
+        }
+        Instantiate(dieParticles, transform.position, Quaternion.Euler(-90, 0, 0));
+    }
+
+    private void UpdateSpriteFlip()
+    {
+        if ((player.transform.position.x - realPos.x) > 0)
+        {
+            spriteRenderer.flipX = true;
+            legsSprite.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+            legsSprite.flipX = false;
+        }
     }
 
     #endregion
@@ -598,18 +658,26 @@ public class Perserver : Boss
         currentAbilityRoutine = ISpin();
         StartCoroutine(currentAbilityRoutine);
         CastAbilityBlade(Blade.BladeAbility.Spin);
+        animator.SetBool("Focusing", true);
+        UpdateSpriteFlip();
+
     }
 
     public void ExpandingSpin()
     {
         currentAbility = Ability.ExpandingSpin;
+        currentAbilityRoutine = ISpin();
+        StartCoroutine(currentAbilityRoutine);
         CastAbilityBlade(Blade.BladeAbility.ExpandingSpin, false);
+        animator.SetBool("Focusing", true);
+        UpdateSpriteFlip();
     }
 
     public void UndodgeableSpin()
     {
         currentAbility = Ability.UndodgeableSpin;
         CastAbilityBlade(Blade.BladeAbility.UndodgeableSpin, false);
+        UpdateSpriteFlip();
     }
 
     public void PowderDrop()
@@ -617,24 +685,30 @@ public class Perserver : Boss
         currentAbility = Ability.PowderDrop;
         CastAbilityBlade(Blade.BladeAbility.PowderDrop);
         StartCoroutine(ICooldownPowerDrop());
+        animator.SetBool("Focusing", true);
+        UpdateSpriteFlip();
     }
 
     public void BarrelPop()
     {
         currentAbility = Ability.BarrelPop;
         CastAbilityBlade(Blade.BladeAbility.BarrelPop);
+        UpdateSpriteFlip();
     }
 
     public void BarrelToss()
     {
         currentAbility = Ability.BarrelToss;
         CastAbilityBlade(Blade.BladeAbility.BarrelToss);
+        UpdateSpriteFlip();
     }
 
     public void BarrelDrop()
     {
         currentAbility = Ability.BarrelDrop;
         CastAbilityBlade(Blade.BladeAbility.BarrelDrop);
+        animator.SetTrigger("Shooting");
+        UpdateSpriteFlip();
     }
 
     public void DoubleSlash(bool aproaching = false)
@@ -645,12 +719,17 @@ public class Perserver : Boss
         currentAbilityRoutine = IDoubleSlash(aproaching);
         StartCoroutine(currentAbilityRoutine);
         CastAbilityBlade(Blade.BladeAbility.DoubleSlash);
+        animator.SetBool("Moving", true);
+        UpdateSpriteFlip();
     }
 
     public void SpinHeal()
     {
         currentAbility = Ability.SpinHeal;
         CastAbilityBlade(Blade.BladeAbility.SpinHeal);
+        animator.SetBool("Focusing", false);
+        animator.SetBool("Healing", true);
+        UpdateSpriteFlip();
     }
 
     public void CastAbilityBlade(Blade.BladeAbility ability, bool randomMotion = true)
@@ -673,8 +752,7 @@ public class Perserver : Boss
 
     private IEnumerator ISpin()
     {
-        Debug.Log(currentAbility.ToString());
-        while(currentAbility == Ability.Spin)
+        while(currentAbility == Ability.Spin || currentAbility == Ability.ExpandingSpin)
         {
             if(DistanceToPlayer() > spinStats.minimumDistanceToPlayer)
             {
@@ -719,9 +797,20 @@ public class Perserver : Boss
 
     public void SpawnPowder()
     {
-        Powder powder = Instantiate(powderDropStats.powderObject, transform.position, Quaternion.identity);
-        powder.radius = powderDropStats.radius;
-        powder.delay = powderDropStats.powderDelay;
+        StartCoroutine(ISpawnPowder());
+    }
+
+    private IEnumerator ISpawnPowder()
+    {
+        float angle = (2 * Mathf.PI * blades[0].motionDirection) / powderDropStats.nSpawn;
+        for (int i = 0; i < powderDropStats.nSpawn; i++)
+        {
+            Powder powder = Instantiate(powderDropStats.powderObject, transform.position, Quaternion.identity);
+            powder.transform.position += new Vector3(Mathf.Sin(angle + angle * i), Mathf.Cos(angle + angle * i) / blades[0].inclination) * powderDropStats.radius;
+            powder.radius = powderDropStats.explosionRadius;
+            powder.delay = powderDropStats.powderDelay;
+            yield return new WaitForSeconds(powderDropStats.dropInterval);
+        }
     }
 
     public void StartBarrelDrop()
@@ -742,6 +831,8 @@ public class Perserver : Boss
         barrel.transform.parent = barrelContainer.transform;
 
         barrel.LaunchBarrel(transform.position, destPos, barrelDropStats.launchSpeed, barrelDropStats.throwArcIterations, barrelDropStats.gravityScale);
+
+        animator.SetTrigger("ShootBarrel");
     }
 
     private bool BarrelMinDistanceValid(Vector3 pos)
@@ -782,6 +873,7 @@ public class Perserver : Boss
 
     public IEnumerator IBarrelDrop()
     {
+        yield return new WaitForSeconds(barrelDropStats.castInterval);
         for (int i = 0; i < barrelDropStats.nBarrels[fase]; i++)
         {
             LaunchBarrel();
@@ -802,12 +894,22 @@ public class Perserver : Boss
         previousAbility = currentAbility;
         currentAbility = Ability.None;
 
+        ResetAnimations();
         if (currentAbilityRoutine != null)
         {
             StopCoroutine(currentAbilityRoutine);
         }
         currentAbilityRoutine = ILagTime(ability, lagTime);
         StartCoroutine(currentAbilityRoutine);
+    }
+
+    private void ResetAnimations()
+    {
+        animator.SetBool("Moving", false);
+        animator.SetBool("Shooting", false);
+        animator.SetBool("Healing", false);
+        animator.SetBool("Focusing", false);
+        legsAnimator.SetBool("Moving", false);
     }
 
     public void EndSpin()
@@ -1015,7 +1117,8 @@ public class Perserver : Boss
     {
         currentAbilityRoutine = IHealEvaluation();
         StartCoroutine(currentAbilityRoutine);
-
+        animator.SetBool("Healing", true);
+        UpdateSpriteFlip();
         StartHeal();
     }
 
@@ -1023,8 +1126,8 @@ public class Perserver : Boss
     {
         healing = true;
         healRoutine = IHeal();
-        healStats.healParticles.Play();
         StartCoroutine(healRoutine);
+        
     }
 
     public void Heal()
@@ -1044,6 +1147,7 @@ public class Perserver : Boss
     {
         healing = false;
         healStats.healParticles.Stop();
+        animator.SetBool("Healing", false);
         StopCoroutine(healRoutine);
     }
 
@@ -1068,6 +1172,8 @@ public class Perserver : Boss
 
     public IEnumerator IHeal()
     {
+        yield return new WaitForSeconds(healStats.healDelay);
+        healStats.healParticles.Play();
         while (healing)
         {
             Heal();

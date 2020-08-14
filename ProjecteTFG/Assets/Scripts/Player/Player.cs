@@ -651,6 +651,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         animator.SetTrigger("Die");
 
         Globals.deathCount += 1;
+        GameManager.instance.ResumeGame();
 
     }
 
