@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Perserver : Boss
 {
@@ -613,7 +614,7 @@ public class Perserver : Boss
         ChangeLayerIgnore();
         StartCoroutine(IDieAnim());
         gm.SlowDownGame(killSlowScale, killSlowTime);
-        Globals.gameState = GameState.End;
+        Globals.gameState = GameState.PerserverDefeated;
         SaveSystem.SaveGame();
     }
 
@@ -658,7 +659,6 @@ public class Perserver : Boss
         currentAbilityRoutine = ISpin();
         StartCoroutine(currentAbilityRoutine);
         CastAbilityBlade(Blade.BladeAbility.Spin);
-        animator.SetBool("Focusing", true);
         UpdateSpriteFlip();
 
     }

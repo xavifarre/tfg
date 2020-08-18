@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Boss : Enemy
 {
@@ -79,6 +80,18 @@ public class Boss : Enemy
             transform.position = new Vector3(Random.Range(-100000, 100000) / 100000f, Random.Range(-100000, 100000) / 100000f).normalized * t / shakeDuration / 2 + diePosition;
             yield return new WaitForFixedUpdate();
         }
+        SaveSystem.SaveGame();
+        
+        yield return new WaitForSeconds(6f);
+        if (Globals.gameState == GameState.End)
+        {
+            SceneManager.LoadScene("Credits");
+        }
+        else
+        {
+            SceneManager.LoadScene("ToriiLevel");
+        }
+
         Destroy(gameObject);
     }
 

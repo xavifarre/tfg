@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -124,8 +123,6 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     protected Material defaultMaterial;
 
     [Header("Animators")]
-    public AnimatorController swordlessAnimatorController;
-    public AnimatorController baseAnimatorController;
     public Material baseMaterial;
     public Material glowMaterial;
     public bool swordPicked;
@@ -631,10 +628,16 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             {
                 DamageInvulnerability();
             }
+            ShowDamage(damage);
             Globals.damageReceivedCount += damage;
         }
 
         gm.tLastHit = 0;
+    }
+
+    protected void ShowDamage(int damage)
+    {
+        PopupTextController.CreatePopupTextDamageSelf(damage.ToString(), realPos);
     }
 
     public void Die()
@@ -829,6 +832,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         spriteRenderer.material = glowMaterial;
         defaultMaterial = glowMaterial;
         animator.SetLayerWeight(3, 0);
+        animator.SetLayerWeight(4, 0);
     }
 
     protected void DisableAllColliders()

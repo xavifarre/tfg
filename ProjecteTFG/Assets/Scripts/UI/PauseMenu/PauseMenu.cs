@@ -45,23 +45,22 @@ public class PauseMenu : MonoBehaviour
     {
         if (gameObject.activeSelf)
         {
-
-            if (Input.GetAxis("Vertical") >= 0.8f && tPrevious >= timeOffset)
+            if (Input.GetAxisRaw("Vertical") >= 0.8f && tPrevious >= timeOffset)
             {
                 MoveUp();
             }
-            else if (Input.GetAxis("Vertical") <= -0.8f && tPrevious >= timeOffset)
+            else if (Input.GetAxisRaw("Vertical") <= -0.8f && tPrevious >= timeOffset)
             {
                 MoveDown();
             }
 
             if (confirmMenu.activeSelf)
             {
-                if (Input.GetAxis("Horizontal") >= 0.8f && tPrevious >= timeOffset)
+                if (Input.GetAxisRaw("Horizontal") >= 0.8f && tPrevious >= timeOffset)
                 {
                     MoveDown();
                 }
-                else if (Input.GetAxis("Horizontal") <= -0.8f && tPrevious >= timeOffset)
+                else if (Input.GetAxisRaw("Horizontal") <= -0.8f && tPrevious >= timeOffset)
                 {
                     MoveUp();
                 }
@@ -170,33 +169,33 @@ public class PauseMenu : MonoBehaviour
     {
         if (currentIndex == 0)
         {
-            if (Input.GetAxis("Horizontal") >= 0.8f && tPrevious >= timeOffset)
+            if (Input.GetAxisRaw("Horizontal") >= 0.8f && tPrevious >= timeOffset)
             {
                 ResolutionUp();
             }
-            else if (Input.GetAxis("Horizontal") <= -0.8f && tPrevious >= timeOffset)
+            else if (Input.GetAxisRaw("Horizontal") <= -0.8f && tPrevious >= timeOffset)
             {
                 ResolutionDown();
             }
         }
         else if (currentIndex == 1)
         {
-            if (Input.GetAxis("Horizontal") >= 0.8f && tPrevious >= timeOffset)
+            if (Input.GetAxisRaw("Horizontal") >= 0.8f && tPrevious >= timeOffset)
             {
                 ToggleFullScreen();
             }
-            else if (Input.GetAxis("Horizontal") <= -0.8f && tPrevious >= timeOffset)
+            else if (Input.GetAxisRaw("Horizontal") <= -0.8f && tPrevious >= timeOffset)
             {
                 ToggleFullScreen();
             }
         }
         else if (currentIndex == 2)
         {
-            if (Input.GetAxis("Horizontal") >= 0.8f)
+            if (Input.GetAxisRaw("Horizontal") >= 0.8f)
             {
                 VolumeUp();
             }
-            else if (Input.GetAxis("Horizontal") <= -0.8f)
+            else if (Input.GetAxisRaw("Horizontal") <= -0.8f)
             {
                 VolumeDown();
             }

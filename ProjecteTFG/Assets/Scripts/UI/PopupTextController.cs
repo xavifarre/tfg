@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PopupTextController : MonoBehaviour
 {
     private static PopupText popupDamage;
+    private static PopupText popupDamageSelf;
     private static PopupText popupHeal;
     private static GameObject worldCanvas;
 
@@ -19,6 +20,10 @@ public class PopupTextController : MonoBehaviour
         {
             popupDamage = Resources.Load<PopupText>("UI/PopupDamage");
         }
+        if (!popupDamageSelf)
+        {
+            popupDamageSelf = Resources.Load<PopupText>("UI/PopupDamageSelf");
+        }
 
         if (!popupHeal)
         {
@@ -29,6 +34,14 @@ public class PopupTextController : MonoBehaviour
     public static void CreatePopupTextDamage(string s, Vector3 position)
     {
         PopupText instance = Instantiate(popupDamage, worldCanvas.transform);
+
+        instance.transform.position = position;
+        instance.SetText(s);
+    }
+
+    public static void CreatePopupTextDamageSelf(string s, Vector3 position)
+    {
+        PopupText instance = Instantiate(popupDamageSelf, worldCanvas.transform);
 
         instance.transform.position = position;
         instance.SetText(s);

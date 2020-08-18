@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Destroyer : Boss, IState
 {
@@ -443,6 +444,8 @@ public class Destroyer : Boss, IState
         StartCoroutine(IDieAnim());
         gm.SlowDownGame(killSlowScale, killSlowTime);
         Globals.gameState = GameState.End;
+        System.TimeSpan span = System.DateTime.Now.Subtract(Globals.startTimeStamp);
+        Globals.totalTime = (float)span.TotalMilliseconds;
         SaveSystem.SaveGame();
     }
 

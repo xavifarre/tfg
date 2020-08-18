@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Summoner : Boss
 {
@@ -728,7 +729,7 @@ public class Summoner : Boss
         FadeShadow();
         StartCoroutine(IDie());
 
-        Instantiate(dieParticles, transform.position, Quaternion.Euler(-90,0,0));
+        Instantiate(dieParticles, transform.position, Quaternion.Euler(-90, 0, 0));
     }
 
     private void KillAllMinions()

@@ -26,4 +26,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PreserverLevel.unity
     guid: 0771dd7e7139c794bb4a53a73231e510
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 95f65cf4fa02496489c2f80b12d4d6d2
+  - enabled: 1
+    path: Assets/Scenes/StatsScreen.unity
+    guid: f027ec8f5d7931045ba96b1809b1e3f1
+  - enabled: 1
+    path: Assets/Scenes/DestroyerLevel.unity
+    guid: 2d4e7c28a50a57d479f0560646ab987b
   m_configObjects: {}

@@ -6,8 +6,6 @@ public class BarrelThrowable: Barrel
 
     public float randomRangeExplosion;
 
-    private float t = 0;
-
     private Vector3 destPos;
     private float speed;
     private Vector3 direction;

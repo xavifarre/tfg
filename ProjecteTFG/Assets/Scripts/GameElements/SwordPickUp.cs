@@ -13,6 +13,7 @@ public class SwordPickUp : MonoBehaviour, IInteractuableObject
     public void Interact()
     {
         player.PickSword();
+        ToriiLevelController.instance.PickSword();
         TutorialManager.instance.StartTutorial();
         Destroy(gameObject);
     }

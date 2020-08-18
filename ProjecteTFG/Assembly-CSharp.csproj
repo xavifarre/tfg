@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Credits.cs" />
+    <Compile Include="Assets\ScoreScreen.cs" />
     <Compile Include="Assets\Scripts\Attacks\Attack.cs" />
     <Compile Include="Assets\Scripts\Attacks\Explosion.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="Assets\Scripts\Utils\ParticlePlayer.cs" />
     <Compile Include="Assets\Scripts\Utils\Poly.cs" />
     <Compile Include="Assets\Scripts\Utils\RectArea.cs" />
+    <Compile Include="Assets\ToriiLevelController.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Shaders\LightCircle.shader" />

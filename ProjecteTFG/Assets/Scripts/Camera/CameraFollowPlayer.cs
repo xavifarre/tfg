@@ -19,6 +19,7 @@ public class CameraFollowPlayer : MonoBehaviour
     private Vector3 desiredPosition;
     private Vector3 realPos;
 
+
     private void Start()
     {
         cm = FindObjectOfType<CameraManager>();
@@ -44,8 +45,7 @@ public class CameraFollowPlayer : MonoBehaviour
 
             desiredPosition = cm.ClampPositionOnArea(desiredPosition);
         }
-
-        realPos = Vector3.SmoothDamp(realPos, desiredPosition, ref velocity, smoothTime);
+        realPos = Vector3.SmoothDamp(realPos, desiredPosition, ref velocity, smoothTime, 1000000f,Time.fixedDeltaTime);
 
         PixelPerfectMovement.Move(realPos, transform);
     }

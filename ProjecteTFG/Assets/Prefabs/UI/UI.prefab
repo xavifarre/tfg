@@ -4138,7 +4138,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2046693118423990329}
-    characterCount: 6
+    characterCount: 4
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -4451,10 +4451,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 3452168246019521983}
-    characterCount: 6
+    characterCount: 17
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
     lineCount: 1
     pageCount: 1
