@@ -23,6 +23,7 @@ public class Sentinel : Minion
     {
         base.Init();
         areaMove = GameObject.Find("MovementPoints").transform.Find("3").GetComponent<RectArea>();
+        soundController.PlaySound("sentinel_spawn", 0.1f);
     }
 
     //Move
@@ -64,6 +65,19 @@ public class Sentinel : Minion
         instance.damage = damage;
         instance.knockback = knockBackValue;
         StartIdle();
+        soundController.PlaySound("sentinel_shoot");
+    }
+
+    public override void GetDamage(int damage)
+    {
+        soundController.PlaySound("sentinel_hit");
+        base.GetDamage(damage);
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        soundController.PlaySound("sentinel_die");
     }
 
     IEnumerator ICharge()

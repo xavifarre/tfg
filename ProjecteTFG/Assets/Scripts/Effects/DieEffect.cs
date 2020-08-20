@@ -31,6 +31,6 @@ public class DieEffect : MonoBehaviour
             spriteRenderer.material.SetFloat("_Fade", Mathf.Lerp(1, 0, t / duration));
             yield return null;
         }
-        Destroy(gameObject);
+        Destroy(gameObject, 2f);
     }
 }

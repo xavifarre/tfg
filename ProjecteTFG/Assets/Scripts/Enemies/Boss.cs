@@ -38,7 +38,7 @@ public class Boss : Enemy
 
     protected override void Init()
     {
-       
+
     }
 
     protected override void UpdateEnemy()
@@ -99,6 +99,7 @@ public class Boss : Enemy
     {
         float t = 0;
         spriteRenderer.material = disolveMaterialDie;
+        GetComponentInChildren<ShadowCopySprite>().gameObject.SetActive(false);
         while (t < shakeDuration)
         {
             t += Time.deltaTime;

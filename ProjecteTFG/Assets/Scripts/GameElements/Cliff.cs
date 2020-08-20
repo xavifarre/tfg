@@ -7,7 +7,7 @@ public class Cliff : MonoBehaviour
 {
 
     private Tilemap tilemap;
-    private Vector3 hitTilePos, pos2, pos3;
+    private Vector3 hitTilePos;
 
     private float t;
 
@@ -92,7 +92,6 @@ public class Cliff : MonoBehaviour
         hitTilePos = contactsSum;
         Grid tileGrid = tilemap.layoutGrid;
         Vector3 tilePosition = tileGrid.WorldToCell(contactsSum) + new Vector3(0.5f, 0.5f, 0);
-        pos2 = tilePosition;
         collision.gameObject.SendMessage("Fall", tilePosition);
     }
 
@@ -100,6 +99,5 @@ public class Cliff : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(hitTilePos,0.1f);
-        Gizmos.DrawSphere(pos2, 0.1f);
     }
 }

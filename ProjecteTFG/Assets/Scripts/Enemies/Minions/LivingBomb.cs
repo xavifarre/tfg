@@ -23,6 +23,13 @@ public class LivingBomb : Minion
         base.Init();
 
         shadowController = GetComponentInChildren<ShadowController>();
+        soundController.PlaySound("bomb_spawn", 0.1f);
+    }
+
+    protected override void StartMove()
+    {
+        base.StartMove();
+        //soundController.PlaySound("bomb_move",0,true);
     }
 
     //Move
@@ -55,6 +62,7 @@ public class LivingBomb : Minion
     public void StopToExplode()
     {
         animator.SetTrigger("Explode");
+        soundController.PlaySound("bomb_charge");
         state = MinionState.Idle;
     }
 
@@ -65,7 +73,7 @@ public class LivingBomb : Minion
         GameObject explosion = Instantiate(explosionCollider, transform.position, Quaternion.identity);
         explosion.transform.localScale = Vector3.one * explosionRange;
         explosion.GetComponent<Explosion>().damage = damage;
-
+        soundController.PlaySound("bomb_explosion");
         Die();
     }
 
@@ -82,6 +90,7 @@ public class LivingBomb : Minion
     {
         base.KnockBack(knockBack);
         animator.SetTrigger("Explode");
+        soundController.PlaySound("bomb_charge");
         shadowController.gameObject.SetActive(false);
     }
 

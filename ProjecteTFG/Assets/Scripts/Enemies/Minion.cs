@@ -147,7 +147,8 @@ public class Minion : Enemy, IFallableObject
         }
         else
         {
-            Destroy(gameObject);
+            spriteRenderer.enabled = false;
+            Destroy(gameObject,5);
         }
     }
 

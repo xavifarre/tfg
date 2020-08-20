@@ -42,10 +42,9 @@ public class CameraFollowPlayer : MonoBehaviour
         if (followingPlayer)
         {
             desiredPosition = player.transform.position + offset + (Vector3)player.lastDir * facingOffset;
-
             desiredPosition = cm.ClampPositionOnArea(desiredPosition);
         }
-        realPos = Vector3.SmoothDamp(realPos, desiredPosition, ref velocity, smoothTime, 1000000f,Time.fixedDeltaTime);
+        realPos = Vector3.SmoothDamp(realPos, desiredPosition, ref velocity, smoothTime);
 
         PixelPerfectMovement.Move(realPos, transform);
     }
@@ -53,7 +52,6 @@ public class CameraFollowPlayer : MonoBehaviour
     public void SetDestination(Vector3 dest, float smoothDuration = -1)
     {
         desiredPosition = dest + offset;
-        
         //Stop following player
         followingPlayer = false;
 
@@ -71,7 +69,6 @@ public class CameraFollowPlayer : MonoBehaviour
     public void FollowPlayer(float smoothDuration = -1)
     {
         followingPlayer = true;
-
         //Update smooth time
         if (smoothDuration == -1)
         {

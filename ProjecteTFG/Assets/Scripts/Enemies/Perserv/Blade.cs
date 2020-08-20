@@ -54,6 +54,7 @@ public class Blade : Attack
     //RigidBody
     private Rigidbody2D rb;
 
+    private SpriteRenderer spriteRenderer;
     //Layer
     private int defaultLayer;
 
@@ -61,9 +62,11 @@ public class Blade : Attack
     void Start()
     {
         player = FindObjectOfType<Player>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         trail = transform.GetComponentInChildren<TrailRenderer>();
         defaultLayer = gameObject.layer;
+
     }
 
     public void InitPosition()
@@ -81,6 +84,8 @@ public class Blade : Attack
         Vector3 circlePos = new Vector2(Mathf.Sin(currentAngle), Mathf.Cos(currentAngle)) * basicRadius;
         transform.localPosition = circleCenter + circlePos;
         defaultPosition = transform.localPosition;
+
+        RotateBlades();
     }
 
 
@@ -92,10 +97,17 @@ public class Blade : Attack
         Vector3 circlePos = new Vector2(Mathf.Sin(currentAngle), Mathf.Cos(currentAngle)/ inclination) * currentRadius;
         Vector3 nextPosition = circleCenter + circlePos;
 
+        RotateBlades();
+
         SmoothTrail();
 
         transform.localPosition = nextPosition;
     }   
+
+    private void RotateBlades()
+    {
+        transform.eulerAngles = new Vector3(0, 0, -Vector2.SignedAngle(transform.localPosition, Vector3.right));
+    }
 
     public float GetCurrentAngle()
     {
@@ -332,8 +344,6 @@ public class Blade : Attack
         float initialRadius = currentRadius;
         float initialSpeed = angularSpeed;
 
-        stats.collider.Enable();
-
         while (currentRadius != stats.radius)
         {
             t += Time.deltaTime;
@@ -343,6 +353,8 @@ public class Blade : Attack
 
             yield return null;
         }
+
+        stats.collider.Enable();
 
         t = 0;
 
@@ -355,8 +367,6 @@ public class Blade : Attack
 
             yield return null;
         }
-
-        stats.collider.Disable();
 
         //Recover
         yield return new WaitForSeconds(perserver.bladeRecoverDelay);
@@ -638,16 +648,16 @@ public class Blade : Attack
             t += Time.deltaTime;
             currentAngle = Mathf.Lerp(previousAngle, GetAngleToPlayer(), t / 0.5f);
             CircleMovement();
+
             yield return null;
         }
 
-
-       
-        while(t < stats.chargeDuration)
+        while (t < stats.chargeDuration)
         {
             t += Time.deltaTime;
             currentRadius = Mathf.Lerp(basicRadius, basicRadius + stats.expandDistance, t / stats.chargeDuration);
             BladeAngleLookAtPlayer();
+            RotateBlades();
             yield return null;
         }
 
@@ -686,16 +696,19 @@ public class Blade : Attack
 
         t = 0;
 
+
         //Blade recover
-        while(t < stats.recoverDuration)
+        while (t < stats.recoverDuration)
         {
             t += Time.deltaTime;
             transform.localPosition = Vector3.Lerp(destPos - transform.parent.position, defaultPosition, t / stats.recoverDuration);
+            RotateBlades();
             yield return null;
         }
 
         //Recover
         yield return new WaitForSeconds(perserver.bladeRecoverDelay);
+
 
         currentAngle = GetCurrentAngle();
         currentRadius = basicRadius;

@@ -63,8 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Credits.cs" />
-    <Compile Include="Assets\ScoreScreen.cs" />
     <Compile Include="Assets\Scripts\Attacks\Attack.cs" />
     <Compile Include="Assets\Scripts\Attacks\Explosion.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
@@ -116,6 +114,7 @@
     <Compile Include="Assets\Scripts\GameControllers\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\GameControllers\ScreenManager.cs" />
     <Compile Include="Assets\Scripts\GameControllers\StartLevelManager.cs" />
+    <Compile Include="Assets\Scripts\GameControllers\ToriiLevelController.cs" />
     <Compile Include="Assets\Scripts\GameControllers\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\GameElements\Cliff.cs" />
     <Compile Include="Assets\Scripts\GameElements\FallableObject.cs" />
@@ -142,6 +141,7 @@
     <Compile Include="Assets\Scripts\Sounds\SoundCollection.cs" />
     <Compile Include="Assets\Scripts\Sounds\SoundController.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonPopUp.cs" />
+    <Compile Include="Assets\Scripts\UI\Credits.cs" />
     <Compile Include="Assets\Scripts\UI\DamagePopup.cs" />
     <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\Scripts\UI\InteractPopUp.cs" />
@@ -149,6 +149,7 @@
     <Compile Include="Assets\Scripts\UI\PauseMenu\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\UI\PopupText.cs" />
     <Compile Include="Assets\Scripts\UI\PopupTextController.cs" />
+    <Compile Include="Assets\Scripts\UI\ScoreScreen.cs" />
     <Compile Include="Assets\Scripts\Utils\DestroyAfterSeconds.cs" />
     <Compile Include="Assets\Scripts\Utils\Enums.cs" />
     <Compile Include="Assets\Scripts\Utils\MathFunctions.cs" />
@@ -156,7 +157,8 @@
     <Compile Include="Assets\Scripts\Utils\ParticlePlayer.cs" />
     <Compile Include="Assets\Scripts\Utils\Poly.cs" />
     <Compile Include="Assets\Scripts\Utils\RectArea.cs" />
-    <Compile Include="Assets\ToriiLevelController.cs" />
+    <Compile Include="Assets\SwordAttackAnim.cs" />
+    <Compile Include="Assets\TutorialCollider.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Shaders\LightCircle.shader" />

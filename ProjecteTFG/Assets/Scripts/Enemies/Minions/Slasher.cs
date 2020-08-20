@@ -12,6 +12,12 @@ public class Slasher : Minion
     public float attackDuration = 1;
     public float attackDistance = 10f;
 
+    protected override void Init()
+    {
+        base.Init();
+        soundController.PlaySound("slasher_spawn", 0.1f);
+    }
+
     //Move
     protected override void UpdateMove()
     {
@@ -44,10 +50,15 @@ public class Slasher : Minion
 
     private void Charge()
     {
+        Debug.Log(state);
         UpdateSpriteFlip();
         state = MinionState.Charge;
+        animator.SetBool("AttackDown", player.transform.position.y - realPos.y < 0);
+        animator.ResetTrigger("EndAction");
         animator.SetTrigger("Attack");
         StartCoroutine(ICharge());
+        Debug.Log(state);
+        soundController.PlaySound("slasher_attack");
     }
 
     private void Attack()
@@ -67,6 +78,18 @@ public class Slasher : Minion
         {
             Attack();
         }
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        soundController.PlaySound("slasher_die");
+    }
+
+    public override void GetDamage(int damage)
+    {
+        soundController.PlaySound("slasher_hit");
+        base.GetDamage(damage);
     }
 
     protected override void KnockBack(float knockBack)

@@ -556,7 +556,6 @@ public class Perserver : Boss
             damageAccumulated += dmg;
             if (damageAccumulated >= undodgeableSpinStats.minDamageTrigger)
             {
-                Debug.Log("ATTACK");
                 UndodgeableSpin();
                 damageAccumulated = 0;
             }
@@ -627,6 +626,7 @@ public class Perserver : Boss
             b.DieBlade();
         }
         Instantiate(dieParticles, transform.position, Quaternion.Euler(-90, 0, 0));
+        legsSprite.enabled = false;
     }
 
     private void UpdateSpriteFlip()
@@ -734,7 +734,6 @@ public class Perserver : Boss
 
     public void CastAbilityBlade(Blade.BladeAbility ability, bool randomMotion = true)
     {
-        undodgeableSpinStats.collider.Disable();
         int motionDirection = Random.Range(0, 2) * 2 - 1;
         foreach (Blade blade in blades)
         {

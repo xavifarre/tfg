@@ -9,7 +9,7 @@ public class ToriiChangeLevel : MonoBehaviour
 
     public string level;
     public float transitionDuration;
-
+    public SoundController soundController;
     public void TransitionToLevel()
     {
         StartCoroutine(ITransitionLevel());
@@ -17,6 +17,7 @@ public class ToriiChangeLevel : MonoBehaviour
 
     private IEnumerator ITransitionLevel()
     {
+        GameManager.instance.BlockInputs(true);
         ScreenManager.instance.StartFadeHideScreen(transitionDuration);
         yield return new WaitForSeconds(transitionDuration);
         SceneManager.LoadScene(level);

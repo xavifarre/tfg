@@ -5,7 +5,7 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour
 {
     public static TutorialManager instance;
-
+    private bool started = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,12 +19,15 @@ public class TutorialManager : MonoBehaviour
 
     public void StartTutorial()
     {
-        StartCoroutine(IStartTutorial());
+        if (!started)
+        {
+            StartCoroutine(IStartTutorial());
+            started = true;
+        }
     }
 
     private IEnumerator IStartTutorial()
     {
-        yield return new WaitForSeconds(1f);
         ButtonPopUp.instance.Show("Attack");
         while (ButtonPopUp.instance.IsShowing())
         {

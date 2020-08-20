@@ -15,9 +15,7 @@ public class GameLoader : MonoBehaviour
     {
         SaveSystem.LoadGame();
         string scene = GetScene();
-        Debug.Log(scene);
         yield return new WaitForSeconds(1f);
-        Debug.Log(scene);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
 
         while (!asyncLoad.isDone)

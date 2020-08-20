@@ -22,13 +22,14 @@ public class SoundController : MonoBehaviour
         return GetComponent<AudioSource>();
     }
 
-    public void PlaySound(string id, float delay = 0)
+    public void PlaySound(string id, float delay = 0, bool loop = false)
     {
         if(audioSource == null)
         {
             audioSource = GetComponent<AudioSource>();
         }
 
+        audioSource.loop = loop;
         audioSource.clip = SoundCollection.sounds[id];
         audioSource.PlayDelayed(delay);
     }

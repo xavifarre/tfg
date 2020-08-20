@@ -88,30 +88,30 @@ public class GameManager : MonoBehaviour
 
 
     //Camera shake
-    public void Shake(float duration, float magnitude)
+    public void Shake(float duration, float magnitude, float tInc = 0)
     {
-        StartCoroutine(IShake(duration, magnitude));
+        StartCoroutine(IShake(duration, magnitude, tInc));
     }
 
-    IEnumerator IShake(float duration, float magnitude)
+    IEnumerator IShake(float duration, float magnitude, float tInc)
     {
         float elapsed = 0.0f;
-
+        float tMagnitude = 0;
         Vector3 originalCamPos = Camera.main.transform.position;
         Debug.Log(originalCamPos);
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
-
+            tMagnitude = Mathf.Lerp(0, magnitude, elapsed / tInc);
             float percentComplete = elapsed / duration;
             float damper = 1.0f - Mathf.Clamp(4.0f * percentComplete - 3.0f, 0.0f, 1.0f);
 
             // map value to [-1, 1]
             float x = Random.value * 2.0f - 1.0f;
             float y = Random.value * 2.0f - 1.0f;
-            x *= magnitude * damper;
-            y *= magnitude * damper;
+            x *= tMagnitude * damper;
+            y *= tMagnitude * damper;
 
             Camera.main.transform.position = new Vector3(originalCamPos.x + x, originalCamPos.y + y, originalCamPos.z);
 

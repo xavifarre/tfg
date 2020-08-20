@@ -129,6 +129,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     [Header("Audio")]
     public SoundController soundController; 
+    public SoundController voiceController; 
 
     void Start()
     {
@@ -235,6 +236,11 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
             UpdateAnimations();
         }
+        else
+        {
+            movementValue = Vector3.zero;
+        }
+        
     }
 
     ////Modificar ordre de layer segons la posició y
@@ -377,6 +383,11 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
         dashLastTimestamp = Time.time;
 
+        if (Random.value < 0.7f)
+        {
+            voiceController.PlaySound("player_voice_dash0" + Random.Range(1, 3));
+        }
+
         //Play sound
         soundController.PlaySound("player_dash");
     }
@@ -445,6 +456,22 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
         //Play sound
         soundController.PlaySound("player_slash0" + Random.Range(1, 4));
+
+        if(Random.value < 1f)
+        {
+            if (consecutiveAttacks == 1)
+            {
+                voiceController.PlaySound("player_attack0" + Random.Range(1, 3));
+            }
+            else if (consecutiveAttacks == 2)
+            {
+                voiceController.PlaySound("player_attack0" + Random.Range(3, 5));
+            }
+            else
+            {
+                voiceController.PlaySound("player_attack05");
+            }
+        }
     }
 
     //Moviment al atacar
@@ -619,6 +646,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             ScreenManager.instance.ShowHitScreen();
             //gm.SlowDownGame(0, 0.5f);
             //gm.Shake(0.1f, 1f);
+            voiceController.PlaySound("player_damage0" + Random.Range(1, 3));
 
             if (HasDied())
             {
@@ -628,6 +656,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             {
                 DamageInvulnerability();
             }
+
+            
             ShowDamage(damage);
             Globals.damageReceivedCount += damage;
         }
@@ -652,6 +682,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
         animator.updateMode = AnimatorUpdateMode.UnscaledTime;
         animator.SetTrigger("Die");
+
+        voiceController.PlaySound("player_die");
 
         Globals.deathCount += 1;
         GameManager.instance.ResumeGame();

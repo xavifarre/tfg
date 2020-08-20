@@ -22,7 +22,7 @@ public class StateFollowEffect : MonoBehaviour
     private Queue<Vector3> positionQueue = new Queue<Vector3>();
     private Queue<Sprite> spriteQueue = new Queue<Sprite>();
 
-    
+    public bool ignoreState = false;
 
     // Start is called before the first frame update
     void Start()
@@ -60,7 +60,7 @@ public class StateFollowEffect : MonoBehaviour
 
     private void UpdateSpriteOnDelay()
     {
-        if (targetState.GetState() == state)
+        if (ignoreState || targetState.GetState() == state)
         {
             spriteQueue.Enqueue(targetRenderer.sprite);
         }
