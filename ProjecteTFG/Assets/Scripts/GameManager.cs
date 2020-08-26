@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public bool inputsBlocked = false;
 
     private GameObject enemyContainer;
-
+    private IEnumerator slowCoroutine;
     private void Start()
     {
         instance = this;
@@ -76,7 +76,12 @@ public class GameManager : MonoBehaviour
 
     public void SlowDownGame(float tScale, float time)
     {
-        StartCoroutine(ISlowTime(tScale, time));
+        if (slowCoroutine != null)
+        {
+            StopCoroutine(slowCoroutine);
+        }
+        slowCoroutine = ISlowTime(tScale, time);
+        StartCoroutine(slowCoroutine);
     }
 
     private IEnumerator ISlowTime(float tScale, float time)
@@ -85,6 +90,37 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(time);
         Time.timeScale = 1;
     }
+
+    public void SlowDownGameLerp(float tScale, float lerpTime, float time)
+    {
+        if (slowCoroutine != null)
+        {
+            StopCoroutine(slowCoroutine);
+        }
+        slowCoroutine = ISlowTimeLerp(tScale,lerpTime, time);
+        StartCoroutine(slowCoroutine);
+    }
+
+    private IEnumerator ISlowTimeLerp(float tScale, float lerpTime, float time)
+    {
+        float t = 0;
+        while (t < lerpTime)
+        {
+            t += Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Lerp(1, tScale, t / lerpTime);
+            yield return null;
+        }
+        yield return new WaitForSeconds(time - lerpTime - lerpTime);
+        t = 0;
+        while (t < lerpTime)
+        {
+            t += Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Lerp(tScale,1, t / lerpTime);
+            yield return null;
+        }
+        Time.timeScale = 1;
+    }
+
 
 
     //Camera shake
@@ -135,6 +171,37 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void RedToBlackFilter(float redDuration, float blackDuration)
+    {
+
+        StartCoroutine(IRedToBlack(redDuration, blackDuration));
+    }
+
+    private IEnumerator IRedToBlack(float redDuration, float blackDuration)
+    {
+        
+        float t = 0;
+        while(t < redDuration)
+        {
+            t += Time.unscaledDeltaTime;
+            volumeColors.colorFilter.value = Color.Lerp(Color.white, Color.red, t / redDuration);
+            volumeColors.SetAllOverridesTo(true);
+
+            yield return null;
+        }
+
+        t = 0;
+
+        while (t < blackDuration)
+        {
+            t += Time.unscaledDeltaTime;
+            volumeColors.colorFilter.value =Color.Lerp(Color.red, Color.black, t / blackDuration);
+            volumeColors.SetAllOverridesTo(true);
+            yield return null;
+        }
+
     }
 
 }

@@ -159,6 +159,7 @@
     <Compile Include="Assets\Scripts\Utils\RectArea.cs" />
     <Compile Include="Assets\SwordAttackAnim.cs" />
     <Compile Include="Assets\TutorialCollider.cs" />
+    <Compile Include="Assets\groundCircles.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Shaders\LightCircle.shader" />

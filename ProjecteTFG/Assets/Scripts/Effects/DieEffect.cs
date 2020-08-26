@@ -20,7 +20,7 @@ public class DieEffect : MonoBehaviour
         StartCoroutine(IDie());
     }
 
-    IEnumerator IDie()
+    private IEnumerator IDie()
     {
         float t = 0;
         Material m = disolveMaterialDie;

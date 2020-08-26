@@ -158,7 +158,6 @@ public class Spawner : MonoBehaviour, ISpawner
     private void Spawn(Vector3 pos)
     {
         GameObject spawnedObject = Instantiate(obj, pos, Quaternion.identity, spawnContainer.transform);
-
     }
 
     private Vector3 SpawnOnAreas()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class Destroyer : Boss, IState
@@ -59,6 +60,7 @@ public class Destroyer : Boss, IState
     public TrailRenderer dashTrail;
     public DashParticles dashParticles;
 
+    private PixelPerfectCamera ppCamera;
     #endregion
 
     #region Abilities Structs
@@ -206,7 +208,7 @@ public class Destroyer : Boss, IState
         {
             abilityAvailable.Add(true);
         }
-
+        ppCamera = FindObjectOfType<PixelPerfectCamera>();
         StartCoroutine(IPresentation());
     }
 
@@ -439,14 +441,76 @@ public class Destroyer : Boss, IState
     {
         base.Die();
         StopAllCoroutines();
+        StartCoroutine(IQuickTimeEvent());
+    }
+
+    private IEnumerator IQuickTimeEvent()
+    {
+        float duration = 4, delay = 1 ;
+        gm.SlowDownGame(0.2f, duration);
+        gm.BlockInputs(true);
+
+        
+        bool attacked = false;
+        float t = 0;
+        while(t < duration && !attacked)
+        {
+            t += Time.unscaledDeltaTime;
+            if (t > delay)
+            {
+                if(!ButtonPopUp.instance.IsShowing())
+                    ButtonPopUp.instance.Show("Attack");
+                if (Input.GetButtonDown("Attack"))
+                {
+                    attacked = true;
+                    ButtonPopUp.instance.Hide();
+                    StartEndAnim();
+                }
+            }
+            yield return null;
+        }
+        if (!attacked)
+        {
+            health = (int)(maxHealth * ratiosDamageFase[2])/2;
+            Dash(false);
+            fase = 2;
+            gm.BlockInputs(false);
+            ButtonPopUp.instance.Hide();
+        }
+    }
+
+    private void StartEndAnim()
+    {
         state = State.Dead;
         ChangeLayerIgnore();
-        StartCoroutine(IDieAnim());
-        gm.SlowDownGame(killSlowScale, killSlowTime);
         Globals.gameState = GameState.End;
         System.TimeSpan span = System.DateTime.Now.Subtract(Globals.startTimeStamp);
         Globals.totalTime = (float)span.TotalMilliseconds;
         SaveSystem.SaveGame();
+        gm.SlowDownGame(1f,0);
+        StartCoroutine(IEndAnim());
+    }
+
+    private IEnumerator IEndAnim()
+    {
+        player.DashTo(realPos + new Vector3(-0.5f,-2.5f));
+        CameraManager.instance.mainCamera.SetDestination(realPos);
+        yield return new WaitForSeconds(player.dashTime + 0.5f);
+        player.gameObject.SetActive(false);
+        animator.SetTrigger("Die");
+        ppCamera.refResolutionX = 480;
+        ppCamera.refResolutionY = 270;
+        yield return new WaitForSeconds(0.1f);
+        ppCamera.refResolutionX = 400;
+        ppCamera.refResolutionY = 125;
+        yield return new WaitForSeconds(0.1f);
+        ppCamera.refResolutionX = 320;
+        ppCamera.refResolutionY = 180;
+        gm.SlowDownGameLerp(0.1f, 0.5f, 5f);
+
+        yield return new WaitForSecondsRealtime(2);
+        gm.RedToBlackFilter(2, 2);
+
     }
 
     private IEnumerator IDieAnim()
@@ -454,6 +518,16 @@ public class Destroyer : Boss, IState
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(IDie());
         Instantiate(dieParticles, transform.position, Quaternion.Euler(-90, 0, 0));
+    }
+
+    private void UpdateSpriteFlip(Vector3 target)
+    {
+        spriteRenderer.flipX = (target - realPos).x > 0;
+    }
+
+    private int GetDirection(Vector3 dest)
+    {
+        return MathFunctions.GetDirection(dest - realPos);
     }
 
     #endregion
@@ -572,15 +646,19 @@ public class Destroyer : Boss, IState
     private IEnumerator ISlash()
     {
 
-        yield return new WaitForSeconds(slashStats.prepDuration);
-
         int iSlash = 0;
 
-        while (iSlash < slashStats.slashesPerFase[fase] || (iSlash == slashStats.slashesPerFase[fase] && CheckDistanceToPlayer() == 0 && fase <= 1))
+        //while (iSlash < slashStats.slashesPerFase[fase] || (iSlash == slashStats.slashesPerFase[fase] && CheckDistanceToPlayer() == 0 && fase <= 1))
 
         while(iSlash < slashStats.slashesPerFase[fase] || (iSlash == slashStats.slashesPerFase[fase] && CheckDistanceToPlayer() == 0))
         {
-
+            yield return new WaitForSeconds(slashStats.timeBetweenSlashes[fase]);
+            if(iSlash%2 == 0)
+                animator.SetTrigger("Slash");
+            else 
+                animator.SetTrigger("Slash2");
+            animator.SetInteger("Direction", GetDirection(player.transform.position));
+            UpdateSpriteFlip(player.transform.position);
             float t = 0;
 
             Vector2 vectorToPlayer = player.transform.position - realPos;
@@ -592,8 +670,6 @@ public class Destroyer : Boss, IState
             Vector2 startPoint = realPos;
             Vector2 destPoint = Vector2.ClampMagnitude(vectorToPlayer * 10000, slashStats.attackMoveDistance) + startPoint;
 
-            slashStats.slashObject.gameObject.SetActive(true);
-
             while (t < slashStats.moveDuration || t < slashStats.timeActive)
             {
                 t += Time.deltaTime;
@@ -602,15 +678,9 @@ public class Destroyer : Boss, IState
                     realPos = MathFunctions.EaseOutExp(t, startPoint, destPoint, slashStats.moveDuration, 5);
                     PixelPerfectMovement.Move(realPos, rb);
                 }
-
-                if (slashStats.slashObject.gameObject.activeSelf && t >= slashStats.timeActive)
-                {
-                    slashStats.slashObject.gameObject.SetActive(false);
-                }
+              
                 yield return null;
             }
-
-            yield return new WaitForSeconds(slashStats.timeBetweenSlashes[fase]);
 
             iSlash += 1;
             if (fase == 2 && Random.value < slashStats.extraSlashProb)
@@ -618,6 +688,7 @@ public class Destroyer : Boss, IState
                 iSlash = -1;
             }
         }
+        animator.SetTrigger("EndSlash");
 
         EndAbility(Ability.Slash, slashStats.lagTime);
     }
@@ -642,6 +713,10 @@ public class Destroyer : Boss, IState
         ChangeLayerIgnore();
         SpawnDashParticles(startPoint, destPoint);
 
+        animator.SetTrigger("Dash");
+        animator.SetInteger("Direction", GetDirection(destPoint));
+        UpdateSpriteFlip(destPoint);
+
         float t = 0;
         while (t < dashStats.duration)
         {
@@ -652,15 +727,19 @@ public class Destroyer : Boss, IState
         }
         state = State.Idle;
         ResetLayer();
-
+        UpdateSpriteFlip(player.transform.position);
         EndAbility(Ability.Dash, dashStats.lagTime);
     }
 
 
     private IEnumerator ICrystalsUp()
     {
-        crystalsUpStats.circleObject.SetActive(true);
-        crystalsUpStats.circleObject.transform.localScale = Vector3.one * crystalsUpStats.spawnMaxRadius;
+        animator.SetTrigger("PalmDown");
+        UpdateSpriteFlip(player.transform.position);
+
+        GameObject circlesObject = Instantiate(crystalsUpStats.circleObject, transform);
+        circlesObject.transform.localScale = Vector3.one * crystalsUpStats.spawnMaxRadius;
+
         yield return new WaitForSeconds(crystalsUpStats.prepDuration);
 
         List<CrystalDestroyer> crystalList = new List<CrystalDestroyer>();
@@ -680,7 +759,9 @@ public class Destroyer : Boss, IState
             crystal.Float();
             yield return new WaitForSeconds(crystalsUpStats.crystalSpawnDuration / crystalsUpStats.nCrystals);
         }
-        crystalsUpStats.circleObject.SetActive(false);
+
+        animator.SetTrigger("EndPalmDown");
+
         yield return new WaitForSeconds(crystalsUpStats.castDelay);
 
         foreach (CrystalDestroyer crystal in crystalList)
@@ -694,8 +775,12 @@ public class Destroyer : Boss, IState
 
     private IEnumerator IOrbitalStrike()
     {
-        orbitalStrikeStats.circleObject.SetActive(true);
-        orbitalStrikeStats.circleObject.transform.localScale = Vector3.one * orbitalStrikeStats.circleRadius;
+        GameObject circlesObject = Instantiate(orbitalStrikeStats.circleObject, transform);
+        circlesObject.transform.localScale = Vector3.one * orbitalStrikeStats.circleRadius;
+
+        animator.SetTrigger("PalmDown");
+        UpdateSpriteFlip(player.transform.position);
+
         yield return new WaitForSeconds(orbitalStrikeStats.prepDuration);
 
         OrbitalStrike strike = Instantiate(orbitalStrikeStats.orbitalObject, player.transform.position, Quaternion.identity);
@@ -703,8 +788,9 @@ public class Destroyer : Boss, IState
         strike.transform.localScale = Vector3.one * orbitalStrikeStats.orbitalRadius;
         strike.StartStrike(orbitalStrikeStats.orbitalDuration, orbitalStrikeStats.orbitalDelay, orbitalStrikeStats.damageInterval);
 
+        animator.SetTrigger("EndPalmDown");
+
         yield return new WaitForSeconds(orbitalStrikeStats.stopDuration);
-        orbitalStrikeStats.circleObject.SetActive(false);
 
         EndAbility(Ability.OrbitalStrike, orbitalStrikeStats.lagTime);
 
@@ -714,6 +800,10 @@ public class Destroyer : Boss, IState
     {
         StartCoroutine(ICooldownSwordsCircle());
         StartCoroutine(ISwordsCircleMove());
+
+        animator.SetTrigger("SwordsCircle");
+        UpdateSpriteFlip(player.transform.position);
+
         yield return new WaitForSeconds(swordsCircleStats.prepDuration);
         List<SwordDestroyer> swords = new List<SwordDestroyer>();
         int motionDir = Random.Range(0, 2) == 0 ? 1 : -1;
@@ -735,6 +825,8 @@ public class Destroyer : Boss, IState
 
         yield return new WaitForSeconds(swordsCircleStats.chargeDuration + swordsCircleStats.alertDuration + swordsCircleStats.castDelay);
 
+        animator.SetTrigger("EndSwordsCircle");
+
         EndAbility(Ability.SwordsCircle, swordsCircleStats.lagTime);
 
     }
@@ -743,20 +835,24 @@ public class Destroyer : Boss, IState
     {
         float t = 0;
         Vector3 destPoint = FindRandomMovePoint(0, mediumDistance, 10);
+        float floatAmplitude = 0.01f, floatAngularSpeed = 1;
         while (t < swordsCircleStats.prepDuration + (1 / swordsCircleStats.swordFrequency) + swordsCircleStats.chargeDuration)
         {
             t += Time.deltaTime;
             if (Vector3.Distance(realPos, destPoint) > 0.2f)
             {
-                realPos += swordsCircleStats.moveSpeed * (destPoint - transform.position).normalized * Time.deltaTime;
+                UpdateSpriteFlip(player.transform.position);
+                realPos += swordsCircleStats.moveSpeed * (destPoint - transform.position).normalized * Time.deltaTime + new Vector3(0, floatAmplitude * Mathf.Sin(floatAngularSpeed * t * Mathf.PI));
                 PixelPerfectMovement.Move(realPos, rb);
             }
             yield return null;
         }
     }
 
+
     private IEnumerator IDashSlam()
     {
+
         yield return new WaitForSeconds(dashSlamStats.prepDuration);
         Vector3 startPoint = realPos;
         Vector3 destPoint = player.transform.position + (Vector3)player.lastDir.normalized * player.movementValue.magnitude * player.speed * dashSlamStats.dashDuration;
@@ -764,6 +860,9 @@ public class Destroyer : Boss, IState
         state = State.Dash;
         ChangeLayerIgnore();
         SpawnDashParticles(startPoint, destPoint);
+
+        animator.SetTrigger("DashSlam");
+        UpdateSpriteFlip(player.transform.position);
 
         float t = 0;
         while (t < dashSlamStats.dashDuration * 0.3f)
@@ -777,7 +876,7 @@ public class Destroyer : Boss, IState
         }
 
         ResetLayer();
-        state = State.Idle;
+
 
         DashSlam slam = dashSlamStats.slamObject;
         slam.transform.localScale = dashSlamStats.slamRadius * Vector3.one;
@@ -788,6 +887,9 @@ public class Destroyer : Boss, IState
         t = 0;
         yield return new WaitForSeconds(dashSlamStats.slamDelay);
 
+        UpdateSpriteFlip(player.transform.position);
+        animator.SetTrigger("DashSlamDown");
+
         while (t < dashSlamStats.dashDuration * 0.7f)
         {
             t += Time.deltaTime;
@@ -797,10 +899,12 @@ public class Destroyer : Boss, IState
             PixelPerfectMovement.Move(realPos, rb);
             yield return null;
         }
-
+        state = State.Idle;
         slam.gameObject.SetActive(true);
         yield return new WaitForSeconds(dashSlamStats.slamColliderDuration);
         slam.gameObject.SetActive(false);
+
+        animator.SetTrigger("EndDashSlam");
 
         EndAbility(Ability.DashSlam, dashStats.lagTime);
     }
@@ -810,7 +914,6 @@ public class Destroyer : Boss, IState
         Vector3 startPoint = realPos;
         int dir = Random.Range(0, 2) == 0 ? 1 : -1;
         Vector3 destPoint = player.transform.position + horizontalPierceStats.distanceToPlayer * Vector3.right * -dir;
-        Debug.Log(walkableArea.isInside(destPoint) + " " + destPoint);
         if (!walkableArea.isInside(destPoint))
         {
             dir *= -1;
@@ -821,6 +924,10 @@ public class Destroyer : Boss, IState
         state = State.Dash;
         ChangeLayerIgnore();
         SpawnDashParticles(startPoint, destPoint);
+
+        animator.SetTrigger("Dash");
+        animator.SetInteger("Direction", GetDirection(destPoint));
+        UpdateSpriteFlip(destPoint);
 
         float t = 0;
         while (t < dashStats.duration)
@@ -833,6 +940,10 @@ public class Destroyer : Boss, IState
 
         ResetLayer();
         state = State.Idle;
+
+        animator.SetTrigger("HorizontalPierce");
+        spriteRenderer.flipX = dir == -1;
+
         yield return new WaitForSeconds(horizontalPierceStats.prepDuration);
 
         horizontalPierceStats.pierceObject.gameObject.SetActive(true);

@@ -85,6 +85,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public float recallHealMultiplier = 1;
     public float recallHealMultiplierFromMinions = 0.5f;
     public float maxHealFromMinions = 10;
+    private float healCounter;
     [HideInInspector]
     public float healFromMinionsCounter = 0;
     public Vector2 shardRange = new Vector2(300,500);
@@ -392,6 +393,28 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         soundController.PlaySound("player_dash");
     }
 
+    public void DashTo(Vector3 dest)
+    {
+        state = State.Dash;
+        invulnerable = true;
+        startPoint = realPos;
+        destPoint = dest;
+        tAction = 0;
+
+        ChangeLayerDash(); //Canvi de layer per a travessar enemics simples
+
+        attackCollider.GetComponent<AttackMelee>().StopAttack();
+        animator.SetTrigger("Dash");
+        queuedInput = "";
+
+        DashParticles particlesInstance = Instantiate(dashLineParticles, transform);
+        particlesInstance.PlayParticles((destPoint - startPoint).normalized);
+        dashTrail.emitting = true;
+
+        //Play sound
+        soundController.PlaySound("player_dash");
+    }
+
     void UpdateDashPosition()
     {
          //-----Desacceleració exponencial----
@@ -401,16 +424,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         Vector3 tNextPos = MathFunctions.EaseOutExp(tAction, startPoint, destPoint, dashTime, 5);
         float tDistance = (tNextPos - MathFunctions.EaseOutExp(tAction-Time.deltaTime, startPoint, destPoint, dashTime, 5)).magnitude;
         Vector3 tDir = (destPoint - startPoint).normalized;
-        //Debug.Log(tNextPos + " " + transform.position + " " + tDistance + " " + tDir);
 
         Move(realPos + tDir * tDistance);
-
-        //float vDash = 2f;
-        //float vt = MathFunctions.EaseOutExp(tAction, vDash, 0, dashTime, 3);
-
-        //Debug.Log(vt);
-        //Move(transform.position + (Vector3)lastDir.normalized * vt );
-
 
         //Invulnerabilitat 2/3 parts del dash
         if (tAction >= dashTime * 2 / 3)
@@ -469,7 +484,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             }
             else
             {
-                voiceController.PlaySound("player_attack05");
+                voiceController.PlaySound("player_attack0" + Random.Range(5, 7));
             }
         }
     }
@@ -524,6 +539,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         if(activeShards.Count > 0)
         {
             recallParticles.PlayParticles();
+            StartCoroutine(IHealCounter());
             healFromMinionsCounter = 0;
         }
         
@@ -686,8 +702,6 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         voiceController.PlaySound("player_die");
 
         Globals.deathCount += 1;
-        GameManager.instance.ResumeGame();
-
     }
 
     public bool HasDied()
@@ -795,12 +809,24 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public void ShardHeal(float accumulatedHeal)
     {
         health += accumulatedHeal;
-        if(health > maxHealth)
+        healCounter += accumulatedHeal;
+        if (health > maxHealth)
         {
             health = maxHealth;
         }
         HealthBar.UpdateBar((int)health);
         shardHealParticles.Play();
+    }
+
+    private IEnumerator IHealCounter()
+    {
+        healCounter = 0;
+        yield return new WaitForSeconds(1.5f);
+        healCounter = Mathf.Round(healCounter);
+        if(healCounter > 0)
+        {
+            PopupTextController.CreatePopupTextHealSelf(healCounter.ToString(), realPos);
+        }
     }
 
     public void PickSword()

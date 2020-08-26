@@ -21,6 +21,7 @@ public class StateFollowEffect : MonoBehaviour
     private string lastSprite;
     private Queue<Vector3> positionQueue = new Queue<Vector3>();
     private Queue<Sprite> spriteQueue = new Queue<Sprite>();
+    private Queue<bool> flipQueue = new Queue<bool>();
 
     public bool ignoreState = false;
 
@@ -63,19 +64,23 @@ public class StateFollowEffect : MonoBehaviour
         if (ignoreState || targetState.GetState() == state)
         {
             spriteQueue.Enqueue(targetRenderer.sprite);
+            flipQueue.Enqueue(targetRenderer.flipX);
         }
         else
         {
             spriteQueue.Clear();
+            flipQueue.Clear();
         }
 
         if (spriteQueue.Count > delay)
         {
             spriteQueue.Clear();
+            flipQueue.Clear();
         }
         else if (spriteQueue.Count == delay)
         {
             ownRenderer.sprite = spriteQueue.Dequeue();
+            ownRenderer.flipX = flipQueue.Dequeue();
             ownRenderer.enabled = true;
         }
         else

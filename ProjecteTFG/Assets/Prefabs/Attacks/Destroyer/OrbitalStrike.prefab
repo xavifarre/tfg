@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4684338619034024150}
   - component: {fileID: 5692907138817732194}
   - component: {fileID: 3872793245721566873}
-  - component: {fileID: 4505334322630179826}
+  - component: {fileID: 3007338702268589967}
+  - component: {fileID: 5312124818102768531}
   m_Layer: 17
   m_Name: OrbitalStrike
   m_TagString: EnemyAttack
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6231657598060834110}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20, y: -21.69, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -65,7 +66,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 7b930d962820c0f4688bc6bb2687ea07, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,8 +87,9 @@ SpriteRenderer:
   m_SortingLayerID: -922912191
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: be543e3891d95fc41b34e30cc75686dd, type: 3}
-  m_Color: {r: 0.9771824, g: 1, b: 0, a: 0.5019608}
+  m_Sprite: {fileID: 2046414458406969977, guid: b4e29eee676988844af9bf6226c09cb5,
+    type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,8 +99,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &4505334322630179826
-CircleCollider2D:
+--- !u!95 &3007338702268589967
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6231657598060834110}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4cc5b7216c992c04682e4ec5acfefafc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!60 &5312124818102768531
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -111,5 +132,35 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.1}
+    oldSize: {x: 1.4726562, y: 3.640625}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.5800781, y: -0.2351563}
+      - {x: 0.6308594, y: -0.1960938}
+      - {x: 0.6933594, y: -0.1414063}
+      - {x: 0.7363281, y: -0.0710938}
+      - {x: 0.7532348, y: 0.21644688}
+      - {x: 0.43226922, y: 0.4191904}
+      - {x: 0.004354179, y: 0.47845486}
+      - {x: -0.44853756, y: 0.3904646}
+      - {x: -0.7363281, y: 0.19954062}
+      - {x: -0.7363281, y: -0.059375048}
+      - {x: -0.7324219, y: -0.0710938}
+      - {x: -0.6933594, y: -0.1414063}
+      - {x: -0.6035156, y: -0.22343755}
+      - {x: -0.5605469, y: -0.24687505}
+      - {x: -0.47851562, y: -0.28593755}
+      - {x: -0.40820312, y: -0.31718755}
+      - {x: -0.31054688, y: -0.3445313}
+      - {x: -0.17382812, y: -0.36406255}
+      - {x: 0.20117188, y: -0.36406255}
+      - {x: 0.35742188, y: -0.33281255}
+      - {x: 0.48242188, y: -0.2898438}

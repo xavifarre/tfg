@@ -24,6 +24,8 @@ public class Slasher : Minion
         Vector3 direction = (player.transform.position - realPos).normalized;
         realPos = realPos + speed * direction * Time.deltaTime;
 
+        UpdateSpriteFlip();
+
         if (Vector3.Distance(player.transform.position, realPos) < chargeRange)
         {
             Charge();
@@ -68,7 +70,7 @@ public class Slasher : Minion
         UpdateSpriteFlip();
     }
 
-    IEnumerator ICharge()
+    private IEnumerator ICharge()
     {
         yield return new WaitForSeconds(chargeTime * 0.7f);
         startActionPoint = realPos;

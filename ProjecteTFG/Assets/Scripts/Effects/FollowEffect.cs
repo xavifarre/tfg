@@ -14,6 +14,7 @@ public class FollowEffect : MonoBehaviour
 
     private Queue<Vector3> positionQueue = new Queue<Vector3>();
     private Queue<Sprite> spriteQueue = new Queue<Sprite>();
+    private Queue<bool> flipQueue = new Queue<bool>();
 
     // Start is called before the first frame update
     void Start()
@@ -32,17 +33,21 @@ public class FollowEffect : MonoBehaviour
             if (!fixedSprite)
             {
                 spriteQueue.Enqueue(targetRenderer.sprite);
+                flipQueue.Enqueue(targetRenderer.flipX);
             }
 
             if (positionQueue.Count > delay)
             {
                 positionQueue.Clear();
                 spriteQueue.Clear();
+                flipQueue.Clear();
             }
             else if (positionQueue.Count == delay)
             {
                 transform.position = positionQueue.Dequeue();
                 ownRenderer.sprite = fixedSprite ? fixedSprite : spriteQueue.Dequeue();
+                ownRenderer.flipX = fixedSprite ? false : flipQueue.Dequeue();
+                Debug.Log(flipQueue.Count);
 
             }
             ownRenderer.enabled = true;

@@ -1,0 +1,512 @@
+fileFormatVersion: 2
+guid: 38558bdd277f5654cae5fb982491ed6f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7944371853502451845
+    second: horizontalPierce_0
+  - first:
+      213: -6586002839846428464
+    second: horizontalPierce_1
+  - first:
+      213: -6405922859709082435
+    second: horizontalPierce_2
+  - first:
+      213: -2609457980414269398
+    second: horizontalPierce_3
+  - first:
+      213: 3945079878219267279
+    second: horizontalPierce_4
+  - first:
+      213: 7363800949514160956
+    second: horizontalPierce_5
+  - first:
+      213: -888613051518707617
+    second: horizontalPierce_6
+  - first:
+      213: 9183700654434844296
+    second: horizontalPierce_7
+  - first:
+      213: -1738094727380545769
+    second: horizontalPierce_8
+  - first:
+      213: -7996865378052045371
+    second: horizontalPierce_9
+  - first:
+      213: -3878476542741745335
+    second: horizontalPierce_10
+  - first:
+      213: 6039137652278148571
+    second: horizontalPierce_11
+  - first:
+      213: 5070952196913909711
+    second: horizontalPierce_12
+  - first:
+      213: -4149408766304657171
+    second: horizontalPierce_13
+  - first:
+      213: 3226234261867346516
+    second: horizontalPierce_14
+  - first:
+      213: 753273459610750344
+    second: horizontalPierce_15
+  - first:
+      213: 893924978579202217
+    second: horizontalPierce_16
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: horizontalPierce_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58010a31c14104e60800000000000000
+      internalID: 7944371853502451845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_1
+      rect:
+        serializedVersion: 2
+        x: 287
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d06d31bf41d994a0800000000000000
+      internalID: -6586002839846428464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_2
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db45c7069179917a0800000000000000
+      internalID: -6405922859709082435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_3
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a286915dac759cbd0800000000000000
+      internalID: -2609457980414269398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_4
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fccfccf4f3dbfb630800000000000000
+      internalID: 3945079878219267279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_5
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3bc970d2f9713660800000000000000
+      internalID: 7363800949514160956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_6
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f58937143230ba3f0800000000000000
+      internalID: -888613051518707617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_7
+      rect:
+        serializedVersion: 2
+        x: 2009
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88e7c1f761f037f70800000000000000
+      internalID: 9183700654434844296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_8
+      rect:
+        serializedVersion: 2
+        x: 2296
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71fc084ed0c01e7e0800000000000000
+      internalID: -1738094727380545769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_9
+      rect:
+        serializedVersion: 2
+        x: 2583
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c58690de4d650190800000000000000
+      internalID: -7996865378052045371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_10
+      rect:
+        serializedVersion: 2
+        x: 2870
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94171382222ec2ac0800000000000000
+      internalID: -3878476542741745335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_11
+      rect:
+        serializedVersion: 2
+        x: 3157
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bddb9b1b2b35fc350800000000000000
+      internalID: 6039137652278148571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_12
+      rect:
+        serializedVersion: 2
+        x: 3444
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcf4a02f724af5640800000000000000
+      internalID: 5070952196913909711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_13
+      rect:
+        serializedVersion: 2
+        x: 3731
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de0e48826b65a66c0800000000000000
+      internalID: -4149408766304657171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_14
+      rect:
+        serializedVersion: 2
+        x: 4018
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45a3cc4c7f2e5cc20800000000000000
+      internalID: 3226234261867346516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_15
+      rect:
+        serializedVersion: 2
+        x: 4305
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88d04d2783a247a00800000000000000
+      internalID: 753273459610750344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: horizontalPierce_16
+      rect:
+        serializedVersion: 2
+        x: 4592
+        y: 0
+        width: 287
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a0ef04280cd76c00800000000000000
+      internalID: 893924978579202217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

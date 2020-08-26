@@ -85,8 +85,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5467164000750030649}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.609413, y: -11.805664, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6934538934670621807}
@@ -549,6 +549,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BiterSmoke
+      objectReference: {fileID: 0}
+    - target: {fileID: 4667407172456291076, guid: fcee158823a59834aafca80ce62b9e7a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4667407172456291077, guid: fcee158823a59834aafca80ce62b9e7a,
         type: 3}

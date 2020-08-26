@@ -89,7 +89,7 @@ public class Biter : Minion
         attackCollider.enabled = false;
     }
 
-    IEnumerator ICharge()
+    private IEnumerator ICharge()
     {
         yield return new WaitForSeconds(chargeTime);
         if (state == MinionState.Charge)

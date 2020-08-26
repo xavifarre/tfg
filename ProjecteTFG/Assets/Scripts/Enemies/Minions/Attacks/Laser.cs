@@ -15,12 +15,6 @@ public class Laser : Attack
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Enemy")
-        {
-            //Envia el hit al enemic
-            //collider.GetComponent<Enemy>().Hit(this);
-        }
-
         if (collider.gameObject.tag == "Player")
         {
             //Envia el hit al player

@@ -25,6 +25,8 @@ public static class SoundCollection
         {"player_attack03", Resources.Load<AudioClip>("Audio/Player/player_voice_attack03")},
         {"player_attack04", Resources.Load<AudioClip>("Audio/Player/player_voice_attack04")},
         {"player_attack05", Resources.Load<AudioClip>("Audio/Player/player_voice_attack05")},
+        {"player_attack07", Resources.Load<AudioClip>("Audio/Player/player_voice_attack06")},
+        {"player_attack06", Resources.Load<AudioClip>("Audio/Player/player_voice_attack07")},
 
         //Voice damage
         {"player_die", Resources.Load<AudioClip>("Audio/Player/player_voice_die")},

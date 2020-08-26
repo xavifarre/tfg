@@ -24,9 +24,8 @@ public class OrbitalStrike : Attack
     private IEnumerator IStrike(float duration, float delay, float timeInterval)
     {
         sprite = GetComponent<SpriteRenderer>();
-        sprite.color = new Color(Color.yellow.r, Color.yellow.g, Color.yellow.b, 0.4f);
         yield return new WaitForSeconds(delay);
-        sprite.color = new Color(Color.red.r, Color.red.g, Color.red.b, 0.4f);
+        GetComponent<Animator>().SetTrigger("Strike");
         float t = 0;
         while(t < duration)
         {
@@ -36,8 +35,8 @@ public class OrbitalStrike : Attack
                 player.HitByTime((int)(damage * timeInterval/duration));
             }
             yield return new WaitForSeconds(timeInterval);
-            
         }
-        Destroy(gameObject);
+
+        Destroy(gameObject, 3f);
     }
 }

@@ -620,6 +620,7 @@ public class Perserver : Boss
     private IEnumerator IDieAnim()
     {
         yield return new WaitForSeconds(0.5f);
+        FadeShadow();
         StartCoroutine(IDie());
         foreach (Blade b in blades)
         {

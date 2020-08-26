@@ -9783,6 +9783,7 @@ Transform:
   - {fileID: 988502236592803258}
   - {fileID: 1692292542}
   - {fileID: 569580112}
+  - {fileID: 332436335056305055}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9901,17 +9902,19 @@ MonoBehaviour:
   size: 2
   health: 500
   knockBackValue: 1
+  soundController: {fileID: 0}
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   hitColorDuration: 0.05
   hitMaterial: {fileID: 2100000, guid: 00b2286b10131024ca63aab6387d9618, type: 2}
   fase: 0
   ratiosDamageFase:
-  - 1
-  - 1
-  - 1
+  - 0.8
+  - 0.6
+  - 0.4
   - 0
   killSlowTime: 3
   killSlowScale: 0.2
+  disolveMaterialDie: {fileID: 2100000, guid: 04bd415a4cd55c645827000248145c55, type: 2}
   lungeDamage: 20
   lungeKnockback: 3
   lungeSpeed: 40
@@ -9951,7 +9954,6 @@ MonoBehaviour:
   knockbackTime: 0.5
   shadowController: {fileID: 1890833828}
   disolveMaterial: {fileID: 2100000, guid: 1515dac6577b6714e9957cac0e9c3868, type: 2}
-  disolveMaterialDie: {fileID: 2100000, guid: 04bd415a4cd55c645827000248145c55, type: 2}
   dieParticles: {fileID: 4518581663593840656, guid: 4946a4c6669e12646bc2c6ff176dc7ad,
     type: 3}
   moveParticles: {fileID: 7244889182214107552}
@@ -9977,6 +9979,75 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1020091989261194339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 332436335056305055}
+  - component: {fileID: 8502641486820108922}
+  - component: {fileID: 3539665708832661997}
+  m_Layer: 12
+  m_Name: BodyCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &332436335056305055
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020091989261194339}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 449336332740483369}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &8502641486820108922
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020091989261194339}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.07152748, y: -0.06502533}
+  serializedVersion: 2
+  m_Radius: 0.46748734
+--- !u!50 &3539665708832661997
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020091989261194339}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1974370126386528571
 GameObject:
   m_ObjectHideFlags: 0

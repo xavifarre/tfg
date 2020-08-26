@@ -4593,10 +4593,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 277910350}
     m_Modifications:
-    - target: {fileID: 1913470174, guid: 640c85d469e290a44ad85c5087d2fdd3, type: 3}
-      propertyPath: m_MaskInteraction
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
       propertyPath: spawnersContainer
@@ -4604,38 +4600,13 @@ PrefabInstance:
       objectReference: {fileID: 190578458}
     - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
-      propertyPath: ratiosDamageFase.Array.data[0]
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
-        type: 3}
-      propertyPath: ratiosDamageFase.Array.data[1]
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
-        type: 3}
-      propertyPath: ratiosDamageFase.Array.data[2]
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
-        type: 3}
-      propertyPath: maxEnemies
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
-        type: 3}
-      propertyPath: health
-      value: 50
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 449336332740483365, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
       propertyPath: m_Name
       value: Summoner
-      objectReference: {fileID: 0}
-    - target: {fileID: 449336332740483365, guid: 640c85d469e290a44ad85c5087d2fdd3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 449336332740483369, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
@@ -4691,6 +4662,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1020091989261194339, guid: 640c85d469e290a44ad85c5087d2fdd3,
+        type: 3}
+      propertyPath: m_Layer
+      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 640c85d469e290a44ad85c5087d2fdd3, type: 3}

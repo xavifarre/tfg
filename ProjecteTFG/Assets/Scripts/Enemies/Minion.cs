@@ -62,10 +62,6 @@ public class Minion : Enemy, IFallableObject
         }
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
 
     //Move
     protected virtual void UpdateMove()

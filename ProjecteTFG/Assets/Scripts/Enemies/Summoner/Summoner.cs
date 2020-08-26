@@ -156,7 +156,6 @@ public class Summoner : Boss
         }
 
         areaMove = mp.transform.Find("3").GetComponent<RectArea>();
-
     }
 
     private void InitSpawners()
@@ -189,7 +188,6 @@ public class Summoner : Boss
     //Fa flotar el enemic en forma de funció sinusoidal
     private float FloatY()
     {
-
         return floatAmplitude * Mathf.Sin(floatAngularSpeed * tAction * Mathf.PI);
     }
 
@@ -219,7 +217,6 @@ public class Summoner : Boss
         {
             EndDash();
         }
-
     }
 
     //Knockback
@@ -504,7 +501,6 @@ public class Summoner : Boss
 
         animator.SetTrigger("EndAction");
         animator.SetInteger("Fase", fase);
-
     }
 
     private void EndSummon()
@@ -700,7 +696,7 @@ public class Summoner : Boss
         {
             summonType = SummType.StartFase;
             animator.SetTrigger("EndAction");
-            //StartSummon();
+            StartSummon();
             DashToRandom();
         }
     }
@@ -719,7 +715,7 @@ public class Summoner : Boss
         gm.SlowDownGame(killSlowScale, killSlowTime);
 
         KillAllMinions();
-
+        
         Globals.gameState = GameState.SummonerDefeated;
     }
 
@@ -764,7 +760,7 @@ public class Summoner : Boss
     }
     
 
-    IEnumerator IVulnerable()
+    private IEnumerator IVulnerable()
     {
         yield return new WaitForSeconds(vulnerableTime);
         state = SummState.Damaged;
@@ -774,7 +770,7 @@ public class Summoner : Boss
         ChangeLayerIgnore();
     }
 
-    IEnumerator ISummon()
+    private IEnumerator ISummon()
     {
         yield return new WaitForSeconds(summonPreparationTime[fase]);
         animator.SetTrigger("Summon");
@@ -782,7 +778,7 @@ public class Summoner : Boss
         EndSummon();
     }
 
-    IEnumerator IStopForSeconds(float sec)
+    private IEnumerator IStopForSeconds(float sec)
     {
         yield return new WaitForSeconds(sec);
         if(state == SummState.Idle)
@@ -791,7 +787,7 @@ public class Summoner : Boss
         }
     }
 
-    IEnumerator ITriggerMelee()
+    private IEnumerator ITriggerMelee()
     {
         AnimatorClipInfo[] clipInfo;
         clipInfo = animator.GetCurrentAnimatorClipInfo(0);
@@ -805,7 +801,7 @@ public class Summoner : Boss
         StartMelee();
     }
 
-    IEnumerator IMeleeAttack()
+    private IEnumerator IMeleeAttack()
     {
         yield return new WaitForSeconds(meleeDelay);
         if (state == SummState.Melee)
@@ -820,10 +816,9 @@ public class Summoner : Boss
             
             DashToRandom();
         }
-
     }
 
-    IEnumerator ICompleteAnim(System.Action nextAction)
+    private IEnumerator ICompleteAnim(System.Action nextAction)
     {
         AnimatorClipInfo[] clipInfo = animator.GetCurrentAnimatorClipInfo(0);
         yield return new WaitForSeconds(clipInfo[0].clip.length);
@@ -832,7 +827,7 @@ public class Summoner : Boss
 
 
 
-    IEnumerator IPrepareLunge(bool startFaseLunge)
+   private  IEnumerator IPrepareLunge(bool startFaseLunge)
     {
         AnimatorClipInfo[] clipInfo;
         if (startFaseLunge)

@@ -7,6 +7,7 @@ public class PopupTextController : MonoBehaviour
     private static PopupText popupDamage;
     private static PopupText popupDamageSelf;
     private static PopupText popupHeal;
+    private static PopupText popupHealSelf;
     private static GameObject worldCanvas;
 
     public static void Initialize()
@@ -29,6 +30,11 @@ public class PopupTextController : MonoBehaviour
         {
             popupHeal = Resources.Load<PopupText>("UI/PopupHeal");
         }
+
+        if (!popupHealSelf)
+        {
+            popupHealSelf = Resources.Load<PopupText>("UI/PopupHealSelf");
+        }
     }
 
     public static void CreatePopupTextDamage(string s, Vector3 position)
@@ -50,6 +56,14 @@ public class PopupTextController : MonoBehaviour
     public static void CreatePopupTextHeal(string s, Vector3 position)
     {
         PopupText instance = Instantiate(popupHeal, worldCanvas.transform);
+
+        instance.transform.position = position;
+        instance.SetText("+" + s);
+    }
+
+    public static void CreatePopupTextHealSelf(string s, Vector3 position)
+    {
+        PopupText instance = Instantiate(popupHealSelf, worldCanvas.transform);
 
         instance.transform.position = position;
         instance.SetText("+" + s);

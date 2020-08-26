@@ -51,18 +51,13 @@ public abstract class Enemy : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
-
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultMaterial = spriteRenderer.material;
         gm = FindObjectOfType<GameManager>();
-
         shadow = GetComponentInChildren<ShadowCopySprite>();
-
         realPos = transform.position;
         maxHealth = health;
-
         Init();
-
         animator = GetComponent<Animator>();
     }
 
