@@ -30,12 +30,21 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 1
-        value: {x: 25, y: 25, z: 1}
+        value: {x: 30, y: 30, z: 1}
         inSlope: {x: 1276.6152, y: 3107.2253, z: 0}
         outSlope: {x: 1276.6152, y: 3107.2253, z: 0}
         tangentMode: 0
         weightedMode: 1
         inWeight: {x: 0.019634545, y: 0.007963538, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
+        time: 1.3166667
+        value: {x: 100, y: 100, z: 1}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -402,12 +411,21 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 25
+        value: 30
         inSlope: 1276.6152
         outSlope: 1276.6152
         tangentMode: 0
         weightedMode: 1
         inWeight: 0.019634545
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.3166667
+        value: 100
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -430,12 +448,21 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 25
+        value: 30
         inSlope: 3107.2253
         outSlope: 3107.2253
         tangentMode: 0
         weightedMode: 1
         inWeight: 0.007963538
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1.3166667
+        value: 100
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
         outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -734,6 +761,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 1.3166667
+    functionName: EndRain
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 5
     functionName: DestroySword
     data: 

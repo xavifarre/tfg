@@ -152,7 +152,7 @@ public class Minion : Enemy, IFallableObject
     {
         state = MinionState.Fall;
         vulnerable = false;
-        StartCoroutine(FallableObject.IFallAnimation(fallPosition, gameObject, fallTime));
+        StartCoroutine(FallableObject.IFallAnimation(transform.position, gameObject, fallTime));
     }
 
     public void EndFall()

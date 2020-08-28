@@ -306,12 +306,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.13310003, y: -0.5157616}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.4592812
 --- !u!114 &2920582230278171630
 MonoBehaviour:
   m_ObjectHideFlags: 0

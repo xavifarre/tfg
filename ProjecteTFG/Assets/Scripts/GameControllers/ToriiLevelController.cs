@@ -30,17 +30,20 @@ public class ToriiLevelController : MonoBehaviour
 
     public void OpenSummoner()
     {
-        summonerGate.gameObject.SetActive(false);
+        summonerGate.GetComponentInChildren<Seal>().Fade(2);
+        summonerGate.enabled = false;
     }
 
     public void OpenPreserver()
     {
-        preserverGate.gameObject.SetActive(false);
+        preserverGate.GetComponentInChildren<Seal>().Fade(2);
+        preserverGate.enabled = false;
     }
 
     public void OpenDestroyer()
     {
-        destroyerGate.gameObject.SetActive(false);
+        destroyerGate.GetComponentInChildren<Seal>().Fade(2);
+        destroyerGate.enabled = false;
     }
 
     public void InitializeLevel()
@@ -76,14 +79,15 @@ public class ToriiLevelController : MonoBehaviour
 
     private IEnumerator ICinematicSword()
     {
-
+        player.MoveToDir(Vector3.up);
         GameManager.instance.BlockInputs(true);
         ScreenManager.instance.StartFadeShowScreen(4,2);
         yield return new WaitForSeconds(2f);
 
+        yield return new WaitForSeconds(3f);
+        player.StopMoving();
+        yield return new WaitForSeconds(1f);
         soundController.PlaySound("enter_torii_level");
-        yield return new WaitForSeconds(4f);
-
         CameraManager.instance.mainCamera.SetDestination(sword.transform.position,2f);
         yield return new WaitForSeconds(5f);
         CameraManager.instance.mainCamera.FollowPlayer(1f);

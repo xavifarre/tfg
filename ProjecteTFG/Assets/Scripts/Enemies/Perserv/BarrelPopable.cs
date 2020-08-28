@@ -13,7 +13,6 @@ public class BarrelPopable : Barrel
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name);
         Blade blade = collision.GetComponent<Blade>();
         if (collision.tag == "EnemyAttack" && (!blade || blade.poppingBlade))
         {

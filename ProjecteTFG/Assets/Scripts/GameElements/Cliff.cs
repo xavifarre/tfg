@@ -81,18 +81,18 @@ public class Cliff : MonoBehaviour
 
     void TriggerFall(Collision2D collision)
     {
-        int n = 0;
-        Vector2 contactsSum = Vector2.zero;
-        foreach (ContactPoint2D hit in collision.contacts)
-        {
-            contactsSum += hit.point;
-            n++;
-        }
-        contactsSum /= n;
-        hitTilePos = contactsSum;
-        Grid tileGrid = tilemap.layoutGrid;
-        Vector3 tilePosition = tileGrid.WorldToCell(contactsSum) + new Vector3(0.5f, 0.5f, 0);
-        collision.gameObject.SendMessage("Fall", tilePosition);
+        //int n = 0;
+        //Vector2 contactsSum = Vector2.zero;
+        //foreach (ContactPoint2D hit in collision.contacts)
+        //{
+        //    contactsSum += hit.point;
+        //    n++;
+        //}
+        //contactsSum /= n;
+        //hitTilePos = contactsSum;
+        //Grid tileGrid = tilemap.layoutGrid;
+        //Vector3 tilePosition = tileGrid.WorldToCell(contactsSum) + new Vector3(0.5f, 0.5f, 0);
+        collision.gameObject.SendMessage("Fall", transform.position);
     }
 
 

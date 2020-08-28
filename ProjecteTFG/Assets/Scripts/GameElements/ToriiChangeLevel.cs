@@ -18,6 +18,7 @@ public class ToriiChangeLevel : MonoBehaviour
     private IEnumerator ITransitionLevel()
     {
         GameManager.instance.BlockInputs(true);
+        FindObjectOfType<Player>().MoveToDir(Vector3.up);
         ScreenManager.instance.StartFadeHideScreen(transitionDuration);
         yield return new WaitForSeconds(transitionDuration);
         SceneManager.LoadScene(level);

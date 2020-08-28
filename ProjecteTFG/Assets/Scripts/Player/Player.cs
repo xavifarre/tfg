@@ -35,6 +35,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     [HideInInspector]
     public Vector2 destPoint;
     private Vector3 lastSafePosition;
+    private bool gameMoving = false;
 
     [Header("Dash")]
     //Dash
@@ -237,9 +238,19 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
             UpdateAnimations();
         }
-        else
+        else if(!gm.gamePaused)
         {
-            movementValue = Vector3.zero;
+            if (!gameMoving)
+            {
+                
+                movementValue = Vector3.zero;
+            }
+            else
+            {
+                StoreLastDir(movementValue);
+               
+            }
+            UpdateAnimations();
         }
         
     }
@@ -307,6 +318,17 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     {
         realPos = position;
         PixelPerfectMovement.Move(position, rb2d);
+    }
+
+    public void MoveToDir(Vector3 dir)
+    {
+        movementValue = dir.normalized;
+        gameMoving = true;
+    }
+
+    public void StopMoving()
+    {
+        gameMoving = false;
     }
 
     void CheckAttackInput()
@@ -782,8 +804,9 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     {
         state = State.Fall;
         animator.SetTrigger("Fall");
-
-        StartCoroutine(FallableObject.IFallAnimation(fallPosition, gameObject, fallTime));
+        dashTrail.emitting = false;
+        StartCoroutine(FallableObject.IFallAnimation(transform.position, gameObject, fallTime));
+        //StartCoroutine(FallableObject.IFallAnimation(fallPosition, gameObject, fallTime));
         
     }
 
@@ -845,7 +868,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         if (swordPicked)
         {
             //Si està en moviment activar la layer de moviment
-            animator.SetLayerWeight(1, GetMovementInput().magnitude == 0 ? 0 : 1);
+            animator.SetLayerWeight(1, movementValue.magnitude == 0 ? 0 : 1);
 
             //Si està realitzant una acció activar la layer d'accions
             animator.SetLayerWeight(2, state == 0 ? 0 : 1);
@@ -853,7 +876,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         else
         {
             //Si està en moviment activar la layer de moviment sense espasa
-            animator.SetLayerWeight(4, GetMovementInput().magnitude == 0 ? 0 : 1);
+            animator.SetLayerWeight(4, movementValue.magnitude == 0 ? 0 : 1);
         }
     }
 

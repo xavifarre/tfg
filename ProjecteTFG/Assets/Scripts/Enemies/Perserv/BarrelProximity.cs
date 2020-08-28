@@ -42,12 +42,6 @@ public class BarrelProximity : Barrel
         //transform.position = destPos;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void LaunchBarrel(Vector3 launchPosition, Vector3 destPosition, float speed, int iterations, float gravityScale)
     {
         destPos = destPosition;
@@ -78,6 +72,7 @@ public class BarrelProximity : Barrel
         state = BarrelState.Destroyed;
         animator.SetTrigger("Destroy");
         GetComponent<Collider2D>().enabled = false;
+        shadowController.enabled = false;
         DieEffect dieEffect = GetComponent<DieEffect>();
         if (dieEffect)
         {

@@ -30,7 +30,6 @@ public class Barrel : Attack
         exp.damage = damage;
         exploded = true;
         Destroy(gameObject, 2);
-
     }
 
 

@@ -263,7 +263,7 @@ public class Perserver : Boss
         undodgeableSpinStats.collider.Initialize(undodgeableSpinStats);
         barrelContainer = GameObject.Find("BarrelContainer");
 
-        //StartCoroutine(IPresentation());
+        StartCoroutine(IPresentation());
     }
 
     protected override void UpdateEnemy()
@@ -661,7 +661,6 @@ public class Perserver : Boss
         StartCoroutine(currentAbilityRoutine);
         CastAbilityBlade(Blade.BladeAbility.Spin);
         UpdateSpriteFlip();
-
     }
 
     public void ExpandingSpin()

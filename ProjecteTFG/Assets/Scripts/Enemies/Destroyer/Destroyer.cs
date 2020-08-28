@@ -168,6 +168,7 @@ public class Destroyer : Boss, IState
         public float slamColliderDuration;
         public float lagTime;
         public DashSlam slamObject;
+        public ParticleSystem slamParticles;
     }
 
     [System.Serializable]
@@ -879,7 +880,7 @@ public class Destroyer : Boss, IState
 
 
         DashSlam slam = dashSlamStats.slamObject;
-        slam.transform.localScale = dashSlamStats.slamRadius * Vector3.one;
+        slam.transform.localScale = dashSlamStats.slamRadius * new Vector3(1,0.5f);
         slam.damage = dashSlamStats.damage;
         slam.knockback = dashSlamStats.knockback;
 
@@ -889,7 +890,7 @@ public class Destroyer : Boss, IState
 
         UpdateSpriteFlip(player.transform.position);
         animator.SetTrigger("DashSlamDown");
-
+        animator.SetTrigger("EndDashSlam");
         while (t < dashSlamStats.dashDuration * 0.7f)
         {
             t += Time.deltaTime;
@@ -901,10 +902,15 @@ public class Destroyer : Boss, IState
         }
         state = State.Idle;
         slam.gameObject.SetActive(true);
+        ParticleSystem slamParticles = Instantiate(dashSlamStats.slamParticles, transform.position + Vector3.up * -1, Quaternion.identity);
+        ParticleSystem.ShapeModule shape = slamParticles.shape;
+        shape.radius = dashSlamStats.slamRadius;
+        slamParticles.transform.GetChild(0).localScale = dashSlamStats.slamRadius * new Vector3(1, 0.5f);
+        Destroy(slamParticles, 2f);
         yield return new WaitForSeconds(dashSlamStats.slamColliderDuration);
         slam.gameObject.SetActive(false);
 
-        animator.SetTrigger("EndDashSlam");
+
 
         EndAbility(Ability.DashSlam, dashStats.lagTime);
     }
@@ -968,7 +974,7 @@ public class Destroyer : Boss, IState
             StopCoroutine(currentAbilityRoutine);
         }
         currentAbilityRoutine = ILagTime(ability, lagTime);
-        StartCoroutine(currentAbilityRoutine);
+        //StartCoroutine(currentAbilityRoutine);
     }
 
     public IEnumerator ILagTime(Ability ability, float lagTime)
