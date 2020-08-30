@@ -15146,6 +15146,7 @@ MonoBehaviour:
   replicateSprite: 1
   fixedSprite: {fileID: 0}
   minDistance: 0.1
+  ignoreState: 0
 --- !u!1 &6656172827076308811
 GameObject:
   m_ObjectHideFlags: 0
@@ -19918,6 +19919,7 @@ MonoBehaviour:
   replicateSprite: 1
   fixedSprite: {fileID: 0}
   minDistance: 0.1
+  ignoreState: 0
 --- !u!114 &1406293216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19936,6 +19938,7 @@ MonoBehaviour:
   replicateSprite: 1
   fixedSprite: {fileID: 0}
   minDistance: 0.1
+  ignoreState: 0
 --- !u!114 &1883958989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19954,6 +19957,7 @@ MonoBehaviour:
   replicateSprite: 1
   fixedSprite: {fileID: 0}
   minDistance: 0.1
+  ignoreState: 0
 --- !u!1 &8690547736406173591
 GameObject:
   m_ObjectHideFlags: 0

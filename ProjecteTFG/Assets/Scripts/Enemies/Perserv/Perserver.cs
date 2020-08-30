@@ -615,6 +615,7 @@ public class Perserver : Boss
         gm.SlowDownGame(killSlowScale, killSlowTime);
         Globals.gameState = GameState.PerserverDefeated;
         SaveSystem.SaveGame();
+        soundController.PlaySound("preserver_die");
     }
 
     private IEnumerator IDieAnim()
@@ -661,6 +662,7 @@ public class Perserver : Boss
         StartCoroutine(currentAbilityRoutine);
         CastAbilityBlade(Blade.BladeAbility.Spin);
         UpdateSpriteFlip();
+        soundController.PlaySound("preserver_spin");
     }
 
     public void ExpandingSpin()
@@ -671,6 +673,7 @@ public class Perserver : Boss
         CastAbilityBlade(Blade.BladeAbility.ExpandingSpin, false);
         animator.SetBool("Focusing", true);
         UpdateSpriteFlip();
+        soundController.PlaySound("preserver_expanding_spin");
     }
 
     public void UndodgeableSpin()
@@ -678,6 +681,7 @@ public class Perserver : Boss
         currentAbility = Ability.UndodgeableSpin;
         CastAbilityBlade(Blade.BladeAbility.UndodgeableSpin, false);
         UpdateSpriteFlip();
+        soundController.PlaySound("preserver_undodgeable_spin");
     }
 
     public void PowderDrop()
@@ -687,6 +691,7 @@ public class Perserver : Boss
         StartCoroutine(ICooldownPowerDrop());
         animator.SetBool("Focusing", true);
         UpdateSpriteFlip();
+        soundController.PlaySound("preserver_powder_drop");
     }
 
     public void BarrelPop()
@@ -694,6 +699,7 @@ public class Perserver : Boss
         currentAbility = Ability.BarrelPop;
         CastAbilityBlade(Blade.BladeAbility.BarrelPop);
         UpdateSpriteFlip();
+        soundController.PlaySound("preserver_barrel_pop");
     }
 
     public void BarrelToss()
@@ -701,6 +707,7 @@ public class Perserver : Boss
         currentAbility = Ability.BarrelToss;
         CastAbilityBlade(Blade.BladeAbility.BarrelToss);
         UpdateSpriteFlip();
+        soundController.PlaySound("preserver_barrel_throw");
     }
 
     public void BarrelDrop()
@@ -721,6 +728,7 @@ public class Perserver : Boss
         CastAbilityBlade(Blade.BladeAbility.DoubleSlash);
         animator.SetBool("Moving", true);
         UpdateSpriteFlip();
+        soundController.PlaySound("preserver_double_slash_charge");
     }
 
     public void SpinHeal()
@@ -730,6 +738,7 @@ public class Perserver : Boss
         animator.SetBool("Focusing", false);
         animator.SetBool("Healing", true);
         UpdateSpriteFlip();
+        soundController.PlaySound("preserver_heal");
     }
 
     public void CastAbilityBlade(Blade.BladeAbility ability, bool randomMotion = true)
@@ -830,6 +839,8 @@ public class Perserver : Boss
         barrel.transform.parent = barrelContainer.transform;
 
         barrel.LaunchBarrel(transform.position, destPos, barrelDropStats.launchSpeed, barrelDropStats.throwArcIterations, barrelDropStats.gravityScale);
+
+        soundController.PlaySound("preserver_launch_barrel");
 
         animator.SetTrigger("ShootBarrel");
     }

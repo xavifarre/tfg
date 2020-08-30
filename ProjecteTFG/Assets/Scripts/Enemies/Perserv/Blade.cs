@@ -97,11 +97,10 @@ public class Blade : Attack
         Vector3 circlePos = new Vector2(Mathf.Sin(currentAngle), Mathf.Cos(currentAngle)/ inclination) * currentRadius;
         Vector3 nextPosition = circleCenter + circlePos;
 
-        RotateBlades();
-
         SmoothTrail();
 
         transform.localPosition = nextPosition;
+        RotateBlades();
     }   
 
     private void RotateBlades()
@@ -679,7 +678,7 @@ public class Blade : Attack
         Vector3 slashDir = (destPos - transform.position).normalized;
         Vector3 movementValue;
         bool reachedDest = false;
-
+        perserver.soundController.PlaySound("preserver_double_slash_throw");
         while (!reachedDest)
         {
             movementValue = slashDir * stats.speed * Time.deltaTime;

@@ -68,6 +68,24 @@ public static class SoundCollection
 
         #endregion
 
+
+        #region Bosses
+
+        //Preserver
+        {"preserver_spin", Resources.Load<AudioClip>("Audio/Enemies/Preserver/spin")},
+        {"preserver_expanding_spin", Resources.Load<AudioClip>("Audio/Enemies/Preserver/expanding_spin")},
+        {"preserver_undodgeable_spin", Resources.Load<AudioClip>("Audio/Enemies/Preserver/undodgeable_spin")},
+        {"preserver_double_slash_charge", Resources.Load<AudioClip>("Audio/Enemies/Preserver/double_slash_charge")},
+        {"preserver_double_slash_throw", Resources.Load<AudioClip>("Audio/Enemies/Preserver/double_slash_throw")},
+        {"preserver_barrel_pop", Resources.Load<AudioClip>("Audio/Enemies/Preserver/barrel_pop")},
+        {"preserver_barrel_throw", Resources.Load<AudioClip>("Audio/Enemies/Preserver/barrel_throw")},
+        {"preserver_launch_barrel", Resources.Load<AudioClip>("Audio/Enemies/Preserver/launch_barrel")},
+        {"preserver_powder_drop", Resources.Load<AudioClip>("Audio/Enemies/Preserver/powder_drop")},
+        {"preserver_die", Resources.Load<AudioClip>("Audio/Enemies/Preserver/preserver_die")},
+        {"preserver_heal", Resources.Load<AudioClip>("Audio/Enemies/Preserver/heal")},
+
+        #endregion
+
         #region Enviroment
 
         {"rain", Resources.Load<AudioClip>("Audio/Enviroment/rain")},
@@ -75,6 +93,18 @@ public static class SoundCollection
         {"thunder02", Resources.Load<AudioClip>("Audio/Enviroment/thunder02")},
         {"thunder03", Resources.Load<AudioClip>("Audio/Enviroment/thunder03")},
         {"enter_torii_level", Resources.Load<AudioClip>("Audio/Enviroment/enter_torii_level")},
+
+        #endregion
+
+
+        #region Music
+
+        {"music_intro_summoner", Resources.Load<AudioClip>("Audio/Music/OST_Boss01_Intro")},
+        {"music_loop_summoner", Resources.Load<AudioClip>("Audio/Music/OST_Boss01_Main")},
+        {"music_intro_preserver", Resources.Load<AudioClip>("Audio/Music/OST_Boss02_Intro")},
+        {"music_loop_preserver", Resources.Load<AudioClip>("Audio/Music/OST_Boss02_Main")},
+        {"music_intro_destroyer", Resources.Load<AudioClip>("Audio/Music/OST_Boss03_Intro")},
+        {"music_loop_destroyer", Resources.Load<AudioClip>("Audio/Music/OST_Boss03_Main")},
 
         #endregion
     };

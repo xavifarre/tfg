@@ -10,6 +10,8 @@ public class ToriiChangeLevel : MonoBehaviour
     public string level;
     public float transitionDuration;
     public SoundController soundController;
+
+    public int dir;
     public void TransitionToLevel()
     {
         StartCoroutine(ITransitionLevel());
@@ -18,7 +20,19 @@ public class ToriiChangeLevel : MonoBehaviour
     private IEnumerator ITransitionLevel()
     {
         GameManager.instance.BlockInputs(true);
-        FindObjectOfType<Player>().MoveToDir(Vector3.up);
+
+        if(dir == 0){
+            FindObjectOfType<Player>().MoveToDir(Vector3.up);
+        }
+        else if (dir == 1)
+        {
+            FindObjectOfType<Player>().MoveToDir(Vector3.right);
+        }
+        else if (dir == 2)
+        {
+            FindObjectOfType<Player>().MoveToDir(Vector3.left);
+        }
+
         ScreenManager.instance.StartFadeHideScreen(transitionDuration);
         yield return new WaitForSeconds(transitionDuration);
         SceneManager.LoadScene(level);

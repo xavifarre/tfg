@@ -1,5 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &101324530577062550
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8350166178929450819}
+  - component: {fileID: 3466552957012993939}
+  - component: {fileID: 4843182970548258402}
+  m_Layer: 23
+  m_Name: BodyCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8350166178929450819
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101324530577062550}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.07, y: -0.43, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 659472159562601902}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &3466552957012993939
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101324530577062550}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &4843182970548258402
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101324530577062550}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.8
 --- !u!1 &659472158050054168
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &659472158680161119
 Transform:
   m_ObjectHideFlags: 0
@@ -325,7 +394,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 659472158680161112}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -540,7 +609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &659472159276531964
 Transform:
   m_ObjectHideFlags: 0
@@ -568,7 +637,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.5, y: 0}
+  m_Offset: {x: 4.3928165, y: 0.24999428}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -579,7 +648,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 1}
+  m_Size: {x: 7.357071, y: 1.571415}
   m_EdgeRadius: 0
 --- !u!114 &659472159276533507
 MonoBehaviour:
@@ -612,7 +681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &659472159374518702
 Transform:
   m_ObjectHideFlags: 0
@@ -652,13 +721,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.5, y: 3}
-      - {x: -0.5, y: -3}
-      - {x: 2, y: -4}
-      - {x: 5, y: -4}
+    - - {x: -0.5, y: 5}
+      - {x: -0.5, y: -4.7}
+      - {x: 2, y: -4.5}
+      - {x: 5, y: -3.5}
+      - {x: 6.5, y: -2}
       - {x: 7, y: 0}
-      - {x: 5, y: 4}
-      - {x: 2, y: 4}
+      - {x: 6.5, y: 2}
+      - {x: 5, y: 3.5}
+      - {x: 2, y: 4.5}
 --- !u!114 &659472159374518701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -957,6 +1028,7 @@ GameObject:
   - component: {fileID: 659472159562601901}
   - component: {fileID: 659472159562601907}
   - component: {fileID: 659472159562601900}
+  - component: {fileID: 659472158756743941}
   m_Layer: 12
   m_Name: Destroyer
   m_TagString: Enemy
@@ -980,6 +1052,7 @@ Transform:
   - {fileID: 659472159276531964}
   - {fileID: 5920862950141506912}
   - {fileID: 659472158178947592}
+  - {fileID: 8350166178929450819}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1001,7 +1074,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1022,12 +1095,12 @@ SpriteRenderer:
   m_SortingLayerID: 528159245
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 54892af3024f02a4d84351c41428c3eb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e7d44736deefd24fa3cc2ee103dbf7d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 73.0625, y: 13.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1048,20 +1121,24 @@ MonoBehaviour:
   damage: 10
   speed: 0
   size: 1
-  health: 10
+  health: 600
   knockBackValue: 1
   soundController: {fileID: 0}
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   hitColorDuration: 0.05
   hitMaterial: {fileID: 2100000, guid: 00b2286b10131024ca63aab6387d9618, type: 2}
-  fase: 0
-  ratiosDamageFase: []
+  fase: 2
+  ratiosDamageFase:
+  - 0.6
+  - 0.2
+  - 0
   killSlowTime: 3
   killSlowScale: 0.2
   disolveMaterialDie: {fileID: 2100000, guid: 04bd415a4cd55c645827000248145c55, type: 2}
   lagTimeMultiplierPerFase:
   - 1
-  - 1
+  - 0.6
+  - 0.5
   shortDistance: 7
   mediumDistance: 12
   slashStats:
@@ -1069,7 +1146,7 @@ MonoBehaviour:
     knockback: 6
     attackMoveDistance: 1
     prepDuration: 0.2
-    timeActive: 0.1
+    timeActive: 0.05
     slashesPerFase: 020000000300000001000000
     extraSlashProb: 0.3
     slashDuration:
@@ -1078,9 +1155,9 @@ MonoBehaviour:
     - 0.5
     moveDuration: 0.2
     timeBetweenSlashes:
+    - 0.4
     - 0.3
-    - 0.2
-    - 0.1
+    - 0.3
     lagTime: 1
     slashObject: {fileID: 659472159374518701}
   dashStats:
@@ -1091,36 +1168,38 @@ MonoBehaviour:
     lagTime: 1
   crystalsUpStats:
     damage: 5
-    nCrystals: 10
+    nCrystals: 20
     knockback: 1
     crystalSpeed: 50
     crystalDuration: 1
     prepDuration: 0.5
     castDelay: 1
-    crystalSpawnDuration: 2
+    crystalSpawnDuration: 1
     crystalCastDuration: 1
     lagTime: 1
     spawnMinRadius: 1.5
-    spawnMaxRadius: 4
+    spawnMaxRadius: 5
     crystalMinDistance: 10
     crystalObject: {fileID: -7500032893547703623, guid: f4a6e41e39e28e44db74815991841153,
       type: 3}
-    circleObject: {fileID: 0}
+    circleObject: {fileID: 4340695905757799163, guid: 3eda0bcb8d3e12c489164114a5d09953,
+      type: 3}
     drawGizmos: 1
   orbitalStrikeStats:
-    damage: 200
+    damage: 30
     knockback: 0
     prepDuration: 1
     stopDuration: 0.5
-    orbitalDelay: 0.2
-    orbitalDuration: 6
+    orbitalDelay: 0.5
+    orbitalDuration: 0.5
     damageInterval: 0.1
-    orbitalRadius: 4
-    circleRadius: 4
+    orbitalRadius: 7
+    circleRadius: 5
     lagTime: 1
     orbitalObject: {fileID: 5692907138817732194, guid: 7be21728dd6a9c04791eb1a7185df6f3,
       type: 3}
-    circleObject: {fileID: 0}
+    circleObject: {fileID: 4340695905757799163, guid: 3eda0bcb8d3e12c489164114a5d09953,
+      type: 3}
   swordsCircleStats:
     damage: 10
     knockback: 5
@@ -1152,16 +1231,18 @@ MonoBehaviour:
     slamColliderDuration: 0.2
     lagTime: 1
     slamObject: {fileID: 659472158680161118}
+    slamParticles: {fileID: 1465425672386761396, guid: 437aefe426272ab438959e749cd9ba5c,
+      type: 3}
   horizontalPierceStats:
     pierceDamage: 0
     knockback: 0
     distanceToPlayer: 4
     pierceOfsset: 1
     pirceRange: 5
-    prepDuration: 0
+    prepDuration: 0.6
     recoverDuration: 1
     crystalDamage: 10
-    crystalSpawnDelay: 0.2
+    crystalSpawnDelay: 0
     nCrystals: 20
     crystalRange: {x: 5, y: 10}
     crystalReleaseDuration: 0.5
@@ -1218,14 +1299,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 4.3125, y: 2.75}
+    newSize: {x: 73.0625, y: 13.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.6646862, y: 1.8773918}
   m_EdgeRadius: 0
 --- !u!50 &659472159562601900
 Rigidbody2D:
@@ -1248,6 +1329,25 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &659472158756743941
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659472159562601903}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2a60fbf921e589b49b58a82661b6b479, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &5140846614183078110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1258,12 +1358,12 @@ PrefabInstance:
     - target: {fileID: 1548347365437627838, guid: e2637ce0e653f814285f6673b0353f50,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.06
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1548347365437627838, guid: e2637ce0e653f814285f6673b0353f50,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.22
+      value: -1.252
       objectReference: {fileID: 0}
     - target: {fileID: 1548347365437627838, guid: e2637ce0e653f814285f6673b0353f50,
         type: 3}
@@ -1313,18 +1413,24 @@ PrefabInstance:
     - target: {fileID: 1548347365437627838, guid: e2637ce0e653f814285f6673b0353f50,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1548347365437627838, guid: e2637ce0e653f814285f6673b0353f50,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.3
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1548347365437627838, guid: e2637ce0e653f814285f6673b0353f50,
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3591685383223995796, guid: e2637ce0e653f814285f6673b0353f50,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e7d44736deefd24fa3cc2ee103dbf7d,
+        type: 3}
     - target: {fileID: 6668448722382762047, guid: e2637ce0e653f814285f6673b0353f50,
         type: 3}
       propertyPath: m_Name

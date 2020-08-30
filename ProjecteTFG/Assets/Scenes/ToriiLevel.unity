@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -607,6 +607,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RainObject
       objectReference: {fileID: 0}
+    - target: {fileID: 7641238165744592407, guid: 9919814891a627d419b9b6ea1e79b065,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9919814891a627d419b9b6ea1e79b065, type: 3}
 --- !u!1 &273694810
@@ -763,7 +768,7 @@ Transform:
   m_GameObject: {fileID: 330034844}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 86.5, y: 0.2, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2061991545}
   - {fileID: 1580286244}
@@ -986,6 +991,7 @@ MonoBehaviour:
   level: DestroyerLevel
   transitionDuration: 2
   soundController: {fileID: 1131510474}
+  dir: 0
 --- !u!61 &365968282
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1767,6 +1773,7 @@ MonoBehaviour:
   level: SummonerLevel
   transitionDuration: 2
   soundController: {fileID: 1858059916}
+  dir: 1
 --- !u!61 &771530904
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1801,7 +1808,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771530902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8, y: -40.4, z: 0}
+  m_LocalPosition: {x: 159.3, y: 63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1858059914}
@@ -1871,6 +1878,7 @@ MonoBehaviour:
   level: PreserverLevel
   transitionDuration: 2
   soundController: {fileID: 832731782}
+  dir: 0
 --- !u!61 &821332444
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2112,6 +2120,8 @@ MonoBehaviour:
   - {fileID: 678251835}
   player: {fileID: 30143177}
   soundController: {fileID: 339102990}
+  globalLight: {fileID: 6369064706269046821}
+  rainObject: {fileID: 216706631}
 --- !u!1 &875237357
 GameObject:
   m_ObjectHideFlags: 0
@@ -3620,7 +3630,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580286243}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.9, y: -4.5, z: 0}
+  m_LocalPosition: {x: 96.9, y: -4.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 330034845}
@@ -4472,7 +4482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061991544}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -68.6, y: -1.6, z: 0}
+  m_LocalPosition: {x: -12, y: -1.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 330034845}

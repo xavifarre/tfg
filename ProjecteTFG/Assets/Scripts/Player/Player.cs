@@ -139,10 +139,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         attackCollider = transform.Find("Attack").gameObject;
         lastDir = new Vector2(0, -1);
         animator = GetComponent<Animator>();
-
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-
         if (Globals.gameState >= GameState.SwordPicked || swordPicked)
         {
             swordPicked = true;
@@ -152,10 +149,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         {
             ChangeSpriteToSwordless();
         }
-
-
         gm = FindObjectOfType<GameManager>();
-
         realPos = transform.position;
         maxHealth = health;
         HealthBar.Initialize((int)maxHealth,(int)health);
@@ -227,15 +221,6 @@ public class Player : MonoBehaviour, IState, IFallableObject {
                 CheckDashInput();
             }
 
-            if (Input.GetKeyDown("u"))
-            {
-                Die();
-            }
-            if (Input.GetKeyDown("i"))
-            {
-                Fall(transform.position);
-            }
-
             UpdateAnimations();
         }
         else if(!gm.gamePaused)
@@ -305,7 +290,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     }
 
     //Store the last direction if movement is not 0
-    void StoreLastDir(Vector3 movement)
+    private void StoreLastDir(Vector3 movement)
     {
         if (movement != Vector3.zero)
         {
@@ -371,7 +356,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         return (state == State.Idle || state == State.Attack) && swordPicked;
     }
 
-    void Dash()
+    private void Dash()
     {
         state = State.Dash;
         invulnerable = true;

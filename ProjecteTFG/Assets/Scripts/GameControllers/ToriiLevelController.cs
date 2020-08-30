@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class ToriiLevelController : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class ToriiLevelController : MonoBehaviour
     public Player player;
 
     public SoundController soundController;
+
+    public Light2D globalLight;
+    public RainObject rainObject;
 
     // Start is called before the first frame update
     void Start()
@@ -58,15 +62,21 @@ public class ToriiLevelController : MonoBehaviour
         }
         else if (Globals.gameState == GameState.SwordPicked)
         {
+            rainObject.gameObject.SetActive(false);
+            globalLight.intensity = 1;
             player.transform.position = startingPoints[1].position;
         }
         else if (Globals.gameState == GameState.SummonerDefeated)
         {
+            rainObject.gameObject.SetActive(false);
+            globalLight.intensity = 1;
             player.transform.position = startingPoints[2].position;
             StartCoroutine(ICinematicSummonerDefeated());
         }
         else if (Globals.gameState == GameState.PerserverDefeated)
         {
+            rainObject.gameObject.SetActive(false);
+            globalLight.intensity = 1;
             player.transform.position = startingPoints[3].position;
             StartCoroutine(ICinematicPreserverDefeated());
         }

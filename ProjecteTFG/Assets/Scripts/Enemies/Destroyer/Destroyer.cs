@@ -646,7 +646,6 @@ public class Destroyer : Boss, IState
 
     private IEnumerator ISlash()
     {
-
         int iSlash = 0;
 
         //while (iSlash < slashStats.slashesPerFase[fase] || (iSlash == slashStats.slashesPerFase[fase] && CheckDistanceToPlayer() == 0 && fase <= 1))
@@ -776,8 +775,8 @@ public class Destroyer : Boss, IState
 
     private IEnumerator IOrbitalStrike()
     {
-        GameObject circlesObject = Instantiate(orbitalStrikeStats.circleObject, transform);
-        circlesObject.transform.localScale = Vector3.one * orbitalStrikeStats.circleRadius;
+        //GameObject circlesObject = Instantiate(orbitalStrikeStats.circleObject, transform);
+        //circlesObject.transform.localScale = Vector3.one * orbitalStrikeStats.circleRadius;
 
         animator.SetTrigger("PalmDown");
         UpdateSpriteFlip(player.transform.position);
@@ -974,7 +973,7 @@ public class Destroyer : Boss, IState
             StopCoroutine(currentAbilityRoutine);
         }
         currentAbilityRoutine = ILagTime(ability, lagTime);
-        //StartCoroutine(currentAbilityRoutine);
+        StartCoroutine(currentAbilityRoutine);
     }
 
     public IEnumerator ILagTime(Ability ability, float lagTime)
