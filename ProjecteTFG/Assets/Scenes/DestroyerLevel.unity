@@ -462,6 +462,7 @@ Transform:
   - {fileID: 622230721}
   - {fileID: 1176262942}
   - {fileID: 37656564}
+  - {fileID: 486552391}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -575,6 +576,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 889f3c2d351bfc5469a09766f7b4aad7, type: 3}
+--- !u!1 &486552390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 486552391}
+  m_Layer: 0
+  m_Name: Footsteps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &486552391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486552390}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 13.881085, y: 58.55898, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 566748180}
+  m_Father: {fileID: 218958801}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &487494062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -724,6 +756,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &566748179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 566748180}
+  - component: {fileID: 566748181}
+  m_Layer: 25
+  m_Name: None
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &566748180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566748179}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -18.4, y: -54.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 486552391}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &566748181
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566748179}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 8.301933, y: 11.375763}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 95.0777, y: 128.5846}
+  m_EdgeRadius: 0
 --- !u!1 &600173681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1142,7 @@ PrefabInstance:
     - target: {fileID: 6063876068583248787, guid: 48b841030478b464cbbe5a32ce705a79,
         type: 3}
       propertyPath: loopPlayDelay
-      value: 70
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 6063876068583248787, guid: 48b841030478b464cbbe5a32ce705a79,
         type: 3}
@@ -1063,7 +1152,7 @@ PrefabInstance:
     - target: {fileID: 6063876068583248787, guid: 48b841030478b464cbbe5a32ce705a79,
         type: 3}
       propertyPath: loopReplayDelay
-      value: 71
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 6063876068583248787, guid: 48b841030478b464cbbe5a32ce705a79,
         type: 3}
@@ -1519,7 +1608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c75355991b3e64d9e6459a0fa3ffa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnAreaSize: {x: 32, y: 24}
+  spawnAreaSize: {x: 31, y: 23}
 --- !u!4 &2070978357
 Transform:
   m_ObjectHideFlags: 0
@@ -1578,6 +1667,11 @@ PrefabInstance:
       propertyPath: walkableArea
       value: 
       objectReference: {fileID: 2070978356}
+    - target: {fileID: 659472159562601901, guid: 860503ee6fc1adf41b7accf12494bc81,
+        type: 3}
+      propertyPath: horizontalPierceStats.pierceDamage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 659472159562601902, guid: 860503ee6fc1adf41b7accf12494bc81,
         type: 3}
       propertyPath: m_LocalPosition.x

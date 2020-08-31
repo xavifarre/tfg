@@ -107,7 +107,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
     public Material hitMaterial;
     private IEnumerator hitRoutine;
     public ParticleSystem hitParticles;
-
+    public Material disolveMaterialTeleport;
     //Animations
     private Animator animator;
 
@@ -974,6 +974,26 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         yield return new WaitForSecondsRealtime(hitColorDuration);
         spriteRenderer.material = defaultMaterial;
         hitRoutine = null;
+    }
+
+    public void StartTeleport(float dur)
+    {
+        soundController.PlaySound("player_tp", 0.5f);
+        GetComponentInChildren<ShadowCopySprite>().Fade();
+        StartCoroutine(ITeleport(dur));
+    }
+
+    public IEnumerator ITeleport(float dur)
+    {
+        float t = 0;
+        Material m = disolveMaterialTeleport;
+        while (t < dur)
+        {
+            t += Time.deltaTime;
+            spriteRenderer.material = m;
+            spriteRenderer.material.SetFloat("_Fade", Mathf.Lerp(1, 0, t / dur));
+            yield return null;
+        }
     }
 
 }

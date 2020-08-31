@@ -58,6 +58,7 @@ public class Blade : Attack
     //Layer
     private int defaultLayer;
 
+    private SoundController soundController;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +67,7 @@ public class Blade : Attack
         rb = GetComponent<Rigidbody2D>();
         trail = transform.GetComponentInChildren<TrailRenderer>();
         defaultLayer = gameObject.layer;
+        soundController = GetComponentInChildren<SoundController>();
 
     }
 
@@ -86,12 +88,14 @@ public class Blade : Attack
         defaultPosition = transform.localPosition;
 
         RotateBlades();
+
     }
 
 
     private void CircleMovement()
     {
         lastPos = transform.position;
+        float previousA = previousAngle;
         previousAngle = currentAngle;
         currentAngle += angularSpeed * Time.deltaTime * motionDirection * perserver.GetBladeSpeedMultiplier();
         Vector3 circlePos = new Vector2(Mathf.Sin(currentAngle), Mathf.Cos(currentAngle)/ inclination) * currentRadius;
@@ -101,6 +105,11 @@ public class Blade : Attack
 
         transform.localPosition = nextPosition;
         RotateBlades();
+
+        if(bladeId == 0 && (int)(previousA/Mathf.PI) != (int)(currentAngle / Mathf.PI) && angularSpeed > 1)
+        {
+            soundController.PlaySound("blade_move");
+        }
     }   
 
     private void RotateBlades()

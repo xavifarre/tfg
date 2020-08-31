@@ -15,8 +15,11 @@ public class SwordDestroyer : Attack
     private bool charge;
     private List<SwordDestroyer> swordList;
 
+    private Player player;
+
     public void StartRotating(float angularSpeed, float radius, float motionDir, Destroyer destroyer, float chargeDuration, float minRadius)
     {
+        player = FindObjectOfType<Player>();
         StartCoroutine(IPrep(angularSpeed, radius, motionDir, destroyer, chargeDuration, minRadius));   
     }
 
@@ -48,7 +51,15 @@ public class SwordDestroyer : Attack
                 t += Time.deltaTime;
                 currentRadius = Mathf.Lerp(radius, minRadius, t / chargeDuration);
             }
-            if(t > chargeDuration)
+
+            Vector3 circlePos = new Vector2(Mathf.Sin(currentAngle), Mathf.Cos(currentAngle) / inclination) * currentRadius;
+            Vector3 nextPosition = destroyer.transform.position + circlePos;
+            transform.position = nextPosition;
+            Vector3 dir = (destroyer.transform.position - transform.position).normalized;
+            float rot_z = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, rot_z - 270);
+
+            if (t > chargeDuration)
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, (transform.position - destroyer.transform.position).normalized,1000,LayerMask.GetMask("Player"));
                 if (hit.collider != null)
@@ -60,12 +71,7 @@ public class SwordDestroyer : Attack
                 }
             }
             
-            Vector3 circlePos = new Vector2(Mathf.Sin(currentAngle), Mathf.Cos(currentAngle) / inclination) * currentRadius;
-            Vector3 nextPosition = destroyer.transform.position + circlePos;
-            transform.position = nextPosition;
-            Vector3 dir = (destroyer.transform.position - transform.position).normalized;
-            float rot_z = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, rot_z - 270);
+
             yield return null;
         }
 
@@ -92,7 +98,11 @@ public class SwordDestroyer : Attack
         yield return new WaitForSeconds(releaseDelay);
 
         swordCollider.enabled = false;
-        releaseCollider.enabled = true;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (transform.position - destroyer.transform.position).normalized, 1000, LayerMask.GetMask("Player"));
+        if (hit.collider != null)
+        {
+            player.Hit(this);
+        }
         yield return null;
 
         t = 0;

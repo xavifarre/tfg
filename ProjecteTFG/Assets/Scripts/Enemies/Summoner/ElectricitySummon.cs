@@ -14,6 +14,8 @@ public class ElectricitySummon : MonoBehaviour
 
     public List<Material> materialsColors;
 
+    public SoundController soundController1;
+    public SoundController soundController2;
 
     public void PlayAnim(int type1, int type2)
     {
@@ -27,12 +29,16 @@ public class ElectricitySummon : MonoBehaviour
     private IEnumerator IPlayElectricity1()
     {
         yield return new WaitForSeconds(delay1);
+        soundController1.PlaySound("thunder01");
+        soundController1.FadeOutSound(1, 0.6f, 1);
         animator1.SetTrigger("Show");
     }
 
     private IEnumerator IPlayElectricity2()
     {
         yield return new WaitForSeconds(delay2);
+        soundController2.PlaySound("thunder01");
+        soundController2.FadeOutSound(1,0.6f,1);
         animator2.SetTrigger("Show");
     }
 }

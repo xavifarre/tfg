@@ -40,7 +40,6 @@ public class CameraLimits : MonoBehaviour
         }
         if (boundsPolygon)
         {
-            Debug.Log("changed!");
             for (int i = 0; i < limits.Count; i++)
             {
                 limits[i] = limits[i] - (Vector2)boundsPolygon.transform.position;

@@ -389,7 +389,7 @@ public class Shard : Attack {
                 accumulatedHeal += 1;
             }
         }
-        else
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Default"))
         {
             Stop();
         }

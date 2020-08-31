@@ -65,7 +65,7 @@ public class CameraManager : MonoBehaviour
                 {
                     desiredPosition = cameraLimits[currentArea].GetClosestPoint(desiredPosition);
                 }
-                Debug.Log(outside + " Closest point: " + desiredPosition);
+                //Debug.Log(outside + " Closest point: " + desiredPosition);
             }
         }
         camPos = desiredPosition;

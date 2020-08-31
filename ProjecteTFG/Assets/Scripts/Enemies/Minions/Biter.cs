@@ -29,7 +29,7 @@ public class Biter : Minion
         colliderInstance = GetComponent<Collider2D>();
         colliderStartOffset = colliderInstance.offset;
 
-        soundController.PlaySound("biter_spawn",0.1f);
+        soundController.PlaySound("biter_spawn",0.5f);
 
         base.Init();
     }

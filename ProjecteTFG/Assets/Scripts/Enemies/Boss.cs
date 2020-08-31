@@ -25,6 +25,7 @@ public class Boss : Enemy
 
     public override void Die()
     {
+        MusicController.instance.StopMusic();
         Globals.killCount += 1;
     }
 
@@ -73,7 +74,7 @@ public class Boss : Enemy
 
         StartCoroutine(IDieDisolve(shakeDuration));
         Vector3 diePosition = transform.position;
-
+        gm.BlockInputs(true); 
         while (t < shakeDuration)
         {
             t += Time.deltaTime;
@@ -81,8 +82,15 @@ public class Boss : Enemy
             yield return new WaitForFixedUpdate();
         }
         SaveSystem.SaveGame();
-        
-        yield return new WaitForSeconds(6f);
+
+        yield return new WaitForSeconds(1f);
+        if (Globals.gameState != GameState.End)
+        {
+            player.StartTeleport(2);
+        }
+
+        ScreenManager.instance.StartFadeHideScreen(2,2);
+        yield return new WaitForSeconds(4f);
         if (Globals.gameState == GameState.End)
         {
             SceneManager.LoadScene("Credits");

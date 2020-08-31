@@ -14,6 +14,10 @@ public class ToriiChangeLevel : MonoBehaviour
     public int dir;
     public void TransitionToLevel()
     {
+        if (soundController != null)
+        {
+            soundController.FadeOutSound(transitionDuration);
+        }
         StartCoroutine(ITransitionLevel());
     }
 

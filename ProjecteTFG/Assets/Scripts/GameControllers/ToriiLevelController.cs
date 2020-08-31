@@ -13,6 +13,9 @@ public class ToriiLevelController : MonoBehaviour
     public Collider2D preserverGate;
     public Collider2D destroyerGate;
 
+    public Collider2D blockSummoner;
+    public Collider2D blockPreserver;
+
     public GameState currentGameState;
 
     public List<Transform> startingPoints;
@@ -69,6 +72,8 @@ public class ToriiLevelController : MonoBehaviour
         else if (Globals.gameState == GameState.SummonerDefeated)
         {
             rainObject.gameObject.SetActive(false);
+            blockSummoner.gameObject.SetActive(true);
+            summonerGate.gameObject.SetActive(false);
             globalLight.intensity = 1;
             player.transform.position = startingPoints[2].position;
             StartCoroutine(ICinematicSummonerDefeated());
@@ -76,6 +81,10 @@ public class ToriiLevelController : MonoBehaviour
         else if (Globals.gameState == GameState.PerserverDefeated)
         {
             rainObject.gameObject.SetActive(false);
+            blockSummoner.gameObject.SetActive(true);
+            blockPreserver.gameObject.SetActive(true);
+            summonerGate.gameObject.SetActive(false);
+            preserverGate.gameObject.SetActive(false);
             globalLight.intensity = 1;
             player.transform.position = startingPoints[3].position;
             StartCoroutine(ICinematicPreserverDefeated());
@@ -100,8 +109,9 @@ public class ToriiLevelController : MonoBehaviour
         soundController.PlaySound("enter_torii_level");
         CameraManager.instance.mainCamera.SetDestination(sword.transform.position,2f);
         yield return new WaitForSeconds(5f);
-        CameraManager.instance.mainCamera.FollowPlayer(1f);
+        CameraManager.instance.mainCamera.SetDestination(player.transform.position, 1f);
         yield return new WaitForSeconds(2f);
+        CameraManager.instance.mainCamera.FollowPlayer();
         GameManager.instance.BlockInputs(false);
     }
 
@@ -115,8 +125,9 @@ public class ToriiLevelController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         OpenSummoner();
         yield return new WaitForSeconds(2f);
-        CameraManager.instance.mainCamera.FollowPlayer(1f);
-        yield return new WaitForSeconds(2f);
+        CameraManager.instance.mainCamera.SetDestination(player.transform.position, 1f);
+        yield return new WaitForSeconds(3f);
+        CameraManager.instance.mainCamera.FollowPlayer();
         GameManager.instance.BlockInputs(false);
     }
 
@@ -125,13 +136,14 @@ public class ToriiLevelController : MonoBehaviour
         GameManager.instance.BlockInputs(true);
         ScreenManager.instance.StartFadeShowScreen(4, 1);
         yield return new WaitForSeconds(4f);
-
+        soundController.PlaySound("enter_torii_level");
         CameraManager.instance.mainCamera.SetDestination(preserverGate.transform.position, 1f);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         OpenPreserver();
-        yield return new WaitForSeconds(2f);
-        CameraManager.instance.mainCamera.FollowPlayer(1f);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
+        CameraManager.instance.mainCamera.SetDestination(player.transform.position, 1f);
+        yield return new WaitForSeconds(3f);
+        CameraManager.instance.mainCamera.FollowPlayer();
         GameManager.instance.BlockInputs(false);
     }
 
@@ -140,13 +152,14 @@ public class ToriiLevelController : MonoBehaviour
         GameManager.instance.BlockInputs(true);
         ScreenManager.instance.StartFadeShowScreen(4, 1);
         yield return new WaitForSeconds(4f);
-
+        soundController.PlaySound("enter_torii_level");
         CameraManager.instance.mainCamera.SetDestination(destroyerGate.transform.position, 1f);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         OpenDestroyer();
-        yield return new WaitForSeconds(2f);
-        CameraManager.instance.mainCamera.FollowPlayer(1f);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
+        CameraManager.instance.mainCamera.SetDestination(player.transform.position, 1f);
+        yield return new WaitForSeconds(3f);
+        CameraManager.instance.mainCamera.FollowPlayer();
         GameManager.instance.BlockInputs(false);
     }
 }

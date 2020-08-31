@@ -13,6 +13,8 @@ TagManager:
   - Barrel
   - BarrelInvulnerable
   - PlayerInteract
+  - Grass
+  - Concrete
   layers:
   - Default
   - TransparentFX
@@ -38,8 +40,8 @@ TagManager:
   - InteractuableObject
   - PlayerIgnoreEnemies
   - BossBody
-  - 
-  - 
+  - Footsteps
+  - FootstepsZone
   - 
   - 
   - 

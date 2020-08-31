@@ -23,7 +23,7 @@ public class LivingBomb : Minion
         base.Init();
 
         shadowController = GetComponentInChildren<ShadowController>();
-        soundController.PlaySound("bomb_spawn", 0.1f);
+        soundController.PlaySound("bomb_spawn", 0.5f);
     }
 
     protected override void StartMove()

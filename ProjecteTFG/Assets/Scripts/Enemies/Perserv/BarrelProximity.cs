@@ -27,6 +27,8 @@ public class BarrelProximity : Barrel
 
     private Perserver perserver;
     private ShadowController shadowController;
+
+    private SoundController soundController;
     
     // Use this for initialization
     void Start()
@@ -34,7 +36,7 @@ public class BarrelProximity : Barrel
         //GetComponent<SpriteRenderer>().color = colorInactive;
         shadowController = GetComponent<ShadowController>();
         perserver = FindObjectOfType<Perserver>();
-
+        soundController = GetComponentInChildren<SoundController>();
         ChangeLayerIgnoreAll();
 
         Init();
@@ -114,6 +116,7 @@ public class BarrelProximity : Barrel
     public IEnumerator ICountDown()
     {
         animator.SetTrigger("Active");
+        soundController.PlaySound("barrel_active");
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         int times = 10;
         for (int i = 0; i < times && state == BarrelState.AboutToExplode; i++)

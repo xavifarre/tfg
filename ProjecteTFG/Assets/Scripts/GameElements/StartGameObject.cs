@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class StartGameObject : MonoBehaviour, IInteractuableObject
 {
+    public SoundController soundController;
     public void Interact()
     {
+        soundController.FadeOutSound(5f);
         StartCoroutine(IStartGame());
     }
 

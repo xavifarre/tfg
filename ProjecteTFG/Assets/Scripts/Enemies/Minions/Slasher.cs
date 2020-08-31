@@ -15,7 +15,7 @@ public class Slasher : Minion
     protected override void Init()
     {
         base.Init();
-        soundController.PlaySound("slasher_spawn", 0.1f);
+        soundController.PlaySound("slasher_spawn", 0.5f);
     }
 
     //Move

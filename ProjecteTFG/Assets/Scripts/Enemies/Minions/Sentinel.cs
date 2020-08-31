@@ -23,7 +23,7 @@ public class Sentinel : Minion
     {
         base.Init();
         areaMove = GameObject.Find("MovementPoints").transform.Find("3").GetComponent<RectArea>();
-        soundController.PlaySound("sentinel_spawn", 0.1f);
+        soundController.PlaySound("sentinel_spawn", 0.5f);
     }
 
     //Move
