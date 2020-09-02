@@ -22,6 +22,7 @@ public static class SoundCollection
 
         //tp
         {"player_tp", Resources.Load<AudioClip>("Audio/Player/player_tp")},
+        {"player_tp2", Resources.Load<AudioClip>("Audio/Player/player_tp2")},
 
         //Voice attack
         {"player_attack01", Resources.Load<AudioClip>("Audio/Player/player_voice_attack01")},
@@ -36,6 +37,10 @@ public static class SoundCollection
         {"player_die", Resources.Load<AudioClip>("Audio/Player/player_voice_die")},
         {"player_damage01", Resources.Load<AudioClip>("Audio/Player/player_voice_damage01")},
         {"player_damage02", Resources.Load<AudioClip>("Audio/Player/player_voice_damage02")},
+        
+        
+        {"crystal_recall", Resources.Load<AudioClip>("Audio/Player/crystal_recall")},
+        {"creepy_die", Resources.Load<AudioClip>("Audio/Player/die_creepy_sound")},
         
 
 
@@ -77,8 +82,16 @@ public static class SoundCollection
 
         #region Bosses
 
+        {"dead_particles", Resources.Load<AudioClip>("Audio/Enemies/boss_dead_particles")},
+
         //Summoner
         {"spawn_sound", Resources.Load<AudioClip>("Audio/Enemies/Summoner/spawn_sound")},
+        {"summoner_slash", Resources.Load<AudioClip>("Audio/Enemies/Summoner/slash")},
+        {"summoner_lunge", Resources.Load<AudioClip>("Audio/Enemies/Summoner/lunge")},
+        {"summoner_summon", Resources.Load<AudioClip>("Audio/Enemies/Summoner/summon")},
+        {"summoner_dash", Resources.Load<AudioClip>("Audio/Enemies/Summoner/dash")},
+        {"summoner_damage", Resources.Load<AudioClip>("Audio/Enemies/Summoner/damage")},
+        {"summoner_die", Resources.Load<AudioClip>("Audio/Enemies/Summoner/die")},
 
 
         //Preserver
@@ -97,6 +110,28 @@ public static class SoundCollection
         {"blade_move", Resources.Load<AudioClip>("Audio/Enemies/Preserver/blade_rotation")},
         {"barrel_active", Resources.Load<AudioClip>("Audio/Enemies/Preserver/barrel_active")},
 
+
+        //Destroyer
+
+        {"destroyer_slash01", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/slash01")},
+        {"destroyer_slash02", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/slash02")},
+        {"destroyer_slamUp", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/slamUp")},
+        {"destroyer_slamGround", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/slamGround")},
+        {"destroyer_slamDown", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/slamDown")},
+        {"destroyer_prepSlash", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/prepSlash")},
+        {"destroyer_dashPierce", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/dashPierce")},
+        {"destroyer_pierce", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/pierce")},
+        {"destroyer_circleCharge", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/circleCharge")},
+        {"destroyer_charge", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/charge")},
+        {"destroyer_dash", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/dash")},
+        {"destroyer_die", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/die")},
+
+        {"destroyer_crystal", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/crystal_spawn")},
+        {"destroyer_crystal_throw", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/crystal_throw")},
+        {"destroyer_crystal_recall", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/crystal_recall")},
+        {"orbital_charge", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/orbital_charge")},
+        {"orbital_strike", Resources.Load<AudioClip>("Audio/Enemies/Destroyer/orbital_strike")},
+
         #endregion
 
         #region Enviroment
@@ -107,6 +142,10 @@ public static class SoundCollection
         {"thunder03", Resources.Load<AudioClip>("Audio/Enviroment/thunder03")},
         {"enter_torii_level", Resources.Load<AudioClip>("Audio/Enviroment/enter_torii_level")},
         {"birds", Resources.Load<AudioClip>("Audio/Enviroment/birds")},
+        {"sword_explosion", Resources.Load<AudioClip>("Audio/Enviroment/sword_explosion")},
+        {"sword_swing", Resources.Load<AudioClip>("Audio/Enviroment/sword_swing")},
+        {"seal_disappear", Resources.Load<AudioClip>("Audio/Enviroment/seal_disappear")},
+        {"eq", Resources.Load<AudioClip>("Audio/Enviroment/eq")},
 
         #endregion
 
@@ -137,6 +176,7 @@ public static class SoundCollection
         {"concrete4", Resources.Load<AudioClip>("Audio/Player/Footsteps/Concrete/concrete04")},
         {"concrete5", Resources.Load<AudioClip>("Audio/Player/Footsteps/Concrete/concrete05")},
         {"concrete6", Resources.Load<AudioClip>("Audio/Player/Footsteps/Concrete/concrete06")},
+
 
 
         #endregion

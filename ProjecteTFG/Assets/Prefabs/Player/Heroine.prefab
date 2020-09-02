@@ -5126,7 +5126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
-  health: 100
+  health: 200
   dead: 0
   state: 0
   lastDir: {x: 0, y: 0}
@@ -5151,12 +5151,12 @@ MonoBehaviour:
   shardObject: {fileID: 1028228151706104, guid: adefcabf1c17acc48a788833313ba98d,
     type: 3}
   baseShardDamage: 1
-  maxShardDamage: 5
+  maxShardDamage: 8
   minMaxShards: {x: 0, y: 2}
   activeShards: []
-  recallHealMultiplier: 1
-  recallHealMultiplierFromMinions: 0.5
-  maxHealFromMinions: 10
+  recallHealMultiplier: 0.5
+  recallHealMultiplierFromMinions: 0.1
+  maxHealFromMinions: 20
   healFromMinionsCounter: 0
   shardRange: {x: 300, y: 500}
   recallReady: 1

@@ -63,9 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\FootsetpsController.cs" />
-    <Compile Include="Assets\MenuLevel.cs" />
-    <Compile Include="Assets\MusicController.cs" />
     <Compile Include="Assets\Scripts\Attacks\Attack.cs" />
     <Compile Include="Assets\Scripts\Attacks\Explosion.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
@@ -113,22 +110,27 @@
     <Compile Include="Assets\Scripts\Enemies\Summoner\SummonerLunge.cs" />
     <Compile Include="Assets\Scripts\Enemies\Summoner\SummonerMeleeAttack.cs" />
     <Compile Include="Assets\Scripts\GameControllers\GameLoader.cs" />
+    <Compile Include="Assets\Scripts\GameControllers\MenuLevel.cs" />
     <Compile Include="Assets\Scripts\GameControllers\SaveData.cs" />
     <Compile Include="Assets\Scripts\GameControllers\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\GameControllers\ScreenManager.cs" />
     <Compile Include="Assets\Scripts\GameControllers\StartLevelManager.cs" />
     <Compile Include="Assets\Scripts\GameControllers\ToriiLevelController.cs" />
+    <Compile Include="Assets\Scripts\GameControllers\TutorialCollider.cs" />
     <Compile Include="Assets\Scripts\GameControllers\TutorialManager.cs" />
     <Compile Include="Assets\Scripts\GameElements\Cliff.cs" />
     <Compile Include="Assets\Scripts\GameElements\FallableObject.cs" />
     <Compile Include="Assets\Scripts\GameElements\GenericInteractuableObject.cs" />
+    <Compile Include="Assets\Scripts\GameElements\Seal.cs" />
     <Compile Include="Assets\Scripts\GameElements\Shard.cs" />
     <Compile Include="Assets\Scripts\GameElements\Spawner.cs" />
     <Compile Include="Assets\Scripts\GameElements\SpawnerGroup.cs" />
     <Compile Include="Assets\Scripts\GameElements\Stairs.cs" />
     <Compile Include="Assets\Scripts\GameElements\StartGameObject.cs" />
+    <Compile Include="Assets\Scripts\GameElements\SwordAttackAnim.cs" />
     <Compile Include="Assets\Scripts\GameElements\SwordPickUp.cs" />
     <Compile Include="Assets\Scripts\GameElements\ToriiChangeLevel.cs" />
+    <Compile Include="Assets\Scripts\GameElements\groundCircles.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Globals.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IFallableObject.cs" />
@@ -141,6 +143,8 @@
     <Compile Include="Assets\Scripts\Player\PlayerInteract.cs" />
     <Compile Include="Assets\Scripts\Player\ShardEnemyManager.cs" />
     <Compile Include="Assets\Scripts\Player\StateFollowEffect.cs" />
+    <Compile Include="Assets\Scripts\Sounds\FootsetpsController.cs" />
+    <Compile Include="Assets\Scripts\Sounds\MusicController.cs" />
     <Compile Include="Assets\Scripts\Sounds\SoundCollection.cs" />
     <Compile Include="Assets\Scripts\Sounds\SoundController.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonPopUp.cs" />
@@ -160,10 +164,6 @@
     <Compile Include="Assets\Scripts\Utils\ParticlePlayer.cs" />
     <Compile Include="Assets\Scripts\Utils\Poly.cs" />
     <Compile Include="Assets\Scripts\Utils\RectArea.cs" />
-    <Compile Include="Assets\Seal.cs" />
-    <Compile Include="Assets\SwordAttackAnim.cs" />
-    <Compile Include="Assets\TutorialCollider.cs" />
-    <Compile Include="Assets\groundCircles.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Shaders\LightCircle.shader" />

@@ -707,7 +707,8 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         animator.SetTrigger("Die");
 
         voiceController.PlaySound("player_die");
-
+        MusicController.instance.StopMusic();
+        MusicController.instance.introController.PlaySound("creepy_die", 1);
         Globals.deathCount += 1;
     }
 
@@ -816,6 +817,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
 
     public void ShardHeal(float accumulatedHeal)
     {
+        Globals.healCount += accumulatedHeal;
         health += accumulatedHeal;
         healCounter += accumulatedHeal;
         if (health > maxHealth)
@@ -870,7 +872,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
-    private void ChangeLayerIgnoreEnemies()
+    public void ChangeLayerIgnoreEnemies()
     {
         gameObject.layer = LayerMask.NameToLayer("PlayerIgnoreEnemies");
     }
@@ -880,7 +882,7 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         gameObject.layer = LayerMask.NameToLayer("PlayerDash");
     }
 
-    protected void ChangeLayerIgnore()
+    public void ChangeLayerIgnore()
     {
         gameObject.layer = LayerMask.NameToLayer("IgnoreAll");
     }
@@ -983,6 +985,13 @@ public class Player : MonoBehaviour, IState, IFallableObject {
         StartCoroutine(ITeleport(dur));
     }
 
+    public void StartTeleportAppear(float dur, float delay)
+    {
+        soundController.PlaySound("player_tp2", delay);
+        GetComponentInChildren<ShadowCopySprite>().GetComponent<SpriteRenderer>().enabled = false;
+        StartCoroutine(ITeleportAppear(dur, delay));
+    }
+
     public IEnumerator ITeleport(float dur)
     {
         float t = 0;
@@ -994,6 +1003,30 @@ public class Player : MonoBehaviour, IState, IFallableObject {
             spriteRenderer.material.SetFloat("_Fade", Mathf.Lerp(1, 0, t / dur));
             yield return null;
         }
+    }
+
+    public IEnumerator ITeleportAppear(float dur, float delay)
+    {
+        float t = 0;
+        yield return null;
+        Material m = disolveMaterialTeleport;
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        spriteRenderer.material = m;
+        spriteRenderer.material.SetFloat("_Fade", 0);
+        yield return new WaitForSeconds(delay);
+
+        while (t < dur)
+        {
+            t += Time.deltaTime;
+            spriteRenderer.material = m;
+            spriteRenderer.material.SetFloat("_Fade", Mathf.Lerp(0, 1, t / dur));
+            yield return null;
+        }
+        GetComponentInChildren<ShadowCopySprite>().GetComponent<SpriteRenderer>().enabled = true;
+        ChangeSpriteToDefault();
     }
 
 }

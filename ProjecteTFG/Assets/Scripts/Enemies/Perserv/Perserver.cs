@@ -266,48 +266,64 @@ public class Perserver : Boss
         StartCoroutine(IPresentation());
     }
 
+    private IEnumerator IPresentation()
+    {
+        gm.BlockInputs(true);
+
+        ScreenManager.instance.StartFadeShowScreen(5, 2);
+        yield return new WaitForSeconds(1f);
+        CameraManager.instance.mainCamera.SetDestination(transform.position, 3);
+
+        yield return new WaitForSeconds(5f);
+        PowderDrop();
+        yield return new WaitForSeconds(4f);
+
+        gm.BlockInputs(false);
+        CameraManager.instance.mainCamera.FollowPlayer(1f);
+    }
+
     protected override void UpdateEnemy()
     {
-        if(Input.GetKeyDown("l"))
-        {
+        //if(Input.GetKeyDown("l"))
+        //{
             
-        }
-        if (Input.GetKeyDown("j"))
-        {
-            Spin();
-        }
-        if (Input.GetKeyDown("h"))
-        {
-            ExpandingSpin();
-        }
-        if (Input.GetKeyDown("g"))
-        {
-            DoubleSlash();
-        }
-        if (Input.GetKeyDown("y"))
-        {
-            UndodgeableSpin();
-        }
-        if (Input.GetKeyDown("t"))
-        {
-            PowderDrop();
-        }
-        if (Input.GetKeyDown("o"))
-        {
-            BarrelDrop();
-        }
-        if (Input.GetKeyDown("m"))
-        {
-            BarrelToss();
-        }
-        if (Input.GetKeyDown("n"))
-        {
-            BarrelPop();
-        }
-        if (Input.GetKeyDown("b"))
-        {
-            SpinHeal();
-        }
+        //}
+        //if (Input.GetKeyDown("j"))
+        //{
+        //    Spin();
+        //}
+        //if (Input.GetKeyDown("h"))
+        //{
+        //    ExpandingSpin();
+        //}
+        //if (Input.GetKeyDown("g"))
+        //{
+        //    DoubleSlash();
+        //}
+        //if (Input.GetKeyDown("y"))
+        //{
+        //    UndodgeableSpin();
+        //}
+        //if (Input.GetKeyDown("t"))
+        //{
+        //    PowderDrop();
+        //}
+        //if (Input.GetKeyDown("o"))
+        //{
+        //    BarrelDrop();
+        //}
+        //if (Input.GetKeyDown("m"))
+        //{
+        //    BarrelToss();
+        //}
+        //if (Input.GetKeyDown("n"))
+        //{
+        //    BarrelPop();
+        //}
+        //if (Input.GetKeyDown("b"))
+        //{
+        //    SpinHeal();
+        //}
 
         legsAnimator.SetBool("Moving", previousPos != realPos);
 
@@ -586,11 +602,6 @@ public class Perserver : Boss
         return false;
     }
 
-    private IEnumerator IPresentation()
-    {
-        yield return new WaitForSeconds(1f);
-        StartFase(0);
-    }
 
     public override void DisableEnemy()
     {

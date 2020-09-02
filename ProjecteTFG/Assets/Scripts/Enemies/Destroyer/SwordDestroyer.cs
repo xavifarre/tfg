@@ -14,13 +14,15 @@ public class SwordDestroyer : Attack
     private bool prep;
     private bool charge;
     private List<SwordDestroyer> swordList;
-
+    public SoundController soundController;
     private Player player;
 
     public void StartRotating(float angularSpeed, float radius, float motionDir, Destroyer destroyer, float chargeDuration, float minRadius)
     {
+        soundController.PlaySound("destroyer_crystal");
         player = FindObjectOfType<Player>();
-        StartCoroutine(IPrep(angularSpeed, radius, motionDir, destroyer, chargeDuration, minRadius));   
+        StartCoroutine(IPrep(angularSpeed, radius, motionDir, destroyer, chargeDuration, minRadius));
+        Destroy(gameObject, 6f);
     }
 
     public void Charge(List<SwordDestroyer> swords)
@@ -32,6 +34,9 @@ public class SwordDestroyer : Attack
     public void ReleaseSword(float releaseDelay, float alertDuration, float speed, float duration, Destroyer destroyer)
     {
         prep = false;
+        soundController.PlaySound("destroyer_crystal_throw");
+        soundController.SetVolume(0.05f);
+
         StartCoroutine(IRelease(releaseDelay, alertDuration, speed, duration, destroyer));
     }
 

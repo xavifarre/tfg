@@ -112,7 +112,31 @@ public class Summoner : Boss
         InitSpawners();
         firstHit = false;
 
+        //Initialize boss
+        ChangeLayerIgnore();
+        transform.position = movementPoints[0][0];
+        realPos = transform.position;
+        nextPoint = RandomAdjacentPoint();
+        float nextXMovement = (movementPoints[fase][nextPoint] - realPos).x;
+        UpdateAnimFlip(nextXMovement);
+
         StartCoroutine(IPresentation());
+    }
+
+    private IEnumerator IPresentation()
+    {
+        gm.BlockInputs(true);
+
+        ScreenManager.instance.StartFadeShowScreen(5, 2);
+        yield return new WaitForSeconds(1f);
+        CameraManager.instance.mainCamera.SetDestination(transform.position, 3);
+
+        yield return new WaitForSeconds(5f);
+
+        StartFase(0);
+        yield return new WaitForSeconds(4f);
+        gm.BlockInputs(false);
+        CameraManager.instance.mainCamera.FollowPlayer(1f);
     }
 
     protected override void UpdateEnemy()
@@ -325,7 +349,6 @@ public class Summoner : Boss
     {
         sameActionCounter = 0;
         lungeDest = realPos + (player.transform.position - realPos).normalized * lungeDistance;
-
         StartCoroutine(IPrepareLunge(startFaseLunge));
     }
 
@@ -395,7 +418,7 @@ public class Summoner : Boss
     private void StartDashAnim()
     {
         animator.SetTrigger("Dash");
-        
+        soundController.PlaySound("summoner_dash");
         float nextXMovement = (dashDest - realPos).x;
         UpdateAnimFlip(nextXMovement);
 
@@ -451,6 +474,7 @@ public class Summoner : Boss
     {
         int dir = MathFunctions.GetDirection(player.transform.position - realPos);
 
+        soundController.PlaySound("summoner_slash");
         animator.SetTrigger("Slash");
         animator.SetInteger("SlashDirection", dir);
         float x = (player.transform.position - realPos).x;
@@ -638,6 +662,7 @@ public class Summoner : Boss
 
             if (vulnerable)
             {
+                soundController.PlaySound("summoner_damage");
                 GetDamage(attack.damage);
                 summonType = SummType.Normal;
             }
@@ -648,32 +673,9 @@ public class Summoner : Boss
         }
         else
         {
+            soundController.PlaySound("summoner_damage");
             GetDamage(attack.damage);
         }
-    }
-
-    private IEnumerator IPresentation()
-    {
-        gm.BlockInputs(true);
-
-        //Initialize boss
-        ChangeLayerIgnore();
-        transform.position = movementPoints[0][0];
-        realPos = transform.position;
-        nextPoint = RandomAdjacentPoint();
-        float nextXMovement = (movementPoints[fase][nextPoint] - realPos).x;
-        UpdateAnimFlip(nextXMovement);
-
-        ScreenManager.instance.StartFadeShowScreen(5, 2);
-        yield return new WaitForSeconds(1f);
-        CameraManager.instance.mainCamera.SetDestination(transform.position, 3);
-
-        yield return new WaitForSeconds(5f);
-
-        StartFase(0);
-        yield return new WaitForSeconds(4f);
-        gm.BlockInputs(false);
-        CameraManager.instance.mainCamera.FollowPlayer(1f);
     }
 
 
@@ -705,6 +707,7 @@ public class Summoner : Boss
     {
         StopAllCoroutines();
         base.Die();
+        soundController.PlaySound("summoner_die");
         state = SummState.Die;
         ChangeLayerIgnore();
         animator.SetTrigger("Die");
@@ -774,7 +777,9 @@ public class Summoner : Boss
     {
         yield return new WaitForSeconds(summonPreparationTime[fase]);
         animator.SetTrigger("Summon");
+        soundController.PlaySound("summoner_summon",1);
         yield return new WaitForSeconds(summonTime[fase]);
+
         EndSummon();
     }
 
@@ -843,6 +848,7 @@ public class Summoner : Boss
         yield return new WaitForSeconds(clipInfo[0].clip.length);
         yield return null;
         animator.SetTrigger("Lunge");
+        soundController.PlaySound("summoner_lunge");
         clipInfo = animator.GetCurrentAnimatorClipInfo(0);
         yield return new WaitForSeconds(clipInfo[0].clip.length);
         yield return null;

@@ -11,13 +11,18 @@ public class CrystalDestroyer : Attack
     private Player player;
     private Collider2D crystalCollider;
 
+    public SoundController soundController;
+
     private void Start()
     {
+        soundController.PlaySound("destroyer_crystal");
+        soundController.RandomPitch(0.9f, 1.1f);
         rotationValue = new Vector3(Random.Range(1, 11), Random.Range(1, 11), Random.Range(1, 11)).normalized;
         transform.rotation = Random.rotation;
         player = FindObjectOfType<Player>();
         crystalCollider = GetComponent<Collider2D>();
         crystalCollider.enabled = false;
+        Destroy(gameObject, 10f);
     }
 
     private void Update()
@@ -33,6 +38,7 @@ public class CrystalDestroyer : Attack
 
     public void AttackPlayer(float speed, float duration)
     {
+        soundController.PlaySound("destroyer_crystal_throw");
         floating = false;
         crystalCollider.enabled = true;
         StartCoroutine(IAttack(speed, duration));
@@ -93,6 +99,7 @@ public class CrystalDestroyer : Attack
         }
 
         yield return new WaitForSeconds(stats.crystalRecallDelay);
+        soundController.PlaySound("destroyer_crystal_recall");
         float speed = stats.crystalRecallSpeed;
         while (!((transform.position.x > destroyerPos.x && destPos.x < destroyerPos.x) || (transform.position.x < destroyerPos.x  && destPos.x > destroyerPos.x)))
         {

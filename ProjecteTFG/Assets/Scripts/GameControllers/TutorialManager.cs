@@ -5,6 +5,8 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour
 {
     public static TutorialManager instance;
+    public GameObject arrow;
+
     private bool started = false;
     // Start is called before the first frame update
     void Start()
@@ -15,12 +17,14 @@ public class TutorialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     public void StartTutorial()
     {
         if (!started)
         {
+            arrow.SetActive(false);
             StartCoroutine(IStartTutorial());
             started = true;
         }

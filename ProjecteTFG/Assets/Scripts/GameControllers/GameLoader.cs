@@ -5,24 +5,51 @@ using UnityEngine.SceneManagement;
 
 public class GameLoader : MonoBehaviour
 {
+    public GameObject title;
+    public float waitTitle;
+    public GameObject startButton;
+    public float tWait;
+    public GameObject screenTransition;
+    public float transitionTime; 
+    public GameObject bg;
+    public float startTime;
+
     void Start()
     {
         StartCoroutine(ILoadGame());
     }
 
-
-    private IEnumerator ILoadGame()
+    public IEnumerator ILoadGame()
     {
+
         SaveSystem.LoadGame();
         string scene = GetScene();
-        yield return new WaitForSeconds(1f);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
+        asyncLoad.allowSceneActivation = false;
+        yield return new WaitForSeconds(startTime);
+        bg.SetActive(true);
+        yield return new WaitForSeconds(waitTitle);
+        title.SetActive(true);
 
+        float t = 0;
         while (!asyncLoad.isDone)
         {
-            Debug.Log("hey");
+            t += Time.deltaTime;
+            if(asyncLoad.progress >= 0.9f && t > tWait)
+            {
+                startButton.SetActive(true);
+                if (Input.GetButton("Pause") || Input.GetButton("Interact") || Input.GetButton("Attack") || Input.GetButton("Recall") || Input.anyKey)
+                {
+                    startButton.SetActive(false);
+                    break;
+                }
+            }
             yield return null;
         }
+        screenTransition.SetActive(true);
+        yield return new WaitForSeconds(transitionTime);
+        asyncLoad.allowSceneActivation = true;
+
     }
 
     private string GetScene()

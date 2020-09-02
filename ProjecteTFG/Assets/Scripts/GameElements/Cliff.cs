@@ -1,13 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class Cliff : MonoBehaviour
 {
-
-    private Tilemap tilemap;
-    private Vector3 hitTilePos;
 
     private float t;
 
@@ -21,7 +17,6 @@ public class Cliff : MonoBehaviour
         // {estat,frames}
         offsetStates = new Dictionary<int, float> { { 0, 1.5f }, { 1, 4f } };
 
-        tilemap = transform.parent.GetComponent<Tilemap>();
         t = 0;
     }
 
@@ -95,9 +90,4 @@ public class Cliff : MonoBehaviour
         collision.gameObject.SendMessage("Fall", transform.position);
     }
 
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(hitTilePos,0.1f);
-    }
 }

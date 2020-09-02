@@ -53,7 +53,7 @@ public class ScreenManager : MonoBehaviour
         }
 
         yield return new WaitForSecondsRealtime(5f);
-
+        GameManager.instance.SlowDownGame(1, 0);
         SceneManager.LoadScene("ToriiLevel");
     }
 

@@ -10,17 +10,19 @@ public class SwordPickUp : MonoBehaviour, IInteractuableObject
     public Attack swordAttack;
     public Light2D light2DLevel;
     public Light2D light2DSword;
-
+    public Sprite pickedSprite;
     public float minRadius, maxRadius;
     public float innerRadius;
     public float duration;
     private float invultTime;
 
     public RainObject rainObject;
+    private SoundController soundController;
 
     private bool active = true;
     private void Start()
     {
+        soundController = GetComponent<SoundController>();
         player = FindObjectOfType<Player>();
         StartCoroutine(ILightAnim());
     }
@@ -45,6 +47,7 @@ public class SwordPickUp : MonoBehaviour, IInteractuableObject
     public void PickSword()
     {
         player.PickSword();
+        SaveSystem.SaveGame();
     }
 
     public void HitPlayer()
@@ -54,8 +57,19 @@ public class SwordPickUp : MonoBehaviour, IInteractuableObject
 
     public void EndRain()
     {
+        GetComponent<SpriteRenderer>().sprite = pickedSprite;
         light2DLevel.intensity = 1;
         rainObject.EndRain();
+    }
+
+    public void PlayExplosion()
+    {
+        soundController.PlaySound("sword_explosion");
+    }
+
+    public void PlaySword()
+    {
+        soundController.PlaySound("blade_move");
     }
 
     private IEnumerator ILightAnim()

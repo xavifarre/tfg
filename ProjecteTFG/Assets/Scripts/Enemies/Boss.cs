@@ -25,6 +25,7 @@ public class Boss : Enemy
 
     public override void Die()
     {
+        player.ChangeLayerIgnore();
         MusicController.instance.StopMusic();
         Globals.killCount += 1;
     }
@@ -115,6 +116,7 @@ public class Boss : Enemy
             yield return null;
         }
     }
+
 
     protected void ResetLayer()
     {

@@ -91,4 +91,10 @@ public class SoundController : MonoBehaviour
         }
     }
 
+
+    public void SetVolume(float volume)
+    {
+        audioSource.volume = volume;
+    }
+
 }

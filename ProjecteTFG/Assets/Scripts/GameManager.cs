@@ -134,7 +134,6 @@ public class GameManager : MonoBehaviour
         float elapsed = 0.0f;
         float tMagnitude = 0;
         Vector3 originalCamPos = Camera.main.transform.position;
-        Debug.Log(originalCamPos);
 
         while (elapsed < duration)
         {

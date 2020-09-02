@@ -12,6 +12,9 @@ public class Destroyer : Boss, IState
 
     private State state;
 
+    public SoundController dashSoundController;
+    public SoundController soundController2;
+
     [Header("Distance evaluation")]
     public float shortDistance = 2;
     public float mediumDistance = 6;
@@ -213,42 +216,58 @@ public class Destroyer : Boss, IState
         StartCoroutine(IPresentation());
     }
 
+    private IEnumerator IPresentation()
+    {
+        gm.BlockInputs(true);
+
+        ScreenManager.instance.StartFadeShowScreen(5, 2);
+        yield return new WaitForSeconds(1f);
+        CameraManager.instance.mainCamera.SetDestination(transform.position, 3);
+        yield return new WaitForSeconds(3f);
+        SwordsCircle();
+        gm.BlockInputs(false);
+        yield return new WaitForSeconds(1f);
+        StartFase(0);
+
+        CameraManager.instance.mainCamera.FollowPlayer(1f);
+    }
+
     protected override void UpdateEnemy()
     {
         UpdateDashTrail();
 
-        if (Input.GetKeyDown("j"))
-        {
-            Slash();
-        }
-        if (Input.GetKeyDown("k"))
-        {
-            Dash(true);
-        }
-        if (Input.GetKeyDown("l"))
-        {
-            Dash(false);
-        }
-        if (Input.GetKeyDown("o"))
-        {
-            CrystalsUp();
-        }
-        if (Input.GetKeyDown("m"))
-        {
-            OrbitalStrike();
-        }
-        if (Input.GetKeyDown("n"))
-        {
-            SwordsCircle();
-        }
-        if (Input.GetKeyDown("h"))
-        {
-            DashSlam();
-        }
-        if (Input.GetKeyDown("g"))
-        {
-            HorizontalPierce();
-        }
+        //if (Input.GetKeyDown("j"))
+        //{
+        //    Slash();
+        //}
+        //if (Input.GetKeyDown("k"))
+        //{
+        //    Dash(true);
+        //}
+        //if (Input.GetKeyDown("l"))
+        //{
+        //    Dash(false);
+        //}
+        //if (Input.GetKeyDown("o"))
+        //{
+        //    CrystalsUp();
+        //}
+        //if (Input.GetKeyDown("m"))
+        //{
+        //    OrbitalStrike();
+        //}
+        //if (Input.GetKeyDown("n"))
+        //{
+        //    SwordsCircle();
+        //}
+        //if (Input.GetKeyDown("h"))
+        //{
+        //    DashSlam();
+        //}
+        //if (Input.GetKeyDown("g"))
+        //{
+        //    HorizontalPierce();
+        //}
     }
 
     public void EvaluateSituation()
@@ -366,6 +385,10 @@ public class Destroyer : Boss, IState
             {
                 CastAbility(Ability.Dash);
             }
+            else if (rand < fase1Long[3])
+            {
+                CastAbility(Ability.DashSlam);
+            }
             else
             {
                 CastAbility(Ability.HorizontalPierce);
@@ -425,11 +448,14 @@ public class Destroyer : Boss, IState
         return false;
     }
 
-    private IEnumerator IPresentation()
+
+    protected override void StartFase(int f)
     {
-        yield return new WaitForSeconds(1f);
-        CastAbility(Ability.Dash);
-        StartFase(0);
+        base.StartFase(f);
+        if(health > 0 && fase!=0)
+        {
+            CastAbility(Ability.Dash);
+        }
     }
 
     public override void Hit(Attack attack)
@@ -474,6 +500,7 @@ public class Destroyer : Boss, IState
         {
             health = (int)(maxHealth * ratiosDamageFase[2])/2;
             Dash(false);
+            MusicController.instance.PlayMusic();
             fase = 2;
             gm.BlockInputs(false);
             ButtonPopUp.instance.Hide();
@@ -497,20 +524,26 @@ public class Destroyer : Boss, IState
         player.DashTo(realPos + new Vector3(-0.5f,-2.5f));
         CameraManager.instance.mainCamera.SetDestination(realPos);
         yield return new WaitForSeconds(player.dashTime + 0.5f);
+        soundController2.RandomPitch(1, 1.01f);
+        soundController2.PlaySound("player_attack06");
         player.gameObject.SetActive(false);
         animator.SetTrigger("Die");
         ppCamera.refResolutionX = 480;
-        ppCamera.refResolutionY = 270;
+        ppCamera.refResolutionY = 270; 
         yield return new WaitForSeconds(0.1f);
         ppCamera.refResolutionX = 400;
         ppCamera.refResolutionY = 125;
         yield return new WaitForSeconds(0.1f);
         ppCamera.refResolutionX = 320;
         ppCamera.refResolutionY = 180;
+        soundController.PlaySound("destroyer_die");
         gm.SlowDownGameLerp(0.1f, 0.5f, 5f);
-
+        dashSoundController.PlaySound("enter_torii_level");
         yield return new WaitForSecondsRealtime(2);
         gm.RedToBlackFilter(2, 2);
+        yield return new WaitForSecondsRealtime(8);
+        gm.SlowDownGame(1, 0);
+        SceneManager.LoadScene("credits");
 
     }
 
@@ -650,9 +683,12 @@ public class Destroyer : Boss, IState
 
         //while (iSlash < slashStats.slashesPerFase[fase] || (iSlash == slashStats.slashesPerFase[fase] && CheckDistanceToPlayer() == 0 && fase <= 1))
 
-        while(iSlash < slashStats.slashesPerFase[fase] || (iSlash == slashStats.slashesPerFase[fase] && CheckDistanceToPlayer() == 0))
+        soundController.PlaySound("destroyer_prepSlash");
+        yield return new WaitForSeconds(slashStats.prepDuration*2);
+        while (iSlash < slashStats.slashesPerFase[fase] || (iSlash == slashStats.slashesPerFase[fase] && CheckDistanceToPlayer() == 0))
         {
-            yield return new WaitForSeconds(slashStats.timeBetweenSlashes[fase]);
+
+            soundController2.PlaySound("destroyer_slash0" + Random.Range(1,3));
             if(iSlash%2 == 0)
                 animator.SetTrigger("Slash");
             else 
@@ -660,7 +696,7 @@ public class Destroyer : Boss, IState
             animator.SetInteger("Direction", GetDirection(player.transform.position));
             UpdateSpriteFlip(player.transform.position);
             float t = 0;
-
+            yield return new WaitForSeconds(slashStats.prepDuration);
             Vector2 vectorToPlayer = player.transform.position - realPos;
             int dir = MathFunctions.GetDirection(vectorToPlayer);
             slashStats.slashObject.transform.eulerAngles = new Vector3(0, 0, dir * 90);
@@ -687,6 +723,7 @@ public class Destroyer : Boss, IState
             {
                 iSlash = -1;
             }
+            yield return new WaitForSeconds(slashStats.timeBetweenSlashes[fase]);
         }
         animator.SetTrigger("EndSlash");
 
@@ -710,9 +747,11 @@ public class Destroyer : Boss, IState
         }
 
         state = State.Dash;
+
         ChangeLayerIgnore();
         SpawnDashParticles(startPoint, destPoint);
 
+        dashSoundController.PlaySound("destroyer_dash");
         animator.SetTrigger("Dash");
         animator.SetInteger("Direction", GetDirection(destPoint));
         UpdateSpriteFlip(destPoint);
@@ -739,7 +778,7 @@ public class Destroyer : Boss, IState
 
         GameObject circlesObject = Instantiate(crystalsUpStats.circleObject, transform);
         circlesObject.transform.localScale = Vector3.one * crystalsUpStats.spawnMaxRadius;
-
+        soundController.PlaySound("destroyer_charge");
         yield return new WaitForSeconds(crystalsUpStats.prepDuration);
 
         List<CrystalDestroyer> crystalList = new List<CrystalDestroyer>();
@@ -779,6 +818,7 @@ public class Destroyer : Boss, IState
         //circlesObject.transform.localScale = Vector3.one * orbitalStrikeStats.circleRadius;
 
         animator.SetTrigger("PalmDown");
+        soundController.PlaySound("destroyer_charge");
         UpdateSpriteFlip(player.transform.position);
 
         yield return new WaitForSeconds(orbitalStrikeStats.prepDuration);
@@ -803,7 +843,7 @@ public class Destroyer : Boss, IState
 
         animator.SetTrigger("SwordsCircle");
         UpdateSpriteFlip(player.transform.position);
-
+        soundController.PlaySound("destroyer_circleCharge");
         yield return new WaitForSeconds(swordsCircleStats.prepDuration);
         List<SwordDestroyer> swords = new List<SwordDestroyer>();
         int motionDir = Random.Range(0, 2) == 0 ? 1 : -1;
@@ -862,6 +902,7 @@ public class Destroyer : Boss, IState
         SpawnDashParticles(startPoint, destPoint);
 
         animator.SetTrigger("DashSlam");
+        soundController.PlaySound("destroyer_slamUp");
         UpdateSpriteFlip(player.transform.position);
 
         float t = 0;
@@ -889,6 +930,8 @@ public class Destroyer : Boss, IState
 
         UpdateSpriteFlip(player.transform.position);
         animator.SetTrigger("DashSlamDown");
+        soundController.PlaySound("destroyer_slamDown");
+        soundController2.PlaySound("destroyer_slamGround");
         animator.SetTrigger("EndDashSlam");
         while (t < dashSlamStats.dashDuration * 0.7f)
         {
@@ -932,6 +975,8 @@ public class Destroyer : Boss, IState
 
         animator.SetTrigger("Dash");
         animator.SetInteger("Direction", GetDirection(destPoint));
+        soundController.PlaySound("destroyer_dashPierce");
+        dashSoundController.PlaySound("destroyer_dash");
         UpdateSpriteFlip(destPoint);
 
         float t = 0;
@@ -946,6 +991,7 @@ public class Destroyer : Boss, IState
         ResetLayer();
         state = State.Idle;
 
+        soundController.PlaySound("destroyer_pierce",0.5f);
         animator.SetTrigger("HorizontalPierce");
         spriteRenderer.flipX = dir == -1;
 

@@ -100,7 +100,7 @@ public class LivingBomb : Minion
         realPos = nextPos;
         PixelPerfectMovement.Move(nextPos, rb);
 
-        transform.Rotate(0, 0, 300 * Time.deltaTime, Space.Self);
+        //transform.Rotate(0, 0, 300 * Time.deltaTime, Space.Self);
         tAction += Time.deltaTime;
 
         if (tAction >= knockBackDuration)

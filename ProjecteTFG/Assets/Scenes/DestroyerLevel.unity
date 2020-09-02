@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -280,16 +280,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114939774282884152, guid: bc1105cebd13d6343a8d632813bf8948,
-        type: 3}
-      propertyPath: health
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5385542337759519491, guid: bc1105cebd13d6343a8d632813bf8948,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc1105cebd13d6343a8d632813bf8948, type: 3}
 --- !u!1 &70058116
@@ -464,7 +454,7 @@ Transform:
   - {fileID: 37656564}
   - {fileID: 486552391}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &277910349
 GameObject:
@@ -495,7 +485,7 @@ Transform:
   m_Children:
   - {fileID: 1342815917}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &326674826
 PrefabInstance:
@@ -547,7 +537,7 @@ PrefabInstance:
     - target: {fileID: 4132555773901738372, guid: 889f3c2d351bfc5469a09766f7b4aad7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4132555773901738372, guid: 889f3c2d351bfc5469a09766f7b4aad7,
         type: 3}
@@ -1202,7 +1192,7 @@ PrefabInstance:
     - target: {fileID: 8871204849981384998, guid: 48b841030478b464cbbe5a32ce705a79,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8871204849981384998, guid: 48b841030478b464cbbe5a32ce705a79,
         type: 3}
@@ -1647,31 +1637,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 277910350}
     m_Modifications:
-    - target: {fileID: 659472158680161112, guid: 860503ee6fc1adf41b7accf12494bc81,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 659472159276531965, guid: 860503ee6fc1adf41b7accf12494bc81,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 659472159374518703, guid: 860503ee6fc1adf41b7accf12494bc81,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 659472159562601901, guid: 860503ee6fc1adf41b7accf12494bc81,
         type: 3}
       propertyPath: walkableArea
       value: 
       objectReference: {fileID: 2070978356}
-    - target: {fileID: 659472159562601901, guid: 860503ee6fc1adf41b7accf12494bc81,
-        type: 3}
-      propertyPath: horizontalPierceStats.pierceDamage
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 659472159562601902, guid: 860503ee6fc1adf41b7accf12494bc81,
         type: 3}
       propertyPath: m_LocalPosition.x

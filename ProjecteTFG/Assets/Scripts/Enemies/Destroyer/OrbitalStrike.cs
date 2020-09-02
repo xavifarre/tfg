@@ -8,12 +8,14 @@ public class OrbitalStrike : Attack
     private Collider2D playerCollider;
     private Collider2D coll;
     private SpriteRenderer sprite;
+    public SoundController soundController;
 
     private void Start()
     {
         coll = GetComponent<Collider2D>();
         player = FindObjectOfType<Player>();
         playerCollider = player.GetComponent<Collider2D>();
+        soundController.PlaySound("orbital_charge");
     }
 
     public void StartStrike(float duration, float delay, float timeInterval)
@@ -25,6 +27,7 @@ public class OrbitalStrike : Attack
     {
         sprite = GetComponent<SpriteRenderer>();
         yield return new WaitForSeconds(delay);
+        soundController.PlaySound("orbital_strike");
         GetComponent<Animator>().SetTrigger("Strike");
         float t = 0;
         while(t < duration)

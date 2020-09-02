@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -317,27 +317,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114939774282884152, guid: bc1105cebd13d6343a8d632813bf8948,
-        type: 3}
-      propertyPath: health
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 114939774282884152, guid: bc1105cebd13d6343a8d632813bf8948,
-        type: 3}
-      propertyPath: maxHealFromMinions
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114939774282884152, guid: bc1105cebd13d6343a8d632813bf8948,
-        type: 3}
-      propertyPath: recallHealMultiplierFromMinions
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2250532167891181434, guid: bc1105cebd13d6343a8d632813bf8948,
-        type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 24300002, guid: be9fff05df34244428aa210b7a9d2524,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc1105cebd13d6343a8d632813bf8948, type: 3}
 --- !u!1 &61055099
@@ -5481,6 +5460,11 @@ PrefabInstance:
       propertyPath: health
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 449336332740483360, guid: 640c85d469e290a44ad85c5087d2fdd3,
+        type: 3}
+      propertyPath: maxEnemies
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 449336332740483365, guid: 640c85d469e290a44ad85c5087d2fdd3,
         type: 3}
       propertyPath: m_Name
@@ -5763,7 +5747,7 @@ PrefabInstance:
     - target: {fileID: 6063876068583248787, guid: 48b841030478b464cbbe5a32ce705a79,
         type: 3}
       propertyPath: loopPlayDelay
-      value: 55
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 6063876068583248787, guid: 48b841030478b464cbbe5a32ce705a79,
         type: 3}
@@ -5773,7 +5757,7 @@ PrefabInstance:
     - target: {fileID: 6063876068583248787, guid: 48b841030478b464cbbe5a32ce705a79,
         type: 3}
       propertyPath: loopReplayDelay
-      value: 43
+      value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 7904023433784945081, guid: 48b841030478b464cbbe5a32ce705a79,
         type: 3}

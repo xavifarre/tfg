@@ -225,7 +225,7 @@ public class PauseMenu : MonoBehaviour
         {
             ToggleFullScreen();
         }
-        else if (currentIndex == 3)
+        else if (currentIndex == 3 && Globals.gameState >= GameState.SwordPicked)
         {
             confirmAction = ReturnLobby;
             confirmText.text = "Do you want to return to lobby?";

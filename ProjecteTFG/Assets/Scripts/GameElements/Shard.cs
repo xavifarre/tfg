@@ -25,6 +25,7 @@ public class Shard : Attack {
     bool moving = false;
     bool recalling = false;
 
+
     Player player;
     Rigidbody2D rb;
 
@@ -63,6 +64,8 @@ public class Shard : Attack {
     //Accumulated heal
     [HideInInspector]
     public float accumulatedHeal;
+
+    public SoundController soundController;
 
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
@@ -152,6 +155,7 @@ public class Shard : Attack {
         lastPos = transform.position;
         recalling = true;
         gameObject.layer = LayerMask.NameToLayer("CrystalActive"); //ShardActive layer
+        soundController.PlaySound("crystal_recall");
     }
 
 

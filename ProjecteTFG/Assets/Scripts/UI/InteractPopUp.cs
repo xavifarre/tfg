@@ -37,7 +37,6 @@ public class InteractPopUp : MonoBehaviour
         gameObject.SetActive(true);
         transform.position = (Vector2)player.transform.position + offset;
         currentObject = interactuableObject;
-        Debug.Log("hey");
     }
 
     public void Hide()

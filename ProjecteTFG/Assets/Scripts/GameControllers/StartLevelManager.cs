@@ -9,20 +9,22 @@ public class StartLevelManager : MonoBehaviour
     
     private void Start()
     {
-        
-        ScreenManager.instance.StartFadeHideScreen(0);
-        ScreenManager.instance.StartFadeShowScreen(10f,2);
-        rainSound.FadeInSound(5, rainSound.GetSource().volume,1);
+
         StartCoroutine(IStartLevel());
-        foreach(SoundController sc in thunderSounds)
-        {
-            sc.FadeInSound(5, sc.GetSource().volume,1);
-        }
     }
 
     private IEnumerator IStartLevel()
     {
+
         GameManager.instance.BlockInputs(true);
+        ScreenManager.instance.StartFadeHideScreen(0);
+        ScreenManager.instance.StartFadeShowScreen(10f, 4);
+        rainSound.FadeInSound(5, rainSound.GetSource().volume, 4);
+        foreach (SoundController sc in thunderSounds)
+        {
+            sc.FadeInSound(5, sc.GetSource().volume, 4);
+        }
+
         yield return new WaitForSeconds(5f);
         GameManager.instance.BlockInputs(false);
     }
